@@ -10,10 +10,10 @@ import javax.sql.DataSource;
 @Controller
 public class DbTest {
 
-//    @GetMapping("/ck")
-//    public String ckEdit(){
-//        return "index11";
-//    }
+    @GetMapping("/c")
+    public String ckEdit(){
+        return "loginPage";
+    }
 
 
 //    @Autowired
