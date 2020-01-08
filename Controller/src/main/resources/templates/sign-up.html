@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <th:block th:include="~{fragment/__bootstrap_link}"></th:block>
+
+</head>
+
+<body>
+    <div class="container-fluid py-0">
+        <div class="row">
+            <div class="col-sm col-6 col-lg-6 d-none d-sm-block d-none d-sm-block d-sm-none d-md-block">
+                <img class="vh-100 w-100" src="/img/loginPic.jpg" alt="">
+            </div>
+            <div class="col-sm h-100 my-auto" style="padding-left: 14%; padding-right: 14%; ">
+                <form class="p-form" style="text-align: center;">
+                    <h5 style="line-height: 60px; font-size: x-large;" class="font-weight-bold">How To Khmer</h5>
+                    <!-- <span class="title-log ">Khmer How To</span> -->
+                    <p class="line-m" style="line-height: 100%; font-size: small;">Sign up with Khmer How To
+                        account</p>
+
+                    <div style=" text-align: start; margin-bottom: 10%; margin-top: 10%;">
+                        <span style="text-align: left; margin-bottom: 0px !important;font-size: small ">Name</span>
+                        <input style="text-align: left; margin-top: 9px; font-size: small" type="text"
+                            class="t-span form-control" placeholder="Name">
+                    </div>
+                    <div style="text-align: start;">
+                        <span class="t-span" style="margin-bottom: 0px; font-size: small">E-mail</span>
+                        <input type="text" class="t-span form-control"
+                            style="margin-top: 9px; margin-bottom: 10%; font-size: small " placeholder="ABC@gmail.com">
+                    </div>
+
+                    <div style="text-align: start; margin-bottom: 20px;">
+
+                        <span class="t-span" style="display: block; margin-bottom: 4px; font-size: small">Gender</span>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" style="font-size: small " type="radio"
+                                name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                            <label class="form-check-label" style="font-size: small " for="inlineRadio1">Male</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" style="font-size: small " type="radio"
+                                name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                            <label class="form-check-label " style="font-size: small " for="inlineRadio2">Female</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3"
+                                value="option3">
+                            <label style="font-size: small " class="form-check-label" for="inlineRadio3">Other</label>
+                        </div>
+                    </div>
+                    <div style=" text-align: start; margin-bottom: 10%; margin-top: 7%;">
+                        <span style="text-align: left; margin-bottom: 0px !important;font-size: small ">Phone
+                            Number</span>
+                        <input style="text-align: left; margin-top: 9px; font-size: small " type="text"
+                            class="t-span form-control" placeholder="+885">
+                    </div>
+
+                    <div class="container-fluid mb-2">
+                        <div class="row">
+                            <div class="col-6 px-0 text-left">
+                                <button type="submit" class="btn btn-primary left-al"><span class="t-span">Login</span>
+                                </button>
+                            </div>
+                            <div class="col-6 px-0 text-right">
+                                <button type="submit" class="btn btn-secondary right-al"><span class="t-span">Sign Up</span></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="height: 48px;">
+                        or Sign up With
+                    </div>
+
+                    <button style="margin-bottom: 39px;" class="loginBtn loginBtn--google">
+                        Login with Google
+                    </button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+</html>
