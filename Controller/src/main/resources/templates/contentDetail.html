@@ -20,13 +20,25 @@
             height: 0;
             padding: 0;
         }
-
+        /* .maTooltip {
+            opacity: 1.8 !important;
+        } */
+        .maTooltip-contents{
+            padding: 0%;
+            border: none;
+        }
         .card-hover:hover .reveal {
             height: auto;
             visibility: visible;
             opacity: 10;
             transition: opacity 1s ease;
         }
+        .avatar {
+  border: 0.3rem solid rgba(#fff, 0.3);
+  margin-top: -6rem;
+  margin-bottom: 1rem;
+  max-width: 9rem;
+}
     </style>
 </head>
 
@@ -288,12 +300,8 @@
             var button = $('#myButton');
             var tooltip = new maTooltip(button, {
                    inline_style: 'max-width: none;',
-                   full_visibility_duration: 1500,
-                   position: maTooltip.POSITION.BOTTOM, static_message: '<div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-  </div>' } );
+                   full_visibility_duration: 333070,
+                   position: maTooltip.POSITION.BOTTOM, static_message: '<div style="background-color: white; color: black;"><div>  <img class="img-fluid rounded-circle z-depth-2" style="width: 80px; min-width: 40px;" alt="100x100" src="https://mdbootstrap.com/img/Photos/Avatars/img%20(31).jpg" data-holder-rendered="true"></div><h3>Hum Chamroeun</h3><p>From Takeo</p><p>I am so happy</p><hr><div style="background-color: white; color: black;"><a href="" style="margin-left: 30px;margin-right: 30px ">Favorite Category</a><a style="margin-left: 30px;margin-right: 30px " href="">Education</a><a href="" style="margin-left: 30px;margin-right: 30px ">Technology</a></div></div>'} );
 
    
             //  var tooltip = new maTooltip( button, {  } );
