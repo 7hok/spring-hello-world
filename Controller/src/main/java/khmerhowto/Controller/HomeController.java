@@ -13,5 +13,9 @@ public class HomeController {
     String example(){
         return "myhometest";
     }
-    
+
+    @GetMapping("/homepage")
+    String home(){
+        return "client-home";
+    }
 }

@@ -5,11 +5,29 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <!-- <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script> -->
     <th:block th:include="~{fragment/__bootstrap_link}"></th:block>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <th:block th:include="~{fragment/__javascript_link}"></th:block>
+    <link rel="stylesheet" type="text/css" href="css/maTooltip.css" title="maTooltip">
+       <script src="js/maTooltip.js"></script>
+    <style>
+        .row{
+            margin-bottom: 15px;
+        }
+        .card-hover .reveal {
+            visibility: hidden;
+            opacity: 0;
+            height: 0;
+            padding: 0;
+        }
 
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        .card-hover:hover .reveal {
+            height: auto;
+            visibility: visible;
+            opacity: 10;
+            transition: opacity 1s ease;
+        }
+    </style>
 </head>
 
 <body>
@@ -26,14 +44,15 @@
                         <!-- <img src="" alt=""> -->
                         <img class="img-fluid rounded-circle z-depth-2" style="width: 80px; min-width: 40px;" alt="100x100"
                             src="https://mdbootstrap.com/img/Photos/Avatars/img%20(31).jpg" data-holder-rendered="true">
-
+                        
                     </div>
 
                     <div class="col-9" style="padding-left: 0;">
 
                         <div class="container ml-0 pt-1" >
                             <div class="row mb-0">
-                                <div class="col-12 pf-size">Kong Pengsea</div>
+                                <input id="myButton" type="button" value="Click me!">
+                                  <div data-toggle="tooltip" data-html="true" title="<em>Tooltip</em> <u>with</u> <b>HTML</b>" class="col-12 pf-size card-hover">Kong Pengsea</div>
                             </div>
                           
                             <div class="row">
@@ -42,10 +61,10 @@
                         </div>
                     </div>
                     <div class="col-2">
-                        <table>
+                        <table style="position: relative;float: right;">
                             <tr>
-                                <td> <img style="width: 25px" src="img/baseline_announcement_black_18dp.png" alt=""></td>
-                                <td><img style="width: 34px;" src="img/facebook-black-icon.png" alt=""></td>
+                                <td> <img style="max-width: 25px" src="img/baseline_announcement_black_18dp.png" alt=""></td>
+                                <td><img style="max-width: 34px;" src="img/facebook-black-icon.png" alt=""></td>
                             </tr>
                         </table>
                        
@@ -90,13 +109,14 @@
                             src="https://mdbootstrap.com/img/Photos/Avatars/img%20(31).jpg" data-holder-rendered="true">
 
                     </div>
-                    <div class="col-10 col-sm-10 col-md-11 col-lg-11">
-                        <input placeholder="comment" type="text" name="" id="">
+                    <div class="col-10 col-sm-10 col-md-11 col-lg-11 my-auto">
+                        <div class="form-group my-auto">
+                            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Comment">
+                        </div>
+<!--                        <input style="width: -webkit-fill-available;" placeholder="comment" type="text" name="" id="">-->
                     </div>
                 </div>
-                <div class="row">
-                    <input type="button" value="Show more comment" class="w-100 0 btn-primary">
-                </div>
+
 <div class="row">
     <div class="ml-3 mr-0 container-fluid">
         <div class="row">
@@ -107,6 +127,39 @@
                 <div class="container-fluid ml-0 pr-0 mr-0">
                     <div class="row">
                         <span style="color: blue;">kong pengsea</span> 
+                        <span> &nbsp;&nbsp;&nbsp;* 22 days ago</span>
+                    </div>
+                    <div class="row">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius sapiente illum expedita sed possimus tempora odit at voluptas, ea odio. Perspiciatis facere ipsam aut deserunt quasi at neque alias dignissimos!
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2 col-sm-1">
+                <img class="img-fluid rounded-circle z-depth-2" style="width: 80px; min-width: 40px;" alt="100x100"
+                                                src="https://mdbootstrap.com/img/Photos/Avatars/img%20(31).jpg" data-holder-rendered="true">
+            </div>
+            <div class="col-10 col-sm-10">
+                <div class="container-fluid ml-0 pr-0 mr-0">
+                    <div class="row">
+                        <span style="color: blue;">kong pengsea</span>
+                        <span> &nbsp;&nbsp;&nbsp;* 22 days ago</span>
+                    </div>
+                    <div class="row">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius sapiente illum expedita sed possimus tempora odit at voluptas, ea odio. Perspiciatis facere ipsam aut deserunt quasi at neque alias dignissimos!
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2 col-sm-1">   <img class="img-fluid rounded-circle z-depth-2" style="width: 80px; min-width: 40px;" alt="100x100"
+                                                src="https://mdbootstrap.com/img/Photos/Avatars/img%20(31).jpg" data-holder-rendered="true">
+            </div>
+            <div class="col-10 col-sm-10">
+                <div class="container-fluid ml-0 pr-0 mr-0">
+                    <div class="row">
+                        <span style="color: blue;">kong pengsea</span>
                         <span> &nbsp;&nbsp;&nbsp;* 22 days ago</span>
                     </div>
                     <div class="row">
@@ -138,7 +191,7 @@
                             </div>
                             <div class="row"  style="position: relative;
                             float: right;">
-                                <a href="">see more</a>
+                                <a href="" style="font-size: smaller">see more &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
                             </div>
                         </div>
                        
@@ -159,7 +212,7 @@
                             </div>
                             <div class="row"  style="position: relative;
                             float: right;">
-                                <a href="">see more</a>
+                                <a href="" style="font-size: smaller">see more &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
                             </div>
                         </div>
                        
@@ -179,7 +232,7 @@
                             </div>
                             <div class="row"  style="position: relative;
                             float: right;">
-                                <a href="">see more</a>
+                                <a href="" style="font-size: smaller">see more &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
                             </div>
                         </div>
                        
@@ -199,7 +252,7 @@
                             </div>
                             <div class="row"  style="position: relative;
                             float: right;">
-                                <a href="">see more</a>
+                                <a href="" style="font-size: smaller">see more &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
                             </div>
                         </div>
                        
@@ -219,7 +272,7 @@
                             </div>
                             <div class="row"  style="position: relative;
                             float: right;">
-                                <a href="">see more</a>
+                                <a href="" style="font-size: smaller">see more &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
                             </div>
                         </div>
                        
@@ -228,5 +281,23 @@
         </div>
     </div>
 </body>
+<script>
+    // Document ready function
+    $(function ()
+        {
+            var button = $('#myButton');
+            var tooltip = new maTooltip(button, {
+                   inline_style: 'max-width: none;',
+                   full_visibility_duration: 1500,
+                   position: maTooltip.POSITION.BOTTOM, static_message: '<div class="card-body">
+    <h5 class="card-title">Card title</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>' } );
 
+   
+            //  var tooltip = new maTooltip( button, {  } );
+                  button.on('click', function () { tooltip.show(); });
+             });
+</script>
 </html>
