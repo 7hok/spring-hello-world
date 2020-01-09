@@ -18,4 +18,19 @@ public class HomeController {
     String home(){
         return "client-home";
     }
+
+    @GetMapping("/logPage")
+    String loginPage(){
+        return "loginPage";
+    }
+
+    @GetMapping("/logPage")
+    String signUp(){
+        return "sign-up";
+    }
+
+    @GetMapping("/detail")
+    String detail(){
+        return "clients/contentDetail";
+    }
 }
