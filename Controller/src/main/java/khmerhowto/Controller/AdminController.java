@@ -8,6 +8,14 @@ import org.springframework.web.bind.annotation.GetMapping;
  */
 @Controller
 public class AdminController {
+    @GetMapping("/admin/feedback")
+    String manageFeedBack(){
+        return "admin/admin-feedback";
+    }
+    @GetMapping("/admin/question")
+    String manageQuestion(){
+        return "admin/admin-question";
+    }
     @GetMapping("/admin/user")
     String manageUser(){
         return "admin/admin-user";
@@ -26,4 +34,11 @@ public class AdminController {
     String customizeInfo(){
         return "admin/admin-customize-user";
     }
+
+
+    @GetMapping("/admin/article")
+    String manageArticle(){
+        return "admin/admin-article";
+    }
+
 }
