@@ -19,7 +19,18 @@
 </head>
 <body>
     <div th:replace="~{navbar/__admin_navbar}"></div>
-    <div class="" layout:fragment="content"></div>
+    <div class="container-fluid ">
+        <div class="row ">
+            <!-- LEFT SIDE BAR -->
+            <div class="col-1 px-0 left-side-menu-div d-none d-lg-block">
+                <div th:replace="~{navbar/__admin_left_side_bar}"></div>
+            </div>
+            <div class="col-md-12 col-lg-11 bg-color-two">
+                <div class="" layout:fragment="content"></div>
+            </div>
+        </div>  
+    </div>
+   
     <th:block th:include="~{fragment/__javascript_link}"></th:block>
 
 </body>
