@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    xmlns="http://www.w3.org/1999/xhtml" layout:decorator="~{admin-layout}">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+    </head>
+    <body>
+       
+        <div class="content p-5  "  layout:fragment="content">
+            <div class="bg-white p-5">
+                <!-- upper -->
+               
+                <div class=" w-75 text-center d-none d-lg-block">
+                  
+                    <div class="d-inline-block border border-dark rounded-circle w-25 h-25 m-5 p-2">
+                        <img src="/image-static/machine-learning.svg" class="card-img-top border border-dark rounded-circle" alt="...">
+                    </div>
+                    <div class="d-inline-block">
+                        <h2>User Administrator</h2>
+                        <h6>Honoi , Vietnam</h6>
+                    </div>
+                </div>
+                <!-- upper -->
+                <!-- middle -->
+                <div>
+                    <form class="right-side-bar-form">
+                        <div class="py-4 d-flex justify-content-around">
+                            <div class="">
+                                <label>Name</label>
+                                <input type="text" class="form-control bg-color-two" placeholder="Enter name">
+                            </div>
+                            <div class="">
+                                <label>Sex</label>
+                                <input type="text" class="form-control bg-color-two" placeholder="Robot">
+                            </div>
+                        </div>
+                        <!-- middle form -->
+                        <div class="py-4 d-flex justify-content-around">
+                            <div class="">
+                                <label>Location</label>
+                                <input type="text" class="form-control bg-color-two" placeholder="Enter name">
+                            </div>
+                            <div class="">
+                                <label>Phone</label>
+                                <input type="text" class="form-control bg-color-two" placeholder="018-6319-168">
+                            </div>
+                        </div>
+                        <!-- last  -->
+                        <div class="py-4 d-flex justify-content-around">
+                            <div class="">
+                                <label>Bio</label>
+                                <input type="text" class="form-control bg-color-two" placeholder="In love with JS">
+                            </div>
+                            <div class="">
+                                <label>Role</label>
+                                <input type="text" class="form-control bg-color-two" placeholder="Choose Role">
+                            </div>
+                        </div>
+
+                        <div class="text-center">
+                            <button class="btn btn-success "    >Update</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- middle -->
+
+                 
+            </div>
+        </div>
+    </body>
+</html>

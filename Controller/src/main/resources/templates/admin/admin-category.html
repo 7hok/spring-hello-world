@@ -10,6 +10,24 @@
     </head>
     <body>
         <div class="content  p-5" layout:fragment="content">
+            <style>
+            body{
+                background-color: #fff !important;
+            }
+            .hover-highlight-for-click{
+                    transition: box-shadow .3s;
+                }
+            .hover-highlight-for-click:hover{
+            
+            
+                box-shadow: 05px 10px 18px rgba(33,33,33,.2); 
+            }
+            .hover-white-highlight-for-click:hover{
+            
+            background-color: #fff;
+            box-shadow: 05px 10px 18px rgba(33,33,33,.2); 
+            }
+            </style>
             <!-- UPPER DIV -->
             <div class="d-flex align-items-center justify-content-around bg-color-two right-side-bar-upper-div">
                 <div class="h-50 align-items-center">
@@ -21,7 +39,7 @@
                     <input type="text" class="form-control-one-line  my-2  " placeholder="  find your category">
                 </div>
                 <div class="p-3 text-center hover-highlight-for-click" id="new_category">
-                    <img src="Pre-Icon/content.svg" class="card-img-top text-center" style="max-width: 150px;" alt="...">
+                    <img src="/image-static/content.svg" class="card-img-top text-center" style="max-width: 150px;" alt="...">
                 </div>
             </div>
             <!-- UPPER DIV -->
@@ -35,7 +53,7 @@
             <div class="d-flex justify-content-around ">
                 <div class="card bg-color-two p-2 hover-white-highlight-for-click" style="width: 14rem;">
                     <div class="m-4">
-                        <img src="Pre-Icon/machine-learning.svg" class="card-img-top" alt="...">
+                        <img src="/image-static/machine-learning.svg" class="card-img-top" alt="...">
                     </div>
                     <div class="card-body">
                         <h6 class="card-title text-center">
@@ -45,7 +63,7 @@
                 </div>
                 <div class="card bg-color-two p-2 hover-white-highlight-for-click" style="width: 14rem;">
                     <div class="m-4" >
-                        <img src="Pre-Icon/machine-learning.svg" class="card-img-top" alt="...">
+                        <img src="/image-static/machine-learning.svg" class="card-img-top" alt="...">
                     </div>
                     <div class="card-body">
                         <h6 class="card-title text-center">
@@ -55,7 +73,7 @@
                 </div>
                 <div class="card bg-color-two p-2 hover-white-highlight-for-click" style="width: 14rem;">
                     <div class="m-4">
-                        <img src="Pre-Icon/machine-learning.svg" class="card-img-top" alt="...">
+                        <img src="/image-static/machine-learning.svg" class="card-img-top" alt="...">
                     </div>
                     <div class="card-body">
                         <h6 class="card-title text-center">
@@ -65,7 +83,7 @@
                 </div>
                 <div class="card bg-color-two p-2 hover-white-highlight-for-click" style="width: 14rem;">
                     <div class="m-4">
-                        <img src="Pre-Icon/machine-learning.svg" class="card-img-top" alt="...">
+                        <img src="/image-static/machine-learning.svg" class="card-img-top" alt="...">
                     </div>
                     <div class="card-body">
                         <h6 class="card-title text-center">
@@ -75,7 +93,7 @@
                 </div>
                 <div class="card bg-color-two p-2 hover-white-highlight-for-click" style="width: 14rem;">
                     <div class="m-4">
-                        <img src="Pre-Icon/machine-learning.svg" class="card-img-top" alt="...">
+                        <img src="/image-static/machine-learning.svg" class="card-img-top" alt="...">
                     </div>
                     <div class="card-body">
                         <h6 class="card-title text-center">
@@ -85,7 +103,7 @@
                 </div>
                 <div class="card bg-color-two p-2 hover-white-highlight-for-click" style="width: 14rem;">
                     <div class="m-4">
-                        <img src="Pre-Icon/machine-learning.svg" class="card-img-top" alt="...">
+                        <img src="/image-static/machine-learning.svg" class="card-img-top" alt="...">
                     </div>
                     <div class="card-body">
                         <h6 class="card-title text-center">
@@ -97,47 +115,52 @@
                 
             </div>
             <!-- FOOTER DIV  -->
+              <!-- Modal -->
+            <div id="new_category_modal" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <!-- background m3 -->
+                        <div class="m-3">
+                            <h3 class="text-center">
+                                Category
+                            </h3>
+                            <div class="form-group">
+                                <label >Name</label>
+                                <input type="email" class="form-control" placeholder="Name">
+                            </div>
+                            <div class="form-group">
+                                <label >Image</label>
+                                <div class="custom-file">
+
+                                    <input type="file" class="custom-file-input" id="customFile">
+                                    <label class="custom-file-label" for="customFile">Choose file</label>
+                                </div>
+                            </div>
+                            <div class="m-3 d-flex justify-content-center ">
+                                <div class="border w-50 bg-color-two " style="height: 15vh;"></div>
+                            </div>
+                        </div>
+                        <!-- background m3 -->
+                    </div>
+                </div>
+            </div>
+            <!-- Modal -->
+         
 
         </div>
         <!--  END CONTENT-->
-        <!-- Modal -->
-        <div id="new_category_modal" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-sm">
-                <div class="modal-content">
-                      <!-- background m3 -->
-                    <div class="m-3">
-                        <h3 class="text-center">
-                             Category
-                        </h3>
-                        <div class="form-group">
-                            <label >Name</label>
-                            <input type="email" class="form-control" placeholder="Name">
-                        </div>
-                        <div class="form-group">
-                            <label >Image</label>
-                            <div class="custom-file">
-
-                                <input type="file" class="custom-file-input" id="customFile">
-                                <label class="custom-file-label" for="customFile">Choose file</label>
-                            </div>
-                        </div>
-                        <div class="m-3 d-flex justify-content-center ">
-                            <div class="border w-50 bg-color-two " style="height: 15vh;"></div>
-                        </div>
-                    </div>
-                    <!-- background m3 -->
-                </div>
-            </div>
+        <div  layout:fragment="content-js">
+            <!-- Script -->
+               <script>
+                $(".hover-white-highlight-for-click,#new_category").on("click",function(){
+                    console.log(`hjashdijasidjsai`)
+                        $('#new_category_modal').modal('toggle');
+                        $('#new_category_modal').modal('show');
+                    })
+            
+            
+            </script>
+            <!-- Script -->
         </div>
-         <!-- Modal -->
-         <!-- Script -->
-         <script>
-               $(".hover-white-highlight-for-click,#new_category").on("click",function(){
-                    $('#new_category_modal').modal('toggle');
-                    $('#new_category_modal').modal('show');
-                })
-        
-        
-         </script>
     </body>
 </html>
