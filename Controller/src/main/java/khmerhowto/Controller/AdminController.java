@@ -21,4 +21,9 @@ public class AdminController {
     String category(){
         return "admin/admin-category";
     }
+
+    @GetMapping("/admin/customize")
+    String customizeInfo(){
+        return "admin/admin-customize-user";
+    }
 }
