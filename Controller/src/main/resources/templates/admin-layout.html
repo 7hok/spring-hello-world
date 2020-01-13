@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://storage.googleapis.com/non-spec-apps/mio-icons/latest/outline.css">
 
     <th:block th:include="~{fragment/__bootstrap_link}"></th:block>
-    <th:block th:include="~{navbar/__navbar_css}"></th:block>
+    <th:block th:include="~{navbar/__navbar_admin_css}"></th:block>
     <style>
     .bg-color-two {
         background-color: #E5EAED;
@@ -19,8 +19,19 @@
 </head>
 <body>
     <div th:replace="~{navbar/__admin_navbar}"></div>
-    <div class="" layout:fragment="content"></div>
+    <div class="container-fluid ">
+        <div class="row ">
+            <!-- LEFT SIDE BAR -->
+            <div class="col-1 px-0 left-side-menu-div d-none d-lg-block">
+                <div th:replace="~{navbar/__admin_left_side_bar}"></div>
+            </div>
+            <div class="col-md-12 col-lg-11 ">
+                <div class="" layout:fragment="content"></div>
+            </div>
+        </div>  
+    </div>
+   
     <th:block th:include="~{fragment/__javascript_link}"></th:block>
-
+    <div class="" layout:fragment="content-js"></div>
 </body>
 </html>
