@@ -17,9 +17,12 @@
             .v-40-test {
                 height: 40vh;
             }
+            .vh-30 { 
+                height: 28vh;
+            }
             .v-parent > div {
                 width: 48%;
-                max-height: 60vh; 
+                max-height: 70vh; 
                 border : 1px solid black;
                 /* padding: 10px; */
                 margin-bottom: 2%; 
@@ -29,7 +32,9 @@
             }
             
             .group-one-c-one{
-                background: url("image-static/dribbble_starry_night.png") no-repeat center center;
+                /* background: url("image-static/dribbble_starry_night.png") no-repeat center center; */
+                background-image:  url("image-static/dribbble_starry_night.png");
+                background-position: center center;
                 background-size: cover;
                 filter: brightness(60%);
             }
@@ -45,11 +50,20 @@
             }
             .card{
                 border : 0px !important;
+               
+            }
+            .card > .card-header {
+                padding-left: 0% !important;
+                padding-right: 0% !important;
+                padding-bottom: 0% !important;
             }
             @media only screen and (max-width: 992px) {
                 .v-parent > div {
                     width: 100%;
                    
+                }
+                .card {
+                    margin-bottom: 2%;
                 }
             }
            
@@ -95,11 +109,15 @@
                     <!-- INNER LEFT SIDE  -->
                     <div class="col-md-12 col-lg-9 v-parent d-flex flex-md-row flex-column justify-content-around flex-wrap " style="">
                         <div class="card ">
-                            <div class="card-header text-center">
+                            <div class="card-header text-center ">
                                 <a href="">Romance- <span>02/14/2020</span></a>
                                 <h6>How tech recognize human face</h6>
-                                <img class="mw-100 " style="max-height: 30vh;" src="image-static/face_recognition_dribbble.png" alt="">
+                                <!-- <img class="mw-100 " style="max-height: 30vh;" src="image-static/face_recognition_dribbble.png" alt=""> -->
+                                <div class="w-100 vh-30 border group-one-c-two" >
+
+                                </div>
                             </div>
+                            
                             <div class="card-body overflow-hidden">
                                
                                 <p class="card-text ">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc
@@ -125,10 +143,12 @@
                               
                         </div>
                         <div class="card">
-                            <div class="card-header text-center">
+                            <div class="card-header text-center ">
                                 <a href="">Romance- <span>02/14/2020</span></a>
                                 <h6>How to choose suitable fashion</h6>
-                                <img class="mw-100 " style="max-height: 30vh;" src="image-static/girlfashion.jpg" alt="">
+                                <div class="w-100 vh-30 border group-one-c-three" >
+
+                                </div>
                             </div>
                             <div class="card-body overflow-hidden">
                                
@@ -155,10 +175,13 @@
                               
                         </div>
                         <div class="card">
-                            <div class="card-header text-center">
+                            <div class="card-header text-center ">
                                 <a href="">Romance- <span>02/14/2020</span></a>
                                 <h6>Why people value art</h6>
-                                <img class="mw-100 " style="max-height: 30vh;" src="image-static/draw" alt="">
+                                <!-- <img class="mw-100 " style="max-height: 30vh;" src="image-static/draw" alt=""> -->
+                                <div class="w-100 vh-30 border group-one-c-three" >
+
+                                </div>
                             </div>
                             <div class="card-body overflow-hidden">
                                
@@ -185,10 +208,15 @@
                               
                         </div>
                         <div class="card">
-                            <div class="card-header text-center">
-                                <a href="">Romance- <span>02/14/2020</span></a>
-                                <h6>How to smoke to be healthy </h6>
-                                <img class="mw-100 " style="max-height: 30vh;" src="image-static/mansmoke.png" alt="">
+                          
+                                <!-- <img class="mw-100 " style="max-height: 30vh;" src="image-static/mansmoke.png" alt=""> -->
+                                <div class="card-header text-center ">
+                                    <a href="">Romance- <span>02/14/2020</span></a>
+                                    <h6>How to smoke to be healthy </h6>
+                                    <!-- <img class="mw-100 " style="max-height: 30vh;" src="image-static/draw" alt=""> -->
+                                    <div class="w-100 vh-30 border group-one-c-three" >
+    
+                                    </div>
                             </div>
                             <div class="card-body overflow-hidden">
                                
@@ -218,7 +246,10 @@
                             <div class="card-header text-center">
                                 <a href="">Romance- <span>02/14/2020</span></a>
                                 <h6>How tech recognize human face</h6>
-                                <img class="mw-100 " style="max-height: 30vh;" src="image-static/face_recognition_dribbble.png" alt="">
+                                <!-- <img class="mw-100 " style="max-height: 30vh;" src="image-static/face_recognition_dribbble.png" alt=""> -->
+                                <div class="w-100 vh-30 border group-one-c-three" >
+    
+                                </div>
                             </div>
                             <div class="card-body overflow-hidden">
                                
@@ -248,7 +279,9 @@
                             <div class="card-header text-center">
                                 <a href="">Romance- <span>02/14/2020</span></a>
                                 <h6>How to choose suitable fashion</h6>
-                                <img class="mw-100 " style="max-height: 30vh;" src="image-static/girlfashion.jpg" alt="">
+                                <div class="w-100 vh-30 border group-one-c-two" >
+    
+                                </div>
                             </div>
                             <div class="card-body overflow-hidden">
                                
@@ -278,7 +311,9 @@
                             <div class="card-header text-center">
                                 <a href="">Romance- <span>02/14/2020</span></a>
                                 <h6>Why people value art</h6>
-                                <img class="mw-100 " style="max-height: 30vh;" src="image-static/draw" alt="">
+                                <div class="w-100 vh-30 border group-one-c-two" >
+    
+                                </div>
                             </div>
                             <div class="card-body overflow-hidden">
                                
@@ -308,7 +343,9 @@
                             <div class="card-header text-center">
                                 <a href="">Romance- <span>02/14/2020</span></a>
                                 <h6>How to smoke to be healthy </h6>
-                                <img class="mw-100 " style="max-height: 30vh;" src="image-static/mansmoke.png" alt="">
+                                <div class="w-100 vh-30 border group-one-c-one" >
+    
+                                </div>
                             </div>
                             <div class="card-body overflow-hidden">
                                
@@ -338,11 +375,11 @@
                         <div class=""></div> -->
                     </div>
                     <!-- INNER RIGHT SIDE  -->
-                    <div class="col-3 d-none d-lg-block bg-white" style="">
+                    <div class="col-3 d-none d-lg-block bg-white border-left border-right" style="">
                         <div class="my-3">
                             <h4>Categories</h4>
                             <hr>
-                            <div class="text-center">
+                            <div class="text-left ml-5">
                                 <p>Technology</p>
                                 <p>Business</p>
                                 <p>About</p>
