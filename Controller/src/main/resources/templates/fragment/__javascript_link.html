@@ -1,2 +1,22 @@
 <script src="node_module/jquery/dist/jquery.min.js"></script>
 <script src="node_module/bootstrap-4.4.1/dist/js/bootstrap.min.js"></script>
+<script src="js/maTooltip.js"></script>
+<script>
+    // Document ready function
+    $(function () {
+        var button = $('#myButton');
+        var tooltip = new maTooltip(button, {
+            inline_style: 'max-width: none;',
+            full_visibility_duration: 31000,
+            position: maTooltip.POSITION.BOTTOM,
+            static_message: '<div style="background-color: white; color: black; border-radius: inherit;"><div>  <img class="img-fluid rounded-circle z-depth-2" style="width: 80px; min-width: 40px;" alt="100x100" src="https://mdbootstrap.com/img/Photos/Avatars/img%20(31).jpg" data-holder-rendered="true"></div><h3>Hum Chamroeun</h3><p>From Takeo</p><p>I am so happy</p><hr><div style="height: 32px;border-radius: inherit;background-color: white; color: black;"><a href="" style="margin-left: 20px;margin-right: 20px ">Favorite Category</a><a style="margin-left: 20px;margin-right: 20px " href="">Education</a><a href="" style="margin-left: 20px;margin-right: 20px ">Technology</a></div></div>'
+        });
+
+
+        //  var tooltip = new maTooltip( button, {  } );
+        button.on('click', function () {
+            tooltip.show();
+        });
+    });
+
+</script>
