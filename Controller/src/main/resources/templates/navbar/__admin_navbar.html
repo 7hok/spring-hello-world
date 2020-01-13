@@ -1,8 +1,11 @@
 <style>
     .icon-linear-color{
-        background: linear-gradient(#FFBF3F 10%, #FF6A8F 100%);
+        background: #b93d5c;
         -webkit-background-clip: text;
 	    -webkit-text-fill-color: transparent;
+    }
+    .left-align > li > a > p > sub {
+        margin-right : 8px;
     }
 </style>
 <nav class="navbar navbar-expand-lg bg-white border-bottom pb-0" >
@@ -15,7 +18,7 @@
     </button>
 
     <a class="navbar-brand ml-4 text-dark" href="#">
-        <h3><b>KhmerHowTo</b></h3>
+        <h3 class="icon-linear-color"><b>KhmerHowTo</b></h3>
     </a>
     
     <div class="collapse navbar-collapse" id="navbarTopRightSide">
@@ -26,61 +29,104 @@
                 last 3 = text-center    
              -->
             <li class="nav-item d-none d-lg-block">
-                <a class="nav-link text-dark" href="#">
+                <a class="nav-link text-dark" href="/homepage">
                     <h5 class="icon-linear-color">Home</h5>
                 </a>
             </li>
             <li class="nav-item d-none d-lg-block">
-                <a class="nav-link text-center text-dark" href="#">
+                <a class="nav-link text-center text-dark" href="/admin">
                     <h5 class="icon-linear-color">Admin</h5 >
                 </a>
             </li>
             <li class="nav-item d-none d-lg-block ">
                 <a class="nav-link text-center " href="#">  
                  
-                    <img class="" src="/icon/non-notification.svg" style="width: 30px; height: 30px;" alt="">
+                    <img class="" src="/icon/notification-navbar-v2.svg" style="width: 28px; height: 28px;" alt="">
                     
                 </a>
             </li>
             <li class="nav-item d-none d-lg-block">
                 <a class="nav-link text-center" href="#">  
-                    <img class="" src="/icon/user-profile.svg" style="width: 28px; height: 28px;" alt="">
+                    <img class="" src="/icon/user-navbar-v2.svg" style="width: 30px; height: 30px;" alt="">
                 </a>
             </li>
         </ul>
-        <ul class="d-md-block d-lg-none">
-            <li class="list-group-item text-center">
-                <a class="nav-link text-dark" href="#">
-                    <i class="material-icons-new outline-home"></i>
-                    <h5>Home</h5>
+        <ul class="d-md-block d-lg-none left-align">
+            <li class="list-group-item ">
+                <a class="nav-link text-dark" href="/homepage">
+                    
+                    <p>
+                        <sub>
+                        <i class="material-icons-new outline-home"></i>
+                        </sub>Home</p>
                 </a>
             </li>
-            <li class="list-group-item text-center">
-                <a class="nav-link text-center text-dark" href="#">
-                    <i class="material-icons-new outline-account_circle md-36"></i>
-                    <h5>Admin</h5>
+            <li class="list-group-item ">
+                <a class="nav-link  text-dark" href="/admin">
+                  
+                    <p>
+                        <sub>
+                            <i class="material-icons-new outline-account_circle md-36"></i>
+                           </sub>
+                        Admin
+                    </p>
 
                 </a>
             </li>
-            <li class="list-group-item text-center">
-                <i class="material-icons-new outline-library_books"></i>
-                <p>Article</p>
+            <li class="list-group-item ">
+                <a class="nav-link  text-dark" href="/admin/article">
+                    <p>
+                        <sub>
+                            <i class="material-icons-new outline-library_books"></i>
+                        </sub>
+                        Article
+                    </p>
+                </a>    
             </li>
-            <li class="list-group-item text-center">
-                <i class="material-icons-new outline-people"></i>
-                <p>User</p>
+            <li class="list-group-item ">
+                <a class="nav-link  text-dark" href="/admin/user">
+                    <p>
+                        <sub>
+                        <i class="material-icons-new outline-people"></i>
+                        </sub>
+                        User
+                    </p>
+           
+                </a>
+                 </li>
+            <li class="list-group-item ">
+                <a class="nav-link  text-dark" href="/admin/question">
+                    <p>
+                    <sub>
+                        <i class="material-icons-new outline-question_answer"></i>
+                    </sub>
+                        Question
+                    </p>
+           
+                </a>
             </li>
-            <li class="list-group-item text-center">
-                <i class="material-icons-new outline-question_answer"></i>
-                <p>Question</p>
+            <li class="list-group-item ">
+                <a class="nav-link  text-dark" href="/admin/feedback">
+                    <p>
+                        <sub>
+                        <i class="material-icons-new outline-feedback"></i>
+                        </sub>
+                
+                    Feedback
+                    </p>
+           
+                </a>
             </li>
-            <li class="list-group-item text-center">
-                <i class="material-icons-new outline-feedback"></i>
-                <p>Feedback</p>
-            </li>
-            <li class="list-group-item text-center">
-                <i class="material-icons-new outline-settings_applications"></i>
-                <p>Setting</p>
+            <li class="list-group-item ">
+                <a class="nav-link  text-dark" href="/admin/customize">
+                    <p>
+                    <sub>
+                    <i class="material-icons-new outline-settings_applications"></i>
+                    </sub>
+                
+                    Setting</p>
+           
+                </a>
             </li>
         </ul> 
     </div>

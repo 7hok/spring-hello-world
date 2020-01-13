@@ -136,7 +136,7 @@ var maTooltip = (function ()
             one_time_only: false,
             insert_before: 'body > *:first-child',
             calculated_time_offset: null,
-            opacity: 2,                             // <-- Only a fall back value, will be overwritten in a minute if parsing of the stylesheet succeeds.
+            opacity: 0.8,                             // <-- Only a fall back value, will be overwritten in a minute if parsing of the stylesheet succeeds.
             
             /*
              * If you call .show() when the tooltiper is visible, AND the message supposed to display have changed, then the tooltiper will
@@ -365,7 +365,7 @@ var maTooltip = (function ()
         $window.on('resize.maTooltip', self._windowResizeHandler); // Window resize
         $window.one('load.maTooltip', function () { if(self.DOM) self.positionMightBeDirty(); });   // Run just once when document has fully finished loading (fonts etc. will move elements on screen) Note the if clause, .dispose might have been called before this event takes place!
 
-        // Mouseenter- and leave handlers.opa
+        // Mouseenter- and leave handlers.
         if (this.SETTINGS.full_visibility_duration === -3)
             {
             // EXPERIMENTAL FUNCTION TO FOUND OUT IF MOUSE REALLY IS OVER ELEMENT
@@ -502,9 +502,9 @@ var maTooltip = (function ()
         // OPACITY
         //
         if ('opacity' in settings && settings.opacity >= 0 && settings.opacity <= 1)
-            this.SETTINGS.opacity = 1;
+            this.SETTINGS.opacity = settings.opacity;
         else
-            this.SETTINGS.opacity = 1;
+            this.SETTINGS.opacity = _DEFAULTS.opacity;
         //
         // POSITION
         //
@@ -884,7 +884,7 @@ var maTooltip = (function ()
 
         _stopAnimation.call(this, 'fade', false);   // Equivalent of a "pause".
         
-        var opacity_target = 1;
+        var opacity_target = this.SETTINGS.opacity;
         var opacity_current = this.DOM.$divParent.css('opacity');
         var opacity_delta = opacity_target - opacity_current;
         
