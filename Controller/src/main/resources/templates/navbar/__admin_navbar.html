@@ -4,6 +4,9 @@
         -webkit-background-clip: text;
 	    -webkit-text-fill-color: transparent;
     }
+    .left-align > li > a > p > sub {
+        margin-right : 8px;
+    }
 </style>
 <nav class="navbar navbar-expand-lg bg-white border-bottom pb-0" >
     <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarTopRightSide" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
@@ -15,7 +18,7 @@
     </button>
 
     <a class="navbar-brand ml-4 text-dark" href="#">
-        <h3><b>KhmerHowTo</b></h3>
+        <h3 class="icon-linear-color"><b>KhmerHowTo</b></h3>
     </a>
     
     <div class="collapse navbar-collapse" id="navbarTopRightSide">
@@ -48,39 +51,82 @@
                 </a>
             </li>
         </ul>
-        <ul class="d-md-block d-lg-none">
-            <li class="list-group-item text-center">
+        <ul class="d-md-block d-lg-none left-align">
+            <li class="list-group-item ">
                 <a class="nav-link text-dark" href="#">
-                    <i class="material-icons-new outline-home"></i>
-                    <h5>Home</h5>
+                    
+                    <p>
+                        <sub>
+                        <i class="material-icons-new outline-home"></i>
+                        </sub>Home</p>
                 </a>
             </li>
-            <li class="list-group-item text-center">
-                <a class="nav-link text-center text-dark" href="#">
-                    <i class="material-icons-new outline-account_circle md-36"></i>
-                    <h5>Admin</h5>
+            <li class="list-group-item ">
+                <a class="nav-link  text-dark" href="#">
+                  
+                    <p>
+                        <sub>
+                            <i class="material-icons-new outline-account_circle md-36"></i>
+                           </sub>
+                        Admin
+                    </p>
 
                 </a>
             </li>
-            <li class="list-group-item text-center">
-                <i class="material-icons-new outline-library_books"></i>
-                <p>Article</p>
+            <li class="list-group-item ">
+                <a class="nav-link  text-dark" href="#">
+                    <p>
+                        <sub>
+                            <i class="material-icons-new outline-library_books"></i>
+                        </sub>
+                        Article
+                    </p>
+                </a>    
             </li>
-            <li class="list-group-item text-center">
-                <i class="material-icons-new outline-people"></i>
-                <p>User</p>
+            <li class="list-group-item ">
+                <a class="nav-link  text-dark" href="#">
+                    <p>
+                        <sub>
+                        <i class="material-icons-new outline-people"></i>
+                        </sub>
+                        User
+                    </p>
+           
+                </a>
+                 </li>
+            <li class="list-group-item ">
+                <a class="nav-link  text-dark" href="#">
+                    <p>
+                    <sub>
+                        <i class="material-icons-new outline-question_answer"></i>
+                    </sub>
+                        Question
+                    </p>
+           
+                </a>
             </li>
-            <li class="list-group-item text-center">
-                <i class="material-icons-new outline-question_answer"></i>
-                <p>Question</p>
+            <li class="list-group-item ">
+                <a class="nav-link  text-dark" href="#">
+                    <p>
+                        <sub>
+                        <i class="material-icons-new outline-feedback"></i>
+                        </sub>
+                
+                    Feedback
+                    </p>
+           
+                </a>
             </li>
-            <li class="list-group-item text-center">
-                <i class="material-icons-new outline-feedback"></i>
-                <p>Feedback</p>
-            </li>
-            <li class="list-group-item text-center">
-                <i class="material-icons-new outline-settings_applications"></i>
-                <p>Setting</p>
+            <li class="list-group-item ">
+                <a class="nav-link  text-dark" href="#">
+                    <p>
+                    <sub>
+                    <i class="material-icons-new outline-settings_applications"></i>
+                    </sub>
+                
+                    Setting</p>
+           
+                </a>
             </li>
         </ul> 
     </div>
