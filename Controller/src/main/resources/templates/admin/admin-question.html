@@ -35,84 +35,20 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Title</th>
-                <th scope="col">Category</th>
-                <th scope="col">Author</th>
+                <th scope="col">User</th>
                 <th scope="col">Date</th>
                 <th scope="col">Action</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>How to have a fresh morning after a night without sleeping </td>
-                <td>Science</td>
-                <td>@Hok</td>
-                <td>3/10/18</td>
-                <td>
-                    <button class="btn btn-outline-primary">View</button>
-                    <button class="btn btn-outline-primary">Edit</button>
-                    <button class="btn btn-outline-primary">Delete</button>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>How to have a fresh morning after a night without sleeping
+            <tr th:each="q:${questions}">
+                <th scope="row" th:text="${q.id}"></th>
+                <td th:text="${q.title}"> </td>
+                <td th:text="${q.getUser().getName()}"></td>
+                <td th:text="${q.timestamp}"></td>
 
-                </td>
-                <td>Science</td>
-                <td>@Hok</td>
-                <td>3/10/18</td>
                 <td>
                     <button class="btn btn-outline-primary">View</button>
-                    <button class="btn btn-outline-primary">Edit</button>
-                    <button class="btn btn-outline-primary">Delete</button>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>How to have a fresh morning after a night without sleeping </td>
-                <td>Science</td>
-                <td>@Hok</td>
-                <td>3/10/18</td>
-                <td>
-                    <button class="btn btn-outline-primary">View</button>
-                    <button class="btn btn-outline-primary">Edit</button>
-                    <button class="btn btn-outline-primary">Delete</button>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">4</th>
-                <td>How to have a fresh morning after a night without sleeping </td>
-                <td>Science</td>
-                <td>@Hok</td>
-                <td>3/10/18</td>
-                <td>
-                    <button class="btn btn-outline-primary">View</button>
-                    <button class="btn btn-outline-primary">Edit</button>
-                    <button class="btn btn-outline-primary">Delete</button>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">5</th>
-                <td>How to have a fresh morning after a night without sleeping </td>
-                <td>Science</td>
-                <td>@Hok</td>
-                <td>3/10/18</td>
-                <td>
-                    <button class="btn btn-outline-primary">View</button>
-                    <button class="btn btn-outline-primary">Edit</button>
-                    <button class="btn btn-outline-primary">Delete</button>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">1</th>
-                <td>How to have a fresh morning after a night without sleeping </td>
-                <td>Science</td>
-                <td>@Hok</td>
-                <td>3/10/18</td>
-                <td>
-                    <button class="btn btn-outline-primary">View</button>
-                    <button class="btn btn-outline-primary">Edit</button>
                     <button class="btn btn-outline-primary">Delete</button>
                 </td>
             </tr>
@@ -127,17 +63,17 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
     <div class="">
         <nav aria-label="Page navigation example" class="">
             <ul class="pagination justify-content-center">
-                <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Previous">
+                <li class="page-item" th:if="${page.hasPrevious()}">
+                    <a class="page-link" th:href="@{/(page=${page.number-1},size=${page.size})}" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
                         <span class="sr-only">Previous</span>
                     </a>
                 </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Next">
+                <li class="page-item" th:each="i: ${#numbers.sequence(0, page.totalPages - 1)}"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" th:if="${page.number == i}" >[[${i}+1]]</a></li>
+                <!--                <li class="page-item"><a class="page-link"th:unless="${page.number == i}" ></a></li>-->
+                <li class="page-item"  th:if="${page.hasNext()}">
+                    <a class="page-link" href="#" aria-label="Next" th:href="@{/(page=${page.number+1},size=${page.size})}">
                         <span aria-hidden="true">&raquo;</span>
                         <span class="sr-only">Next</span>
                     </a>
