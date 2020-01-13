@@ -15,7 +15,10 @@ public class DbTest {
         return "loginPage";
     }
 
-
+    @GetMapping("/testing-style")
+    public String test(){
+        return "test";
+    }
 //    @Autowired
 //    private DataSource dataSource;
 //
