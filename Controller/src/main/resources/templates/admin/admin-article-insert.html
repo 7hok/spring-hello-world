@@ -18,21 +18,23 @@
 </head>
 
 <body>
-    <div class="content m-5" layout:fragment="content">
-
-        <textarea name="editor1" id="hello"></textarea>
-        <form method="POST" enctype="multipart/form-data" th:action="@{/upload}">
-
+    <div class="content m-5" layout:fragment="content"> 
+        
+        <form style="display: none;" method="POST" id="frm" enctype="multipart/form-data">
             <input id="chooseImg" type="file" name="file" accept=".png, .jpg, .jpeg"><br><br>
-           
-
+            <button type="submit" style="display: none;" id="added">add</button>
         </form>
+        <button onclick="chooseImage()" style="position: absolute;left: 343px; margin-top: 7px; border: none; background-color: inherit;">image</button>
+        <textarea name="editor1" id="hello"></textarea>
 
         <script th:src="@{/js/ckeditor/ckeditor.js}"></script>
         <script src="/node_module/jquery/dist/jquery.min.js"></script>
         <script>
             CKEDITOR.replace('editor1');
 
+           function chooseImage(){
+               $("#chooseImg").click();
+           }
             function getData() {
                 // $( 'textarea.editor1' ).val();
                 // // var content = CKEDITOR.instances['comment'].getData();
@@ -41,38 +43,22 @@
                 $("#imgInput").click()
             }
 
-            $(document).ready(function () {
-                $("#cke_24").click(function () {
-                    console.log($('#cke_28'));
-                });
-            });
+            $("#chooseImg").change(function(){
+                $("#added").click()
+             });
 
-
-
-
-            $("#chooseImg").change(function () {
-                readURL(this);
-            });
-
-            document.querySelector("#chooseImg").addEventListener("click", function (event) {
-                PostImage();
+            $("form").submit(function (e) {
                 event.preventDefault();
-            }, false);
-
-            function PostImage() {
-
+            
                 var fd = new FormData();
-                var files = $('#chooseImg')[0].files[0];
-                fd.append('file', files);
+                fd.append('file', chooseImg.files[0]);
                 $.ajax({
                     type: 'POST',
                     url: 'http://localhost:8080/upload',
                     data: fd,
-                    cache: false,
                     contentType: false,
                     processData: false,
                     success: function (data) {
-                        console.log("success");
                         console.log(data);
                         var srcimg = data["Data"]
                         var im =
@@ -83,10 +69,9 @@
                     error: function (data) {
                         console.log("error");
                         console.log(data);
-                    },
-                    contentType: "application/json"
+                    }
                 });
-            }
+            });
 
         </script>
     </div>
