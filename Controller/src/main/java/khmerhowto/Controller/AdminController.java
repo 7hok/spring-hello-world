@@ -25,7 +25,8 @@ public class AdminController {
     @Autowired
     private ContentRequestService contentRequestService;
     @GetMapping("/admin/feedback")
-    String manageFeedBack(){
+    String manageFeedBack(Model model){
+        model.addAttribute("CURRENT_PAGE", "feedback");
         return "admin/admin-feedback";
     }
     @GetMapping("/admin/question")
@@ -34,7 +35,7 @@ public class AdminController {
         List<ContentRequest>questions = page.getContent();
         model.addAttribute("page",page);
         model.addAttribute("questions",questions);
-
+        model.addAttribute("CURRENT_PAGE", "question");
         return "admin/admin-question";
     }
     @GetMapping("/admin/user")
@@ -43,28 +44,32 @@ public class AdminController {
         List<User> users = page.getContent();
         model.addAttribute("page",page);
         model.addAttribute("users",users);
-
+        model.addAttribute("CURRENT_PAGE", "user");
 
         return "admin/admin-user";
     }
     @GetMapping("/admin")
-    String home(){
+    String home(Model model){
+        model.addAttribute("CURRENT_PAGE", "home");
         return "admin/admin-home";
     }
 
     @GetMapping("/admin/category")
-    String category(){
+    String category(Model model){
+        model.addAttribute("CURRENT_PAGE", "category");
         return "admin/admin-category";
     }
 
     @GetMapping("/admin/customize")
-    String customizeInfo(){
+    String customizeInfo(Model model){
+        model.addAttribute("CURRENT_PAGE", "setting");
         return "admin/admin-customize-user";
     }
 
 
     @GetMapping("/admin/article")
-    String manageArticle(){
+    String manageArticle(Model model){
+        model.addAttribute("CURRENT_PAGE", "article");
         return "admin/admin-article";
     }
 

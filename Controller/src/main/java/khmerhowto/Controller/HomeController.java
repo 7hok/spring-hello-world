@@ -2,6 +2,7 @@ package khmerhowto.Controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.ui.Model;
 
 /**
  * HomeController
@@ -14,8 +15,9 @@ public class HomeController {
         return "myhometest";
     }
 
-    @GetMapping("/homepage")
-    String home(){
+    @GetMapping(value = {"/homepage","/","/home"})
+    String home(Model model){
+        model.addAttribute("CURRENT_PAGE", "home");
         return "client-home";
     }
 
@@ -35,7 +37,8 @@ public class HomeController {
     }
 
     @GetMapping("/contentByCategory")
-    String contentByCategory(){
+    String contentByCategory(Model model){
+        model.addAttribute("CURRENT_PAGE", "category");
         return "content-by-category";
     }
 
