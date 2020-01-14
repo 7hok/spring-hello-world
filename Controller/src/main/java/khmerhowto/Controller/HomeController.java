@@ -33,4 +33,11 @@ public class HomeController {
     String detail(){
         return "clients/contentDetail";
     }
+
+    @GetMapping("/contentByCategory")
+    String contentByCategory(){
+        return "content-by-category";
+    }
+
+
 }
