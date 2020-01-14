@@ -9,12 +9,24 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class UserServiceImp implements UserService {
     @Autowired
 private UserRepository userRepository;
 
+    @Override
+    public void updateUser(Integer id,User user) {
+      User user1 = userRepository.getOne(id);
+      user.setProfilePicture(user1.getProfilePicture());
+        userRepository.save(user);
+    }
 
+    @Override
+    public User findById(Integer id) {
+        return userRepository.getOne(id);
+    }
 
     @Override
     public Page<User> findAll(Pageable pageable) {

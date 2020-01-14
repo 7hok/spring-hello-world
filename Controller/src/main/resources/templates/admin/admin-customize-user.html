@@ -45,42 +45,46 @@
                 <!-- upper -->
                 <!-- middle -->
                 <div>
-                    <form class="right-side-bar-form">
+                    <form class="right-side-bar-form" th:action="@{/admin/customize/__${user.id}__}" th:object="${user}"  method="POST">
                         <div class="py-4 d-flex justify-content-around">
                             <div class="">
                                 <label>Name</label>
-                                <input type="text" class="form-control bg-color-two" placeholder="Enter name">
+                                <input type="text" class="form-control bg-color-two" placeholder="Enter name" th:field="*{name}" th:value="*{getName()}" >
                             </div>
                             <div class="">
                                 <label>Sex</label>
-                                <input type="text" class="form-control bg-color-two" placeholder="Robot">
+                                <input type="text" class="form-control bg-color-two" placeholder="User's Gender" th:field="*{sex}" th:value="*{getSex()}">
                             </div>
                         </div>
                         <!-- middle form -->
                         <div class="py-4 d-flex justify-content-around">
                             <div class="">
                                 <label>Location</label>
-                                <input type="text" class="form-control bg-color-two" placeholder="Enter name">
+                                <input type="text" class="form-control bg-color-two" placeholder="Enter name" th:field="*{location}" th:value="*{getLocation()}">
                             </div>
                             <div class="">
                                 <label>Phone</label>
-                                <input type="text" class="form-control bg-color-two" placeholder="018-6319-168">
+                                <input type="text" class="form-control bg-color-two" placeholder="018-6319-168" th:field="*{phoneNumber}" th:value="*{getPhoneNumber()}">
                             </div>
                         </div>
                         <!-- last  -->
                         <div class="py-4 d-flex justify-content-around">
                             <div class="">
                                 <label>Bio</label>
-                                <input type="text" class="form-control bg-color-two" placeholder="In love with JS">
+                                <input type="text" class="form-control bg-color-two" placeholder="In love with JS" th:field="*{bio}" th:value="*{getBio()}">
                             </div>
                             <div class="">
                                 <label>Role</label>
-                                <input type="text" class="form-control bg-color-two" placeholder="Choose Role">
+                                <select class="form-control form-control-one-line w-25" name="dropdown-test">
+                                    <option value="1">Admin</option>
+                                    <option value="2">User</option>
+
+                                </select>
                             </div>
                         </div>
 
                         <div class="text-center">
-                            <button class="btn btn-success "    >Update</button>
+                            <input type="submit" class="btn btn-success " value="Update"></button>
                         </div>
                     </form>
                 </div>

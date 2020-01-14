@@ -46,9 +46,9 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
                 <td th:text="${user1.email}"></td>
                 <td th:text="${user1.phoneNumber}"></td>
                 <td>
-                    <button class="btn  btn-outline-primary btn-sm" ><i class="material-icons-new outline-edit ">
+                    <a class="btn  btn-outline-primary btn-sm"  th:href="@{/admin/customize/{id}(id=${user1.getId()})}" ><i class="material-icons-new outline-edit ">
 
-                    </i></button>
+                    </i></a>
 
 
                 </td>
