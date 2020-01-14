@@ -4,6 +4,16 @@
         -webkit-background-clip: text;
 	    -webkit-text-fill-color: transparent;
     }
+    .dropdown div.dropdown-menu-customized:before {
+        content: "";
+        border-bottom: 10px solid #fff;
+        border-right: 10px solid transparent;
+        border-left: 10px solid transparent;
+        position: absolute;
+        top: -10px;
+        right: 40px;
+        z-index: 10;
+    }
 </style>
 <nav class="navbar navbar-expand-lg bg-white border-bottom pb-0" >
     <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarTopRightSide" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,15 +50,45 @@
                 </a>
             </li>
             <li class="nav-item  ">
-                <a class="nav-link text-center  d-none d-lg-block" href="#">  
-                    
-                    <img class="" src="/icon/notification-navbar-v2.svg" style="width: 28px; height: 28px;" alt="">
-                </a>
+                <div class="dropdown ">
+                    <a class="nav-link text-center  d-none d-lg-block" href="#" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        
+                        <img class="" src="/icon/notification-navbar-v2.svg" style="width: 28px; height: 28px;" alt="">
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-customized dropdown-menu-right mt-3" style="width: 100px;" aria-labelledby="notification">
+                        <ul class="list-group">
+                            <li class="list-group-item" >New post From Science</li>
+                            <li class="list-group-item">New post From Tech</li>
+                            <li class="list-group-item">New post From Soft</li>
+                        </ul>
+                    </div>
+                </div>
             </li>
             <li class="nav-item ">
-                <a class="nav-link text-center  d-none d-lg-block" href="#">  
-                    <img class="" src="/icon/user-navbar-v2.svg" style="width: 30px; height: 30px;" alt="">
-                </a>
+                <div class="dropdown ">
+
+                    <a class="nav-link text-center  d-none d-lg-block" href="#" id="profile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">  
+                        <img class="" src="/icon/user-navbar-v2.svg" style="width: 30px; height: 30px;" alt="">
+                    </a>
+                <div class="dropdown-menu dropdown-menu-customized dropdown-menu-right mt-3" aria-labelledby="profile">
+                    <div class="card">
+                        <div class="card-title d-flex justify-content-around">
+                                <img class="" src="/icon/user-navbar-v2.svg" style="width: 30px; height: 30px;" alt="">
+                                <p> Administrator</p>
+                            
+                        </div>
+                        <div class="card-body">
+                            <p class="">
+                                at org.apache.catalina.valves.ErrorReportValve.invoke
+                                (ErrorReportValve.java:92)[tomcat-embed-core-9.0.19.jar:9.0.19]
+                                at org.apache.catalina.core.StandardEngineValve.invoke
+                                (StandardEngineValve.java:74)[tomcat-embed-core-9.0.19.jar:9.0.19]
+                                
+                            </p>
+                        </div>
+                    </div>
+                  </div>
+                </div>
             </li>
         </ul>
         <ul class="d-md-block d-lg-none">
