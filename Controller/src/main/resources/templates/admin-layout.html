@@ -33,5 +33,51 @@
    
     <th:block th:include="~{fragment/__javascript_link}"></th:block>
     <div class="" layout:fragment="content-js"></div>
+    <script>
+        $(function(){
+            
+           
+            const _convert_current_page_string_to_number = () => {
+                // if(text == null | text == ""){
+                //     return -1;
+                // }else{
+                let text =  $("#span_current_page").text();   
+                switch (text) {
+                    case "home":
+                        return 0;
+                        break;
+                    case "category":
+                        return -1;
+                        break;
+                    case "article":
+                        return 2;
+                        break;
+                    case "user":
+                        return 3;
+                        break;    
+                    case "question":
+                        return 4;
+                    break;
+                    case "feedback":
+                        return 5;
+                    break;
+                    case "setting":
+                        return 6;
+                    break;
+                    default:
+                        return -1;
+                        break;
+                    }
+                // }
+            }   
+            let _current_page_number =  _convert_current_page_string_to_number();
+            if(_current_page_number > -1){
+                $("#left-side-menu>li").eq(_current_page_number).addClass("bg-transparent");
+            }else{
+                console.log(`-1 is selected`)
+            }
+           
+    })
+    </script>
 </body>
 </html>

@@ -15,6 +15,7 @@
         z-index: 10;
     }
 
+
      /* Chamroeun Notification */
      /* Chamroeun Notification */
 
@@ -79,7 +80,10 @@
          border-radius:4px;
      }
 
-
+     .page-active {
+         border-bottom: 2px solid yellow;
+         border-width: 5px;
+     }
 
 
 </style>
@@ -109,12 +113,12 @@
              -->
             <li class="nav-item  d-none d-lg-block">
                 <a class="nav-link text-dark" href="/homepage">
-                    <h5 class="icon-linear-color">Home</h5>
+                    <h5 th:class="${CURRENT_PAGE == 'home'}?'icon-linear-color page-active':'icon-linear-color'" style="width: 60%;">Home</h5>
                 </a>
             </li>
             <li class="nav-item  d-none d-lg-block">
                 <a class="nav-link text-center text-dark" href="/contentByCategory">
-                    <h5 class="icon-linear-color">Category</h5>
+                    <h5 th:class="${CURRENT_PAGE == 'category'}?'icon-linear-color page-active':'icon-linear-color'"  >Category</h5>
                 </a>
             </li>
             <li class="nav-item  ">
