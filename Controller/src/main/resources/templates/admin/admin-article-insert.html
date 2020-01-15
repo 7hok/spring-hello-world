@@ -40,7 +40,7 @@
 
                     <div class="form-group">
                         <label for="comment">Title:</label>
-                        <textarea id="mytitle" class="form-control  " style="box-sizing: border-box;
+                        <textarea id="mytitle" class="form-control  " style="resize: none; box-sizing: border-box;
                          width: 100% !important;"></textarea>
                     </div>
                 </div>
@@ -71,7 +71,7 @@
                 </div>
             </div>
 
-            <div class="row py-2" style="">
+            <div class="row py-2">
                 <div class="col-12"><input style="float: right; width: 100px; " onclick="getData()" type="button"
                         value="Post" class="btn btn-primary"></div>
             </div>
@@ -80,6 +80,7 @@
             <script th:src="@{/js/ckeditor/ckeditor.js}"></script>
             <script src="/node_module/jquery/dist/jquery.min.js"></script>
             <script>
+                var thImg="";
                 CKEDITOR.replace('editor1', {
                     uiColor: '#C2D6FF',
                     allowedContent: true
@@ -97,7 +98,7 @@
                         "body": value,
                         "id": 9,
                         "status": "1",
-                        "thumbnail": "string",
+                        "thumbnail": thImg,
                         "timestamp": 0,
                         "title": $("#mytitle").val(),
                         "writer": "string",
@@ -166,13 +167,8 @@
                         contentType: false,
                         processData: false,
                         success: function (data) {
-
                             var srcimg = data["Data"]
-                            console.log("name img:" + srcimg);
-                            // var im =
-                            //     `<span><img width='200px' src='http://localhost:8080/img/${srcimg}'><span>`;
-
-                            // CKEDITOR.instances.editor1.insertHtml(im);
+                            thImg=srcimg;
                         },
                         error: function (data) {
                             console.log("error");
