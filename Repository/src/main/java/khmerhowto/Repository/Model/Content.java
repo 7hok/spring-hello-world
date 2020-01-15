@@ -1,7 +1,8 @@
 package khmerhowto.Repository.Model;
 
-
 import javax.persistence.*;
+
+import org.springframework.data.rest.core.annotation.RestResource;
 
 @Entity
 public class Content {
@@ -10,6 +11,7 @@ public class Content {
     private int id;
 
     @ManyToOne
+    @RestResource(exported = false)
     private Category category;
 
     private String thumbnail;
