@@ -19,6 +19,7 @@ private UserRepository userRepository;
     @Override
     public void updateUser(Integer id,User user) {
       User user1 = userRepository.getOne(id);
+      user.setEmail(user1.getEmail());
       user.setProfilePicture(user1.getProfilePicture());
         userRepository.save(user);
     }
