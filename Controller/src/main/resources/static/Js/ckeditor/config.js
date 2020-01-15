@@ -8,7 +8,7 @@ CKEDITOR.editorConfig = function( config ) {
 	// config.language = 'fr';
 	// config.uiColor = '#AADC6E';
 	
-	config.height = '550px';
-    CKEDITOR.config.removePlugins = 'Language,newpage,save,sourcearea,about,flash,iframe,a11yhelp,div,find,forms,pagebreak,templates,scayt,showblocks,smiley,preview,colordialog,magicline,tableselection,tabletools,wsc';
+	config.height = '350px';
+    CKEDITOR.config.removePlugins = 'Language,newpage,save,sourcearea,about,flash,iframe,a11yhelp,div,find,forms,pagebreak,templates,scayt,showblocks,smiley,preview,colordialog,magicline,tableselection,tabletools,wsc,Image';
     config.removeButtons = 'Maximize,Language,Subscript,Superscript,Blockquote,RemoveFormat,CopyFormatting,Underline,JustifyCenter,JustifyBlock,BidiLtr,BidiRtl,Link,Unlink,Anchor,Outdent,Indent,Scayt,Strike';
 };
