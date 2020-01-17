@@ -4,6 +4,8 @@ import khmerhowto.Repository.Model.ContentRequest;
 import khmerhowto.Repository.Model.User;
 import khmerhowto.Service.ContentRequestService;
 import khmerhowto.Service.UserService;
+import khmerhowto.Service.ServiceImplement.CategoryServiceImp;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,6 +26,9 @@ public class AdminController {
     private UserService userService;
     @Autowired
     private ContentRequestService contentRequestService;
+    @Autowired
+    private CategoryServiceImp categoryService;
+
     @GetMapping("/admin/feedback")
     String manageFeedBack(Model model){
         model.addAttribute("CURRENT_PAGE", "feedback");
@@ -57,6 +62,7 @@ public class AdminController {
     @GetMapping("/admin/category")
     String category(Model model){
         model.addAttribute("CURRENT_PAGE", "category");
+        model.addAttribute("categories",categoryService.findCategoryByStatus(1));
         return "admin/admin-category";
     }
 
