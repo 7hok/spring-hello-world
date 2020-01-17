@@ -75,6 +75,6 @@ public class AdminController {
 
     @GetMapping("/admin/article/insert")
     String insertArticle(){
-        return "admin/admin-article-insert";
+        return "admin/testartcle";
     }
 }
