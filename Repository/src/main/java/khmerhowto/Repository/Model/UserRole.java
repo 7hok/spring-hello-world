@@ -18,6 +18,10 @@ public class UserRole {
     public UserRole() {
     }
 
+    public UserRole(Role role) {
+        this.role = role;
+    }
+
     public UserRole(int id, User user, Role role){
         this.id=id;
         this.user=user;

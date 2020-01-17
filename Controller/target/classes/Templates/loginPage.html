@@ -3,7 +3,8 @@
       xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-    <meta charset="UTF-8">
+    <meta  charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Title</title>
     <th:block th:include="~{fragment/__bootstrap_link}"></th:block>
 
@@ -12,40 +13,42 @@
 <body>
 <div class="container-fluid py-0">
     <div class="row">
-        <div class="col-sm col-6 col-lg-6 d-none d-sm-block d-none d-sm-block d-sm-none d-md-block">
+        <!-- <div class=" col-6 col-lg-6 d-none d-sm-block "> -->
+            <div class="col-sm col-6 col-lg-6 d-none d-sm-block d-none d-sm-block d-sm-none d-md-block">
+
             <img class="vh-100 w-100" src="/img/loginPic.jpg" alt="">
         </div>
         <div class="col-sm h-100 my-auto" style="padding-left: 14%; padding-right: 14%; ">
             <form class="p-form" style="text-align: center;">
-                <h5 style="line-height: 65px; font-size: x-large;" class="font-weight-bold">How To Khmer</h5>
+                <h5 style="line-height: 65px; margin-bottom: 4px; font-size: x-large;" class="font-weight-bold">How To Khmer</h5>
                 <!-- <span class="title-log ">Khmer How To</span> -->
-                <p class="line-m" style="line-height: 100%; font-size: small;">please login or sign up for an account</p>
+                <p class="line-m" style="line-height: 100%; font-size: small;">Please login or sign up for an account</p>
 
-                <div style=" text-align: start; margin-bottom: 10%; margin-top: 10%;">
-                    <span style="text-align: left; margin-bottom: 0px !important;font-size: small ">User Name</span>
-                    <input style="text-align: left; margin-top: 9px;" type="text" class="t-span form-control"
+                <div style=" text-align: start; margin-bottom: 9%; margin-top: 10%;">
+                    <span style="text-align: left; margin-bottom: 0px !important;font-size: small">User Name</span>
+                    <input style="text-align: left; margin-top: 2px;" type="text" class="t-span form-control"
                            placeholder="User Name">
                 </div>
                 <div style="text-align: start;">
                     <span class="t-span" style="margin-bottom: 0px; font-size: small">Password</span>
-                    <input type="password" class="t-span form-control" style="margin-top: 9px; margin-bottom: 10%;"
+                    <input type="password" class="t-span form-control" style="margin-top: 2px; margin-bottom: 10%;"
                            placeholder="Password">
                 </div>
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-6  px-0 text-left"> <input type="checkbox" value=""><span style="font-size: small" class="align-top line-m">Remember me</span></label></div>
-                        <div class="col-6  px-0 text-right"> <p class="line-m checkbox-inline "><a style="font-size: small" class="align-top " href="">Forget Password</a> </p></div>
+                        <div class="col-6  px-0 text-left"> <input type="checkbox" value=""><span style="font-size: small" class="align-top line-m">&nbsp;&nbsp;Remember me</span></label></div>
+                        <div class="col-6  px-0 text-right"> <p class="line-m checkbox-inline "><a style="font-size: small; text-decoration: underline;" class="align-top "  href="">Forget Password</a> </p></div>
                     </div>
                 </div>
 
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-6 px-0 text-left">
-                            <button  type="submit" class="btn btn-primary left-al"><span class="t-span">Login</span> </button>
+                            <button  style="width: 90px;" type="submit" class="btn btn-primary left-al"><span class="t-span">Login</span> </button>
                         </div>
                         <div class="col-6 px-0 text-right">
-                            <button type="submit"
-                                    class="btn btn-secondary right-al"><span class="t-span">Sign Up</span></button>
+                            <button style="width: 90px;     background-color: #a9a9a954;" type="submit"
+                                    class="btn right-al"><span class="t-span">Sign Up</span></button>
                         </div>
                     </div>
                 </div>

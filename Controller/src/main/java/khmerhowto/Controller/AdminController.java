@@ -2,7 +2,12 @@ package khmerhowto.Controller;
 
 import khmerhowto.Repository.Model.ContentRequest;
 import khmerhowto.Repository.Model.User;
+import khmerhowto.Repository.Model.UserRole;
+import khmerhowto.Repository.UserRepository;
+import khmerhowto.Repository.UserRoleRepository;
 import khmerhowto.Service.ContentRequestService;
+import khmerhowto.Service.RoleService;
+import khmerhowto.Service.UserRoleSrvice;
 import khmerhowto.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -25,11 +30,16 @@ import java.util.List;
 @Controller
 public class AdminController {
     @Autowired
+    private RoleService roleService;
+    @Autowired
+    private UserRoleSrvice userRoleSrvice;
+    @Autowired
     private UserService userService;
     @Autowired
     private ContentRequestService contentRequestService;
     @GetMapping("/admin/feedback")
-    String manageFeedBack(){
+    String manageFeedBack(Model model){
+        model.addAttribute("CURRENT_PAGE", "feedback");
         return "admin/admin-feedback";
     }
     @GetMapping("/admin/question")
@@ -38,42 +48,64 @@ public class AdminController {
         List<ContentRequest>questions = page.getContent();
         model.addAttribute("page",page);
         model.addAttribute("questions",questions);
-
+        model.addAttribute("CURRENT_PAGE", "question");
         return "admin/admin-question";
     }
     @GetMapping("/admin/user")
     String manageUser(@ModelAttribute("User")User user, @PageableDefault(size = 10)Pageable pageable, Model model){
-        Page<User> page =userService.findAll(pageable);
-        List<User> users = page.getContent();
+
+        Page<User> page =null;
+        page =userService.findAll(pageable);    
+        List<User> users = null;
+        model.addAttribute("user",user);
+        if(user.getName()!=null){
+            users=userService.findByName(user.getName());
+
+        }else {
+            users=page.getContent();
+        }
+
+        System.out.println(user.getName());
         model.addAttribute("page",page);
         model.addAttribute("users",users);
+
+        model.addAttribute("CURRENT_PAGE", "user");
 
 
         return "admin/admin-user";
     }
     @GetMapping("/admin")
-    String home(){
+    String home(Model model){
+        model.addAttribute("CURRENT_PAGE", "home");
         return "admin/admin-home";
     }
 
     @GetMapping("/admin/category")
-    String category(){
+    String category(Model model){
+        model.addAttribute("CURRENT_PAGE", "category");
         return "admin/admin-category";
     }
 
+
     @GetMapping("/admin/customize/{id}")
     String customizeInfo(@PathVariable("id")Integer id,Model model){
+        model.addAttribute("role",roleService.findAll());
         model.addAttribute("user",userService.findById(id));
+//        model.addAttribute("userRole",userRoleSrvice.findRoleByUserId(id));
+        model.addAttribute("CURRENT_PAGE", "setting");
+
         return "admin/admin-customize-user";
     }
     @PostMapping("/admin/customize/{id}")
-    String updateInfo(@PathVariable("id")Integer id,@ModelAttribute User user, BindingResult bindingResult,Model model){
+    String updateInfo(@PathVariable("id")Integer id, @ModelAttribute User user, BindingResult bindingResult, Model model){
+
             if (bindingResult.hasErrors()){
                 System.out.println("error aii");
                 return "admin/admin-customize-user";
             }
             else {
-
+                userRoleSrvice.updateRole(id,2);
+                System.out.println(userRoleSrvice.findRoleByUserId(id));
                 userService.updateUser(id,user);
                 System.out.println("update Success aii");
                 return "redirect:/admin/user";
@@ -81,8 +113,10 @@ public class AdminController {
     }
 
 
+
     @GetMapping("/admin/article")
-    String manageArticle(){
+    String manageArticle(Model model){
+        model.addAttribute("CURRENT_PAGE", "article");
         return "admin/admin-article";
     }
 

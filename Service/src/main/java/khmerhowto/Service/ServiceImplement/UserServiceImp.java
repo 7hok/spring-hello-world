@@ -17,6 +17,11 @@ public class UserServiceImp implements UserService {
 private UserRepository userRepository;
 
     @Override
+    public List<User> findByName(String name) {
+        return userRepository.findByNameContainingIgnoreCase(name);
+    }
+
+    @Override
     public void updateUser(Integer id,User user) {
       User user1 = userRepository.getOne(id);
       user.setEmail(user1.getEmail());
@@ -38,4 +43,6 @@ private UserRepository userRepository;
     public Page<User> findAllByName(String name,Pageable pageable) {
         return null;
     }
+
 }
+

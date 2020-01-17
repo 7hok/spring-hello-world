@@ -75,10 +75,14 @@
                             </div>
                             <div class="">
                                 <label>Role</label>
-                                <select class="form-control form-control-one-line w-25" name="dropdown-test">
-                                    <option value="1">Admin</option>
-                                    <option value="2">User</option>
-
+                                <select class="form-control form-control-one-line w-25" name="dropdown-test"  >
+<!--                                    <option th:value="1" >Admin</option>-->
+<!--                                    <option th:value="2" >User</option>-->
+                                    <option th:each="r: ${role}"
+                                            th:value="${r.id}"
+                                            th:selected="${r.getId()}"
+                                            th:text="${r.getName()}">
+                                    </option>
                                 </select>
                             </div>
                         </div>

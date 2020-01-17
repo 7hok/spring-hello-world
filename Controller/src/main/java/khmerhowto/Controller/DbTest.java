@@ -14,6 +14,17 @@ public class DbTest {
     public String ckEdit(){
         return "loginPage";
     }
+    @GetMapping("/s")
+    public String ckEdit1(){
+        return "sign-up";
+    }
+
+    @GetMapping("/d")
+    public String ckEdit2(){
+        return "clients/contentDetail";
+    }
+
+
 
     @GetMapping("/testing-style")
     public String test(){
