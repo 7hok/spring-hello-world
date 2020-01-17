@@ -2,7 +2,12 @@ package khmerhowto.Controller;
 
 import khmerhowto.Repository.Model.ContentRequest;
 import khmerhowto.Repository.Model.User;
+import khmerhowto.Repository.Model.UserRole;
+import khmerhowto.Repository.UserRepository;
+import khmerhowto.Repository.UserRoleRepository;
 import khmerhowto.Service.ContentRequestService;
+import khmerhowto.Service.RoleService;
+import khmerhowto.Service.UserRoleSrvice;
 import khmerhowto.Service.UserService;
 import khmerhowto.Service.ServiceImplement.CategoryServiceImp;
 
@@ -12,9 +17,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -22,6 +31,10 @@ import java.util.List;
  */
 @Controller
 public class AdminController {
+    @Autowired
+    private RoleService roleService;
+    @Autowired
+    private UserRoleSrvice userRoleSrvice;
     @Autowired
     private UserService userService;
     @Autowired
@@ -45,11 +58,24 @@ public class AdminController {
     }
     @GetMapping("/admin/user")
     String manageUser(@ModelAttribute("User")User user, @PageableDefault(size = 10)Pageable pageable, Model model){
-        Page<User> page =userService.findAll(pageable);
-        List<User> users = page.getContent();
+
+        Page<User> page =null;
+        page =userService.findAll(pageable);    
+        List<User> users = null;
+        model.addAttribute("user",user);
+        if(user.getName()!=null){
+            users=userService.findByName(user.getName());
+
+        }else {
+            users=page.getContent();
+        }
+
+        System.out.println(user.getName());
         model.addAttribute("page",page);
         model.addAttribute("users",users);
+
         model.addAttribute("CURRENT_PAGE", "user");
+
 
         return "admin/admin-user";
     }
@@ -66,11 +92,32 @@ public class AdminController {
         return "admin/admin-category";
     }
 
-    @GetMapping("/admin/customize")
-    String customizeInfo(Model model){
+
+    @GetMapping("/admin/customize/{id}")
+    String customizeInfo(@PathVariable("id")Integer id,Model model){
+        model.addAttribute("role",roleService.findAll());
+        model.addAttribute("user",userService.findById(id));
+//        model.addAttribute("userRole",userRoleSrvice.findRoleByUserId(id));
         model.addAttribute("CURRENT_PAGE", "setting");
+
         return "admin/admin-customize-user";
     }
+    @PostMapping("/admin/customize/{id}")
+    String updateInfo(@PathVariable("id")Integer id, @ModelAttribute User user, BindingResult bindingResult, Model model){
+
+            if (bindingResult.hasErrors()){
+                System.out.println("error aii");
+                return "admin/admin-customize-user";
+            }
+            else {
+                userRoleSrvice.updateRole(id,2);
+                System.out.println(userRoleSrvice.findRoleByUserId(id));
+                userService.updateUser(id,user);
+                System.out.println("update Success aii");
+                return "redirect:/admin/user";
+            }
+    }
+
 
 
     @GetMapping("/admin/article")
@@ -81,6 +128,6 @@ public class AdminController {
 
     @GetMapping("/admin/article/insert")
     String insertArticle(){
-        return "admin/admin-article-insert";
+        return "admin/testartcle";
     }
 }

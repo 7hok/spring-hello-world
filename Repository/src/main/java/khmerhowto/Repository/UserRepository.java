@@ -10,4 +10,7 @@ import java.util.List;
 @RepositoryRestResource(collectionResourceRel = "users", path = "users")
 public interface UserRepository extends JpaRepository<User,Integer> {
     List<User> findAllByName(@Param("name") String name);
+    List<User>findByNameContainingIgnoreCase(String name);
+
+
 }

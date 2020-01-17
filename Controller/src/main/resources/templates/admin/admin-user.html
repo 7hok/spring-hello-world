@@ -24,7 +24,8 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
 
 
         <h4>User Information and Update</h4>
-        <input type="text" class="form-control-one-line w-25 " placeholder=" Search">
+        <input type="text" class="form-control-one-line w-25 " placeholder=" Search" th:object="${user}">
+
     </div>
     <div class="div-parent-table my-3 table-responsive-sm">
         <table class="table right-side-bar-table bg-white">
@@ -104,9 +105,9 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
                 <td th:text="${user1.email}"></td>
                 <td th:text="${user1.phoneNumber}"></td>
                 <td>
-                    <button class="btn  btn-outline-primary btn-sm" ><i class="material-icons-new outline-edit ">
+                    <a class="btn  btn-outline-primary btn-sm"  th:href="@{/admin/customize/{id}(id=${user1.getId()})}" ><i class="material-icons-new outline-edit ">
 
-                    </i></button>
+                    </i></a>
 
 
                 </td>
