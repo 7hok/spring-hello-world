@@ -79,6 +79,13 @@ public class AdminController {
 
         return "admin/admin-user";
     }
+
+    @GetMapping("/admin/customize")
+    String customizeInfoStatic(Model model){
+        model.addAttribute("CURRENT_PAGE", "setting");
+        return "admin/admin-customize-user-static";
+    }
+
     @GetMapping("/admin")
     String home(Model model){
         model.addAttribute("CURRENT_PAGE", "home");

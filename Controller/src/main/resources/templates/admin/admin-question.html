@@ -41,7 +41,8 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
             </tr>
             </thead>
             <tbody>
-            <tr th:each="q:${questions}">
+                <!-- dynasmic -->
+            <tr class="d-none" th:each="q:${questions}">
                 <th scope="row" th:text="${q.id}"></th>
                 <td th:text="${q.title}"> </td>
                 <td th:text="${q.getUser().getName()}"></td>
@@ -52,8 +53,44 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
                     <button class="btn btn-outline-primary">Delete</button>
                 </td>
             </tr>
+                <!-- dynasmic -->
 
+                <!-- static -->
 
+                <tr>
+                    <th scope="row">1</th>
+                    <td>How to Cook Khmer Food</td>
+                    <td>Chea Panha</td>
+                    <td>144</td>
+    
+                    <td>
+                        <button class="btn btn-outline-primary">View</button>
+                        <button class="btn btn-outline-primary">Delete</button>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>How to Be Something</td>
+                    <td>lsuren</td>
+                    <td>332</td>
+    
+                    <td>
+                        <button class="btn btn-outline-primary">View</button>
+                        <button class="btn btn-outline-primary">Delete</button>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>Ways in doing something</td>
+                    <td>Seav Mey</td>
+                    <td>2222</td>
+    
+                    <td>
+                        <button class="btn btn-outline-primary">View</button>
+                        <button class="btn btn-outline-primary">Delete</button>
+                    </td>
+                </tr>
+                <!-- static -->
             </tbody>
         </table>
 

@@ -1,6 +1,6 @@
 <style>
      .icon-linear-color{
-        background: #b93d5c;
+        background: #393939;
         -webkit-background-clip: text;
 	    -webkit-text-fill-color: transparent;
     }
@@ -15,12 +15,33 @@
         z-index: 10;
     }
     .page-active {
-        border-bottom: 2px solid yellow;
+        border-bottom: 2px solid #f89808;
         border-width: 5px;
     }
-
+    .search-bar-parent-div {
+        /* border-color: #00000029 !important; */
+        border : 1px solid #00000029;
+        border-radius: 20px;
+    }
+    .search-bar {
+        height: 35px; 
+        padding-left: 5px;
+        border : 0px !important;
+        width: 90%;
+     
+    }
+    .search-bar:focus{
+        /* border-radius: 0px; */
+        /* border : 1px solid #0000008; */
+        outline: none;
+        
+    }
+    .click-list-user-profile:hover{
+        background-color: #E5EAED;
+        cursor: pointer; 
+    }
 </style>
-<nav class="navbar navbar-expand-lg bg-white border-bottom pb-0" >
+<nav class="navbar navbar-expand-lg bg-white border-bottom" >
     <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarTopRightSide" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon ">
             <i class="material-icons-new outline-toc">
@@ -33,7 +54,14 @@
         <h3 class="icon-linear-color"><b>KhmerHowTo</b></h3>
     </a>
     <div class="mx-auto  text-center w-75 d-none d-lg-block">
-        <input type="text" class="form-control-one-line w-50" placeholder="&nbsp;&nbsp; Search">
+      
+        <div class="mx-auto w-50 search-bar-parent-div d-flex">
+            <input type="text" class="form-control-one-line search-bar" style="" placeholder="&nbsp;&nbsp; Search"  >
+            <button class="border-0 bg-transparent d-flex">  
+                <i class="material-icons-new outline-search" style="color: #0000008 !important; "></i>
+            </button>
+           
+        </div>
     </div>
    
     
@@ -45,7 +73,7 @@
                 last 3 = text-center    
              -->
             <li class="nav-item  d-none d-lg-block">
-                <a class="nav-link text-dark" href="/homepage">
+                <a class="nav-link text-center text-dark" href="/homepage">
                     <h5 th:class="${CURRENT_PAGE == 'home'}?'icon-linear-color page-active':'icon-linear-color'" style="width: 60%;">Home</h5>
                 </a>
             </li>
@@ -76,12 +104,12 @@
                         <img class="" src="/icon/user-navbar-v2.svg" style="width: 30px; height: 30px;" alt="">
                     </a>
                 <div class="dropdown-menu dropdown-menu-customized dropdown-menu-right mt-3" aria-labelledby="profile">
-                    <div class="card">
-                        <div class="card-title "></div>
-                                <div class="text-center">
+                    <div class="card border-0">
+                        <div class="card-title ">
+                                <div class="text-center pt-2">
                                     <img class="" src="/icon/user-navbar-v2.svg" style="width: 50px; height: 50px;" alt="">
                                     <br>
-                                    <h6> Administrator</h6>
+                                    <h6 class="pt-2"> Administrator</h6>
                             
                                 </div>
                         </div>
@@ -93,6 +121,13 @@
                                 (StandardEngineValve.java:74)[tomcat-embed-core-9.0.19.jar:9.0.19]
                                 
                             </p>
+                        </div>
+                       
+                        <div class="">
+                           <ul class="list-group list-group-flush border-top">
+                            <li class="list-group-item text-center click-list-user-profile" onclick="location.href='/admin/customize';">Customize</li>
+                            <li class="list-group-item text-center click-list-user-profile" onclick="location.href='/admin';">Admin</li>
+                           </ul>
                         </div>
                     </div>
                   </div>

@@ -55,11 +55,26 @@
             <!-- MIDDLE Div -->
             <div class="d-flex  justify-content-between my-4">
                 <h3>Category</h3>
-                <a href="#">See more</a>
+                <!-- <a href="#">See more</a> -->
             </div>
             <!-- MIDDLE Div -->
             <!-- FOOTER DIV  -->
             <div class="d-flex flex-wrap justify-content-around ">
+               <!-- ON DYNASMIC  -->
+                <!-- 
+                <div th:each="category:${categories}" class="card bg-color-two hover-white-highlight-for-click category-card" th:data-id="${category.id}" style="">
+                    <div class="m-4">
+                        <img th:src="${category.image}" class="card-img-top" alt="...">
+                    </div>
+                    <div class="card-body ">
+                        <h6 class="card-title text-center">
+                            <b th:text="${category.name}">Machine Learning</b>
+                        </h6>
+                    </div>
+                </div> -->
+                 
+                <!-- STATIC -->
+               
                 <div class="card bg-color-two hover-white-highlight-for-click" style="">
                     <div class="m-4">
                         <img src="/image-static/machine-learning.svg" class="card-img-top" alt="...">
@@ -120,7 +135,7 @@
                         </h6>
                     </div>
                 </div>
-
+               
                 
             </div>
             <!-- FOOTER DIV  -->
@@ -135,18 +150,20 @@
                             </h3>
                             <div class="form-group">
                                 <label >Name</label>
-                                <input type="email" class="form-control" placeholder="Name">
+                                <input type="email" class="form-control" placeholder="Name" id="modal_name_input">
                             </div>
                             <div class="form-group">
                                 <label >Image</label>
                                 <div class="custom-file">
 
-                                    <input type="file" class="custom-file-input" id="customFile">
+                                    <input type="file" class="custom-file-input" id="modal_file_input">
                                     <label class="custom-file-label" for="customFile">Choose file</label>
                                 </div>
                             </div>
                             <div class="m-3 d-flex justify-content-center ">
-                                <div class="border w-50 bg-color-two " style="height: 15vh;"></div>
+                                <div class="border w-50 bg-color-two " style="height: 15vh;" >
+                                    <img class="mw-100" src="/image-static/content.svg" alt="" style="" id="modal_img_show">
+                                </div>
                             </div>
                         </div>
                         <!-- background m3 -->
@@ -161,13 +178,47 @@
         <div  layout:fragment="content-js">
             <!-- Script -->
                <script>
-                $(".hover-white-highlight-for-click,#new_category").on("click",function(){
-                    console.log(`hjashdijasidjsai`)
-                        $('#new_category_modal').modal('toggle');
-                        $('#new_category_modal').modal('show');
+                const fetch_category_by_id = (uri) => {
+
+                    fetch(uri)
+                    .then(res=> res.json())
+                    .then(json => {
+                        // console.log(json.category)
+                        let category = json;
+                        convert_category_to_modal(category)
                     })
-            
-            
+                    .catch(err => console.log(Error))
+                } 
+
+                const convert_category_to_modal = (category) => {
+                    if(category == null){
+                        $("#modal_name_input").val("default");
+                        $("#modal_file_input").val("hahah");
+                        $("#modal_img_show").attr("src","")
+                        $("#modal_img_show").parent().addClass("bg-color-two")
+                        // $("#modal_img_show").p
+                    }else{
+                        $("#modal_name_input").val(category.name)
+                        $("#modal_file_input").val("")
+                        $("#modal_img_show").parent().removeClass("bg-color-two")
+                        $("#modal_img_show").attr("src",category.image)
+                    }
+                   
+                }
+                
+                fetch_category_by_id("/categories/6");
+                
+                $(document).on('click','.category-card', function () {
+                    let card_id = $(this).attr("data-id");
+                    fetch_category_by_id(`/api/categories/${card_id}`);
+                });
+                /**SIMPLE EVENT **/
+                $(".hover-white-highlight-for-click,#new_category").on("click",function(){
+                   
+                   $('#new_category_modal').modal('toggle');
+                   $('#new_category_modal').modal('show');
+               })
+                /**SIMPLE EVENT **/
             </script>
             <!-- Script -->
         </div>
