@@ -1,6 +1,7 @@
 package khmerhowto.Controller;
 
 import khmerhowto.Repository.Model.ContentRequest;
+import khmerhowto.Repository.Model.Feedback;
 import khmerhowto.Repository.Model.User;
 import khmerhowto.Repository.Model.UserRole;
 import khmerhowto.Repository.UserRepository;
@@ -10,6 +11,7 @@ import khmerhowto.Service.RoleService;
 import khmerhowto.Service.UserRoleSrvice;
 import khmerhowto.Service.UserService;
 import khmerhowto.Service.ServiceImplement.CategoryServiceImp;
+import khmerhowto.Service.ServiceImplement.FeedBackServiceImp;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -30,6 +33,7 @@ import java.util.List;
  * AdminController
  */
 @Controller
+@RequestMapping("/dynas/")
 public class AdminController {
     @Autowired
     private RoleService roleService;
@@ -41,9 +45,15 @@ public class AdminController {
     private ContentRequestService contentRequestService;
     @Autowired
     private CategoryServiceImp categoryService;
+    @Autowired
+    private FeedBackServiceImp feedbackservice;
 
     @GetMapping("/admin/feedback")
-    String manageFeedBack(Model model){
+    String manageFeedBack(@PageableDefault(size = 10)Pageable pageable,Model model){
+        Page<Feedback>page = feedbackservice.findAll(pageable);
+        List<Feedback>feedbacks = page.getContent();
+        model.addAttribute("page",page);
+        model.addAttribute("feedbacks",feedbacks);
         model.addAttribute("CURRENT_PAGE", "feedback");
         return "admin/admin-feedback";
     }

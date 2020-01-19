@@ -17,11 +17,12 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
 </head>
 <body>
 <div class="content p-3 "  layout:fragment="content">
-    <div class="d-inline d-flex justify-content-between my-2">
-        <div class="h4">Feedback Based on Category</div>
+    <div class="d-inline d-flex justify-content-between my-3">
+
+        <div class="h4">Request Content and Question</div>
 
         <select class="form-control form-control-one-line w-25" name="dropdown-test">
-            <option>Science</option>
+            <option>Calendar</option>
             <option>Technology</option>
             <option>Drama</option>
             <option>Structure</option>
@@ -29,132 +30,55 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
         </select>
     </div>
     <div class="div-parent-table my-3">
-        <table class="table right-side-bar-tablen bg-white">
+        <table class="table right-side-bar-table bg-white">
             <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Feedback</th>
-
+                <th scope="col">Title</th>
+                <th scope="col">User</th>
                 <th scope="col">Date</th>
                 <th scope="col">Action</th>
             </tr>
             </thead>
             <tbody>
-                <!--  dynasmic -->
-            <tr class="dynasmic-feedback-tr" th:each="feedback:${feedbacks}">
-                <th scope="row" th:text="${feedback.id}">1</th>
-                <td th:text="${feedback.text}">How to have a fresh morning after a night without sleeping </td>
+        
 
-                <td th:text=${feedback.timestamp}>3/10/18</td>
-                 <td>
-                    <button class="btn btn-outline-primary btn-feedback-view" th:data-id="${feedback.id}" >View</button>
-                    <button class="btn btn-outline-primary btn-feedback-delete" th:data-id="${feedback.id}">Delete</button>
-                </td>
+                <!-- static -->
 
-            </tr>
-            <!-- dynasmic  -->
-            <tr>
-                <th scope="row">2</th>
-                <td>How to have a fresh morning after a night without sleeping
-
-                </td>
-
-                <td>3/10/18</td>
-                 <td>
-                    <button class="btn btn-outline-primary">View</button>
-                    <button class="btn btn-outline-primary">Delete</button>
-                </td>
-
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>How to have a fresh morning after a night without sleeping </td>
-
-                <td>3/10/18</td>
-                 <td>
-                    <button class="btn btn-outline-primary">View</button>
-                    <button class="btn btn-outline-primary">Delete</button>
-                </td>
-
-            </tr>
-            <tr>
-                <th scope="row">4</th>
-                <td>How to have a fresh morning after a night without sleeping </td>
-
-                <td>3/10/18</td>
-                 <td>
-                    <button class="btn btn-outline-primary">View</button>
-                    <button class="btn btn-outline-primary">Delete</button>
-                </td>
-
-            </tr>
-            <tr>
-                <th scope="row">5</th>
-                <td>How to have a fresh morning after a night without sleeping </td>
-
-                <td>3/10/18</td>
-                 <td>
-                    <button class="btn btn-outline-primary">View</button>
-                    <button class="btn btn-outline-primary">Delete</button>
-                </td>
-
-            </tr>
-            <tr>
-                <th scope="row">6</th>
-                <td>How to have a fresh morning after a night without sleeping </td>
-
-                <td>3/10/18</td>
-                 <td>
-                    <button class="btn btn-outline-primary">View</button>
-                    <button class="btn btn-outline-primary">Delete</button>
-                </td>
-
-            </tr>
-            <tr>
-                <th scope="row">7</th>
-                <td>How to have a fresh morning after a night without sleeping </td>
-
-                <td>3/10/18</td>
-                 <td>
-                    <button class="btn btn-outline-primary">View</button>
-                    <button class="btn btn-outline-primary">Delete</button>
-                </td>
-
-            </tr>
-            <tr>
-                <th scope="row">8</th>
-                <td>How to have a fresh morning after a night without sleeping </td>
-
-                <td>3/10/18</td>
-                 <td>
-                    <button class="btn btn-outline-primary">View</button>
-                    <button class="btn btn-outline-primary">Delete</button>
-                </td>
-
-            </tr>
-            <tr>
-                <th scope="row">9</th>
-                <td>How to have a fresh morning after a night without sleeping </td>
-
-                <td>3/10/18</td>
-                 <td>
-                    <button class="btn btn-outline-primary">View</button>
-                    <button class="btn btn-outline-primary">Delete</button>
-                </td>
-
-            </tr>
-            <tr>
-                <th scope="row">10</th>
-                <td>How to have a fresh morning after a night without sleeping </td>
-
-                <td>3/10/18</td>
-                 <td>
-                    <button class="btn btn-outline-primary">View</button>
-                    <button class="btn btn-outline-primary">Delete</button>
-                </td>
-
-            </tr>
-
+                <tr>
+                    <th scope="row">1</th>
+                    <td>How to Cook Khmer Food</td>
+                    <td>Chea Panha</td>
+                    <td>144</td>
+    
+                    <td>
+                        <button class="btn btn-outline-primary">View</button>
+                        <button class="btn btn-outline-primary">Delete</button>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>How to Be Something</td>
+                    <td>lsuren</td>
+                    <td>332</td>
+    
+                    <td>
+                        <button class="btn btn-outline-primary">View</button>
+                        <button class="btn btn-outline-primary">Delete</button>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>Ways in doing something</td>
+                    <td>Seav Mey</td>
+                    <td>2222</td>
+    
+                    <td>
+                        <button class="btn btn-outline-primary">View</button>
+                        <button class="btn btn-outline-primary">Delete</button>
+                    </td>
+                </tr>
+                <!-- static -->
             </tbody>
         </table>
 
@@ -164,17 +88,17 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
     <div class="">
         <nav aria-label="Page navigation example" class="">
             <ul class="pagination justify-content-center">
-                <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Previous">
+                <li class="page-item" th:if="${page.hasPrevious()}">
+                    <a class="page-link" th:href="@{/(page=${page.number-1},size=${page.size})}" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
                         <span class="sr-only">Previous</span>
                     </a>
                 </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Next">
+                <li class="page-item" th:each="i: ${#numbers.sequence(0, page.totalPages - 1)}"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" th:if="${page.number == i}" >[[${i}+1]]</a></li>
+                <!--                <li class="page-item"><a class="page-link"th:unless="${page.number == i}" ></a></li>-->
+                <li class="page-item"  th:if="${page.hasNext()}">
+                    <a class="page-link" href="#" aria-label="Next" th:href="@{/(page=${page.number+1},size=${page.size})}">
                         <span aria-hidden="true">&raquo;</span>
                         <span class="sr-only">Next</span>
                     </a>
@@ -182,71 +106,6 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
             </ul>
         </nav>
     </div>
-
-    <!-- Modal -->
-    <div id="feedback_modal" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-                <div class="modal-head d-flex justify-content-between">
-                    <h6 id="modal_content"> Feedback From Client</h6>
-                    <span id="modal_timestamp"></span>
-                </div>    
-                <hr>
-                <div class="modal-footer ">
-                    <p id="modal_paragraph"></p>
-                </div>
-            </div>
-           
-        </div>
-    </div>
-    <!-- Modal -->
- 
-</div>
-<div layout:fragment="content-js">
-
-    <script>
-        const fetch_feedback_by_id = async (uri) => {
-
-           const response = await fetch(uri);
-           try {
-                const json_data = await response.json();
-
-                return json_data;
-           } catch (error) {
-               return null
-           }
-        } 
-
-        $(function(){
-
-            $(document).on("click",'.btn-feedback-view', function() {
-                let id = $(this).attr("data-id");
-                let _feedback_promise = fetch_feedback_by_id(`/api/feedbacks/${id}?projection=feedbackAdminProjection`)
-                if(_feedback_promise == null){
-
-                }else{
-                    _feedback_promise.then(feedback => {
-                        $("#modal_content").text(feedback.title)
-                        $("#modal_timestamp").text(feedback.timestamp)
-                        $("#modal_paragraph").text(feedback.text)
-                        $('#feedback_modal').modal('toggle');
-                    })
-                }
-                
-            })
-            $(document).on("click",'.btn-feedback-delete', function() {
-                console.log($(this).attr("data-id"))
-            })
-
-            /** ui logic event **/
-            // $(".btn-    ").on("click",function(){
-                   
-            //        $('#new_category_modal').modal('toggle');
-            //        $('#new_category_modal').modal('show');
-            //    })
-        })
-    </script>
-
 </div>
 </body>
 </html>
