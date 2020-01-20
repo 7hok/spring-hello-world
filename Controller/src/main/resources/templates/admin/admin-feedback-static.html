@@ -40,19 +40,7 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
             </tr>
             </thead>
             <tbody>
-                <!--  dynasmic -->
-            <tr class="dynasmic-feedback-tr" th:each="feedback:${feedbacks}">
-                <th scope="row" th:text="${feedback.id}">1</th>
-                <td th:text="${feedback.text}">How to have a fresh morning after a night without sleeping </td>
-
-                <td th:text=${feedback.timestamp}>3/10/18</td>
-                 <td>
-                    <button class="btn btn-outline-primary btn-feedback-view" th:data-id="${feedback.id}" >View</button>
-                    <button class="btn btn-outline-primary btn-feedback-delete" th:data-id="${feedback.id}">Delete</button>
-                </td>
-
-            </tr>
-            <!-- dynasmic  -->
+         
             <tr>
                 <th scope="row">2</th>
                 <td>How to have a fresh morning after a night without sleeping
@@ -202,51 +190,6 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
     <!-- Modal -->
  
 </div>
-<div layout:fragment="content-js">
 
-    <script>
-        const fetch_feedback_by_id = async (uri) => {
-
-           const response = await fetch(uri);
-           try {
-                const json_data = await response.json();
-
-                return json_data;
-           } catch (error) {
-               return null
-           }
-        } 
-
-        $(function(){
-
-            $(document).on("click",'.btn-feedback-view', function() {
-                let id = $(this).attr("data-id");
-                let _feedback_promise = fetch_feedback_by_id(`/api/feedbacks/${id}?projection=feedbackAdminProjection`)
-                if(_feedback_promise == null){
-
-                }else{
-                    _feedback_promise.then(feedback => {
-                        $("#modal_content").text(feedback.title)
-                        $("#modal_timestamp").text(feedback.timestamp)
-                        $("#modal_paragraph").text(feedback.text)
-                        $('#feedback_modal').modal('toggle');
-                    })
-                }
-                
-            })
-            $(document).on("click",'.btn-feedback-delete', function() {
-                console.log($(this).attr("data-id"))
-            })
-
-            /** ui logic event **/
-            // $(".btn-    ").on("click",function(){
-                   
-            //        $('#new_category_modal').modal('toggle');
-            //        $('#new_category_modal').modal('show');
-            //    })
-        })
-    </script>
-
-</div>
 </body>
 </html>
