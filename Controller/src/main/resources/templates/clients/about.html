@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns="http://www.w3.org/1999/xhtml" layout:decorator="~{home-layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div class="content bg-white" layout:fragment="content">
+    <style>
+            .v-10-test {
+                height: 10vh;
+            }
+            .v-40-test {
+                height: 40vh;
+            }
+            .vh-30 {
+                height: 28vh;
+            }
+            .card{
+                border : 0px !important;
+
+            }
+            .v-parent > div {
+                width: 48%;
+                max-height: 70vh;
+                border-bottom : 1px solid #dee2e6 !important;
+                /* padding: 10px; */
+                margin-bottom: 2%;
+            }
+            .v-parent > div >div.card-header , div.card-footer{
+                background-color: #fff !important;
+            }
+            .group-one>div:hover {
+                /* filter:brightness(10%); */
+                /*
+                transition: transform .5s ease;
+                transform: scale(1.5);
+                /* background-color: hsl(0, 100%, 30%);          */
+                 }
+
+            .group-one-c-one{
+                /* background: url("image-static/dribbble_starry_night.png") no-repeat center center; */
+                background-image:  url("image-static/dribbble_starry_night.png");
+                background-position: center center;
+                background-size: cover;
+                /* filter: brightness(60%); */
+            }
+            .group-one-c-two{
+                background: url("image-static/coupledrink.png") no-repeat center center;
+                background-size: cover;
+                /* filter: brightness(60%) */
+            }
+            .group-one-c-three{
+                background: url("image-static/girlnightcupview.jpg") no-repeat center center;
+                background-size: cover;
+                /* filter: brightness(60%) */
+            }
+
+            .card-body >div {
+                height: 80%;
+            }
+
+            .card-body > div > p {
+                color : #768791;
+            }
+
+            .card > .card-header {
+                padding-left: 0% !important;
+                padding-right: 0% !important;
+                padding-bottom: 0% !important;
+            }
+            .card-header > a {
+                background-color: red;
+                color: #fff;
+                padding : 0px 2%;
+            }
+            .card-footer {
+                margin-top : 4%;
+                border : 0px !important;
+            }
+            .card-footer > div:last-child> a {
+
+                color : #ff000078 !important;
+            }
+            .category-list > p {
+                color : #448fbb;
+            }
+            .category-list> p:hover {
+                cursor: pointer;
+                background-color: #e5eaed;
+            }
+            @media only screen and (max-width: 992px) {
+                .v-parent > div {
+                    width: 100%;
+
+                }
+                .card {
+                    margin-bottom: 2%;
+                }
+                .group-one{
+                    display: none !important;
+                }
+                .group-two{
+                    padding : 0px !important;
+                }
+            }
+
+        </style>
+    <div class="container pt-3">
+        <p class="h1 text-center mt-2 ">About Us</p>
+        <div class="col-sm-12 ">
+            <p class="col-12 pt-3">
+                <b>KhmerHowTo</b> is a Khmer trustworthy solution content web
+                application, which is proposed by Korea Software HRD Center; It is
+                also first designed by 7th generation students. To become the greatest
+                web application and come up with the best tips articles in Cambodia,
+                our web application, KhmerHowTo, is created to provide Khmer helpful
+                articles that are based on brief solutions and consisted of many
+                different references. Besides, KhmerHowTo will be the combination of
+                the clean interfaces, smarter search tools, and user favorite content
+                suggestion, which furnishes the best user experience.
+            </p>
+        </div>
+
+        <div class="text-center ">
+            <img
+                    src="/image-static/bottomPic.png"
+                    alt=""
+                    class="img-fluid rounded mx-auto d-block "
+            />
+        </div>
+    </div>
+</div>
+</body>
+</html>
