@@ -73,7 +73,7 @@
                         <div class="col-2 col-sm-2 col-md-1 col-lg-1 pl-0"
                             style="  padding-left: 0; text-align: right; margin-bottom: 23px;">
                             <!-- <img src="" alt=""> -->
-                            <img class=" rounded-circle z-depth-2 myButton point"
+                            <img class=" rounded-circle z-depth-2 myButton point" id="pfpic"
                                 style="width: 80px; width: 50px; height: 50px;" alt="100x100"
                                 src="https://cdn.mos.cms.futurecdn.net/xgc36EhSDW9Zu3RGLCfLEg-970-80.jpg"
                                 data-holder-rendered="true">
@@ -105,8 +105,8 @@
 
                                     <td class="p-1 point"><img style="max-width: 30px;color: #46464e;"
                                             src="img/facebook.svg" alt=""></td>
-                                    <td class=" point"> <img style="max-width: 33px;opacity: 0.7;"
-                                            src="img/baseline_announcement_black_18dp.png" alt="">
+                                    <td class=" point"> <img style="max-width: 38px;opacity: 0.7;"
+                                            src="img/report.png" alt="">
 
                                 </tr>
                             </table>
@@ -165,7 +165,7 @@
 
                     </div>
                     <div class="row " style="margin-left: -6%;  margin-top: 2%;">
-                        <div class="col-1 pr-0 ">
+                        <div class="col-1 pr-0 point">
 
                             <!-- <div class="my-auto ">  -->
                             <i class="material-icons-new outline-favorite_border"
@@ -386,8 +386,6 @@
         </div>
        
         
-<!-- <script src="/node_module/jquery/dist/jquery.min.js"></script>
-<script src="/node_module/bootstrap-4.4.1/dist/js/bootstrap.min.js"></script> -->
     </div>
   
     <div layout:fragment="content-js">
@@ -397,16 +395,25 @@
                 var button = $('#myButton');
                 var tooltip = new maTooltip(button, {
                     inline_style: 'max-width: none;',
-                    full_visibility_duration:  2000,
+                    full_visibility_duration:  99000,
                     position: maTooltip.POSITION.BOTTOM,
-                    static_message: '<div style="background-color: white; color: black; border-radius: inherit;"><div>  <img class=" rounded-circle z-depth-2" style="width: 80px; width: 50px; height: 50px;" alt="100x100" src="https://cdn.mos.cms.futurecdn.net/xgc36EhSDW9Zu3RGLCfLEg-970-80.jpg" data-holder-rendered="true"></div><h3>Hum Chamroeun</h3><p>From Takeo</p><p>I am so happy</p><hr><div style="height: 32px;border-radius: inherit;background-color: white; color: black;"><a href="" style="margin-left: 20px;margin-right: 20px ">Favorite Category</a><a style="margin-left: 20px;margin-right: 20px " href="">Education</a><a href="" style="margin-left: 20px;margin-right: 20px ">Technology</a></div></div>'
+                    static_message: '<div style="background-color: white; color: black; border-radius: inherit;"><div>  <img class=" rounded-circle z-depth-2" style="margin-top: 20px; margin-bottom: 10px; width: 50px; height: 50px;" alt="100x100" src="https://cdn.mos.cms.futurecdn.net/xgc36EhSDW9Zu3RGLCfLEg-970-80.jpg" data-holder-rendered="true"></div><h3 style="color: #46464e">Hum Chamroeun</h3><p style="color: #46464e">From Takeo</p><p style="color: #46464e">I am so happy</p><hr><div style="height: 32px;border-radius: inherit;background-color: white; color: black;"><a href="" style="margin-left: 20px;margin-right: 20px ">Favorite Category</a><a style="margin-left: 20px;margin-right: 20px " href="">Education</a><a href="" style="margin-left: 20px;margin-right: 20px ">Technology</a></div></div>'
                 });
 
 
                 //  var tooltip = new maTooltip( button, {  } );
-                button.on('click', function () {
+                button.hover(function () {
                     tooltip.show();
                 });
+                button.mouseout('click',function () {
+                    tooltip.hide();
+                });
+                $("#pfpic").hover(function(){
+                    tooltip.show();
+                })
+                $("#pfpic").mouseout(function(){
+                    tooltip.hide();
+                })
             });
 
         </script>
