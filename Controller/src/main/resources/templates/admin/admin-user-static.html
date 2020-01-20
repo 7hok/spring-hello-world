@@ -98,26 +98,6 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
     
                     </td>
                 </tr>
-            <tr class="d-none" th:each="user1:${users}">
-                <th scope="row" th:text="${user1.id}"></th>
-                <td class=""><img th:src="@{${user1.getProfilePicture()}}" class=" profile-image img-fluid rounded-circle " alt="user-profile"></td>
-                <td th:text="${user1.name}"></td>
-                <td th:text="${user1.email}"></td>
-                <td th:text="${user1.phoneNumber}"></td>
-                <td>
-                    <a class="btn  btn-outline-primary btn-sm"  th:href="@{/admin/customize/{id}(id=${user1.getId()})}" ><i class="material-icons-new outline-edit ">
-
-                    </i></a>
-
-
-                </td>
-            </tr>
-
-
-
-
-
-
 
             </tbody>
         </table>

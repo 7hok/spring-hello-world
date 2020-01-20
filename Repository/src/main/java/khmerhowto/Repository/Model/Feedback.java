@@ -2,6 +2,8 @@ package khmerhowto.Repository.Model;
 
 import javax.persistence.*;
 
+import org.springframework.data.rest.core.annotation.RestResource;
+
 @Entity
 public class Feedback {
     @Id
@@ -10,6 +12,7 @@ public class Feedback {
     private String text;
     @ManyToOne
     private User user;
+    @RestResource(exported = true)
     @ManyToOne
     private Content content;
     private int timestamp;

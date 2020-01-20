@@ -3,6 +3,7 @@ HELP.md
 !**/src/main/**
 !**/src/test/**
 */target/**
+application.properties
 # Repository/target/**
 ### STS ###
 .apt_generated
