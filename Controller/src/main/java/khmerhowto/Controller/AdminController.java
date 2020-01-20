@@ -1,7 +1,11 @@
 package khmerhowto.Controller;
 
 import khmerhowto.Repository.Model.ContentRequest;
+
+import khmerhowto.Repository.Model.Role;
+
 import khmerhowto.Repository.Model.Feedback;
+
 import khmerhowto.Repository.Model.User;
 import khmerhowto.Repository.Model.UserRole;
 import khmerhowto.Repository.UserRepository;
@@ -114,21 +118,20 @@ public class AdminController {
     String customizeInfo(@PathVariable("id")Integer id,Model model){
         model.addAttribute("role",roleService.findAll());
         model.addAttribute("user",userService.findById(id));
-//        model.addAttribute("userRole",userRoleSrvice.findRoleByUserId(id));
+
         model.addAttribute("CURRENT_PAGE", "setting");
 
         return "admin/admin-customize-user";
     }
     @PostMapping("/admin/customize/{id}")
-    String updateInfo(@PathVariable("id")Integer id, @ModelAttribute User user, BindingResult bindingResult, Model model){
+    String updateInfo(@PathVariable("id")Integer id, @ModelAttribute User user, @ModelAttribute Role R, BindingResult bindingResult, Model model){
 
             if (bindingResult.hasErrors()){
                 System.out.println("error aii");
                 return "admin/admin-customize-user";
             }
             else {
-                userRoleSrvice.updateRole(id,2);
-                System.out.println(userRoleSrvice.findRoleByUserId(id));
+
                 userService.updateUser(id,user);
                 System.out.println("update Success aii");
                 return "redirect:/admin/user";
