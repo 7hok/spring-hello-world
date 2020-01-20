@@ -146,8 +146,5 @@ public class AdminController {
         return "admin/admin-article";
     }
 
-    @GetMapping("/admin/article/insert")
-    String insertArticle(){
-        return "admin/testartcle";
-    }
+
 }
