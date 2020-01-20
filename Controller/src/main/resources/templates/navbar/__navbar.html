@@ -4,21 +4,42 @@
         -webkit-background-clip: text;
 	    -webkit-text-fill-color: transparent;
     }
-    .dropdown div.dropdown-menu-customized:before {
+    .dropdown ul.dropdown-menu-customized:before {
         content: "";
         border-bottom: 10px solid #fff;
         border-right: 10px solid transparent;
         border-left: 10px solid transparent;
         position: absolute;
         top: -10px;
-        right: 40px;
+        right: 52px;
         z-index: 10;
     }
 
+     /*More  Custom CSS*/
+     .dropdown-menu {
+         position: absolute;
+         top: 127%;
+         left: -300px;
+         z-index: 1000;
+         display: none;
+         float: left;
+         min-width: 10rem;
+         padding: .5rem 0;
+         margin: .125rem 0 0;
+         font-size: 1rem;
+         color: #212529;
+         text-align: left;
+         list-style: none;
+         background-color: #fff;
+         background-clip: padding-box;
+         border: 1px solid rgba(0,0,0,.15);
+         border-radius: .25rem;
+     }
+
+
+
 
      /* Chamroeun Notification */
-     /* Chamroeun Notification */
-
      /*.dropdown {*/
      /*    display:inline-block;*/
      /*    margin-left:20px;*/
@@ -30,6 +51,9 @@
 
      /*    font-size:1.5rem;*/
      /*}*/
+
+
+
 
      .notifications {
          min-width:420px;
@@ -46,9 +70,9 @@
          display:inline-block;
      }
 
-     .glyphicon-circle-arrow-right {
-         margin-left:10px;
-     }
+     /*.glyphicon-circle-arrow-right {*/
+     /*    margin-left:10px;*/
+     /*}*/
 
 
      .notification-heading, .notification-footer  {
@@ -62,7 +86,7 @@
 
      .item-title {
 
-         font-size:1.3rem;
+         font-size:16px;
          color:#000;
 
      }
@@ -80,10 +104,10 @@
          border-radius:4px;
      }
 
-     .page-active {
-         border-bottom: 2px solid yellow;
-         border-width: 5px;
-     }
+    .item-info{
+        font-size: 14px;
+    }
+
 
 
 </style>
@@ -113,7 +137,7 @@
              -->
             <li class="nav-item  d-none d-lg-block">
                 <a class="nav-link text-dark" href="/homepage">
-                    <h5 th:class="${CURRENT_PAGE == 'home'}?'icon-linear-color page-active':'icon-linear-color'" style="width: 60%;">Home</h5>
+                    <h5 th:class="${CURRENT_PAGE == 'home'}?'icon-linear-color page-active':'icon-linear-color'" style="width: 65%;">Home</h5>
                 </a>
             </li>
             <li class="nav-item  d-none d-lg-block">
@@ -123,16 +147,74 @@
             </li>
             <li class="nav-item  ">
                 <div class="dropdown ">
-                    <a class="nav-link text-center  d-none d-lg-block" href="#" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link text-center  d-none d-lg-block" href="#" id="dLabel" role="button" data-toggle="dropdown" data-target="#" aria-haspopup="true" aria-expanded="false">
                         <img class="" src="/icon/notification-navbar-v2.svg" style="width: 28px; height: 28px;" alt="">
                     </a>
-                    <div class="notify-drop dropdown-menu dropdown-menu-customized dropdown-menu-right mt-3" style="width: 100px;" aria-labelledby="notification">
-                        <ul class="list-group">
-                            <li class="list-group-item" >New post From Science</li>
-                            <li class="list-group-item">New post From Tech</li>
-                            <li class="list-group-item">New post From Soft</li>
-                        </ul>
-                    </div>
+<!--                    <div class="notify-drop dropdown-menu notifications dropdown-menu-customized dropdown-menu-right mt-3" style="width: 100px;" aria-labelledby="notification">-->
+<!--                        <ul class="list-group">-->
+<!--                            <li class="list-group-item" >New post From Science</li>-->
+<!--                            <li class="list-group-item">New post From Tech</li>-->
+<!--                            <li class="list-group-item">New post From Soft</li>-->
+<!--                        </ul>-->
+<!--                    </div>-->
+
+
+<!--                    CH note-->
+                    <ul class="dropdown-menu notifications dropdown-menu-customized " role="menu" aria-labelledby="dLabel">
+
+                        <div class="notification-heading">
+                            <h4 class="notification-menu-title">Notifications</h4>
+<!--                            <h4 class="notification-menu-title pull-right">View all<i class="glyphicon glyphicon-circle-arrow-right"></i></h4>-->
+                        </div>
+                        <li class="divider"></li>
+                        <div class="notifications-wrapper ">
+                            <a class="notifications-content" href="#">
+                                <div class="notifications-item">
+                                    <h6 class="item-title">New article has been posted in Entertainment</h6>
+                                    <p class="item-info text-muted"><i>2</i>&nbsp;<i>Hours ago</i></p>
+                                </div>
+
+                            </a>
+                            <a class="notifications-content" href="#">
+                                <div class="notifications-item">
+                                    <h6 class="item-title">New article has been posted in Entertainment</h6>
+                                    <p class="item-info text-muted"><i>2</i>&nbsp;<i>Hours ago</i></p>
+                                </div>
+                            </a>
+                            <a class="notifications-content" href="#">
+                                <div class="notifications-item">
+                                    <h6 class="item-title">New article has been posted in Entertainment</h6>
+                                    <p class="item-info text-muted"><i>2</i>&nbsp;<i>Hours ago</i></p>
+                                </div>
+                            </a>
+                            <a class="notifications-content" href="#">
+                                <div class="notifications-item">
+                                    <h6 class="item-title">New article has been posted in Entertainment</h6>
+                                    <p class="item-info text-muted"><i>2</i>&nbsp;<i>Hours ago</i></p>
+                                </div>
+
+                            </a>
+                            <a class="notifications-content" href="#">
+                                <div class="notifications-item">
+                                    <h6 class="item-title">New article has been posted in Entertainment</h6>
+                                    <p class="item-info text-muted"><i>2</i>&nbsp;<i>Hours ago</i></p>
+                                </div>
+                            </a>
+                            <a class="notifications-content" href="#">
+                                <div class="notifications-item">
+                                    <h6 class="item-title">New article has been posted in Entertainment</h6>
+                                    <p class="item-info text-muted"><i>2</i>&nbsp;<i>Hours ago</i></p>
+                                </div>
+                            </a>
+
+                        </div>
+                        <li class="divider buttom-divider "></li>
+                        <div class="notification-footer"><h4 class="notification-menu-title">View all<i class="glyphicon glyphicon-circle-arrow-right"></i></h4></div>
+                    </ul>
+<!--                    End CH note-->
+
+
+
                 </div>
             </li>
             <li class="nav-item ">
