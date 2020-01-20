@@ -15,15 +15,19 @@ public class HomeController {
         return "myhometest";
     }
 
-    @GetMapping(value = {"/homepage","/","/home"})
+    @GetMapping(value = {"/homepage","/home"})
     String home(Model model){
         model.addAttribute("CURRENT_PAGE", "home");
         return "client-home";
     }
 
-    @GetMapping("/logPage")
+    @GetMapping({"/logPage","/"})
     String loginPage(){
         return "loginPage";
+    }
+    @GetMapping("/favorite/chosen")
+    String favorite(){
+        return "clients/CategoryChoosen";
     }
 
     @GetMapping("/signup")

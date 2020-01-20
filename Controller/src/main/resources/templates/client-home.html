@@ -20,42 +20,78 @@
             .vh-30 { 
                 height: 28vh;
             }
+            .card{
+                border : 0px !important;
+               
+            }
             .v-parent > div {
                 width: 48%;
                 max-height: 70vh; 
-                border : 1px solid black;
+                border-bottom : 1px solid #dee2e6 !important;
                 /* padding: 10px; */
                 margin-bottom: 2%; 
             }
-            .group-one>div:hover {
-                filter:brightness(100%);
+            .v-parent > div >div.card-header , div.card-footer{
+                background-color: #fff !important;
             }
+            .group-one>div:hover {
+                /* filter:brightness(10%); */
+                /* 
+                transition: transform .5s ease;
+                transform: scale(1.5);
+                /* background-color: hsl(0, 100%, 30%);          */
+                 }
             
             .group-one-c-one{
                 /* background: url("image-static/dribbble_starry_night.png") no-repeat center center; */
                 background-image:  url("image-static/dribbble_starry_night.png");
                 background-position: center center;
                 background-size: cover;
-                filter: brightness(60%);
+                /* filter: brightness(60%); */
             }
             .group-one-c-two{
                 background: url("image-static/coupledrink.png") no-repeat center center;
                 background-size: cover;
-                filter: brightness(60%)
+                /* filter: brightness(60%) */
             }
             .group-one-c-three{
                 background: url("image-static/girlnightcupview.jpg") no-repeat center center;
                 background-size: cover;
-                filter: brightness(60%)
+                /* filter: brightness(60%) */
             }
-            .card{
-                border : 0px !important;
-               
+            
+            .card-body >div {
+                height: 80%;
             }
+            
+            .card-body > div > p {
+                color : #768791;
+            }
+
             .card > .card-header {
                 padding-left: 0% !important;
                 padding-right: 0% !important;
                 padding-bottom: 0% !important;
+            }
+            .card-header > a {
+                background-color: red;
+                color: #fff;
+                padding : 0px 2%;
+            }
+            .card-footer {
+                margin-top : 4%;
+                border : 0px !important;
+            }
+            .card-footer > div:last-child> a {
+               
+                color : #ff000078 !important;
+            }
+            .category-list > p {
+                color : #448fbb;
+            }
+            .category-list> p:hover {
+                cursor: pointer;
+                background-color: #e5eaed;
             }
             @media only screen and (max-width: 992px) {
                 .v-parent > div {
@@ -67,6 +103,9 @@
                 }
                 .group-one{
                     display: none !important;
+                }
+                .group-two{
+                    padding : 0px !important;
                 }
             }
            
@@ -105,7 +144,7 @@
             
             </div>
         </div>
-        <div class="group-two p-5 border border-dark " >
+        <div class="group-two p-5 " >
             <div class=" container-fluid" style="">
                 <div class="row">
 
@@ -113,19 +152,19 @@
                     <div class="col-md-12 col-lg-9 v-parent d-flex flex-md-row flex-column justify-content-around flex-wrap " style="">
                         <div class="card ">
                             <div class="card-header text-center ">
-                                <a href="">Romance- <span>02/14/2020</span></a>
-                                <h6>How tech recognize human face</h6>
+                                <a class=""  href="">Romance </a><span>-02/14/2020</span>
+                                <h5>How tech recognize human face</h5>
                                 <!-- <img class="mw-100 " style="max-height: 30vh;" src="image-static/face_recognition_dribbble.png" alt=""> -->
-                                <div class="w-100 vh-30 border group-one-c-two" >
+                                <div class="w-100 vh-30 group-one-c-two" >
 
                                 </div>
                             </div>
                             
                             <div class="card-body overflow-hidden">
-                               
-                                <p class="card-text ">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc
+                                <div>
+                                    <p class="card-text ">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc
                                     </p>
-                                    <button>hahah</button>
+                                </div>
                             </div>
                             <div class="card-footer d-inline d-flex justify-content-between">
                                 <div>
@@ -147,17 +186,17 @@
                         </div>
                         <div class="card">
                             <div class="card-header text-center ">
-                                <a href="">Romance- <span>02/14/2020</span></a>
-                                <h6>How to choose suitable fashion</h6>
-                                <div class="w-100 vh-30 border group-one-c-three" >
+                                <a href="">Romance </a><span>-02/14/2020</span>
+                                <h5>How to choose suitable fashion</h5>
+                                <div class="w-100 vh-30 group-one-c-three" >
 
                                 </div>
                             </div>
                             <div class="card-body overflow-hidden">
-                               
-                                <p class="card-text ">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc
+                                <div>
+                                    <p class="card-text ">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc
                                     </p>
-                                    <button>hahah</button>
+                                </div>
                             </div>
                             <div class="card-footer d-inline d-flex justify-content-between">
                                 <div>
@@ -179,18 +218,18 @@
                         </div>
                         <div class="card">
                             <div class="card-header text-center ">
-                                <a href="">Romance- <span>02/14/2020</span></a>
-                                <h6>Why people value art</h6>
+                                <a href="">Romance </a><span>-02/14/2020</span>
+                                <h5>Why people value art</h5>
                                 <!-- <img class="mw-100 " style="max-height: 30vh;" src="image-static/draw" alt=""> -->
-                                <div class="w-100 vh-30 border group-one-c-three" >
+                                <div class="w-100 vh-30 group-one-c-three" >
 
                                 </div>
                             </div>
                             <div class="card-body overflow-hidden">
-                               
-                                <p class="card-text ">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc
+                                <div>
+                                    <p class="card-text ">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc
                                     </p>
-                                    <button>hahah</button>
+                                </div>
                             </div>
                             <div class="card-footer d-inline d-flex justify-content-between">
                                 <div>
@@ -214,18 +253,18 @@
                           
                                 <!-- <img class="mw-100 " style="max-height: 30vh;" src="image-static/mansmoke.png" alt=""> -->
                                 <div class="card-header text-center ">
-                                    <a href="">Romance- <span>02/14/2020</span></a>
-                                    <h6>How to smoke to be healthy </h6>
+                                    <a href="">Romance </a><span>-02/14/2020</span>
+                                    <h5>How to smoke to be healthy </h5>
                                     <!-- <img class="mw-100 " style="max-height: 30vh;" src="image-static/draw" alt=""> -->
-                                    <div class="w-100 vh-30 border group-one-c-three" >
+                                    <div class="w-100 vh-30 group-one-c-three" >
     
                                     </div>
                             </div>
                             <div class="card-body overflow-hidden">
-                               
-                                <p class="card-text ">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc
+                                <div>
+                                    <p class="card-text ">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc
                                     </p>
-                                    <button>hahah</button>
+                                </div>
                             </div>
                             <div class="card-footer d-inline d-flex justify-content-between">
                                 <div>
@@ -247,18 +286,18 @@
                         </div>
                         <div class="card ">
                             <div class="card-header text-center">
-                                <a href="">Romance- <span>02/14/2020</span></a>
-                                <h6>How tech recognize human face</h6>
+                                <a href="">Romance </a><span>-02/14/2020</span>
+                                <h5>How tech recognize human face</h5>
                                 <!-- <img class="mw-100 " style="max-height: 30vh;" src="image-static/face_recognition_dribbble.png" alt=""> -->
-                                <div class="w-100 vh-30 border group-one-c-three" >
+                                <div class="w-100 vh-30 group-one-c-three" >
     
                                 </div>
                             </div>
                             <div class="card-body overflow-hidden">
-                               
-                                <p class="card-text ">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc
+                                <div>
+                                    <p class="card-text ">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc
                                     </p>
-                                    <button>hahah</button>
+                                </div>
                             </div>
                             <div class="card-footer d-inline d-flex justify-content-between">
                                 <div>
@@ -280,17 +319,17 @@
                         </div>
                         <div class="card">
                             <div class="card-header text-center">
-                                <a href="">Romance- <span>02/14/2020</span></a>
-                                <h6>How to choose suitable fashion</h6>
-                                <div class="w-100 vh-30 border group-one-c-two" >
+                                <a href="">Romance </a><span>-02/14/2020</span>
+                                <h5>How to choose suitable fashion</h5>
+                                <div class="w-100 vh-30 group-one-c-two" >
     
                                 </div>
                             </div>
                             <div class="card-body overflow-hidden">
-                               
-                                <p class="card-text ">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc
+                                <div>
+                                    <p class="card-text ">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc
                                     </p>
-                                    <button>hahah</button>
+                                </div>
                             </div>
                             <div class="card-footer d-inline d-flex justify-content-between">
                                 <div>
@@ -312,17 +351,17 @@
                         </div>
                         <div class="card">
                             <div class="card-header text-center">
-                                <a href="">Romance- <span>02/14/2020</span></a>
-                                <h6>Why people value art</h6>
-                                <div class="w-100 vh-30 border group-one-c-two" >
+                                <a href="">Romance </a><span>-02/14/2020</span>
+                                <h5>Why people value art</h5>
+                                <div class="w-100 vh-30 group-one-c-two" >
     
                                 </div>
                             </div>
                             <div class="card-body overflow-hidden">
-                               
-                                <p class="card-text ">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc
+                                <div>
+                                    <p class="card-text ">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc
                                     </p>
-                                    <button>hahah</button>
+                                </div>
                             </div>
                             <div class="card-footer d-inline d-flex justify-content-between">
                                 <div>
@@ -344,17 +383,17 @@
                         </div>
                         <div class="card">
                             <div class="card-header text-center">
-                                <a href="">Romance- <span>02/14/2020</span></a>
-                                <h6>How to smoke to be healthy </h6>
-                                <div class="w-100 vh-30 border group-one-c-one" >
+                                <a href="">Romance </a><span>-02/14/2020</span>
+                                <h5>How to smoke to be healthy </h5>
+                                <div class="w-100 vh-30 group-one-c-one" >
     
                                 </div>
                             </div>
                             <div class="card-body overflow-hidden">
-                               
-                                <p class="card-text ">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc
+                                <div>
+                                    <p class="card-text ">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc
                                     </p>
-                                    <button>hahah</button>
+                                </div>
                             </div>
                             <div class="card-footer d-inline d-flex justify-content-between">
                                 <div>
@@ -380,9 +419,9 @@
                     <!-- INNER RIGHT SIDE  -->
                     <div class="col-3 d-none d-lg-block bg-white border-left border-right" style="">
                         <div class="my-3">
-                            <h4>Categories</h4>
+                            <h4 style="color : #393939">Categories</h4>
                             <hr>
-                            <div class="text-left ml-5">
+                            <div class="text-left ml-5 category-list">
                                 <p>Technology</p>
                                 <p>Business</p>
                                 <p>About</p>
@@ -396,62 +435,62 @@
                         </div>
 
                         <div class="py-3">
-                            <h4>Popular post</h4>
+                            <h4 style="color : #393939">Popular post</h4>
                             <hr>
                             <div class="">
                                 <div class="d-flex  align-items-center">
                                     <img src="image-static/face_recognition_dribbble.png" class="rounded-circle m-2" style="width: 90px; height: 90px;" alt="">
                                     <div class="d-inline-block pl-2">
-                                        <span class="overflow-hidden w-100">How tech recognize human face </span>
+                                        <span class="overflow-hidden w-100"><b>How tech recognize human face </b></span>
                                         <br>
-                                        <sub>02/02/2020</sub>
+                                        <sub>5 days ago</sub>
                                     </div>
                                 </div>
                                 <div class="d-flex  align-items-center">
                                     <img src="image-static/face_recognition_dribbble.png" class="rounded-circle m-2" style="width: 90px; height: 90px;" alt="">
                                     <div class="d-inline-block pl-2">
-                                        <span class="overflow-hidden w-100">How tech recognize human face </span>
+                                        <span class="overflow-hidden w-100"><b>How tech recognize human face </b></span>
                                         <br>
-                                        <sub>02/02/2020</sub>
+                                        <sub>5 days ago</sub>
                                     </div>
                                 </div>
                                 <div class="d-flex  align-items-center">
                                     <img src="image-static/face_recognition_dribbble.png" class="rounded-circle m-2" style="width: 90px; height: 90px;" alt="">
                                     <div class="d-inline-block pl-2">
-                                        <span class="overflow-hidden w-100">How tech recognize human face </span>
+                                        <span class="overflow-hidden w-100"><b>How tech recognize human face </b></span>
                                         <br>
-                                        <sub>02/02/2020</sub>
+                                        <sub>5 days ago</sub>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="py-3">
-                            <h4>Recent Post</h4>
+                            <h4 style="color : #393939">Recent Post</h4>
                             <hr>
                             <div class="">
                                 <div class="d-flex  align-items-center">
                                     <img src="image-static/girlnightcupview.jpg" class="rounded-circle m-2" style="width: 90px; height: 90px;" alt="">
                                     <div class="d-inline-block pl-2">
-                                        <span class="overflow-hidden w-100">How to listen to understand </span>
+                                        <span class="overflow-hidden w-100"><b>How to listen to understand</b> </span>
                                         <br>
-                                        <sub>02/02/2020</sub>
+                                        <sub>2 days ago </sub>
                                     </div>
                                 </div>
                                 <div class="d-flex  align-items-center">
                                     <img src="image-static/girlnightcupview.jpg" class="rounded-circle m-2" style="width: 90px; height: 90px;" alt="">
                                     <div class="d-inline-block pl-2">
-                                        <span class="overflow-hidden w-100">How to listen to understand </span>
+                                        <span class="overflow-hidden w-100"><b>How to listen to understand</b> </span>
                                         <br>
-                                        <sub>02/02/2020</sub>
+                                        <sub>2 days ago </sub>
                                     </div>
                                 </div>
                                 <div class="d-flex  align-items-center">
                                     <img src="image-static/girlnightcupview.jpg" class="rounded-circle m-2" style="width: 90px; height: 90px;" alt="">
                                     <div class="d-inline-block pl-2">
-                                        <span class="overflow-hidden w-100">How to listen to understand </span>
+                                        <span class="overflow-hidden w-100"><b>How to listen to understand</b> </span>
                                         <br>
-                                        <sub>02/02/2020</sub>
+                                        <sub>2 days ago </sub>
                                     </div>
                                 </div>
                             </div>

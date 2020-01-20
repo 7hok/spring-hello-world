@@ -1,12 +1,16 @@
 package khmerhowto.Repository.Model;
 
+import java.io.Serializable;
+import java.time.LocalDateTime;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
 
 @Entity
-public class Category {
+public class Category implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -14,8 +18,14 @@ public class Category {
     private String image;
     private String description;
     private Boolean status;
+  
     private int timestamp;
-
+    
+    @PrePersist
+    public void prePersist() {
+        timestamp = 10000000;
+        status = true;
+    }
     public Category() {
     }
 
