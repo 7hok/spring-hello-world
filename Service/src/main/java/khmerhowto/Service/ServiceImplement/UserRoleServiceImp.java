@@ -18,9 +18,12 @@ public class UserRoleServiceImp implements UserRoleSrvice {
     private UserRoleRepository userRoleRepository;
     @Override
     public void updateRole(Integer id, Integer roleId) {
-      UserRole userRole = userRoleRepository.findByUserAndRoleIsNot(id,roleId);
-      userRole.setRole(new Role(roleId));
-      userRoleRepository.save(userRole);
+      UserRole userRole = userRoleRepository.findByUserIdAndRoleIdIsNot(id,roleId);
+        System.out.println("Before this user role is "+userRole.getRole().getName());
+        userRole.setRole(new Role(roleId));
+        userRoleRepository.save(userRole);
+        System.out.println(userRole.toString());
+        System.out.println("now this user has role as "+ userRole.getRole().getName());
 
     }
 

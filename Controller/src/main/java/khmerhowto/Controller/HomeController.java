@@ -9,7 +9,15 @@ import org.springframework.ui.Model;
  */
 @Controller
 public class HomeController {
+    @GetMapping("/about")
+    String showAboutUs(){
 
+        return "clients/about";
+    }
+    @GetMapping("/privacy")
+    String showPrivacy(){
+        return "clients/privacy";
+    }
     @GetMapping("/example")
     String example(){
         return "myhometest";
