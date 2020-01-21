@@ -1,4 +1,6 @@
-
+NOTE 
+    When database server down, Project will not be error because of ORM technology .
+    so please change database setting in .properties file to local when server down.
 PROJECT DETAIL
 port
     :8080
