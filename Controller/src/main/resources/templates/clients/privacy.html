@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns="http://www.w3.org/1999/xhtml" layout:decorator="~{home-layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div class="content bg-white" layout:fragment="content">
+    <style>
+            .v-10-test {
+                height: 10vh;
+            }
+            .v-40-test {
+                height: 40vh;
+            }
+            .vh-30 {
+                height: 28vh;
+            }
+            .card{
+                border : 0px !important;
+
+            }
+            .v-parent > div {
+                width: 48%;
+                max-height: 70vh;
+                border-bottom : 1px solid #dee2e6 !important;
+                /* padding: 10px; */
+                margin-bottom: 2%;
+            }
+            .v-parent > div >div.card-header , div.card-footer{
+                background-color: #fff !important;
+            }
+            .group-one>div:hover {
+                /* filter:brightness(10%); */
+                /*
+                transition: transform .5s ease;
+                transform: scale(1.5);
+                /* background-color: hsl(0, 100%, 30%);          */
+                 }
+
+            .group-one-c-one{
+                /* background: url("image-static/dribbble_starry_night.png") no-repeat center center; */
+                background-image:  url("image-static/dribbble_starry_night.png");
+                background-position: center center;
+                background-size: cover;
+                /* filter: brightness(60%); */
+            }
+            .group-one-c-two{
+                background: url("image-static/coupledrink.png") no-repeat center center;
+                background-size: cover;
+                /* filter: brightness(60%) */
+            }
+            .group-one-c-three{
+                background: url("image-static/girlnightcupview.jpg") no-repeat center center;
+                background-size: cover;
+                /* filter: brightness(60%) */
+            }
+
+            .card-body >div {
+                height: 80%;
+            }
+
+            .card-body > div > p {
+                color : #768791;
+            }
+
+            .card > .card-header {
+                padding-left: 0% !important;
+                padding-right: 0% !important;
+                padding-bottom: 0% !important;
+            }
+            .card-header > a {
+                background-color: red;
+                color: #fff;
+                padding : 0px 2%;
+            }
+            .card-footer {
+                margin-top : 4%;
+                border : 0px !important;
+            }
+            .card-footer > div:last-child> a {
+
+                color : #ff000078 !important;
+            }
+            .category-list > p {
+                color : #448fbb;
+            }
+            .category-list> p:hover {
+                cursor: pointer;
+                background-color: #e5eaed;
+            }
+            @media only screen and (max-width: 992px) {
+                .v-parent > div {
+                    width: 100%;
+
+                }
+                .card {
+                    margin-bottom: 2%;
+                }
+                .group-one{
+                    display: none !important;
+                }
+                .group-two{
+                    padding : 0px !important;
+                }
+            }
+
+        </style>
+    <div class="container ">
+        <div class="row">
+            <div class="col-12 text-center"><img src="/image-static/secure1.png" alt="" class=" img-fluid rounded float-left"></div>
+        </div>
+        <div class="row">
+            <div class="col-12 mb-3">
+                <div class="h2">Privacy Policy</div>
+                <div class="pt-3 ml-5">
+                    <div class="pl-3">
+                        <p class="h3">Overview</p>
+                        <p>Amendments to this Privacy Policy will be posted to the Site and/or Services and will be effective when posted. Your continued use of the Site and/or Services following the posting of any amendment to this Privacy Policy shall constitute your acceptance of such amendment.</p>
+                        <p class="h3">Consent and Information Collection and User</p>
+                        <p>When you register as a user of our Site and Services, we ask for personal information that will be used to activate your account, provide the Services to you, communicate with you about the status of your account, and for other purposes set out in this Privacy Policy. Your name, company name, address, telephone number, email address, credit card information and certain other information about you may be required by us to provide the Services or be disclosed by you during your use of the Services. You will also be asked to create a user name and private password, which will become part of your account information.</p>
+                        <p class="h3">Age of Consent</p>
+                        <p>Neither the Site nor the Services are intended for children under 13 years of age, and no one under age 13 may provide any personal information to, on or through the Site or Services. We do not knowingly collect personal information from children under 13. If you are under 13, do not use or provide any information to, on or through the Site or Services, make any purchases through the Site or Services, use any of the interactive or public comment features, or provide any information about yourself to us, including your name, address, telephone number, email address, or any screen name or user name you may use. If we learn we have collected or received personal information from a child under 13 without verification of parental consent, we will delete that information. If you believe we might have any information from or about a child under 13, please contact us at the email address provided in the paragraph above.</p>
+                        <p class="h3">Right to Your Information</p>
+                        <p>Under the GDPR, you may be entitled to additional rights, including: (i) the right to withdraw consent to processing where consent is the basis of processing; (ii) the right to access your personal information and certain other supplementary information, under certain conditions; (iii) the right to object to unlawful data processing, under certain conditions; (iv) the right to erasure of personal information about you, under certain conditions; (v) the right to demand that we restrict processing of your personal information, under certain conditions, if you believe we have exceeded the legitimate basis for processing, processing is no longer necessary, are processing, or believe your personal information is inaccurate; (vi) the right to data portability of personal information concerning you that you provided us in a structured, commonly used, and machine-readable format, under certain conditions; (vii) the right object to decisions being taken by automated means which produce legal effects concerning you or similarly significantly affect you, under certain conditions; (viii) the right to lodge a complaint with data protection authorities. If you want to learn more about your rights under the GDPR, you can visit the European Commission’s page on Data Protection.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
+</body>
+</html>

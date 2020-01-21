@@ -9,7 +9,15 @@ import org.springframework.ui.Model;
  */
 @Controller
 public class HomeController {
+    @GetMapping("/about")
+    String showAboutUs(){
 
+        return "clients/about";
+    }
+    @GetMapping("/privacy")
+    String showPrivacy(){
+        return "clients/privacy";
+    }
     @GetMapping("/example")
     String example(){
         return "myhometest";
@@ -44,6 +52,12 @@ public class HomeController {
     String contentByCategory(Model model){
         model.addAttribute("CURRENT_PAGE", "category");
         return "content-by-category";
+    }
+
+    @GetMapping("test/contentByCategory")
+    String contentByCategoryTest(Model model){
+        model.addAttribute("CURRENT_PAGE", "category");
+        return "content-by-category-test";
     }
 
 
