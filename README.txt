@@ -23,4 +23,8 @@ Admin
 /admin/question     =>  question
 /admin/customize    =>  customize
 
+Other
+/privacy
+/about
+
 PLEASE CONTACT ME IF THERE IS ANY PROBLEM
