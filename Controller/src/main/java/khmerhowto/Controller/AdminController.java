@@ -37,7 +37,7 @@ import java.util.List;
  * AdminController
  */
 @Controller
-@RequestMapping("/dynas/")
+//@RequestMapping("/dynas/")
 public class AdminController {
     @Autowired
     private RoleService roleService;

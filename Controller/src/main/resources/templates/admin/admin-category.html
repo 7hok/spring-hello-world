@@ -29,7 +29,7 @@
             }
             .card{
                 width: 13%;
-                margin-bottom: 3%;
+                margin-bottom: 2%;
             }
             @media only screen and (max-width: 992px) {
                .card{ 
@@ -49,6 +49,13 @@
                 </div>
                 <div class="p-3 text-center hover-highlight-for-click" id="new_category">
                     <img src="/icon/article-v1.svg" class="card-img-top text-center" style="max-width: 150px;" alt="...">
+                    <div class="d-flex justify-content-around">
+                       <div class="rounded-circle bg-success text-white w-25" ><span  style="font-size: 25px;">+</span></div>
+                       <span class="align-self-center">
+                            Insert Category
+                        </span>
+                    </div>
+                    
                 </div>
             </div>
             <!-- UPPER DIV -->
@@ -61,80 +68,19 @@
             <!-- FOOTER DIV  -->
             <div class="d-flex flex-wrap justify-content-around ">
                <!-- ON DYNASMIC  -->
-                <!-- 
+                
                 <div th:each="category:${categories}" class="card bg-color-two hover-white-highlight-for-click category-card" th:data-id="${category.id}" style="">
                     <div class="m-4">
                         <img th:src="${category.image}" class="card-img-top" alt="...">
                     </div>
-                    <div class="card-body ">
+                    <div class="card-body p-1">
                         <h6 class="card-title text-center">
                             <b th:text="${category.name}">Machine Learning</b>
                         </h6>
                     </div>
-                </div> -->
+                </div>
                  
-                <!-- STATIC -->
-               
-                <div class="card bg-color-two hover-white-highlight-for-click" style="">
-                    <div class="m-4">
-                        <img src="/image-static/machine-learning.svg" class="card-img-top" alt="...">
-                    </div>
-                    <div class="card-body ">
-                        <h6 class="card-title text-center">
-                            <b>Machine Learning</b>
-                        </h6>
-                    </div>
-                </div>
-                <div class="card bg-color-two hover-white-highlight-for-click" style="">
-                    <div class="m-4" >
-                        <img src="/image-static/machine-learning.svg" class="card-img-top" alt="...">
-                    </div>
-                    <div class="card-body">
-                        <h6 class="card-title text-center">
-                            <b>Technology</b>
-                        </h6>
-                    </div>
-                </div>
-                <div class="card bg-color-two hover-white-highlight-for-click" style="">
-                    <div class="m-4">
-                        <img src="/image-static/machine-learning.svg" class="card-img-top" alt="...">
-                    </div>
-                    <div class="card-body">
-                        <h6 class="card-title text-center">
-                            <b>Machine Learning</b>
-                        </h6>
-                    </div>
-                </div>
-                <div class="card bg-color-two hover-white-highlight-for-click" style="">
-                    <div class="m-4">
-                        <img src="/image-static/machine-learning.svg" class="card-img-top" alt="...">
-                    </div>
-                    <div class="card-body">
-                        <h6 class="card-title text-center">
-                            <b>Technology</b>
-                        </h6>
-                    </div>
-                </div>
-                <div class="card bg-color-two hover-white-highlight-for-click" style="">
-                    <div class="m-4">
-                        <img src="/image-static/machine-learning.svg" class="card-img-top" alt="...">
-                    </div>
-                    <div class="card-body">
-                        <h6 class="card-title text-center">
-                            <b>Machine Learning</b>
-                        </h6>
-                    </div>
-                </div>
-                <div class="card bg-color-two hover-white-highlight-for-click" style="">
-                    <div class="m-4">
-                        <img src="/image-static/machine-learning.svg" class="card-img-top" alt="...">
-                    </div>
-                    <div class="card-body">
-                        <h6 class="card-title text-center">
-                            <b>Technology</b>
-                        </h6>
-                    </div>
-                </div>
+     
                
                 
             </div>
@@ -162,13 +108,13 @@
                             </div>
                             <div class="m-3 d-flex justify-content-center ">
                                 <div class="border w-50 bg-color-two " style="height: 15vh;" >
-                                    <img class="mw-100" src="/image-static/content.svg" alt="" style="" id="modal_img_show"> 
+                                    <img class="mw-100" src="" alt="" style="" id="modal_img_show"> 
                                 </div>
                             </div>
                         </div>
                         <!-- background m3 -->
                         <div class="modal-footer ">
-                            <button class="btn btn-primary text-center" id="modal_save">Save</button>
+                            <button class="btn btn-primary text-center" data-id="0" id="modal_save">Save</button>
                         </div>
                     </div>
                    
@@ -202,6 +148,7 @@
                         $("#modal_img_show").parent().addClass("bg-color-two")
                         // $("#modal_img_show").p
                     }else{
+                        $("#modal_save").attr("data-id",category.id)
                         $("#modal_name_input").val(category.name)
                         $("#modal_file_input").val("")
                         $("#modal_img_show").parent().removeClass("bg-color-two")
@@ -302,6 +249,7 @@
                     }
                
                 $("#modal_save").on("click",function(){
+                    let _id = $(this).attr("data-id")
                     let _promise = upload_process( $("#modal_file_input")[0].files[0])
                     if(_promise ==null){
                       
@@ -310,7 +258,7 @@
                         _promise.then(json => {
                             let _category = {
                                             "name" : $("#modal_name_input").val(),
-                                            "image" : json.Data,
+                                            "image" : "/images/"+json.Data,
                                             "description" : "none"
                                         }
                             post_new_category('/api/categories',_category);            
@@ -326,6 +274,10 @@
                    $('#new_category_modal').modal('toggle');
                    $('#new_category_modal').modal('show');
                })
+               
+               $('#new_category_modal').on('hidden.bs.modal',function(){
+                     $("#modal_save").attr("data-id",0);
+               });
                 /**SIMPLE EVENT **/
             </script>
             <!-- Script -->
