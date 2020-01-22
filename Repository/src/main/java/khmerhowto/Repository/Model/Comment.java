@@ -2,6 +2,8 @@ package khmerhowto.Repository.Model;
 
 import javax.persistence.*;
 
+import org.springframework.data.rest.core.annotation.RestResource;
+
 @Entity
 public class Comment {
 
@@ -9,14 +11,20 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @ManyToOne
+    @RestResource(exported = false)
     private User user;
     @ManyToOne
+    @RestResource(exported = false)
     private Content content;
     private String text;
     private boolean status;
     private int timestamp;
 
-
+    @PrePersist
+    public void prePersist() {
+        timestamp = 10000000;
+        status = true;
+    }
     public Comment() {
     }
 

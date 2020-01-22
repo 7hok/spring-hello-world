@@ -45,7 +45,7 @@
                         <br>
                         KhmerHowTo
                     </h1>
-                    <input type="text" class="form-control-one-line  my-2  " placeholder="  find your category">
+                    <input type="text" class="form-control-one-line  my-2  " id="category_search" placeholder="  find your category">
                 </div>
                 <div class="p-3 text-center hover-highlight-for-click" id="new_category">
                     <img src="/icon/article-v1.svg" class="card-img-top text-center" style="max-width: 150px;" alt="...">
@@ -75,7 +75,7 @@
                     </div>
                     <div class="card-body p-1">
                         <h6 class="card-title text-center">
-                            <b th:text="${category.name}">Machine Learning</b>
+                            <b class="category-name" th:text="${category.name}">Machine Learning</b>
                         </h6>
                     </div>
                 </div>
@@ -113,7 +113,8 @@
                             </div>
                         </div>
                         <!-- background m3 -->
-                        <div class="modal-footer ">
+                        <div class="modal-footer d-flex justify-content-around">
+                            <button class="btn btn-danger float-left">Remove</button>
                             <button class="btn btn-primary text-center" data-id="0" id="modal_save">Save</button>
                         </div>
                     </div>
@@ -133,7 +134,7 @@
                     fetch(uri)
                     .then(res=> res.json())
                     .then(json => {
-                        // console.log(json.category)
+                      
                         let category = json;
                         convert_category_to_modal(category)
                     })
@@ -157,7 +158,7 @@
                    
                 }
                 
-                fetch_category_by_id("/categories/6");
+                // fetch_category_by_id("/categories/6");
                 
                 $(document).on('click','.category-card', function () {
                     let card_id = $(this).attr("data-id");
@@ -250,6 +251,8 @@
                
                 $("#modal_save").on("click",function(){
                     let _id = $(this).attr("data-id")
+                    console.log(_id)
+                    return;
                     let _promise = upload_process( $("#modal_file_input")[0].files[0])
                     if(_promise ==null){
                       
@@ -268,6 +271,16 @@
                     }
                  
                 })
+                jQuery.expr[':'].icontains = function(a, i, m) {
+                    return jQuery(a).text().toUpperCase()
+                    .indexOf(m[3].toUpperCase()) >= 0;
+                };
+
+                $("#category_search").on('input',function(){
+                    $('.category-card').addClass('d-none');
+                    let val = $(this).val()
+                    $(".category-name:icontains("+val+")").parents('.category-card').removeClass('d-none')
+                })
                 /**SIMPLE EVENT **/
                 $(".hover-white-highlight-for-click,#new_category").on("click",function(){
                    
@@ -277,7 +290,21 @@
                
                $('#new_category_modal').on('hidden.bs.modal',function(){
                      $("#modal_save").attr("data-id",0);
+                     $("#modal_img_show").attr("src","");
                });
+               function readURL(input) {
+                    if (input.files && input.files[0]) {
+                        let reader = new FileReader();
+                        reader.onload = function (e) {
+                            // $('#img-preview').attr('src', e.target.result);
+                            $("#modal_img_show").attr("src", e.target.result)
+                        };
+                        reader.readAsDataURL(input.files[0]);
+                    }
+                }
+                $("#modal_file_input").change(function () {
+                    readURL(this);
+                });
                 /**SIMPLE EVENT **/
             </script>
             <!-- Script -->
