@@ -11,7 +11,7 @@ CKEDITOR.editorConfig = function( config ) {
 	// Define changes to default configuration here.
 	// For complete reference see:
 	// https://ckeditor.com/docs/ckeditor4/latest/api/CKEDITOR_config.html
-	config.height = '550px';
+	config.height = '750px';
 	CKEDITOR.config.removePlugins = 'Language,newpage,save,sourcearea,about,flash,iframe,a11yhelp,div,find,forms,pagebreak,templates,scayt,showblocks,smiley,colordialog,magicline,tableselection,tabletools,wsc,Image';
 	// config.removeButtons = 'Maximize,Language,Subscript,Superscript,Blockquote,RemoveFormat,CopyFormatting,Underline,JustifyCenter,JustifyBlock,BidiLtr,BidiRtl,Link,Unlink,Anchor,Outdent,Indent,Scayt,Strike';
 
