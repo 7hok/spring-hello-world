@@ -54,5 +54,11 @@ public class HomeController {
         return "content-by-category";
     }
 
+    @GetMapping("test/contentByCategory")
+    String contentByCategoryTest(Model model){
+        model.addAttribute("CURRENT_PAGE", "category");
+        return "content-by-category-test";
+    }
+
 
 }

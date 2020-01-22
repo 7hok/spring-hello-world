@@ -34,11 +34,15 @@
             .v-parent > div >div.card-header , div.card-footer{
                 background-color: #fff !important;
             }
+            .group-one >div{
+                width: 33.3%;
+                max-width: 33.3%;
+            }
             .group-one>div:hover {
                 /* filter:brightness(10%); */
-                /* 
+                /*     */
                 transition: transform .5s ease;
-                transform: scale(1.5);
+                transform: scale(1.1);
                 /* background-color: hsl(0, 100%, 30%);          */
                  }
             
@@ -60,12 +64,17 @@
                 /* filter: brightness(60%) */
             }
             
-            .card-body >div {
+            /* .card-body >div {
                 height: 80%;
-            }
+            } */
             
             .card-body > div > p {
                 color : #768791;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 2;
             }
 
             .card > .card-header {
@@ -79,19 +88,60 @@
                 padding : 0px 2%;
             }
             .card-footer {
-                margin-top : 4%;
+                /* margin-top : 4%; */
                 border : 0px !important;
             }
-            .card-footer > div:last-child> a {
-               
-                color : #ff000078 !important;
-            }
+           
             .category-list > p {
                 color : #448fbb;
+                padding : 2% 0%;
+                padding-left: 10%;
+
             }
             .category-list> p:hover {
                 cursor: pointer;
                 background-color: #e5eaed;
+            }
+            .article-title-h5{
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 1;
+                text-transform: uppercase;
+                /* padding : 1% 0%; */
+                margin-bottom: 2%;
+            }
+            .read-more-link-color {
+                color : #c3ccd3;
+            }
+            .kht-text-color{
+                color :#768791;
+            }
+            .kht-text-color-express{
+                color: #C3CCD3;
+            }
+            .mw-50 {
+                max-width: 50%;
+            }
+            .carousel-inner > .item {
+                height: 100vh;
+            }
+
+            .carousel-inner > .item > img {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                -webkit-transform: translate(-50%, -50%);
+                -ms-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
+                max-height: 800px;
+                width: auto;
+            }
+
+            .carousel-control.left,
+            .carousel-control.right {
+             background-image: none;
             }
             @media only screen and (max-width: 992px) {
                 .v-parent > div {
@@ -110,57 +160,107 @@
             }
            
         </style>
-        <div class="group-one bg-primary d-flex flex-lg-row flex-column" style="height: 40vh;">
-            <div class="border border-dark h-100 flex-fill group-one-c-one d-flex align-items-end justify-content-center " >
-                <h4 class="text-white">
-                    Travel and relax
-                    <br/>&nbsp;&nbsp;
-                     <sub>
-                        14/2/2020 
-                     </sub>
-
-                </h4>
+        
+        <div id="carouselExampleControls " class="carousel slide d-none" data-ride="carousel" >
+            <div class="carousel-inner" style="">
+                <div class="carousel-item item active">
+                    <div class="border border-dark h-100  group-one-c-one d-flex align-items-end justify-content-center " >
+                        <div class="text-center mw-50 ">
+                            <h5 class="text-white">
+                                The table specify the first browser version that fully supports the property.
+                            </h5>
+                            <span class="text-white">
+                                Jul/2/2020 
+                             </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item item">
+                    <div class="border border-dark h-100  group-one-c-two d-flex align-items-end justify-content-center">
+                        <div class="text-center mw-50 ">
+                            <h5 class="text-white">
+                                the world’s most popular framework for building responsive, mobile-first sites, with BootstrapCDN and a template starter page
+                            </h5>
+                            <span class="text-white">
+                                Jul/2/2020 
+                             </span>
+                        </div>
+                       
+                    </div>
+                </div>
+                <div class="carousel-item item">
+                    <div class="border border-dark h-100  group-one-c-three d-flex  align-items-end justify-content-center ">
+                        <div class="text-center mw-50 ">
+                            <h5 class="text-white">
+                                Tutorials, references, and examples are constantly reviewed to avoid errors, but we cannot warrant full correctness of all content.
+                            </h5>
+                            <span class="text-white">
+                                Jul/2/2020 
+                             </span>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="border border-dark h-100 flex-fill group-one-c-two d-flex align-items-end justify-content-center">
-                <h4 class="text-white">
-                    Have a wonderful night 
-                    <br>&nbsp;&nbsp;
-                    <sub>
-                        14/2/2020 
-                     </sub>
-                </h4>
+            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon " aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+            
+        </div>
+        <div class="group-one bg-primary d-flex flex-lg-row flex-column overflow-hidden" style="height: 40vh;">
+            <div class="border border-dark h-100  group-one-c-one d-flex align-items-end justify-content-center " >
+                <div class="text-center mw-50 ">
+                    <h5 class="text-white">
+                        The table specify the first browser version that fully supports the property.
+                    </h5>
+                    <span class="text-white">
+                        Jul/2/2020 
+                     </span>
+                </div>
+            </div>
+            <div class="border border-dark h-100  group-one-c-two d-flex align-items-end justify-content-center">
+                <div class="text-center mw-50 ">
+                    <h5 class="text-white">
+                        the world’s most popular framework for building responsive, mobile-first sites, with BootstrapCDN and a template starter page
+                    </h5>
+                    <span class="text-white">
+                        Jul/2/2020 
+                     </span>
+                </div>
                
             </div>
-            <div class="border border-dark h-100 flex-fill group-one-c-three d-flex  align-items-end justify-content-center ">
-                <h4 class="text-white">
-                    Avoid to miss
-                    <br> &nbsp;&nbsp;
-                    <sub>
-                       
-                            14/2/2020 
-                   
-                     </sub>
-                </h4>
-            
+            <div class="border border-dark h-100  group-one-c-three d-flex  align-items-end justify-content-center ">
+                <div class="text-center mw-50 ">
+                    <h5 class="text-white">
+                        Tutorials, references, and examples are constantly reviewed to avoid errors, but we cannot warrant full correctness of all content.
+                    </h5>
+                    <span class="text-white">
+                        Jul/2/2020 
+                     </span>
+                </div>
             </div>
         </div>
         <div class="group-two p-5 " >
-            <div class=" container-fluid" style="">
+            <div class=" container-fluid  d-flex flex-column" style="">
                 <div class="row">
 
                     <!-- INNER LEFT SIDE  -->
                     <div class="col-md-12 col-lg-9 v-parent d-flex flex-md-row flex-column justify-content-around flex-wrap " style="">
                         <div class="card ">
                             <div class="card-header text-center ">
-                                <a class=""  href="">Romance </a><span>-02/14/2020</span>
-                                <h5>How tech recognize human face</h5>
+                                <a class="rounded"  href="">Romance </a><span>&nbsp;- May 13, 2018</span>
+                                <h5 class="article-title-h5">How tech recognize human face</h5>
                                 <!-- <img class="mw-100 " style="max-height: 30vh;" src="image-static/face_recognition_dribbble.png" alt=""> -->
-                                <div class="w-100 vh-30 group-one-c-two" >
+                                <div class="mt-2 w-100 vh-30 group-one-c-two" >
 
                                 </div>
                             </div>
                             
-                            <div class="card-body overflow-hidden">
+                            <div class="card-body overflow-hidden px-0">
                                 <div>
                                     <p class="card-text ">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc
                                     </p>
@@ -168,31 +268,31 @@
                             </div>
                             <div class="card-footer d-inline d-flex justify-content-between">
                                 <div>
-                                    <i class="material-icons-new outline-favorite_border" style="width: 22px; height: 22px;">
+                                    <sup>
+                                        <img class="" src="/icon/heart-pink.svg" style="width: 20px; height: 20px;" alt="">
+                                        <span class="kht-text-color-express">12</span>
+                                        &nbsp;
                                     
-                                    </i>
-                                    <sup>12</sup>
-                                    &nbsp;
-                                    <i class="material-icons-new outline-mode_comment" style="width: 22px; height: 22px;">
-                                       
-                                    </i>
-                                    <sup>24</sup>
+                                        <img class="" src="/icon/comment.svg" style="width: 20px; height: 20px;" alt="">
+                                    
+                                        <span class="kht-text-color-express">24</span>
+                                    </sup>
                                 </div>
                                 <div>
-                                    <a href="">Read More</a>
+                                    <a class="read-more-link-color" href="">Read More</a>
                                 </div>
                             </div>
                               
                         </div>
                         <div class="card">
                             <div class="card-header text-center ">
-                                <a href="">Romance </a><span>-02/14/2020</span>
-                                <h5>How to choose suitable fashion</h5>
-                                <div class="w-100 vh-30 group-one-c-three" >
+                                <a href="" class="rounded">Romance </a><span>&nbsp;- May 13, 2018</span>
+                                <h5 class="article-title-h5">How to choose suitable fashion</h5>
+                                <div class="mt-2 w-100 vh-30 group-one-c-three" >
 
                                 </div>
                             </div>
-                            <div class="card-body overflow-hidden">
+                            <div class="card-body overflow-hidden px-0">
                                 <div>
                                     <p class="card-text ">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc
                                     </p>
@@ -200,32 +300,32 @@
                             </div>
                             <div class="card-footer d-inline d-flex justify-content-between">
                                 <div>
-                                    <i class="material-icons-new outline-favorite_border" style="width: 22px; height: 22px;">
+                                    <sup>
+                                        <img class="" src="/icon/heart-pink.svg" style="width: 20px; height: 20px;" alt="">
+                                        <span class="kht-text-color-express">12</span>
+                                        &nbsp;
                                     
-                                    </i>
-                                    <sup>12</sup>
-                                    &nbsp;
-                                    <i class="material-icons-new outline-mode_comment" style="width: 22px; height: 22px;">
-                                       
-                                    </i>
-                                    <sup>24</sup>
+                                        <img class="" src="/icon/comment.svg" style="width: 20px; height: 20px;" alt="">
+                                    
+                                        <span class="kht-text-color-express">24</span>
+                                    </sup>
                                 </div>
                                 <div>
-                                    <a href="">Read More</a>
+                                    <a class="read-more-link-color" href="">Read More</a>
                                 </div>
                             </div>
                               
                         </div>
                         <div class="card">
                             <div class="card-header text-center ">
-                                <a href="">Romance </a><span>-02/14/2020</span>
-                                <h5>Why people value art</h5>
+                                <a class="rounded" href="">Romance </a><span>&nbsp;- May 13, 2018</span>
+                                <h5 class="article-title-h5">Why people value art</h5>
                                 <!-- <img class="mw-100 " style="max-height: 30vh;" src="image-static/draw" alt=""> -->
-                                <div class="w-100 vh-30 group-one-c-three" >
+                                <div class="mt-2 w-100 vh-30 group-one-c-three" >
 
                                 </div>
                             </div>
-                            <div class="card-body overflow-hidden">
+                            <div class="card-body overflow-hidden px-0">
                                 <div>
                                     <p class="card-text ">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc
                                     </p>
@@ -233,18 +333,18 @@
                             </div>
                             <div class="card-footer d-inline d-flex justify-content-between">
                                 <div>
-                                    <i class="material-icons-new outline-favorite_border" style="width: 22px; height: 22px;">
+                                    <sup>
+                                        <img class="" src="/icon/heart-pink.svg" style="width: 20px; height: 20px;" alt="">
+                                        <span class="kht-text-color-express">12</span>
+                                        &nbsp;
                                     
-                                    </i>
-                                    <sup>12</sup>
-                                    &nbsp;
-                                    <i class="material-icons-new outline-mode_comment" style="width: 22px; height: 22px;">
-                                       
-                                    </i>
-                                    <sup>24</sup>
+                                        <img class="" src="/icon/comment.svg" style="width: 20px; height: 20px;" alt="">
+                                    
+                                        <span class="kht-text-color-express">24</span>
+                                    </sup>
                                 </div>
                                 <div>
-                                    <a href="">Read More</a>
+                                    <a class="read-more-link-color" href="">Read More</a>
                                 </div>
                             </div>
                               
@@ -253,14 +353,14 @@
                           
                                 <!-- <img class="mw-100 " style="max-height: 30vh;" src="image-static/mansmoke.png" alt=""> -->
                                 <div class="card-header text-center ">
-                                    <a href="">Romance </a><span>-02/14/2020</span>
-                                    <h5>How to smoke to be healthy </h5>
+                                    <a class="rounded" href="">Romance </a><span>&nbsp;- May 13, 2018</span>
+                                    <h5 class="article-title-h5">How to smoke to be healthy the world’s most popular framework for building responsive, mobile-first sites, with BootstrapCDN and a template starter page </h5>
                                     <!-- <img class="mw-100 " style="max-height: 30vh;" src="image-static/draw" alt=""> -->
-                                    <div class="w-100 vh-30 group-one-c-three" >
+                                    <div class="mt-2 w-100 vh-30 group-one-c-three" >
     
                                     </div>
                             </div>
-                            <div class="card-body overflow-hidden">
+                            <div class="card-body overflow-hidden px-0">
                                 <div>
                                     <p class="card-text ">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc
                                     </p>
@@ -268,32 +368,32 @@
                             </div>
                             <div class="card-footer d-inline d-flex justify-content-between">
                                 <div>
-                                    <i class="material-icons-new outline-favorite_border" style="width: 22px; height: 22px;">
+                                    <sup>
+                                        <img class="" src="/icon/heart-pink.svg" style="width: 20px; height: 20px;" alt="">
+                                        <span class="kht-text-color-express">12</span>
+                                        &nbsp;
                                     
-                                    </i>
-                                    <sup>12</sup>
-                                    &nbsp;
-                                    <i class="material-icons-new outline-mode_comment" style="width: 22px; height: 22px;">
-                                       
-                                    </i>
-                                    <sup>24</sup>
+                                        <img class="" src="/icon/comment.svg" style="width: 20px; height: 20px;" alt="">
+                                    
+                                        <span class="kht-text-color-express">24</span>
+                                    </sup>
                                 </div>
                                 <div>
-                                    <a href="">Read More</a>
+                                    <a class="read-more-link-color" href="">Read More</a>
                                 </div>
                             </div>
                               
                         </div>
                         <div class="card ">
                             <div class="card-header text-center">
-                                <a href="">Romance </a><span>-02/14/2020</span>
+                                <a href="">Romance </a><span>-May 13, 2018</span>
                                 <h5>How tech recognize human face</h5>
-                                <!-- <img class="mw-100 " style="max-height: 30vh;" src="image-static/face_recognition_dribbble.png" alt=""> -->
-                                <div class="w-100 vh-30 group-one-c-three" >
+
+                                <div class="mt-4 w-100 vh-30 group-one-c-three" >
     
                                 </div>
                             </div>
-                            <div class="card-body overflow-hidden">
+                            <div class="card-body overflow-hidden ">
                                 <div>
                                     <p class="card-text ">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc
                                     </p>
@@ -301,15 +401,15 @@
                             </div>
                             <div class="card-footer d-inline d-flex justify-content-between">
                                 <div>
-                                    <i class="material-icons-new outline-favorite_border" style="width: 22px; height: 22px;">
+                                    <sup>
+                                        <img class="" src="/icon/heart-pink.svg" style="width: 20px; height: 20px;" alt="">
+                                        <span class="kht-text-color-express">12</span>
+                                        &nbsp;
                                     
-                                    </i>
-                                    <sup>12</sup>
-                                    &nbsp;
-                                    <i class="material-icons-new outline-mode_comment" style="width: 22px; height: 22px;">
-                                       
-                                    </i>
-                                    <sup>24</sup>
+                                        <img class="" src="/icon/comment.svg" style="width: 20px; height: 20px;" alt="">
+                                    
+                                        <span class="kht-text-color-express">24</span>
+                                    </sup>
                                 </div>
                                 <div>
                                     <a href="">Read More</a>
@@ -319,9 +419,9 @@
                         </div>
                         <div class="card">
                             <div class="card-header text-center">
-                                <a href="">Romance </a><span>-02/14/2020</span>
+                                <a href="">Romance </a><span>-May 13, 2018</span>
                                 <h5>How to choose suitable fashion</h5>
-                                <div class="w-100 vh-30 group-one-c-two" >
+                                <div class="mt-4 w-100 vh-30 group-one-c-two" >
     
                                 </div>
                             </div>
@@ -333,15 +433,15 @@
                             </div>
                             <div class="card-footer d-inline d-flex justify-content-between">
                                 <div>
-                                    <i class="material-icons-new outline-favorite_border" style="width: 22px; height: 22px;">
+                                    <sup>
+                                        <img class="" src="/icon/heart-pink.svg" style="width: 20px; height: 20px;" alt="">
+                                        <span class="kht-text-color-express">12</span>
+                                        &nbsp;
                                     
-                                    </i>
-                                    <sup>12</sup>
-                                    &nbsp;
-                                    <i class="material-icons-new outline-mode_comment" style="width: 22px; height: 22px;">
-                                       
-                                    </i>
-                                    <sup>24</sup>
+                                        <img class="" src="/icon/comment.svg" style="width: 20px; height: 20px;" alt="">
+                                    
+                                        <span class="kht-text-color-express">24</span>
+                                    </sup>
                                 </div>
                                 <div>
                                     <a href="">Read More</a>
@@ -351,9 +451,9 @@
                         </div>
                         <div class="card">
                             <div class="card-header text-center">
-                                <a href="">Romance </a><span>-02/14/2020</span>
+                                <a href="">Romance </a><span>-May 13, 2018</span>
                                 <h5>Why people value art</h5>
-                                <div class="w-100 vh-30 group-one-c-two" >
+                                <div class="mt-4 w-100 vh-30 group-one-c-two" >
     
                                 </div>
                             </div>
@@ -365,15 +465,15 @@
                             </div>
                             <div class="card-footer d-inline d-flex justify-content-between">
                                 <div>
-                                    <i class="material-icons-new outline-favorite_border" style="width: 22px; height: 22px;">
+                                    <sup>
+                                        <img class="" src="/icon/heart-pink.svg" style="width: 20px; height: 20px;" alt="">
+                                        <span class="kht-text-color-express">12</span>
+                                        &nbsp;
                                     
-                                    </i>
-                                    <sup>12</sup>
-                                    &nbsp;
-                                    <i class="material-icons-new outline-mode_comment" style="width: 22px; height: 22px;">
-                                       
-                                    </i>
-                                    <sup>24</sup>
+                                        <img class="" src="/icon/comment.svg" style="width: 20px; height: 20px;" alt="">
+                                    
+                                        <span class="kht-text-color-express">24</span>
+                                    </sup>
                                 </div>
                                 <div>
                                     <a href="">Read More</a>
@@ -383,9 +483,9 @@
                         </div>
                         <div class="card">
                             <div class="card-header text-center">
-                                <a href="">Romance </a><span>-02/14/2020</span>
+                                <a href="">Romance </a><span>-May 13, 2018</span>
                                 <h5>How to smoke to be healthy </h5>
-                                <div class="w-100 vh-30 group-one-c-one" >
+                                <div class="mt-4 w-100 vh-30 group-one-c-one" >
     
                                 </div>
                             </div>
@@ -397,15 +497,15 @@
                             </div>
                             <div class="card-footer d-inline d-flex justify-content-between">
                                 <div>
-                                    <i class="material-icons-new outline-favorite_border" style="width: 22px; height: 22px;">
+                                    <sup>
+                                        <img class="" src="/icon/heart-pink.svg" style="width: 20px; height: 20px;" alt="">
+                                        <span class="kht-text-color-express">12</span>
+                                        &nbsp;
                                     
-                                    </i>
-                                    <sup>12</sup>
-                                    &nbsp;
-                                    <i class="material-icons-new outline-mode_comment" style="width: 22px; height: 22px;">
-                                       
-                                    </i>
-                                    <sup>24</sup>
+                                        <img class="" src="/icon/comment.svg" style="width: 20px; height: 20px;" alt="">
+                                    
+                                        <span class="kht-text-color-express">24</span>
+                                    </sup>
                                 </div>
                                 <div>
                                     <a href="">Read More</a>
@@ -421,11 +521,9 @@
                         <div class="my-3">
                             <h4 style="color : #393939">Categories</h4>
                             <hr>
-                            <div class="text-left ml-5 category-list">
+                            <div class="text-left category-list">
                                 <p>Technology</p>
                                 <p>Business</p>
-                                <p>About</p>
-                                <p>Blog</p>
                                 <p>Hosting</p>
                                 <p>Donate</p>
                                 <p>Support</p>
@@ -441,7 +539,7 @@
                                 <div class="d-flex  align-items-center">
                                     <img src="image-static/face_recognition_dribbble.png" class="rounded-circle m-2" style="width: 90px; height: 90px;" alt="">
                                     <div class="d-inline-block pl-2">
-                                        <span class="overflow-hidden w-100"><b>How tech recognize human face </b></span>
+                                        <span class="overflow-hidden w-100"><b class="kht-text-color">How tech recognize human face </b></span>
                                         <br>
                                         <sub>5 days ago</sub>
                                     </div>
@@ -449,7 +547,7 @@
                                 <div class="d-flex  align-items-center">
                                     <img src="image-static/face_recognition_dribbble.png" class="rounded-circle m-2" style="width: 90px; height: 90px;" alt="">
                                     <div class="d-inline-block pl-2">
-                                        <span class="overflow-hidden w-100"><b>How tech recognize human face </b></span>
+                                        <span class="overflow-hidden w-100"><b class="kht-text-color">How tech recognize human face </b></span>
                                         <br>
                                         <sub>5 days ago</sub>
                                     </div>
@@ -457,7 +555,7 @@
                                 <div class="d-flex  align-items-center">
                                     <img src="image-static/face_recognition_dribbble.png" class="rounded-circle m-2" style="width: 90px; height: 90px;" alt="">
                                     <div class="d-inline-block pl-2">
-                                        <span class="overflow-hidden w-100"><b>How tech recognize human face </b></span>
+                                        <span class="overflow-hidden w-100"><b class="kht-text-color">How tech recognize human face </b></span>
                                         <br>
                                         <sub>5 days ago</sub>
                                     </div>
@@ -472,7 +570,7 @@
                                 <div class="d-flex  align-items-center">
                                     <img src="image-static/girlnightcupview.jpg" class="rounded-circle m-2" style="width: 90px; height: 90px;" alt="">
                                     <div class="d-inline-block pl-2">
-                                        <span class="overflow-hidden w-100"><b>How to listen to understand</b> </span>
+                                        <span class="overflow-hidden w-100"><b class="kht-text-color">How to listen to understand</b> </span>
                                         <br>
                                         <sub>2 days ago </sub>
                                     </div>
@@ -480,7 +578,7 @@
                                 <div class="d-flex  align-items-center">
                                     <img src="image-static/girlnightcupview.jpg" class="rounded-circle m-2" style="width: 90px; height: 90px;" alt="">
                                     <div class="d-inline-block pl-2">
-                                        <span class="overflow-hidden w-100"><b>How to listen to understand</b> </span>
+                                        <span class="overflow-hidden w-100"><b class="kht-text-color">How to listen to understand</b> </span>
                                         <br>
                                         <sub>2 days ago </sub>
                                     </div>
@@ -488,7 +586,7 @@
                                 <div class="d-flex  align-items-center">
                                     <img src="image-static/girlnightcupview.jpg" class="rounded-circle m-2" style="width: 90px; height: 90px;" alt="">
                                     <div class="d-inline-block pl-2">
-                                        <span class="overflow-hidden w-100"><b>How to listen to understand</b> </span>
+                                        <span class="overflow-hidden w-100"><b class="kht-text-color">How to listen to understand</b> </span>
                                         <br>
                                         <sub>2 days ago </sub>
                                     </div>
