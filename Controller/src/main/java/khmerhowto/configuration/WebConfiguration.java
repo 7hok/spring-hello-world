@@ -10,20 +10,20 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Configuration
 @EnableOAuth2Sso
 public class WebConfiguration extends WebSecurityConfigurerAdapter {
-    @Override
-    @Bean
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
-    }
+//    @Override
+//    @Bean
+//    public AuthenticationManager authenticationManagerBean() throws Exception {
+//        return super.authenticationManagerBean();
+//    }
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-       http.csrf().disable().antMatcher("/**")
-           .authorizeRequests()
-//           .antMatchers("/s")
-//           .permitAll()
-           .anyRequest()
-           .authenticated();
-
-    }
+//    @Override
+//    protected void configure(HttpSecurity http) throws Exception {
+//       http.csrf().disable().antMatcher("/**")
+//           .authorizeRequests()
+////           .antMatchers("/s")
+////           .permitAll()
+//           .anyRequest()
+//           .authenticated();
+//
+//    }
 }
