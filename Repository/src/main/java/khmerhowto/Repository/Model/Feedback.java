@@ -16,17 +16,18 @@ public class Feedback {
     @ManyToOne
     private Content content;
     private int timestamp;
-
+    private Integer status;
 
     public Feedback() {
     }
 
-    public Feedback(int id, String text, User user, Content content, int timestamp) {
+    public Feedback(int id, String text, User user, Content content, int timestamp,Integer status) {
         this.id=id;
         this.text=text;
         this.user=user;
         this.content=content;
         this.timestamp=timestamp;
+        this.status = status;
     }
 
 
@@ -69,6 +70,15 @@ public class Feedback {
 
     public void setTimestamp(int timestamp) {
         this.timestamp = timestamp;
+    }
+
+
+    public Integer getStatus() {
+        return this.status;
+    }
+
+    public void setStatus(Integer status) {
+         this.status = status;
     }
 
 

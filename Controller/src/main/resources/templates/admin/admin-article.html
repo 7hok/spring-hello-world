@@ -15,21 +15,28 @@
 
         }
     </style>
+    
     </head>
     <body>
         <div class="content m-5" layout:fragment="content">
-            <div class="d-inline d-flex justify-content-between my-2">
-                <input type="text" class="form-control-one-line w-25 " placeholder="  find your article">
-                
-                <select class="form-control form-control-one-line w-25" name="dropdown-test">
-                    <option>Science</option>
-                    <option>Technology</option>
+            <div class="d-inline d-flex justify-content-end my-2" >
+                <select class="form-control form-control-one-line w-25 pb-2 mr-auto" name="dropdown-test" id="category_select">
+                    <option value="0" disabled selected>All</option>
+                    <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}">Science</option>
+                    <!-- <option>Technology</option>
                     <option>Drama</option>
                     <option>Structure</option>
-                    <option>Algorithm</option>
+                    <option>Algorithm</option> -->
                 </select>
+                <input type="text" class="form-control-one-line  mr-3" placeholder="  find your article" id="title_input">
+                <button class="btn btn-success" id="btn_search" style="width: 10%;"> Find</button>
             </div>
-            <div class="div-parent-table my-5 bg-white">
+            <!-- <button>click,me</button> -->
+            <!--clearfix  float-right-->
+            <!-- <div class=" py-2">
+                <button class="btn btn-primary btn-search  "> Find</button>
+            </div> -->
+            <div class="div-parent-table my-3 bg-white">
                 <table class="table right-side-bar-table">
                     <thead>
                         <tr>
@@ -42,126 +49,17 @@
                           </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>How to have a fresh morning after a night without sleeping </td>
-                            <td>Science</td>
-                            <td>@Hok</td>
-                            <td>3/10/18</td>
-                            <td>
-                                <button class="btn btn-outline-primary">View</button>
-                                <button class="btn btn-outline-primary">Edit</button>
-                                <button class="btn btn-outline-primary">Delete</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>How to have a fresh morning after a night without sleeping 
-            
-                            </td>
-                            <td>Science</td>
-                            <td>@Hok</td>
-                            <td>3/10/18</td>
-                            <td>
-                                <button class="btn btn-outline-primary">View</button>
-                                <button class="btn btn-outline-primary">Edit</button>
-                                <button class="btn btn-outline-primary">Delete</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>How to have a fresh morning after a night without sleeping </td>
-                            <td>Science</td>
-                            <td>@Hok</td>
-                            <td>3/10/18</td>
+                      
+                        <tr th:each="article : ${articles}">
+                            <th th:text="${article.id}">5</th>
+                            <td th:text="${article.title}">How to have a fresh morning after a night without sleeping </td>
+                            <td th:text="${article.category.name}">Science</td>
+                            <td th:text="${article.writer}">@Hok</td>
+                            <td th:text="${article.timestamp}">3/10/18</td>
                              <td>
-                                <button class="btn btn-outline-primary">View</button>
-                                <button class="btn btn-outline-primary">Edit</button>
-                                <button class="btn btn-outline-primary">Delete</button>
-                            </td>
-                        </tr>  
-                        <tr>
-                            <th scope="row">4</th>
-                            <td>How to have a fresh morning after a night without sleeping </td>
-                            <td>Science</td>
-                            <td>@Hok</td>
-                            <td>3/10/18</td>
-                             <td>
-                                <button class="btn btn-outline-primary">View</button>
-                                <button class="btn btn-outline-primary">Edit</button>
-                                <button class="btn btn-outline-primary">Delete</button>
-                            </td>
-                        </tr>  
-                        <tr>
-                            <th scope="row">5</th>
-                            <td>How to have a fresh morning after a night without sleeping </td>
-                            <td>Science</td>
-                            <td>@Hok</td>
-                            <td>3/10/18</td>
-                             <td>
-                                <button class="btn btn-outline-primary">View</button>
-                                <button class="btn btn-outline-primary">Edit</button>
-                                <button class="btn btn-outline-primary">Delete</button>
-                            </td>
-                        </tr>  
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>How to have a fresh morning after a night without sleeping </td>
-                            <td>Science</td>
-                            <td>@Hok</td>
-                            <td>3/10/18</td>
-                             <td>
-                                <button class="btn btn-outline-primary">View</button>
-                                <button class="btn btn-outline-primary">Edit</button>
-                                <button class="btn btn-outline-primary">Delete</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>How to have a fresh morning after a night without sleeping </td>
-                            <td>Science</td>
-                            <td>@Hok</td>
-                            <td>3/10/18</td>
-                             <td>
-                                <button class="btn btn-outline-primary">View</button>
-                                <button class="btn btn-outline-primary">Edit</button>
-                                <button class="btn btn-outline-primary">Delete</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>How to have a fresh morning after a night without sleeping </td>
-                            <td>Science</td>
-                            <td>@Hok</td>
-                            <td>3/10/18</td>
-                             <td>
-                                <button class="btn btn-outline-primary">View</button>
-                                <button class="btn btn-outline-primary">Edit</button>
-                                <button class="btn btn-outline-primary">Delete</button>
-                            </td>
-                        </tr>  
-                        <tr>
-                            <th scope="row">4</th>
-                            <td>How to have a fresh morning after a night without sleeping </td>
-                            <td>Science</td>
-                            <td>@Hok</td>
-                            <td>3/10/18</td>
-                             <td>
-                                <button class="btn btn-outline-primary">View</button>
-                                <button class="btn btn-outline-primary">Edit</button>
-                                <button class="btn btn-outline-primary">Delete</button>
-                            </td>
-                        </tr>  
-                        <tr>
-                            <th scope="row">5</th>
-                            <td>How to have a fresh morning after a night without sleeping </td>
-                            <td>Science</td>
-                            <td>@Hok</td>
-                            <td>3/10/18</td>
-                             <td>
-                                <button class="btn btn-outline-primary">View</button>
-                                <button class="btn btn-outline-primary">Edit</button>
-                                <button class="btn btn-outline-primary">Delete</button>
+                                <button class="btn btn-outline-primary" th:data-id="${article.id}">View</button>
+                                <button class="btn btn-outline-primary" th:data-id="${article.id}">Edit</button>
+                                <button class="btn btn-outline-primary" th:data-id="${article.id}">Delete</button>
                             </td>
                         </tr>  
                         
@@ -180,9 +78,12 @@
                             <span class="sr-only">Previous</span>
                         </a>
                         </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item " th:each="i : ${#numbers.sequence(1,page.getTotalPages() )}">
+                            <a class="page-link" th:href="@{?(size=10,page=${i-1})}" th:text="${i}"></a>
+                        </li>
+                        <!-- <li class="page-item"><a class="page-link" href="#">1</a></li>
                         <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li> -->
                         <li class="page-item">
                         <a class="page-link" href="#" aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
@@ -192,6 +93,21 @@
                     </ul>
                 </nav>
             </div>
+        </div>
+        <div layout:fragment="content-js">
+          
+        
+          <script>
+            /* GETTING STUCK*/
+            $("#btn_search").on("click",function(){
+                alert(`click me`)
+              let _c_id =  $("#category_select").val();
+              let _title =   $("#title_input").val();
+              console.log(`name : ${_c_id} & title : ${_title}`)
+              console.log(`?search=${(_title == "") ? '' : _title}&${(_c_id== null ) ? '' : 'category_id='+_c_id }`)
+             // location.href = `?search=${_title == ""} ${(category_id== null ) ? '' : 'category_id='+_c_id }`;
+            })
+            </script>
         </div>
     </body>
 </html>

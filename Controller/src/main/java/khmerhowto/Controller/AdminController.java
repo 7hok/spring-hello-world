@@ -1,5 +1,7 @@
 package khmerhowto.Controller;
 
+import khmerhowto.Repository.Model.Category;
+import khmerhowto.Repository.Model.Content;
 import khmerhowto.Repository.Model.ContentRequest;
 
 import khmerhowto.Repository.Model.Role;
@@ -16,10 +18,11 @@ import khmerhowto.Service.UserRoleSrvice;
 import khmerhowto.Service.UserService;
 import khmerhowto.Service.ServiceImplement.CategoryServiceImp;
 import khmerhowto.Service.ServiceImplement.FeedBackServiceImp;
-
+import khmerhowto.Service.ServiceImplement.ContentServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,9 +32,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * AdminController
@@ -51,6 +56,8 @@ public class AdminController {
     private CategoryServiceImp categoryService;
     @Autowired
     private FeedBackServiceImp feedbackservice;
+    @Autowired 
+    private ContentServiceImp  articleService;
 
     @GetMapping("/admin/feedback")
     String manageFeedBack(@PageableDefault(size = 10)Pageable pageable,Model model){
@@ -141,10 +148,24 @@ public class AdminController {
 
 
     @GetMapping("/admin/article")
-    String manageArticle(Model model){
+    String manageArticle(@PageableDefault(size = 10)Pageable pageable,@RequestParam(value = "search" ,required = false) String searchText,@RequestParam(value = "category_id", required = false)Integer c_id ,Model model){
+        // System.out.println("hehe : "+searchText.get());
+        Page<Content>page;
+        if(searchText == null){
+            page = articleService.findAll(pageable);
+        }else{
+            page = articleService.findByName(searchText, pageable);
+        } 
+        System.out.println("category_id=>" +c_id);
+        List<Content>articles = page.getContent();
+        List<Category> categories = categoryService.findCategoryByStatus(1);
         model.addAttribute("CURRENT_PAGE", "article");
+        model.addAttribute("page",page);
+        model.addAttribute("articles", articles);
+        model.addAttribute("categories", categories);
         return "admin/admin-article";
     }
 
-
+    
+  
 }
