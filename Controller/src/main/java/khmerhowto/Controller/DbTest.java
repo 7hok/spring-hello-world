@@ -23,8 +23,8 @@ public class DbTest {
     @GetMapping("/detail/{id}")
     public String testDetail(ModelMap modelMap, @PathVariable Integer id) {
         modelMap.addAttribute("id", id);
-        modelMap.addAttribute("totalCmt", cmt.getTotalComment());
-        modelMap.addAttribute("like", ser.getTotalLike());
+        modelMap.addAttribute("totalCmt", cmt.getTotalComment(id));
+        modelMap.addAttribute("like", ser.getTotalLike(id));
         return "clients/contentDetail";
     }
 

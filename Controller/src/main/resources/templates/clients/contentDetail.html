@@ -58,7 +58,7 @@
             }
 
         </style>
-        <link rel="stylesheet" href="css/maTooltip.css">
+        <link rel="stylesheet" href="../css/maTooltip.css">
         <div class="row">
             <div class="col-12">
                 <p class="head-size font-weight-bold" id="tt" style="color: #46464e;">
@@ -97,7 +97,7 @@
                             </div>
                         </div>
                         <div class="col-2 col-sm-2 col-md-2 col-lg-2 pr-0">
-                            <table style="float: right; margin-top: 17%;">
+                            <table style="float: right; margin-top: 3%;">
                                 <tr>
                                     <td class="p-1 point"> <img style="max-width: 31px;color: #46464e;"
                                             src="/img/print.svg" alt="">
@@ -110,8 +110,6 @@
 
                                 </tr>
                             </table>
-
-
                         </div>
                     </div>
 
@@ -130,15 +128,15 @@
                                 style="float: right;width: 26px; height: 22px;">
 
                             </i> -->
-                            <img src="/icon/congrat.svg" style="width: 73px;" alt="">
+                            <img onclick="LikeContent(1)" src="/icon/congrat.svg" style="width: 73px;" alt="">
                             <!-- </div>  -->
 
                         </div>
-                        <div class="col-1 pl-0 my-auto"> <span class="pb-3" th:text=${like}></span></div>
+                        <div class="col-1 pl-0 my-auto"> <span id="likeNum" class="pb-3" th:text=${like}></span></div>
                         <div class="col-10 ">
-                            <div
+                            <div id="category"
                                 style="padding: 6px;display: inline;border-radius: 4px;  background-color: rgb(168, 167, 167)">
-                                Programing</div>
+                                </div>
 
                         </div>
                     </div>
@@ -353,6 +351,7 @@
 
                     $('#bContent').append(data["body"]);
                     $('#tt').html(data["title"]);
+                    $('#category').html(data.category.name);
                     showComment(0);
                 },
                 error: function (data) {
@@ -366,7 +365,7 @@
 
                     "text": $("#commentInp").val(),
                     "content": {
-                        "id": 7
+                        "id": [[${id}]]
                     },
                     "user": {
                         "id": 1
@@ -379,15 +378,7 @@
                         url: 'http://localhost:8080/api/comments',
                         data: JSON.stringify(obj),
                         success: function (data) {
-                            console.log(data);
-                        },
-                        error: function (data) {
-                            console.log(data);
-                        },
-                        contentType: "application/json"
-                    });
-
-                    $("#cmt").append(`
+                            $("#cmt").append(`
                         
                                 <div class="row" style=" margin-left: 0;">
                                         <div class="col-2 col-sm-2 col-md-1  pr-0"> 
@@ -404,14 +395,22 @@
                                                         &nbsp;&nbsp;&nbsp;&#8226; 22 days ago</span>
                                                 </div>
                                             <div class="row" style="color: #46464e;" id="cmt">` +
-                        $("#commentInp").val() + `
+                                                $("#commentInp").val() + `
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                
-                        `);
+                                </div>
+                        
+                `);
+                        },
+                        error: function (data) {
+                          
 
+                        },
+                        contentType: "application/json"
+                    });
+
+                 
                     $('#nCmt').html(parseInt($("#nCmt").text()) + 1);
                 }
             });
@@ -469,6 +468,31 @@
 
             }
 
+            function LikeContent(userId){
+
+                        var obj={
+                        "user": 
+                        {
+                        "id": parseInt(userId)
+                        },
+                        "content":{
+                            "id":[[${id}]]
+                        } 
+                        }
+                        $.ajax({
+                                    type: "POST",
+                                    url: 'http://localhost:8080/api/interesteds',
+                                    data: JSON.stringify(obj),
+                                    success: function (data) {
+                                       $("#likeNum").text(parseInt($('#likeNum').text()) + 1)
+                                    },
+                                    error: function (data) {
+                                    console.log(data)
+                                    },
+                                    contentType: "application/json"
+                                });
+
+            }
         </script>
     </div>
 

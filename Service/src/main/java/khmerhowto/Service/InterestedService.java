@@ -5,5 +5,5 @@ import khmerhowto.Repository.Model.Role;
 import java.util.List;
 
 public interface InterestedService {
-    public Integer getTotalLike();
+    public Integer getTotalLike(Integer id);
 }

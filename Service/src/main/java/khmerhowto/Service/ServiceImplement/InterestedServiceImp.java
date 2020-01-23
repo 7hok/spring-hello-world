@@ -22,8 +22,8 @@ public class InterestedServiceImp implements InterestedService{
     private InterestRepository interestRepository;
 
     @Override
-    public Integer getTotalLike() {
+    public Integer getTotalLike(Integer id) {
 
-        return interestRepository.getTotalLike();
+        return interestRepository.getTotalLike(id);
     }
 }
