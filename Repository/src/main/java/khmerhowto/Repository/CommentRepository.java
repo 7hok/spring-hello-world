@@ -16,7 +16,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 @RepositoryRestResource
 public interface CommentRepository extends JpaRepository<Comment, Integer> {
     
-   public Page<Comment> findAllBycontentIdOrderByTimestamp( Integer id,Pageable pageable);
+   public Page<Comment> findAllBycontentIdOrderById( Integer id,Pageable pageable);
 
    @Query(value = "SELECT Count(c) FROM Comment c where c.content.id=:cId")
    public Integer getTotalComment(@Param("cId") Integer id);

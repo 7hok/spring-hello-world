@@ -1,64 +1,127 @@
 package khmerhowto.Controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import khmerhowto.Repository.Model.Content;
+import khmerhowto.Service.ContentService;
+import khmerhowto.Service.ServiceImplement.ContentServiceImp;
+import khmerhowto.Service.ServiceImplement.InterestedServiceImp;
+
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 
 /**
  * HomeController
  */
 @Controller
 public class HomeController {
+
+    @Autowired
+    ContentService con;
+    @Autowired
+    InterestedServiceImp interestedServiceImp;
+
     @GetMapping("/about")
-    String showAboutUs(){
+    String showAboutUs() {
 
         return "clients/about";
     }
+
     @GetMapping("/privacy")
-    String showPrivacy(){
+    String showPrivacy() {
         return "clients/privacy";
     }
+
     @GetMapping("/example")
-    String example(){
+    String example() {
         return "myhometest";
     }
 
-    @GetMapping(value = {"/homepage","/home"})
-    String home(Model model){
+    @GetMapping(value = "/conCard/{no}")
+    String contentCard(ModelMap map, @PathVariable("no") Integer i) {
+        Page<Content> lst;
+         
+        // if(i==1||i==2){
+            lst = con.findAll(PageRequest.of(i, 3, Sort.by(Sort.Direction.DESC, "Id")));
+ 
+        
+
+        // else{
+        //     if(i==3)
+        //     lst = con.findAll(PageRequest.of(i, 9, Sort.by(Sort.Direction.DESC, "Id")));
+        //     System.out.println("else");
+        // }
+   
+        map.addAttribute("contents", lst.getContent());
+         
+        
+        Map<Integer, Integer> m = new HashMap<>();
+        for (int j = 0; j <= lst.getContent().size()-1; j++) {
+            m.put(lst.getContent().get(j).getId(), interestedServiceImp.getTotalLike(lst.getContent().get(j).getId()));
+           
+        }
+        map.addAttribute("likes", m);
+        return "fragment/__content_card::cardList";
+    }
+
+    @GetMapping(value = "/conCard")
+    String content(ModelMap map) {
+        Page<Content> lst = con.findAll(PageRequest.of(0, 3, Sort.by(Sort.Direction.DESC, "Id")));
+        map.addAttribute("contents", lst.getContent());
+        return "fragment/__content_card::contentList";
+    }
+
+    @GetMapping(value = { "/homepage", "/home" })
+    String home(Model model) {
         model.addAttribute("CURRENT_PAGE", "home");
+        // Page<Content> lst = con.findAll(PageRequest.of(0, 3,
+        // Sort.by(Sort.Direction.DESC, "Id")));
+        // model.addAttribute("contents", lst.getContent());
+        // System.out.println(lst.getContent().get(0).getTitle());
         return "client-home";
     }
 
-    @GetMapping({"/logPage","/"})
-    String loginPage(){
+    @GetMapping({ "/logPage", "/" })
+    String loginPage() {
         return "loginPage";
     }
+
     @GetMapping("/favorite/chosen")
-    String favorite(){
+    String favorite() {
         return "clients/CategoryChoosen";
     }
 
     @GetMapping("/signup")
-    String signUp(){
+    String signUp() {
         return "sign-up";
     }
 
     @GetMapping("/detail")
-    String detail(){
+    String detail() {
         return "clients/contentDetail";
     }
 
     @GetMapping("/contentByCategory")
-    String contentByCategory(Model model){
+    String contentByCategory(Model model) {
         model.addAttribute("CURRENT_PAGE", "category");
         return "content-by-category";
     }
 
     @GetMapping("test/contentByCategory")
-    String contentByCategoryTest(Model model){
+    String contentByCategoryTest(Model model) {
         model.addAttribute("CURRENT_PAGE", "category");
         return "content-by-category-test";
     }
-
 
 }

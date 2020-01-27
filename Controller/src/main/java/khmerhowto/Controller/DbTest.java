@@ -18,13 +18,13 @@ public class DbTest {
     @Autowired
     CommentServiceImp cmt;
     @Autowired
-    InterestedServiceImp ser;
+    InterestedServiceImp interestedServiceImp;
 
     @GetMapping("/detail/{id}")
     public String testDetail(ModelMap modelMap, @PathVariable Integer id) {
         modelMap.addAttribute("id", id);
         modelMap.addAttribute("totalCmt", cmt.getTotalComment(id));
-        modelMap.addAttribute("like", ser.getTotalLike(id));
+        modelMap.addAttribute("like", interestedServiceImp.getTotalLike(id));
         return "clients/contentDetail";
     }
 
