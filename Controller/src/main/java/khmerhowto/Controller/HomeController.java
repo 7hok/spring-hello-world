@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import khmerhowto.Repository.Model.Content;
+import khmerhowto.Service.CommentService;
 import khmerhowto.Service.ContentService;
 import khmerhowto.Service.ServiceImplement.ContentServiceImp;
 import khmerhowto.Service.ServiceImplement.InterestedServiceImp;
@@ -31,7 +32,8 @@ public class HomeController {
     ContentService con;
     @Autowired
     InterestedServiceImp interestedServiceImp;
-
+    @Autowired
+    CommentService cmt;
     @GetMapping("/about")
     String showAboutUs() {
 
@@ -51,27 +53,21 @@ public class HomeController {
     @GetMapping(value = "/conCard/{no}")
     String contentCard(ModelMap map, @PathVariable("no") Integer i) {
         Page<Content> lst;
-         
-        // if(i==1||i==2){
             lst = con.findAll(PageRequest.of(i, 3, Sort.by(Sort.Direction.DESC, "Id")));
- 
-        
-
-        // else{
-        //     if(i==3)
-        //     lst = con.findAll(PageRequest.of(i, 9, Sort.by(Sort.Direction.DESC, "Id")));
-        //     System.out.println("else");
-        // }
-   
         map.addAttribute("contents", lst.getContent());
-         
-        
+        // map.addAttribute("totalCmt", cmt.getTotalComment(id));
+        Map<Integer, Integer> numCmt = new HashMap<>();
+        for (int j = 0; j <= lst.getContent().size()-1; j++) {
+            numCmt.put(lst.getContent().get(j).getId(), cmt.getTotalComment(lst.getContent().get(j).getId()));
+           
+        }
         Map<Integer, Integer> m = new HashMap<>();
         for (int j = 0; j <= lst.getContent().size()-1; j++) {
             m.put(lst.getContent().get(j).getId(), interestedServiceImp.getTotalLike(lst.getContent().get(j).getId()));
            
         }
         map.addAttribute("likes", m);
+        map.addAttribute("cmts",numCmt);
         return "fragment/__content_card::cardList";
     }
 

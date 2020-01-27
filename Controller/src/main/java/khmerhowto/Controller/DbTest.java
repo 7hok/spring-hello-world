@@ -8,15 +8,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import groovyjarjarpicocli.CommandLine.Model;
-import khmerhowto.Service.ServiceImplement.CommentServiceImp;
+import khmerhowto.Service.CommentService;
+ 
 import khmerhowto.Service.ServiceImplement.InterestedServiceImp;
 
-import javax.sql.DataSource;
+ 
 
 @Controller
 public class DbTest {
     @Autowired
-    CommentServiceImp cmt;
+    CommentService cmt;
     @Autowired
     InterestedServiceImp interestedServiceImp;
 
