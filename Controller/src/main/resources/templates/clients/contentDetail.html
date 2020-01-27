@@ -68,18 +68,18 @@
         </div>
         <div class="row">
             <div class="col-12">
-                <div class="container-fluid">
+                <!-- <div class="container-fluid"> -->
                     <div class="row" style="margin-bottom: 23px;">
                         <div class="col-2 col-sm-2 col-md-1 col-lg-1 pl-0" id="pfpic"
                             style="  padding-left: 0; text-align: right; margin-bottom: 23px;">
                             <!-- <img src="" alt=""> -->
                             <img class=" rounded-circle z-depth-2 myButton point"
-                                style="width: 80px; width: 50px; height: 50px;" alt="100x100"
+                                style="width: 80px; width: 60px; height: 60px;" alt="100x100"
                                 src="https://cdn.mos.cms.futurecdn.net/xgc36EhSDW9Zu3RGLCfLEg-970-80.jpg"
                                 data-holder-rendered="true">
 
                         </div>
-
+ 
                         <div class="col-8 col-sm-8 col-md-9 col-lg-9" style="padding-left: 0;">
 
                             <div class="container ml-0 pt-1">
@@ -100,12 +100,12 @@
                             <table style="float: right; margin-top: 3%;">
                                 <tr>
                                     <td class="p-1 point"> <img style="max-width: 31px;color: #46464e;"
-                                            src="/img/print.svg" alt="">
+                                            src="/icon/print.svg" alt="">
                                     </td>
 
                                     <td class="p-1 point"><img style="max-width: 30px;color: #46464e;"
-                                            src="/img/facebook.svg" alt=""></td>
-                                    <td class=" point"> <img style="max-width: 38px;opacity: 0.7;" src="/img/report.png"
+                                            src="/icon/facebook.svg" alt=""></td>
+                                    <td class=" point"> <img style="max-width: 30px; margin-left: 2.6px; " src="/icon/d.svg"
                                             alt="">
 
                                 </tr>
@@ -120,7 +120,7 @@
                         <div class="col-12" id="bContent"></div>
 
                     </div>
-                    <div class="row " style="margin-left: -6%;  margin-top: 2%;">
+                    <div class="row " style="   margin-top: 2%;">
                         <div class="col-1 pr-0 point">
 
                             <!-- <div class="my-auto ">  -->
@@ -140,7 +140,7 @@
 
                         </div>
                     </div>
-                    <div class="row" style="margin-top: 3%; margin-bottom: 3%;">
+                    <div class="row" style="margin-top: 3%; margin-left: 0;; margin-bottom: 3%;  ">
                         <div class="col-4 col-sm-6 col-md-4 col-lg-2 pl-0"
                             style="border-bottom: 3px solid rgb(9, 190, 235);">
                             <span id="nCmt" th:text=${totalCmt}></span> Comments</div>
@@ -152,7 +152,7 @@
                     <div class="row" style="    margin-bottom: 2%;">
                         <div class="col-2 col-sm-2 col-md-1 col-lg-1 pl-0" style=" text-align: right;">
                             <!-- <img src="" alt=""> -->
-                            <img class=" rounded-circle z-depth-2" style="width: 80px; width: 50px; height: 50px;"
+                            <img class=" rounded-circle z-depth-2" style="width: 80px; width: 60px; height: 60px;"
                                 alt="100x100" src="https://cdn.mos.cms.futurecdn.net/xgc36EhSDW9Zu3RGLCfLEg-970-80.jpg"
                                 data-holder-rendered="true">
 
@@ -195,7 +195,7 @@
                     </div>
                 </div>
 
-            </div>
+            <!-- </div> -->
         </div>
 
 
@@ -309,7 +309,7 @@
                     inline_style: 'max-width: none;',
                     full_visibility_duration: 99000,
                     position: maTooltip.POSITION.BOTTOM,
-                    static_message: '<div style="background-color: white; color: black; border-radius: inherit;"><div>  <img class=" rounded-circle z-depth-2" style="margin-top: 20px; margin-bottom: 10px; width: 50px; height: 50px;" alt="100x100" src="https://cdn.mos.cms.futurecdn.net/xgc36EhSDW9Zu3RGLCfLEg-970-80.jpg" data-holder-rendered="true"></div><h3 style="color: #46464e">Hum Chamroeun</h3><p style="color: #46464e">From Takeo</p><p style="color: #46464e">I am so happy</p><hr><div style="height: 32px;border-radius: inherit;background-color: white; color: black;"><a href="" style="margin-left: 20px;margin-right: 20px ">Favorite Category</a><a style="margin-left: 20px;margin-right: 20px " href="">Education</a><a href="" style="margin-left: 20px;margin-right: 20px ">Technology</a></div></div>'
+                    static_message: '<div style="background-color: white; color: black; border-radius: inherit;"><div>  <img class=" rounded-circle z-depth-2" style="margin-top: 20px; margin-bottom: 10px; width: 60px; height: 60px;" alt="100x100" src="https://cdn.mos.cms.futurecdn.net/xgc36EhSDW9Zu3RGLCfLEg-970-80.jpg" data-holder-rendered="true"></div><h3 style="color: #46464e">Hum Chamroeun</h3><p style="color: #46464e">From Takeo</p><p style="color: #46464e">I am so happy</p><hr><div style="height: 32px;border-radius: inherit;background-color: white; color: black;"><a href="" style="margin-left: 20px;margin-right: 20px ">Favorite Category</a><a style="margin-left: 20px;margin-right: 20px " href="">Education</a><a href="" style="margin-left: 20px;margin-right: 20px ">Technology</a></div></div>'
                 });
 
 
@@ -361,6 +361,7 @@
             });
 
             $("#commentInp").on('keypress', function (e) {
+                
                 var obj = {
 
                     "text": $("#commentInp").val(),
@@ -372,18 +373,21 @@
                     }
                 }
                 if (e.which == 13) {
-
+                    if($("#commentInp").val()==""){
+                    return;
+                }
                     $.ajax({
                         type: "POST",
                         url: 'http://localhost:8080/api/comments',
                         data: JSON.stringify(obj),
                         success: function (data) {
-                            $("#cmt").append(`
+                            
+                            $("#cmt").prepend(`
                         
                                 <div class="row" style=" margin-left: 0;">
                                         <div class="col-2 col-sm-2 col-md-1  pr-0"> 
                                             <img class=" rounded-circle z-depth-2"
-                                                style="width: 80px; width: 50px; height: 50px; float: right;" alt="100x100"
+                                                style="width: 80px; width: 60px; height: 60px; float: right;" alt="100x100"
                                                 src="https://cdn.mos.cms.futurecdn.net/xgc36EhSDW9Zu3RGLCfLEg-970-80.jpg"
                                                 data-holder-rendered="true">
                                         </div>
@@ -402,6 +406,7 @@
                                 </div>
                         
                 `);
+                $("#commentInp").val("");
                         },
                         error: function (data) {
                           
@@ -419,7 +424,7 @@
             function showComment(page) {
                 $.ajax({
                     type: 'GET',
-                    url: 'http://localhost:8080/api/comments/search/findAllBycontentIdOrderByTimestamp?id=' + [[${id}]] + '&page=' + page + '&size=3',
+                    url: 'http://localhost:8080/api/comments/search/findAllBycontentIdOrderById?id=' + [[${id}]] + '&page=' + page + '&size=3',
                     contentType: false,
                     processData: false,
                     success: function (data) {
@@ -431,7 +436,7 @@
                                 <div class="row" style=" margin-left: 0;">
                                         <div class="col-2 col-sm-2 col-md-1  pr-0"> 
                                             <img class=" rounded-circle z-depth-2"
-                                                style="width: 80px; width: 50px; height: 50px; float: right;" alt="100x100"
+                                                style="width: 80px; width: 60px; height: 60px; float: right;" alt="100x100"
                                                 src="https://cdn.mos.cms.futurecdn.net/xgc36EhSDW9Zu3RGLCfLEg-970-80.jpg"
                                                 data-holder-rendered="true">
                                         </div>
@@ -443,7 +448,7 @@
                                                         &nbsp;&nbsp;&nbsp;&#8226; 22 days ago</span>
                                                 </div>
                                             <div class="row" style="color: #46464e;" id="cmt">` +
-                                data['_embedded'].comments[i].text + `
+                                                         data['_embedded'].comments[i].text + `
                                                 </div>
                                             </div>
                                         </div>

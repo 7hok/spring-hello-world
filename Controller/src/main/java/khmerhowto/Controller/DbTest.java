@@ -8,23 +8,24 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import groovyjarjarpicocli.CommandLine.Model;
-import khmerhowto.Service.ServiceImplement.CommentServiceImp;
+import khmerhowto.Service.CommentService;
+ 
 import khmerhowto.Service.ServiceImplement.InterestedServiceImp;
 
-import javax.sql.DataSource;
+ 
 
 @Controller
 public class DbTest {
     @Autowired
-    CommentServiceImp cmt;
+    CommentService cmt;
     @Autowired
-    InterestedServiceImp ser;
+    InterestedServiceImp interestedServiceImp;
 
     @GetMapping("/detail/{id}")
     public String testDetail(ModelMap modelMap, @PathVariable Integer id) {
         modelMap.addAttribute("id", id);
         modelMap.addAttribute("totalCmt", cmt.getTotalComment(id));
-        modelMap.addAttribute("like", ser.getTotalLike(id));
+        modelMap.addAttribute("like", interestedServiceImp.getTotalLike(id));
         return "clients/contentDetail";
     }
 

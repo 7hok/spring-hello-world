@@ -50,7 +50,7 @@
                         <td th:text="${q.timestamp}"></td>
 
                         <td>
-                            <button class="btn btn-outline-primary " id="view">View</button>
+                            <button class="btn btn-outline-primary  btn-view"  th:btn-id="${q.id}">View</button>
                             <button class="btn btn-outline-primary">Delete</button>
                         </td>
                     </tr>
@@ -64,31 +64,14 @@
             </table>
             <!-- FOOTER DIV  -->
             <!-- Modal -->
-            <div id="new_category_modal" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog"
-                aria-labelledby="mySmallModalLabel" aria-hidden="true">
+            <div id="question_modal" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-sm">
                     <div class="modal-content">
-                        <!-- background m3 -->
-                        <div class="m-3">
-                            <h3 class="text-center">
-                            Question Detail                            </h3>
-                            <div class="form-group">
 
-                            </div>
 
-                                </div>
-                            </div>
-                            <div class="m-3 d-flex justify-content-center ">
-                                <div class="border w-50 bg-color-two " style="height: 15vh;">
-                                    <img class="mw-100" src="/image-static/content.svg" alt="" style=""
-                                        id="modal_img_show">
-                                </div>
-                            </div>
-                        </div>
-                        <!-- background m3 -->
-                        <div class="modal-footer ">
-                            <button class="btn btn-primary text-center" id="modal_save">Save</button>
-                        </div>
+                            <div id="modalContent"></div>
+
+
                     </div>
 
                 </div>
@@ -127,40 +110,55 @@
 <div  layout:fragment="content-js">
     <script >
 var response;
-
+var b;
+var id;
  function get_one_question(uri){
-
+var name, profile;
  $.getJSON(uri,function(data){
    response=data;
-   console.log("response");
-   console.log(response);
-   $.getJSON(response._links.user.href,function(data){
-   response.user=data.name;
-   response.userProfile = data.profilePicture;
-    console.log(response.user);
-     console.log( response.userProfile);
-   });
-    return response;
-   });
+   $.getJSON(response._links.user.href,function(user){
+  response.name=user.name;
+  response.profile = user.profilePicture;
 
+   })
+
+    console.log(profile);
+   $( "#modalContent" ).empty();
+   $( "#modalContent" ).append( `  <div class="row">
+        <div class="col-3 h4">Title</div>
+        <div class="col-9">`+response.title+`</div>
+    </div>
+    <div class="row">
+        <div class="col-3">Text</div>
+        <div class="col-9">`+response.text+`</div>
+    </div>
+    <div class="row">
+        <div class="col-4">Posted by</div>
+        <div class="col-4">`+name+`</div>
+        <div class="col-4">`+profile+`</div>
+    </div>
+    <div class="ro2">
+        <div class="col-6">Posted on</div>
+        <div class="col-6">`+response.timestamp+`</div>
+    </div> ` );
+
+<!--    return response;-->
+   });
+$('#question_modal').modal('toggle');
 
 }
-function viewQuestionDetail(){
 
 
-}
 
-$( document ).ready(function() {
-get_one_question('/api/contentRequests/1');
 
-});
-        //**view question
-        $('#view').on("click", function () {
-        
-            $('#new_category_modal').modal('toggle');
-            $('#new_category_modal').modal('show');
+$(document).on("click",'.btn-view', function() {
+id = $(this).attr("btn-id") ;
+        console.log(id);
 
-        });
+get_one_question(`/api/contentRequests/`+id);
+            });
+
+
 /** end of click event**/
     </script>
 </div>
