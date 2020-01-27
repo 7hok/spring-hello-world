@@ -113,15 +113,16 @@ var response;
 var b;
 var id;
  function get_one_question(uri){
-
+var name, profile;
  $.getJSON(uri,function(data){
    response=data;
-   $.getJSON(response._links.user.href,function(data){
-   response.user=data.name;
-   response.userProfile = data.profilePicture;
+   $.getJSON(response._links.user.href,function(user){
+  response.name=user.name;
+  response.profile = user.profilePicture;
 
-   });
-    console.log(response.user);
+   })
+
+    console.log(profile);
    $( "#modalContent" ).empty();
    $( "#modalContent" ).append( `  <div class="row">
         <div class="col-3 h4">Title</div>
@@ -133,8 +134,8 @@ var id;
     </div>
     <div class="row">
         <div class="col-4">Posted by</div>
-        <div class="col-4">`+response.user+`</div>
-        <div class="col-4">`+response.userProfile+`</div>
+        <div class="col-4">`+name+`</div>
+        <div class="col-4">`+profile+`</div>
     </div>
     <div class="ro2">
         <div class="col-6">Posted on</div>
