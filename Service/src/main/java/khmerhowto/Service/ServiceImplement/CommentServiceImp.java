@@ -12,8 +12,8 @@ public class CommentServiceImp implements CommentService {
     private CommentRepository commentRepository;
 
     @Override
-    public Integer getTotalComment() {
-        return commentRepository.getTotalComment();
+    public Integer getTotalComment(Integer id) {
+        return commentRepository.getTotalComment(id);
     }
      
 

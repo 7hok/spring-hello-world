@@ -17,19 +17,19 @@ public class Category implements Serializable{
     private String name;
     private String image;
     private String description;
-    private Boolean status;
+    private Integer status;
   
-    private int timestamp;
+    private LocalDateTime timestamp;
     
     @PrePersist
     public void prePersist() {
-        timestamp = 10000000;
-        status = true;
+        timestamp = LocalDateTime.now();
+        status = 1;
     }
     public Category() {
     }
 
-    public Category(int id, String name, String image, String description, Boolean status, int timestamp) {
+    public Category(int id, String name, String image, String description, Integer status, LocalDateTime timestamp) {
         this.id=id;
         this.name=name;
         this.image=image;
@@ -72,19 +72,19 @@ public class Category implements Serializable{
         this.description = description;
     }
 
-    public Boolean getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(Boolean status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
-    public int getTimestamp() {
+    public LocalDateTime getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(int timestamp) {
+    public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
     }
 

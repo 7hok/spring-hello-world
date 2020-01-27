@@ -1,5 +1,7 @@
 package khmerhowto.Repository.Model.projection;
 
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.rest.core.config.Projection;
 
@@ -15,7 +17,7 @@ import khmerhowto.Repository.Model.User;
     @Value("#{target.id}")
     int getId();
     String getText();
-    int getTimestamp();
+    LocalDateTime getTimestamp();
     ContentInfo getContent();
     UserInfo getUser();
     

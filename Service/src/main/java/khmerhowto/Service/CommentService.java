@@ -1,5 +1,5 @@
 package khmerhowto.Service;
 
 public interface CommentService {
-    public Integer getTotalComment();
+    public Integer getTotalComment(Integer id);
 }

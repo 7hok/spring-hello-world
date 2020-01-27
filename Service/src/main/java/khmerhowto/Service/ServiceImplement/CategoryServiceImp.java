@@ -27,7 +27,7 @@ public class CategoryServiceImp {
      */
    public List<Category> findCategoryByStatus(Integer status){
 
-    return categoryRepository.findAll();
+    return categoryRepository.findByStatus(1);
    }
 	public Category findCategoryById(Integer id) {
 		return categoryRepository.getOne(id);

@@ -60,8 +60,13 @@ public class AdminController {
     private ContentServiceImp  articleService;
 
     @GetMapping("/admin/feedback")
-    String manageFeedBack(@PageableDefault(size = 10)Pageable pageable,Model model){
-        Page<Feedback>page = feedbackservice.findAll(pageable);
+    String manageFeedBack(@PageableDefault(size = 10)Pageable pageable,@RequestParam(value = "date" , required = false)String date ,Model model){
+        Page<Feedback>page;
+        if(date == null ){
+            page = feedbackservice.findAll(pageable);
+        }else{
+            page = feedbackservice.findByDate(date,pageable);
+        }
         List<Feedback>feedbacks = page.getContent();
         model.addAttribute("page",page);
         model.addAttribute("feedbacks",feedbacks);
@@ -148,15 +153,16 @@ public class AdminController {
 
 
     @GetMapping("/admin/article")
-    String manageArticle(@PageableDefault(size = 10)Pageable pageable,@RequestParam(value = "search" ,required = false) String searchText,@RequestParam(value = "category_id", required = false)Integer c_id ,Model model){
-        // System.out.println("hehe : "+searchText.get());
+    String manageArticle(@PageableDefault(size = 10)Pageable pageable,@RequestParam(value = "category_id", defaultValue ="0",required = false)Integer c_id,@RequestParam(value = "search" ,required = false) String search_text ,Model model){
+        
+
         Page<Content>page;
-        if(searchText == null){
+        if(search_text == null && c_id ==0){
             page = articleService.findAll(pageable);
         }else{
-            page = articleService.findByName(searchText, pageable);
+            page = articleService.findByNameAndCategory(search_text,c_id, pageable);
         } 
-        System.out.println("category_id=>" +c_id);
+      
         List<Content>articles = page.getContent();
         List<Category> categories = categoryService.findCategoryByStatus(1);
         model.addAttribute("CURRENT_PAGE", "article");

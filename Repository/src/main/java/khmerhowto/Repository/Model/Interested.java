@@ -3,14 +3,18 @@ package khmerhowto.Repository.Model;
 
 import javax.persistence.*;
 
+import org.springframework.data.rest.core.annotation.RestResource;
+
 @Entity
 public class Interested {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @ManyToOne
+    @RestResource(exported = false)
     private User user;
     @ManyToOne
+    @RestResource(exported = false)
     private Content content;
 
     public Interested() {

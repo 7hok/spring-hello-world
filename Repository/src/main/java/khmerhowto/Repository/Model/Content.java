@@ -1,5 +1,7 @@
 package khmerhowto.Repository.Model;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.*;
 
 import org.springframework.data.rest.core.annotation.RestResource;
@@ -18,13 +20,13 @@ public class Content {
     private String title;
     private String body;
     private String writer;
-    private String status;
-    private int timestamp;
+    private Integer status;
+    private LocalDateTime timestamp;
 
     public Content() {
     }
 
-    public Content(int id, Category category, String thumbnail, String title, String body, String writer, String status, int timestamp) {
+    public Content(int id, Category category, String thumbnail, String title, String body, String writer, Integer status, LocalDateTime timestamp) {
         this.id=id;
         this.category=category;
         this.thumbnail=thumbnail;
@@ -32,7 +34,7 @@ public class Content {
         this.body=body;
         this.writer=writer;
         this.status=status;
-        this.timestamp=timestamp;
+        this.timestamp= timestamp;
     }
 
     public int getId() {
@@ -83,19 +85,19 @@ public class Content {
         this.writer = writer;
     }
 
-    public String getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
-    public int getTimestamp() {
+    public LocalDateTime getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(int timestamp) {
+    public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
     }
 
