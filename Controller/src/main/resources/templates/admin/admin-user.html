@@ -40,7 +40,7 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
             </tr>
             </thead>
             <tbody>
-<
+
             <tr class=" " th:each="user1:${users}">
                 <th scope="row" th:text="${user1.id}"></th>
                 <td class=""><img th:src="@{${user1.getProfilePicture()}}" class=" profile-image img-fluid rounded-circle " alt="user-profile"></td>
@@ -68,7 +68,7 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
 
     </div>
     <!-- end middle table -->
-    <div class="">
+    <div th:class="${page.getTotalPages() < 2 ? 'd-none' : ''}">
         <nav aria-label="Page navigation example" class="">
             <ul class="pagination justify-content-center">
                 <li class="page-item" th:if="${page.hasPrevious()}">

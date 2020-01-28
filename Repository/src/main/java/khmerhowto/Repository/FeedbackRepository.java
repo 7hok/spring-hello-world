@@ -22,6 +22,8 @@ public interface FeedbackRepository extends JpaRepository<Feedback,Integer> {
     @Query(value = "Update Feedback f set f.status = 0   Where f.id = :id ")
     void deleteById(@Param("id") Integer id);
 
-    @Query("SELECT f FROM Feedback f WHERE f.timestamp BETWEEN :start_date AND :end_date")
+    @Query("SELECT f FROM Feedback f WHERE f.status = 1 AND f.timestamp BETWEEN :start_date AND :end_date")
 	Page<Feedback> findByDate(LocalDateTime start_date, LocalDateTime end_date, Pageable pageable);
+
+	Page<Feedback> findByStatus(int i, Pageable pageable);
 }

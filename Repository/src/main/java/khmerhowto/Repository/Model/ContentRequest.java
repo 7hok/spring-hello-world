@@ -1,5 +1,7 @@
 package khmerhowto.Repository.Model;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.*;
 
 @Entity
@@ -11,18 +13,19 @@ public class ContentRequest {
     private String text;
     @ManyToOne
     private User user;
-    private int timestamp;
-
+    private LocalDateTime timestamp;
+    private Integer status;
 
     public ContentRequest() {
     }
 
-    public ContentRequest(int id, String title, String text, User user, int timestamp) {
+    public ContentRequest(int id, String title, String text, User user, LocalDateTime timestamp,Integer status) {
         this.id=id;
         this.title=title;
         this.text=text;
         this.user=user;
         this.timestamp=timestamp;
+        this.status = status;
     }
 
 
@@ -58,14 +61,21 @@ public class ContentRequest {
         this.user = user;
     }
 
-    public int getTimestamp() {
+    public LocalDateTime getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(int timestamp) {
+    public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
     }
 
+    public Integer status() {
+        return this.status;
+    }
+
+    public void status(Integer status){
+        this.status = status;
+    }
     @Override
     public String toString() {
         return "ContentRequest{" +

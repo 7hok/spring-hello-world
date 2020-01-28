@@ -2,15 +2,15 @@ package khmerhowto;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Import;
 import org.springframework.web.bind.annotation.RestController;
-import springfox.documentation.spring.data.rest.configuration.SpringDataRestConfiguration;
 
 @SpringBootApplication
 @RestController
-@Import(SpringDataRestConfiguration.class)
+@EnableOAuth2Sso
 public class KhmerHowToSpringBootApplication extends SpringBootServletInitializer {
     public static void main(String[] args){
 
