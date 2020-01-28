@@ -36,6 +36,11 @@
             <!-- <div class=" py-2">
                 <button class="btn btn-primary btn-search  "> Find</button>
             </div> -->
+            <button class="btn btn-primary rounded-circle" style="
+            position: absolute;
+            right:   4%;
+            bottom:  12%;
+            font-size: large;" onclick="location.href='/admin/article/insert';">+</button>
             <div class="div-parent-table my-3 bg-white">
                 <table class="table right-side-bar-table">
                     <thead>
@@ -53,13 +58,13 @@
                         <tr th:each="article : ${articles}">
                             <th th:text="${article.id}">5</th>
                             <td th:text="${article.title}">How to have a fresh morning after a night without sleeping </td>
-                            <td th:text="${article.category.name}">Science</td>
+                            <td th:text="${article.category?.name}">Science</td>
                             <td th:text="${article.writer}">@Hok</td>
                             <td th:text="${article.timestamp}">3/10/18</td>
                              <td>
-                                <button class="btn btn-outline-primary" th:data-id="${article.id}">View</button>
-                                <button class="btn btn-outline-primary" th:data-id="${article.id}">Edit</button>
-                                <button class="btn btn-outline-primary" th:data-id="${article.id}">Delete</button>
+                                <a class="btn btn-outline-primary btn-view" th:href="'/detail/'+${article.id}" >View</a>
+                                <a class="btn btn-outline-primary btn-edit" th:href="'/admin/article/edit/'+${article.id}">Edit</a>
+                                <a class="btn btn-outline-primary btn-remove" th:href="${article.id}">Delete</a>
                             </td>
                         </tr>  
                         
@@ -69,7 +74,7 @@
                   
             </div>
             <!-- end middle table -->
-            <div class="">
+            <div th:class="${page.getTotalPages() < 2 ? 'd-none' : ''}">
                 <nav aria-label="Page navigation example" class="">
                     <ul class="pagination justify-content-center">
                         <li class="page-item">
@@ -100,12 +105,13 @@
           <script>
             /* GETTING STUCK*/
             $("#btn_search").on("click",function(){
-                alert(`click me`)
               let _c_id =  $("#category_select").val();
               let _title =   $("#title_input").val();
-              console.log(`name : ${_c_id} & title : ${_title}`)
-              console.log(`?search=${(_title == "") ? '' : _title}&${(_c_id== null ) ? '' : 'category_id='+_c_id }`)
-             // location.href = `?search=${_title == ""} ${(category_id== null ) ? '' : 'category_id='+_c_id }`;
+              location.href = `?${(_c_id== null ) ? 'category_id=0' : 'category_id='+_c_id }${_title ==""?'':"&search="+_title} `;
+            })
+
+            $(document).on("click",'.btn-view',function() {
+                $(this).attr("")
             })
             </script>
         </div>

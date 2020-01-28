@@ -1,5 +1,7 @@
 package khmerhowto.Repository.Model;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.*;
 
 import org.springframework.data.rest.core.annotation.RestResource;
@@ -15,13 +17,13 @@ public class Feedback {
     @RestResource(exported = true)
     @ManyToOne
     private Content content;
-    private int timestamp;
+    private LocalDateTime timestamp;
     private Integer status;
 
     public Feedback() {
     }
 
-    public Feedback(int id, String text, User user, Content content, int timestamp,Integer status) {
+    public Feedback(int id, String text, User user, Content content, LocalDateTime timestamp,Integer status) {
         this.id=id;
         this.text=text;
         this.user=user;
@@ -64,11 +66,11 @@ public class Feedback {
         this.content = content;
     }
 
-    public int getTimestamp() {
+    public LocalDateTime getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(int timestamp) {
+    public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
     }
 
