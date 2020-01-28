@@ -12,6 +12,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import khmerhowto.Repository.Model.Content;
 import khmerhowto.Service.CommentService;
@@ -55,6 +56,7 @@ public class HomeController {
         Page<Content> lst;
             lst = con.findAll(PageRequest.of(i, 3, Sort.by(Sort.Direction.DESC, "Id")));
         map.addAttribute("contents", lst.getContent());
+        System.out.println(lst.getContent().get(0).getThumbnail());
         // map.addAttribute("totalCmt", cmt.getTotalComment(id));
         Map<Integer, Integer> numCmt = new HashMap<>();
         for (int j = 0; j <= lst.getContent().size()-1; j++) {
@@ -72,9 +74,11 @@ public class HomeController {
     }
 
     @GetMapping(value = "/conCard")
+
     String content(ModelMap map) {
         Page<Content> lst = con.findAll(PageRequest.of(0, 3, Sort.by(Sort.Direction.DESC, "Id")));
         map.addAttribute("contents", lst.getContent());
+        System.out.println(lst.getContent());
         return "fragment/__content_card::contentList";
     }
 

@@ -1,8 +1,11 @@
 package khmerhowto.Repository.Model;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import org.springframework.data.rest.core.annotation.RestResource;
 
@@ -25,7 +28,12 @@ public class Content {
 
     public Content() {
     }
-
+    @PrePersist
+    public void prePersist() {
+        //  d=null;
+        timestamp = LocalDateTime.now();
+        status = 1;
+    }
     public Content(int id, Category category, String thumbnail, String title, String body, String writer, Integer status, LocalDateTime timestamp) {
         this.id=id;
         this.category=category;
