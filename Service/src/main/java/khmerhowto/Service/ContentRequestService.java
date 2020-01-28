@@ -8,4 +8,6 @@ import java.util.List;
 
 public interface ContentRequestService {
     Page<ContentRequest> findAll(Pageable pageable);
+
+	Page<ContentRequest> findByDate(String date, Pageable pageable);
 }

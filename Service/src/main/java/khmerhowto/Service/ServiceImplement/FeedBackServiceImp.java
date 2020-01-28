@@ -23,7 +23,7 @@ public class FeedBackServiceImp {
     private FeedbackRepository feedBackRepository;
 
     public Page<Feedback> findAll(Pageable pageable) {
-        return feedBackRepository.findAll(pageable);
+        return feedBackRepository.findByStatus(1,pageable);
     }
 
     public Page<Feedback> findByDate(String date,Pageable pageable){
