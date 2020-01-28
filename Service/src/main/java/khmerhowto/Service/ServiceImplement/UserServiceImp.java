@@ -17,8 +17,8 @@ public class UserServiceImp implements UserService {
 private UserRepository userRepository;
 
     @Override
-    public List<User> findByName(String name) {
-        return userRepository.findByNameContainingIgnoreCase(name);
+    public Page<User> findByName(String name,Pageable pageable) {
+        return userRepository.findByNameContainingIgnoreCaseAndStatus(name,1,pageable);
     }
 
     @Override
@@ -36,11 +36,17 @@ private UserRepository userRepository;
 
     @Override
     public Page<User> findAll(Pageable pageable) {
-        return userRepository.findAll(pageable);
+        return userRepository.findByStatus(1,pageable);
     }
 
     @Override
     public Page<User> findAllByName(String name,Pageable pageable) {
+        return null;
+    }
+
+    @Override
+    public List<User> findByName(String name) {
+        // TODO Auto-generated method stub
         return null;
     }
 

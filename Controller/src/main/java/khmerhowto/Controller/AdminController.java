@@ -83,8 +83,14 @@ public class AdminController {
         return "admin/admin-feedback";
     }
     @GetMapping("/admin/question")
-    String manageQuestion(@PageableDefault(size = 10)Pageable pageable,Model model){
-        Page<ContentRequest>page = contentRequestService.findAll(pageable);
+    String manageQuestion(@PageableDefault(size = 10)Pageable pageable,@RequestParam(value = "date" , required = false)String date ,Model model){
+        Page<ContentRequest>page;
+        if(date == null ){
+            page = contentRequestService.findAll(pageable);
+        }else{
+            page = contentRequestService.findByDate(date,pageable);
+        }
+        page = contentRequestService.findAll(pageable);
         List<ContentRequest>questions = page.getContent();
         model.addAttribute("page",page);
         model.addAttribute("questions",questions);
@@ -92,22 +98,23 @@ public class AdminController {
         return "admin/admin-question";
     }
     @GetMapping("/admin/user")
-    String manageUser(@ModelAttribute("User")User user, @PageableDefault(size = 10)Pageable pageable, Model model){
+    String manageUser(@RequestParam(value = "search" , required = false)String userName, @PageableDefault(size = 10)Pageable pageable, Model model){
 
         Page<User> page =null;
-        page =userService.findAll(pageable);    
-        List<User> users = null;
-        model.addAttribute("user",user);
-        if(user.getName()!=null){
-            users=userService.findByName(user.getName());
+        // userService.findAll(pageable);    
+      
+        // model.addAttribute("user",user);
+        if(userName!=null){
+            page =userService.findByName(userName,pageable);
 
         }else {
-            users=page.getContent();
+            // page =page.getContent();
+            page = userService.findAll(pageable);
         }
-
-        System.out.println(user.getName());
+        
+        // System.out.println(user.getName());
         model.addAttribute("page",page);
-        model.addAttribute("users",users);
+        model.addAttribute("users",page.getContent());
 
         model.addAttribute("CURRENT_PAGE", "user");
 

@@ -1,6 +1,8 @@
 package khmerhowto.Repository.Model;
 
 
+import java.time.LocalDateTime;
+
 import javax.persistence.*;
 
 @Entity
@@ -18,12 +20,13 @@ public class User {
     private String phoneNumber;
     private String bio;
     private String location;
-    private int timestamp;
+    private LocalDateTime timestamp;
+    private Integer status;
 
     public User() {
     }
 
-    public User(int id, String name, String profilePicture, String sex, String email, String phoneNumber, String bio, String location, int timestamp) {
+    public User(int id, String name, String profilePicture, String sex, String email, String phoneNumber, String bio, String location, LocalDateTime timestamp,Integer status) {
         this.id=id;
         this.name=name;
         this.profilePicture=profilePicture;
@@ -33,6 +36,7 @@ public class User {
         this.bio=bio;
         this.location=location;
         this.timestamp=timestamp;
+        this.status = status;
     }
 
     public int getId() {
@@ -99,15 +103,23 @@ public class User {
         this.location = location;
     }
 
-    public int getTimestamp() {
+    public LocalDateTime getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(int timestamp) {
+    public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
     }
 
+    public Integer getStatus(){
+        return this.status;
+    }
 
+     /* @param status the status to set
+     */
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
     @Override
     public String toString() {
         return "User{" +
