@@ -31,11 +31,8 @@ public class ContentServiceImp implements ContentService {
     public Page<Content> findAllByOrderByIdDesc(Pageable pageable) {
         return contentRepository.findAllByOrderByIdDesc(pageable);
     }
-<<<<<<< HEAD
- 
-=======
-
-	public Page<Content> findByNameAndCategory(String search_text, Integer c_id, Pageable pageable) {
+    
+    public Page<Content> findByNameAndCategory(String search_text, Integer c_id, Pageable pageable) {
         Page<Content> pages;
         if(c_id == 0){
             pages = findByName(search_text, pageable);
@@ -47,5 +44,5 @@ public class ContentServiceImp implements ContentService {
         }
 		return pages;
 	}
->>>>>>> a5e64ad1d92d1d00e4f28c74579c8ec022af8329
+
 }
