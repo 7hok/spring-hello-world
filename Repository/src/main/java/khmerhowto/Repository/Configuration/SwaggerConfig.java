@@ -7,14 +7,14 @@ import org.springframework.context.annotation.Configuration;
 // import springfox.documentation.spring.web.plugins.Docket;
 // import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 
-//@Configuration
-//@EnableSwagger2WebMvc
-public class SwaggerConfig {
-   // @Bean
-    // public Docket productApi() {
-    //     return new Docket(DocumentationType.SWAGGER_2).select()
-    //         .apis(RequestHandlerSelectors.any())
-    //         .paths(PathSelectors.any())
-    //         .build();
-    // }
-}
+// @Configuration
+// @EnableSwagger2WebMvc
+// public class SwaggerConfig {
+//     @Bean
+//     public Docket productApi() {
+//         return new Docket(DocumentationType.SWAGGER_2).select()
+//             .apis(RequestHandlerSelectors.any())
+//             .paths(PathSelectors.any())
+//             .build();
+//     }
+// }
