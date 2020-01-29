@@ -16,18 +16,18 @@ PROJECT DETAIL
         /signup         =>  register
         
     Client    
-    /home & /homepage   =>  homepage
-    /contentByCategory  =>  articlebycategory
-    /detail             =>  specific - article 
+    /home & /homepage   =>  homepage    (developing)
+    /contentByCategory  =>  articlebycategory (developing)
+    /detail             =>  specific - article (developing)
     
     Admin               
-    /admin              =>  admin-home
-    /admin/category     =>  category   
-    /admin/article      =>  article    
-    /admin/user         =>  user    
-    /admin/feedback     =>  feedback
-    /admin/question     =>  question
-    /admin/customize    =>  customize
+    /admin              =>  admin-home (developing)
+    /admin/category     =>  category   (developing)
+    /admin/article      =>  article    (developing)
+    /admin/user         =>  user        (developing)
+    /admin/feedback     =>  feedback    (developing)
+    /admin/question     =>  question (developing)
+    /admin/customize    =>  customize (developing)
     
     Other
     /privacy
