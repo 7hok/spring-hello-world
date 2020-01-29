@@ -6,9 +6,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
-
+ 
 import java.awt.print.Pageable;
 import java.time.LocalDateTime;
+ 
 
 @RepositoryRestResource(collectionResourceRel = "requests")
 public interface ContentRequestRepository extends JpaRepository<ContentRequest,Integer> {

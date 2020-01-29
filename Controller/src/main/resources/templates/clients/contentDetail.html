@@ -352,10 +352,13 @@
                     $('#bContent').append(data["body"]);
                     $('#tt').html(data["title"]);
                     $('#category').html(data.category.name);
-                    showComment(0);
+                    if([[${totalCmt}]]>0){
+                        showComment(0);
+                    }
+                    
                 },
                 error: function (data) {
-                    alert("eror on content");
+                    console.log(data)
                 }
 
             });

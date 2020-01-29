@@ -11,13 +11,14 @@ import org.springframework.web.bind.annotation.RestController;
 @SpringBootApplication
 @RestController
 @EnableOAuth2Sso
+
 public class KhmerHowToSpringBootApplication extends SpringBootServletInitializer {
     public static void main(String[] args){
 
         SpringApplication.run(KhmerHowToSpringBootApplication.class , args);
 
     }
-    @Override
+    @Override 
     protected SpringApplicationBuilder configure(SpringApplicationBuilder builder){
         return builder.sources(KhmerHowToSpringBootApplication.class);
     }

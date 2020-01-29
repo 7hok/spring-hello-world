@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,6 +51,14 @@ private UserRepository userRepository;
         // TODO Auto-generated method stub
         return null;
     }
+
+    // /@Transactional
+	public void saveUser(User user) {
+        //user.setId(30);
+        System.out.println(user);
+        userRepository.save(user);
+        // userRepository.Persist
+	}
 
 }
 

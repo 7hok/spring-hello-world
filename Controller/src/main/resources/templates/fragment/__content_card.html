@@ -11,7 +11,7 @@
 <body>
 <th:block th:fragment="contentList" th:each="content: ${contents}">
      
-    <div th:onclick="'window.location.href = \'' + @{/detail/{id}(id=${content.getId()})} + '\''" th:style="'background:url(img/' + @{${content.getThumbnail()}} +') no-repeat center;'+' background-size: cover; cursor: pointer;' " 
+    <div th:onclick="'window.location.href = \'' + @{/detail/{id}(id=${content.getId()})} + '\''" th:style="'background:url(' + @{${content.getThumbnail()}} +') no-repeat center;'+' background-size: cover; cursor: pointer;' " 
         class="border  border-dark h-100  group-one-c-one d-flex align-items-end justify-content-center mysl">
          
        
@@ -31,7 +31,7 @@
     <div class="card-header text-center">
         <a class="rounded" th:text="${content.getCategory().getName()}">Romance </a><span>&nbsp;-</span><span  th:text="${content.getTimestamp()}"> May 13, 2018</span>
         <h5 class="article-title-h5" th:text=${content.getTitle()}>How tech recognize human face</h5>
-        <div class="mt-2 w-100 vh-30 " th:style="'background:url(img/' + @{${content.getThumbnail()}} +') no-repeat center;'+' background-size: cover;' ">
+        <div class="mt-2 w-100 vh-30 " th:style="'background:url(' + @{${content.getThumbnail()}} +') no-repeat center;'+' background-size: cover;' ">
         </div>
     </div>
     

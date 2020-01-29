@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import groovyjarjarpicocli.CommandLine.Model;
 import khmerhowto.Service.CommentService;
- 
+import khmerhowto.Service.ServiceImplement.CategoryServiceImp;
 import khmerhowto.Service.ServiceImplement.InterestedServiceImp;
 
  
@@ -20,7 +20,8 @@ public class DbTest {
     CommentService cmt;
     @Autowired
     InterestedServiceImp interestedServiceImp;
-
+    @Autowired
+    private CategoryServiceImp categoryService;
     @GetMapping("/detail/{id}")
     public String testDetail(ModelMap modelMap, @PathVariable Integer id) {
         modelMap.addAttribute("id", id);
@@ -45,15 +46,11 @@ public class DbTest {
     }
 
     @GetMapping("/admin/article/insert")
-    String insertArticle() {
+    String insertArticle(ModelMap map) {
+        map.addAttribute("categories",categoryService.findCategoryByStatus(1));
         return "admin/admin-article-insert";
     }
 
-    @GetMapping("/admin/article/edit/{id}")
-    String editArticle(@PathVariable String id, ModelMap model) {
-        model.addAttribute("id", id);
-        return "admin/admin-article-edit";
-    }
 
     @GetMapping("/testing-style")
     public String test() {

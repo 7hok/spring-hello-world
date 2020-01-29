@@ -26,6 +26,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -58,6 +59,14 @@ public class AdminController {
     private FeedBackServiceImp feedbackservice;
     @Autowired 
     private ContentServiceImp  articleService;
+
+    @GetMapping("/admin/article/edit/{id}")
+    String editArticle(@PathVariable String id, ModelMap model) {
+        model.addAttribute("categories",categoryService.findCategoryByStatus(1));
+        
+        model.addAttribute("id", id);
+        return "admin/admin-article-edit";
+    }
 
     @GetMapping("/admin/feedback")
     String manageFeedBack(@PageableDefault(size = 10)Pageable pageable,@RequestParam(value = "date" , required = false)String date ,Model model){

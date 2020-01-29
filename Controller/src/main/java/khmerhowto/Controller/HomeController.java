@@ -10,6 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+
+
+import java.util.HashMap;
+
+import java.util.Map;
+
+
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
@@ -23,15 +30,19 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import khmerhowto.Repository.CategoryRepository;
+import khmerhowto.Repository.ContentRepository;
 import khmerhowto.Repository.Model.Content;
 import khmerhowto.Repository.Model.User;
 import khmerhowto.Service.CommentService;
 import khmerhowto.Service.ContentService;
-import khmerhowto.Service.ServiceImplement.ContentServiceImp;
+import khmerhowto.Service.ServiceImplement.CategoryServiceImpl;
+import khmerhowto.Service.ServiceImplement.ContentServiceImpl;
 import khmerhowto.Service.ServiceImplement.InterestedServiceImp;
 import khmerhowto.Service.ServiceImplement.UserServiceImp;
 
 import org.springframework.ui.Model;
+
 import org.springframework.ui.ModelMap;
 
 /**
@@ -69,16 +80,17 @@ public class HomeController {
         Page<Content> lst;
             lst = con.findAll(PageRequest.of(i, 3, Sort.by(Sort.Direction.DESC, "Id")));
         map.addAttribute("contents", lst.getContent());
+        System.out.println(lst.getContent().get(0).getThumbnail());
         // map.addAttribute("totalCmt", cmt.getTotalComment(id));
         Map<Integer, Integer> numCmt = new HashMap<>();
         for (int j = 0; j <= lst.getContent().size()-1; j++) {
             numCmt.put(lst.getContent().get(j).getId(), cmt.getTotalComment(lst.getContent().get(j).getId()));
-           
+
         }
         Map<Integer, Integer> m = new HashMap<>();
         for (int j = 0; j <= lst.getContent().size()-1; j++) {
             m.put(lst.getContent().get(j).getId(), interestedServiceImp.getTotalLike(lst.getContent().get(j).getId()));
-           
+
         }
         map.addAttribute("likes", m);
         map.addAttribute("cmts",numCmt);
@@ -86,9 +98,11 @@ public class HomeController {
     }
 
     @GetMapping(value = "/conCard")
+
     String content(ModelMap map) {
         Page<Content> lst = con.findAll(PageRequest.of(0, 3, Sort.by(Sort.Direction.DESC, "Id")));
         map.addAttribute("contents", lst.getContent());
+        System.out.println(lst.getContent());
         return "fragment/__content_card::contentList";
     }
 
@@ -155,13 +169,7 @@ public class HomeController {
         user.setEmail("email");
         user.setPhoneNumber("phoneNumber");
         user.setPassword("password");
-        // System.out.println(user);
-        //  RedirectView redirectView = new RedirectView();
-        //  redirectView.setUrl("redirect:/signup");
-        //  redirectView.se(user);
-        // redirectAttributes.addFlashAttribute("user", user);
-        // redirectAttributes.addAttribute("user", user);
-    //    return new ModelAndView("redirect:/signup");
+
         request.getSession().setAttribute("USER", user);
          return "redirect:/signup";
        // return signUp(user,modelMap);
@@ -169,15 +177,54 @@ public class HomeController {
     }
 
     @GetMapping("/contentByCategory")
-    String contentByCategory(Model model) {
+    String contentByCategory(Model model){
         model.addAttribute("CURRENT_PAGE", "category");
         return "content-by-category";
     }
 
-    @GetMapping("test/contentByCategory")
-    String contentByCategoryTest(Model model) {
-        model.addAttribute("CURRENT_PAGE", "category");
+    //Chamroeun
+
+    @Autowired
+    private CategoryRepository categoryRepository;
+
+    @Autowired
+    private CategoryServiceImpl categoryServiceImpl;
+
+    @Autowired
+    private ContentServiceImpl contentService;
+    @Autowired
+    private ContentRepository contentRepository;
+
+    @GetMapping("/category")
+    String category(Model model){
+        model.addAttribute("categories",categoryServiceImpl.findAll());
+        System.out.println(categoryServiceImpl.findAll());
+        System.out.println("JPQfL"+categoryRepository.findByCategoryIdAndStatus());
+
+        return "content-by-category-test";
+
+    }
+
+
+    @GetMapping("/category/{id}")
+    String categoryLeft(Model model, @PathVariable Integer id){
+        System.out.println("jab ban id: " + id);
+        model.addAttribute("categories",categoryServiceImpl.findAll());
+        model.addAttribute("OneCategory",categoryRepository.findByCategoryIdAndStatus());
+
+        System.out.println("Hello");
+        model.addAttribute("myContent", contentRepository.findFirst2ByCategoryId(id));
+        System.out.println("why u"+contentRepository.findFirst2ByCategoryId(id));
+
+
         return "content-by-category-test";
     }
 
+    @GetMapping("/test/contentByCategory")
+    String contentByCategoryTest(Model model){
+
+        model.addAttribute("CURRENT_PAGE", "category");
+
+            return "content-by-category-test";
+            }
 }
