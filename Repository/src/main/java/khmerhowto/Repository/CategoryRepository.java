@@ -9,6 +9,8 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @RepositoryRestResource
 public interface CategoryRepository extends JpaRepository<Category,Integer> {
     @RestResource(rel = "update_status",path = "/delete")
@@ -16,4 +18,14 @@ public interface CategoryRepository extends JpaRepository<Category,Integer> {
     @Modifying
     @Query(value = "Update Category c set c.status = false Where c.id = :id ")
     void deleteById(@Param("id") Integer id);
+
+
+
+
+
+    @Query("SELECT  c FROM Category c WHERE c.id = 1")
+    List<Category> findByCategoryIdAndStatus();
+
+
+
 }
