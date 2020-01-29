@@ -10,9 +10,17 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
+import khmerhowto.ConfigurationService.MyUserDetailsService;
+
 @Order(0)
 @EnableWebSecurity
 public class WebConfiguration extends WebSecurityConfigurerAdapter {
+    
+    @Bean
+    public MyUserDetailsService userDetailsService() {
+      return new MyUserDetailsService();
+    };
+
     @Override
     @Bean
     public AuthenticationManager authenticationManagerBean() throws Exception {
@@ -52,7 +60,8 @@ public class WebConfiguration extends WebSecurityConfigurerAdapter {
     }
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("guest").password("{noop}guest1234").roles("USER");
-        auth.inMemoryAuthentication().withUser("admin").password("{noop}admin1234").roles("ADMIN");
+        auth.userDetailsService(userDetailsService() );
+        // auth.inMemoryAuthentication().withUser("guest").password("{noop}guest1234").roles("USER");
+        // auth.inMemoryAuthentication().withUser("admin").password("{noop}admin1234").roles("ADMIN");
     }
 }
