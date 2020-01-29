@@ -60,8 +60,13 @@ public class AdminController {
     private ContentServiceImp  articleService;
 
     @GetMapping("/admin/feedback")
-    String manageFeedBack(@PageableDefault(size = 10)Pageable pageable,Model model){
-        Page<Feedback>page = feedbackservice.findAll(pageable);
+    String manageFeedBack(@PageableDefault(size = 10)Pageable pageable,@RequestParam(value = "date" , required = false)String date ,Model model){
+        Page<Feedback>page;
+        if(date == null ){
+            page = feedbackservice.findAll(pageable);
+        }else{
+            page = feedbackservice.findByDate(date,pageable);
+        }
         List<Feedback>feedbacks = page.getContent();
         model.addAttribute("page",page);
         model.addAttribute("feedbacks",feedbacks);
@@ -69,8 +74,14 @@ public class AdminController {
         return "admin/admin-feedback";
     }
     @GetMapping("/admin/question")
-    String manageQuestion(@PageableDefault(size = 10)Pageable pageable,Model model){
-        Page<ContentRequest>page = contentRequestService.findAll(pageable);
+    String manageQuestion(@PageableDefault(size = 10)Pageable pageable,@RequestParam(value = "date" , required = false)String date ,Model model){
+        Page<ContentRequest>page;
+        if(date == null ){
+            page = contentRequestService.findAll(pageable);
+        }else{
+            page = contentRequestService.findByDate(date,pageable);
+        }
+        page = contentRequestService.findAll(pageable);
         List<ContentRequest>questions = page.getContent();
         model.addAttribute("page",page);
         model.addAttribute("questions",questions);
@@ -78,22 +89,23 @@ public class AdminController {
         return "admin/admin-question";
     }
     @GetMapping("/admin/user")
-    String manageUser(@ModelAttribute("User")User user, @PageableDefault(size = 10)Pageable pageable, Model model){
+    String manageUser(@RequestParam(value = "search" , required = false)String userName, @PageableDefault(size = 10)Pageable pageable, Model model){
 
         Page<User> page =null;
-        page =userService.findAll(pageable);    
-        List<User> users = null;
-        model.addAttribute("user",user);
-        if(user.getName()!=null){
-            users=userService.findByName(user.getName());
+        // userService.findAll(pageable);    
+      
+        // model.addAttribute("user",user);
+        if(userName!=null){
+            page =userService.findByName(userName,pageable);
 
         }else {
-            users=page.getContent();
+            // page =page.getContent();
+            page = userService.findAll(pageable);
         }
-
-        System.out.println(user.getName());
+        
+        // System.out.println(user.getName());
         model.addAttribute("page",page);
-        model.addAttribute("users",users);
+        model.addAttribute("users",page.getContent());
 
         model.addAttribute("CURRENT_PAGE", "user");
 
@@ -148,15 +160,16 @@ public class AdminController {
 
 
     @GetMapping("/admin/article")
-    String manageArticle(@PageableDefault(size = 10)Pageable pageable,@RequestParam(value = "search" ,required = false) String searchText,@RequestParam(value = "category_id", required = false)Integer c_id ,Model model){
-        // System.out.println("hehe : "+searchText.get());
+    String manageArticle(@PageableDefault(size = 10)Pageable pageable,@RequestParam(value = "category_id", defaultValue ="0",required = false)Integer c_id,@RequestParam(value = "search" ,required = false) String search_text ,Model model){
+        
+
         Page<Content>page;
-        if(searchText == null){
+        if(search_text == null && c_id ==0){
             page = articleService.findAll(pageable);
         }else{
-            page = articleService.findByName(searchText, pageable);
+            page = articleService.findByNameAndCategory(search_text,c_id, pageable);
         } 
-        System.out.println("category_id=>" +c_id);
+      
         List<Content>articles = page.getContent();
         List<Category> categories = categoryService.findCategoryByStatus(1);
         model.addAttribute("CURRENT_PAGE", "article");

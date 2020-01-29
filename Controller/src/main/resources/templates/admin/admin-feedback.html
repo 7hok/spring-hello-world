@@ -55,7 +55,7 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
 
     </div>
     <!-- end middle table -->
-    <div class="">
+    <div th:class="${page.getTotalPages() < 2 ? 'd-none' : ''}">
         <nav aria-label="Page navigation example" class="">
             <ul class="pagination justify-content-center">
                 <li class="page-item">
@@ -141,7 +141,7 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
         $(function(){
 
             $(document).on("click",'.btn-feedback-view', function() {
-                let id = $(this).attr("data-id");
+               let id = $(this).attr("data-id") ;
                 let _feedback_promise = fetch_feedback_by_id(`/api/feedbacks/${id}?projection=feedbackAdminProjection`)
                 if(_feedback_promise == null){
 
@@ -170,8 +170,19 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
                 }
             })
             $('#datepicker').datepicker({
-                uiLibrary: 'bootstrap4'
+                format : 'yyyy-mm-dd'
+                ,icons: {
+                    rightIcon: '<span id="search_date"><i class="material-icons-new outline-search"></i></span>'
+                }
             });
+            $("#search_date").on('click',function(){
+                let search_date =  $('#datepicker').val();
+                if(search_date == "") {
+
+                }else{
+                    location.href = `?date=${search_date}`;
+                }
+            })
             /** ui logic event **/
             // $(".btn-    ").on("click",function(){
                    

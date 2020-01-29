@@ -13,5 +13,6 @@ public interface UserService {
     User findById(Integer id);
     void updateUser(Integer id,User user);
     List<User>findByName(String name);
+    Page<User>findByName(String name,Pageable pageable);
 
 }

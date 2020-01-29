@@ -24,7 +24,105 @@
     <th:block th:include="~{fragment/__javascript_link}"></th:block>
     <div class="" layout:fragment="content-js"></div>
     <script>
-         
-    </script>
+        var p=1;
+        $(document).ready(function(){
+            $.ajax({
+                url: "/conCard",
+                method: 'GET',
+                success: function(obj){
+                     
+                    $("#conn").prepend(obj);
+                },
+                error: function(err){
+                    console.log(err);
+                }
+            });
+        });
+
+        $(document).ready(function(){
+            $.ajax({
+                url: "/conCard/"+p,
+                method: 'GET',
+                success: function(obj){
+                    console.log(obj);
+                    $("#cardCon").append(obj);
+                    p++;
+                    $.ajax({
+                url: "/conCard/"+p,
+                method: 'GET',
+                success: function(obj){
+                    console.log(obj);
+                    $("#cardCon").append(obj);
+                    p++;
+                },
+                error: function(err){
+                    console.log(err);
+                }
+            });
+                },
+                error: function(err){
+                    console.log(err);
+                }
+            });
+        });
+
+       
+        var _throttleTimer = null;
+        var _throttleDelay = 100;
+        var $window = $(window);
+        var $document = $(document);
+
+        $document.ready(function () {
+
+            $window
+                .off('scroll', ScrollHandler)
+                .on('scroll', ScrollHandler);
+
+        });
+
+        function ScrollHandler(e) {
+            //throttle event:
+            clearTimeout(_throttleTimer);
+            _throttleTimer = setTimeout(function () {
+                console.log('scroll');
+
+            //do work
+            if ($window.scrollTop() + $window.height() > $document.height() - 1000) {
+                //  alert(p)
+            
+                 $(document).ready(function(){
+            $.ajax({
+                url: "/conCard/"+p,
+                method: 'GET',
+                success: function(obj){
+                    console.log(obj);
+                    $("#cardCon").append(obj);
+                    p++;
+                    $.ajax({
+                url: "/conCard/"+p,
+                method: 'GET',
+                success: function(obj){
+                    console.log(obj);
+                    $("#cardCon").append(obj);
+                    p++;
+                },
+                error: function(err){
+                    console.log(err);
+                }
+            });
+                },
+                error: function(err){
+                    console.log(err);
+                }
+            });
+        });
+            
+            } 
+            }, _throttleDelay);
+        }
+        
+ 
+                    
+        </script>
 </body>
 </html>

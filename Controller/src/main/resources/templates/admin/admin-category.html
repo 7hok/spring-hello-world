@@ -29,7 +29,7 @@
             }
             .card{
                 width: 13%;
-                margin-bottom: 2%;
+                margin-bottom: 1%;
             }
             @media only screen and (max-width: 992px) {
                .card{ 
@@ -66,10 +66,10 @@
             </div>
             <!-- MIDDLE Div -->
             <!-- FOOTER DIV  -->
-            <div class="d-flex flex-wrap justify-content-around ">
+            <div class="d-flex flex-wrap justify-content-center ">
                <!-- ON DYNASMIC  -->
                 
-                <div th:each="category:${categories}" class="card bg-color-two hover-white-highlight-for-click category-card" th:data-id="${category.id}" style="">
+                <div th:each="category:${categories}" class="card bg-color-two hover-white-highlight-for-click category-card mr-3" th:data-id="${category.id}" style="">
                     <div class="m-4">
                         <img th:src="${category.image}" class="card-img-top" alt="...">
                     </div>
@@ -99,6 +99,10 @@
                                 <input type="text" class="form-control" placeholder="Name" id="modal_name_input">
                             </div>
                             <div class="form-group">
+                                <label> Description </label>
+                                <textarea class="form-control" name="" id="modal_desc_input" cols="30" rows="10"></textarea>
+                            </div>
+                            <div class="form-group">
                                 <label >Image</label>
                                 <div class="custom-file">
 
@@ -114,7 +118,7 @@
                         </div>
                         <!-- background m3 -->
                         <div class="modal-footer d-flex justify-content-around">
-                            <button class="btn btn-danger float-left">Remove</button>
+                            <button class="btn btn-danger float-left d-none" id="modal_remove">Remove</button>
                             <button class="btn btn-primary text-center" data-id="0" id="modal_save">Save</button>
                         </div>
                     </div>
@@ -147,6 +151,7 @@
                         $("#modal_file_input").val("hahah");
                         $("#modal_img_show").attr("src","")
                         $("#modal_img_show").parent().addClass("bg-color-two")
+                        
                         // $("#modal_img_show").p
                     }else{
                         $("#modal_save").attr("data-id",category.id)
@@ -154,6 +159,9 @@
                         $("#modal_file_input").val("")
                         $("#modal_img_show").parent().removeClass("bg-color-two")
                         $("#modal_img_show").attr("src",category.image)
+                        $("#modal_desc_input").val(category.description)
+                        $("#modal_remove").removeClass("d-none")
+                        $("#modal_remove").attr("data-id",category.id)
                     }
                    
                 }
@@ -186,49 +194,26 @@
                         /*return as promise */
                 }
 
-                const update_category = async (uri,data=null) => {
+                const update_category = async (uri,data=null,_method='PUT') => {
                     if (data==null) {
                         return ;
                     }
                     const rawResponse = await fetch(uri, {
-                        method: 'PUT',
+                        method: _method,
                         headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json'
                         },
-                        body: JSON.stringify(data)
+                        body: data
                     });
                         const content = await rawResponse.json();
-
+                        location.reload();
                         console.log(content);
                 }
 
 
-                let category =  
-                    {	
-                        "id" : 5,
-	                    "name" : "content-v10",
-	                    "image" : "/icon/content.svg", 
-	                    "description" : "hahaha",
-                        "status" : true
-                    }
-                //update_category("/api/categories/5",category)    
-                //post_new_category("/api/categories", category)
-                // const upload_image = (file) =>  {
-                //     let _promise = upload_process(file);
-                //     var _return_result;
-                //     if(_promise ==null){
-                //         alert("upload fail")
-                //     }else{
-                       
-                //         _promise.then(res => _return_result = res)
-                //         // return _promise.then(res => res);
-                //         console.log(_return_result)
-                //         return _return_result;
-                //     }
-                // }
-
-                  /*return as promise if fail return null */
+             
+                  /*return as promise if fail return null  "/images/"+json.Data*/
                 const upload_process =async (file) => {
 
                         let _f_data = new FormData();
@@ -240,7 +225,7 @@
                         })
 
                         const _image_obj = await _response.json();
-
+                        
                         if(_image_obj.status == true ){
                             return _image_obj;
                              
@@ -248,24 +233,69 @@
                             return null;
                         }
                     }
-               
+                $("#modal_remove").on("click",function(){
+                    let _id = $(this).attr("data-id") 
+                    // update_category(`/api/categories/${_id}`,{
+                    //                 "name" : $("#modal_name_input").val(),
+                    //                 "image" : $("#modal_img_show").attr("src"),
+                    //                 "description" : $("#modal_desc_input").val(),
+                    //                 "status" : 0
+                    //             })
+                    fetch(`/api/categories/${_id}`,{
+                        method: 'PUT',
+                        headers : {
+                            'Content-Type': 'application/json'
+                        },
+                        body : JSON.stringify({
+                                    "name" : $("#modal_name_input").val(),
+                                    "image" : $("#modal_img_show").attr("src"),
+                                    "description" : $("#modal_desc_input").val(),
+                                    "status" : 0
+                                }),
+                    })
+                    .then(res => {
+                            location.reload();
+                        })
+                    .catch(err => {
+                            console.log(err)
+                        })
+
+                })
                 $("#modal_save").on("click",function(){
+                    
                     let _id = $(this).attr("data-id")
-                    console.log(_id)
-                    return;
-                    let _promise = upload_process( $("#modal_file_input")[0].files[0])
+                    
+                    let _category = {
+                                            "name" : $("#modal_name_input").val(),
+                                            "image" : "",
+                                            "description" : $("#modal_desc_input").val(),
+                                            "status" : 1
+                                        }
+                    let _promise = null;            
+                    if($("#modal_file_input").val() == ""){
+                        _category.image =  $("#modal_img_show").attr("src")
+                    }else{
+                        _promise = upload_process( $("#modal_file_input")[0].files[0])        
+                    }
+                   
+                    
+
                     if(_promise ==null){
-                      
+                        if( _id == "0"){
+                            post_new_category('/api/categories',_category); 
+                        }else{
+                            update_category(`/api/categories/${_id}`,_category)
+                        }
                     }else{
                        
                         _promise.then(json => {
-                            let _category = {
-                                            "name" : $("#modal_name_input").val(),
-                                            "image" : "/images/"+json.Data,
-                                            "description" : "none"
-                                        }
-                            post_new_category('/api/categories',_category);            
-
+                           
+                            _category.image = "/images/"+json.Data;
+                            if( _id == "0"){
+                                post_new_category('/api/categories',_category); 
+                            }else{
+                                update_category(`/api/categories/${_id}`,_category)
+                            }
                         })
                        
                     }
@@ -281,6 +311,7 @@
                     let val = $(this).val()
                     $(".category-name:icontains("+val+")").parents('.category-card').removeClass('d-none')
                 })
+                
                 /**SIMPLE EVENT **/
                 $(".hover-white-highlight-for-click,#new_category").on("click",function(){
                    
@@ -289,8 +320,12 @@
                })
                
                $('#new_category_modal').on('hidden.bs.modal',function(){
+                     $("#modal_name_input").val("");
+                     $("#modal_file_input").val("");
                      $("#modal_save").attr("data-id",0);
+                     $("#modal_desc_input").val("");
                      $("#modal_img_show").attr("src","");
+                     $("#modal_remove").addClass("d-none")
                });
                function readURL(input) {
                     if (input.files && input.files[0]) {

@@ -1,6 +1,11 @@
 package khmerhowto.Repository;
 
 import khmerhowto.Repository.Model.Feedback;
+
+import java.time.LocalDateTime;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -16,4 +21,9 @@ public interface FeedbackRepository extends JpaRepository<Feedback,Integer> {
     @Modifying
     @Query(value = "Update Feedback f set f.status = 0   Where f.id = :id ")
     void deleteById(@Param("id") Integer id);
+
+    @Query("SELECT f FROM Feedback f WHERE f.status = 1 AND f.timestamp BETWEEN :start_date AND :end_date")
+	Page<Feedback> findByDate(LocalDateTime start_date, LocalDateTime end_date, Pageable pageable);
+
+	Page<Feedback> findByStatus(int i, Pageable pageable);
 }
