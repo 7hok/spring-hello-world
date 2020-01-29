@@ -1,5 +1,6 @@
 package khmerhowto.Repository;
 
+import khmerhowto.Repository.Model.Category;
 import khmerhowto.Repository.Model.Content;
 
 import java.util.List;
@@ -12,9 +13,15 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 
 @RepositoryRestResource
-public interface ContentRepository extends JpaRepository<Content,Integer> {
+public interface ContentRepository extends JpaRepository<Content, Integer> {
 
 	Page<Content> findByTitleContainingIgnoreCase(@Param("title") String title, Pageable pageable);
+
+//	Category findContentsByCategoryId(Integer id){
+//		return findFirst2ByCategoryId(id);
+//	};
+	List<Content> findFirst2ByCategoryId(Integer id);
+
 	Page<Content> findByTitleContainingIgnoreCaseAndCategoryIdAndStatus(@Param("title") String title, Integer c_id, int i, Pageable pageable);
 	public Page<Content> findAllByOrderByIdDesc(Pageable pageable);
 }

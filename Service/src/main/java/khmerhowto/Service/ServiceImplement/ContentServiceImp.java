@@ -45,4 +45,8 @@ public class ContentServiceImp implements ContentService {
 		return pages;
 	}
 
+    @Override
+    public List<Content> findAll() {
+        return null;
+    }
 }

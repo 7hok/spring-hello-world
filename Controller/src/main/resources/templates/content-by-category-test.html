@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns="http://www.w3.org/1999/xhtml" layout:decorator="~{home-layout}">
+      xmlns="http://www.w3.org/1999/xhtml" layout:decorator="~{home-layout}"
+      xmlns:category="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="UTF-8">
@@ -169,18 +170,19 @@
     <div class="row">
         <div class="col-md-12 col-sm-12 col-12">
 
-            <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+            <div   id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
                     <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
                     <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
                     <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
                 </ol>
                 <div class="carousel-inner">
-                    <div class="carousel-item active">
+                    <div class="carousel-item active" >
+<!--                        src="/img/mountain1.jpg"-->
                         <img src="/img/mountain1.jpg" class="d-block w-100" alt="...">
                         <div class="latest-post-caption carousel-caption d-none d-md-block text-left ">
                             <h5  class="vw vw-10 mb-3 mb-md-3 mb-sm-3"><span class="carousel-control-next-icon" aria-hidden="true"></span>Latest Post</h5>
-                            <p  class="vw-10 mb-3 mb-md-3 mb-sm-3 latest-post">The travellers always travel to the most beautiful place of the World</p>
+                            <p class="vw-10 mb-3 mb-md-3 mb-sm-3 latest-post">The travellers always travel to the most beautiful place of the World</p>
                             <a href=""><button type="button" class=" latest-category-button btn btn-outline-primary btn-round-lg btn-lg">Keep Reading</button></a>
                         </div>
                     </div>
@@ -213,6 +215,65 @@
             </div>
         </div>
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Body</th>
+            <th scope="col">Writer</th>
+            <th scope="col">Writer</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="contentdetail:${contents}">
+            <th th:text="${contentdetail.id}" scope="row">1</th>
+            <td th:text="${contentdetail.title}">Mark</td>
+            <td th:text="${contentdetail.body}">Otto</td>
+            <td th:text="${contentdetail.writer}">@mdo</td>
+            <td th:text="${contentdetail.thumbnail}">@mdo</td>
+        </tr>
+        </tbody>
+    </table>
+
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Body</th>
+            <th scope="col">Writer</th>
+            <th scope="col">Writer</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="contents2:${myContent}">
+            <th th:text="${contents2.id}" scope="row">1</th>
+            <td th:text="${contents2.title}">Mark</td>
+            <td th:text="${contents2.body}">Otto</td>
+            <td th:text="${contents2.writer}">@mdo</td>
+            <td th:text="${contents2.thumbnail}">@mdo</td>
+        </tr>
+        </tbody>
+    </table>
+
+
+
 
 
 
@@ -269,64 +330,42 @@
 
         <!-- End of New Scroll Category -->
 
+<!--        <table class="table">-->
+<!--            <thead>-->
+<!--            <tr>-->
+<!--                <th scope="col">#</th>-->
+<!--                <th scope="col">First</th>-->
+<!--                <th scope="col">Last</th>-->
+<!--                <th scope="col">Handle</th>-->
+<!--            </tr>-->
+<!--            </thead>-->
+<!--            <tbody>-->
+<!--            <tr th:each="category:${categories}">-->
+<!--                <th scope="row" th:text="${category.id}">1</th>-->
+<!--                <td th:text="${category.name}" >Mark</td>-->
+<!--                <td >Otto</td>-->
+<!--                <td>@mdo</td>-->
+<!--            </tr>-->
+<!--            </tbody>-->
+<!--        </table>-->
+
+
 <!--        The row of Category and Content-->
         <div class="row mt-4">
             <!-- The beginning of Left Container (Category)  -->
             <div class="col-md-3 col-sm-12 left-category category-width">
                 <ul class="list-group">
                     <li class="list-group-item category-border-color active category-bg-color font-weight-bold ">Categories</li>
-                    <li class="list-group-item">
-                        <div class="custom-control custom-radio ">
-                            <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
-                            <label class="custom-control-label" for="customRadio1">Communication</label>
-                        </div>
-                        <div class="custom-control custom-radio mt-2">
-                            <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
-                            <label class="custom-control-label" for="customRadio2">Art</label>
-                        </div>
-                        <div class="custom-control custom-radio mt-2">
-                            <input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
-                            <label class="custom-control-label" for="customRadio3">Emotional State</label>
-                        </div>
-                        <div class="custom-control custom-radio mt-2">
-                            <input type="radio" id="customRadio4" name="customRadio" class="custom-control-input">
-                            <label class="custom-control-label" for="customRadio4">Habits</label>
-                        </div>
-                        <div class="custom-control custom-radio mt-2">
-                            <input type="radio" id="customRadio5" name="customRadio" class="custom-control-input">
-                            <label class="custom-control-label" for="customRadio5">Inspiration</label>
-                        </div>
-                        <div class="custom-control custom-radio mt-2">
-                            <input type="radio" id="customRadio6" name="customRadio" class="custom-control-input">
-                            <label class="custom-control-label" for="customRadio6">Journalling</label>
-                        </div>
-                        <div class="custom-control custom-radio mt-2">
-                            <input type="radio" id="customRadio7" name="customRadio" class="custom-control-input">
-                            <label class="custom-control-label" for="customRadio7">Leadership</label>
-                        </div>
-                        <div class="custom-control custom-radio mt-2">
-                            <input type="radio" id="customRadio8" name="customRadio" class="custom-control-input">
-                            <label class="custom-control-label" for="customRadio8">Travel</label>
-                        </div>
-                        <div class="custom-control custom-radio mt-2">
-                            <input type="radio" id="customRadio9" name="customRadio" class="custom-control-input">
-                            <label class="custom-control-label" for="customRadio9">Nature</label>
-                        </div>
-                        <div class="custom-control custom-radio mt-2">
-                            <input type="radio" id="customRadio10" name="customRadio" class="custom-control-input">
-                            <label class="custom-control-label" for="customRadio10">Entertainment</label>
-                        </div>
-                        <div class="custom-control custom-radio mt-2">
-                            <input type="radio" id="customRadio11" name="customRadio" class="custom-control-input">
-                            <label class="custom-control-label" for="customRadio11">Personal</label>
-                        </div>
-                        <div class="custom-control custom-radio mt-2">
-                            <input type="radio" id="customRadio12" name="customRadio" class="custom-control-input">
-                            <label class="custom-control-label" for="customRadio12">Beauty</label>
+                    <li class="list-group-item" >
+
+                        <div class="custom-control custom-radio mt-2" th:each="category:${categories}">
+                            <a th:href=@{/category/{id}(id=${category.id})}>
+<!--                            <input type="radio" th:id="${category.id}" name="customRadio" class="custom-control-input">-->
+                            <label th:text="${category.name}" class="custom-control-label" th:for="${category.id}">Art</label>
+                            </a>
                         </div>
                     </li>
                 </ul>
-
 
 
 
@@ -486,7 +525,7 @@
                         <div class="card mb-3">
                             <div class="row no-gutters">
                                 <div class="col-md-7">
-                                    <img src="img/rice.jpg" class="card-img first-card-image-category img-thumbnail"
+                                    <img src="/img/rice.jpg" class="card-img first-card-image-category img-thumbnail"
                                          alt="...">
                                 </div>
                                 <div class="col-md-5">
@@ -529,7 +568,7 @@
                     <!-- First in Two Popular Post -->
                     <div class="col-md-6 col-sm-12 mb-3">
                         <div class="card">
-                            <img class="card-img-top img-thumbnail" src="img/view.jpg" alt="Card image cap">
+                            <img class="card-img-top img-thumbnail" src="/img/view.jpg" alt="Card image cap">
                             <div class="card-body text-center">
                                 <h5 class="card-title">Lazy Beach, Koh Rong Samloem</h5>
                                 <p class="card-text"><small class="text-muted">3 days ago /</small> <small
@@ -563,7 +602,7 @@
                     <!-- Second in Two Popular Post -->
                     <div class="col-md-6 col-sm-12">
                         <div class="card">
-                            <img class="card-img-top img-thumbnail" src="img/sea.jpg" alt="Card image cap">
+                            <img class="card-img-top img-thumbnail" src="/img/sea.jpg" alt="Card image cap">
                             <div class="card-body text-center">
                                 <h5 class="card-title">Otres Beach, Sihanoukville</h5>
                                 <p class="card-text"><small class="text-muted">3 days ago /</small> <small
