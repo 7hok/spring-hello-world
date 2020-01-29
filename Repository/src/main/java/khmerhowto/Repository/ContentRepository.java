@@ -16,7 +16,9 @@ public interface ContentRepository extends JpaRepository<Content, Integer> {
 
 	Page<Content> findByTitleContainingIgnoreCase(@Param("title") String title, Pageable pageable);
 
-	Category findContentsByCategoryId(Integer id);
+	Category findContentsByCategoryId(Integer id){
+		return findFirst2ByCategoryId(id);
+	};
 	List<Content> findFirst2ByCategoryId(Integer id);
 
 }
