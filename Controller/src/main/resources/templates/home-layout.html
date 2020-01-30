@@ -23,11 +23,14 @@
     <div th:replace="~{navbar/__navbar}"></div>
     <div class="" layout:fragment="content"></div>
     <div th:replace="~{footer/__footer}"></div>
+    <div sec:authorize="isAuthenticated()">
+        <span id="isAuth" class="d-none" th:text="${#authentication.getPrincipal().getCurrentUser().getLastNotificationClick()}">true</span>  
+    </div>
     <th:block th:include="~{fragment/__javascript_link}"></th:block>
     <div class="" layout:fragment="content-js"></div>
     <script>
 
-
+         
         // Document ready function
         $(function () {
             var button = $('#srch');
@@ -54,12 +57,25 @@
                         <div class="col-7 p-0" style="text-align: left;">
                          ${name}
                         </div>
-                         </div> </div>`
+                         </div> 
+                         <div class="row">
+                            <div class="col-4"><img style="width: 20px" src="https://upload.wikimedia.org/wikipedia/en/thumb/6/63/IMG_%28business%29.svg/1200px-IMG_%28business%29.svg.png" alt=""></div>
+                            <div class="col-8">kladjfl;akdjfl;kjadl;kfj adlkfjl;akdf alkjsdf aksdjf akjf jk a dflkj akjdflkj;lkjlkajdflkjadf</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4"><img style="width: 20px" src="https://upload.wikimedia.org/wikipedia/en/thumb/6/63/IMG_%28business%29.svg/1200px-IMG_%28business%29.svg.png" alt=""></div>
+                            <div class="col-8">kladjfl;akdjfl;kjadl;kfj adlkfjl;akdf alkjsdf aksdjf akjf jk a dflkj akjdflkj;lkjlkajdflkjadf</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4"><img style="width: 20px" src="https://upload.wikimedia.org/wikipedia/en/thumb/6/63/IMG_%28business%29.svg/1200px-IMG_%28business%29.svg.png" alt=""></div>
+                            <div class="col-8">kladjfl;akdjfl;kjadl;kfj adlkfjl;akdf alkjsdf aksdjf akjf jk a dflkj akjdflkj;lkjlkajdflkjadf</div>
+                        </div>
+                         </div>`
                     });
                 }
                 else {
-                   
-                        tooltip.DOM.$divContents
+
+                    tooltip.DOM.$divContents
                         .html(`<div class="container-fluid p-0" onclick="window.location.href ='/facebook.com'" style="background-color: white; color: black; border-radius: inherit; cursor: pointer;  margin-top: 16px">   
                             <div class="row">
                                 <div class="col-5 p-0 " >
@@ -68,16 +84,107 @@
                         <div class="col-7 p-0" style="text-align: left;">
                          ${name}
                         </div>
-                         </div> </div>`)
+                         </div> 
+                         <div class="row" style="border-bottom: 1px solid black;">
+                            <div class="col-4"><img style="width: 20px" src="https://upload.wikimedia.org/wikipedia/en/thumb/6/63/IMG_%28business%29.svg/1200px-IMG_%28business%29.svg.png" alt=""></div>
+                            <div class="col-8">kladjfl;akdjfl;kjadl;kfj adlkfjl;akdf alkjsdf aksdjf akjf jk a dflkj akjdflkj;lkjlkajdflkjadf</div>
+                        </div>
+                        <div class="row" style="border-bottom: 1px solid black;">
+                            <div class="col-4"><img style="width: 20px" src="https://upload.wikimedia.org/wikipedia/en/thumb/6/63/IMG_%28business%29.svg/1200px-IMG_%28business%29.svg.png" alt=""></div>
+                            <div class="col-8">kladjfl;akdjfl;kjadl;kfj adlkfjl;akdf alkjsdf aksdjf akjf jk a dflkj akjdflkj;lkjlkajdflkjadf</div>
+                        </div>
+                        <div class="row" style="border-bottom: 1px solid black;">
+                            <div class="col-4"><img style="width: 20px" src="https://upload.wikimedia.org/wikipedia/en/thumb/6/63/IMG_%28business%29.svg/1200px-IMG_%28business%29.svg.png" alt=""></div>
+                            <div class="col-8">kladjfl;akdjfl;kjadl;kfj adlkfjl;akdf alkjsdf aksdjf akjf jk a dflkj akjdflkj;lkjlkajdflkjadf</div>
+                        </div>
+                         </div>`)
                 }
 
                 tooltip.show();
 
             });
-
-
         });
+
+        const updateLastReadIfClick = async () => {
+            let json = null;
+            try {
+                let res = await fetch(`/user/update/lastread`, {
+                    method: `POST`
+                });
+                json = await res.json();
+                console.log(json)
+
+            } catch (error) {
+                console.log(error)
+            }
+
+            //findAllByOrderByIdDesc
+            //api/contents/search/findAllByOrderByIdDesc?number=1&projection=ContentNotificationProjection
+
+        }
+
+        const updateLastReadIfClickShowContentList = async () => {
+            let res = await fetch(`api/contents/search/findAllByOrderByIdDesc?number=&projection=ContentNotificationProjection`, {
+                method: `GET`
+            });
+            json = await res.json();
+            let = contents = json._embedded.contents;
+
+            contents.forEach(content => {
+                $("#notification_div_body").append(convertJsonToNotificationList(content.id, content.category.name, content.timestamp))
+            })
+        }
+        const getNotification = () => {
+            let _last_read = $("#isAuth").text();
+            if (_last_read == "") {
+                /*unauthenticateed */
+                console.log(`unauthenticateed`)
+            } else {
+                /*authenticated*/
+                console.log(`authenticateed`)
+                console.log(_last_read);
+                let _unread_amount = getAmountNotiFromApi(_last_read)
+                _unread_amount.then(amount => {
+                    numberToNotificationAmount(amount)
+                })
+
+                $("#dLabel").on('click', function () {
+                    updateLastReadIfClickShowContentList()
+                    updateLastReadIfClick()
+                })
+            }
+
+        };
+
+        const getAmountNotiFromApi = async (datetime) => {
+            const response = await fetch(`/api/contents/search/findUnreadContentByDate?date=${datetime}`);
+            const notification_json_amount = await response.json();
+            console.log(notification_json_amount)
+            return notification_json_amount;
+        }
+
+        const numberToNotificationAmount = (amount) => {
+            if (parseInt(amount) > 0) {
+                $("#num_of_notification").text(amount)
+            } else {
+
+            }
+        }
+        const convertJsonToNotificationList = (article_id, category_name, time) => {
+            return ` <a class="notifications-content" href="/detail/${article_id}">
+                            <div class="notifications-item border-bottom">
+                                <p class="item-title">New article has been posted in <b> ${category_name}</b></p>
+                                <p class="item-info text-muted">${time}</p>
+                            </div>
+
+                </a>`
+        }
+        getNotification()
     </script>
+<script>
+
+</script>
+
 </body>
 
 </html>

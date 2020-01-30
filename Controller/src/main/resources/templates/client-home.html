@@ -307,6 +307,8 @@
             </div>
             <!-- container-fluid -->
         </div>
+      
+     
     </div>
     <div layout:fragment="content-js">
         <script>
@@ -405,7 +407,8 @@
             } 
             }, _throttleDelay);
         }
-        
+
+     
 //         $(document).ready(function() {
 //     var myContent = '<p><code>var _throttleTimer = null; var _throttleDelay = 100; var $window = $(window); var $document = $(document); $document.ready(function () { $window .off(&#39;scroll&#39;, ScrollHandler) .on(&#39;scroll&#39;, ScrollHandler); }); function ScrollHandler(e) { //throttle event: clearTimeout(_throttleTimer); _throttleTimer = setTimeout(function () { console.log(&#39;scroll&#39;); //do work if ($window.scrollTop() + $window.height() &gt; $document.height() - 100) { alert(&quot;near bottom!&quot;); } }, _throttleDelay); }</code></p>';
 //     alert(myContent.replace(/(<([^>]+)>)/ig,""));

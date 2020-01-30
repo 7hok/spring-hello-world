@@ -49,4 +49,10 @@ public class ContentServiceImp implements ContentService {
     public List<Content> findAll() {
         return null;
     }
+
+    @Override
+    public Page<Content> findByTitleContainingIgnoreCase(String title, Pageable pageable) {
+       
+        return  contentRepository.findByTitleContainingIgnoreCase(title, pageable);;
+    }
 }
