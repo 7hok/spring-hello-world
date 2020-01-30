@@ -126,7 +126,7 @@ public class GoogleLoginController {
 
     protected Boolean autoLogin(String userName,String password,HttpServletRequest request){
         try {
-            UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken("soksomeungkhun@gmail.com", "menghok");
+            UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(userName,password);
             authToken.setDetails(new WebAuthenticationDetails(request));
             Authentication authentication = authenticationManager.authenticate(authToken);
             SecurityContextHolder.getContext().setAuthentication(authentication);
