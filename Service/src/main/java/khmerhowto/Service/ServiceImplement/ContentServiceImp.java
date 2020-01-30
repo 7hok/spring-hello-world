@@ -19,6 +19,8 @@ public class ContentServiceImp implements ContentService {
     @Autowired
     private ContentRepository contentRepository;
 
+//    public Page<Content> findTop3
+
     public Page<Content> findAll(Pageable pageable) {
         return contentRepository.findAll(pageable);
     }
