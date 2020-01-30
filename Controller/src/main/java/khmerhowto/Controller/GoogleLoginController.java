@@ -10,8 +10,10 @@ public class GoogleLoginController {
 
     @GetMapping("/log")
     public Principal user(Principal principal){
+         
         return principal;
     }
+
     @GetMapping("/ck")
     public String ckEdit(){
         return "ckedit";

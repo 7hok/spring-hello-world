@@ -1,22 +1,24 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link href="https://fonts.googleapis.com/css?family=Hanuman&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">    
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://storage.googleapis.com/non-spec-apps/mio-icons/latest/outline.css">
 
     <th:block th:include="~{fragment/__bootstrap_link}"></th:block>
     <th:block th:include="~{navbar/__navbar_css}"></th:block>
     <style>
-    .bg-color-two {
-        background-color: #E5EAED;
-    }
+        .bg-color-two {
+            background-color: #E5EAED;
+        }
     </style>
 </head>
+
 <body>
     <div th:replace="~{navbar/__navbar}"></div>
     <div class="" layout:fragment="content"></div>
@@ -24,7 +26,58 @@
     <th:block th:include="~{fragment/__javascript_link}"></th:block>
     <div class="" layout:fragment="content-js"></div>
     <script>
-          
-        </script>
+
+
+        // Document ready function
+        $(function () {
+            var button = $('#srch');
+            var tooltip;
+
+            button.focusout(function () {
+                // tooltip.hide();
+            });
+            var l = 0;
+            button.on("change paste keyup", function () {
+                var name = $("#srch").val();
+                if (l == 0) {
+
+                    l = 1;
+                    tooltip = new maTooltip(button, {
+                        inline_style: 'max-width: none; border-radius: 4px; width: 250px; overflow: hidden',
+                        full_visibility_duration: 999999999,
+                        position: maTooltip.POSITION.BOTTOM,
+                        static_message: `<div class="container-fluid p-0" onclick="window.location.href ='facebook.com'" style="background-color: white; overflow: hidden; color: black; border-radius: inherit; cursor: pointer;  margin-top: 16px">   
+                        <div class="row p-0">
+                                <div class="col-5 p-0">
+                            <img style="width: 20px" src="/icon/isearch.png" alt=""><span>Search for:</span>
+                        </div>
+                        <div class="col-7 p-0" style="text-align: left;">
+                         ${name}
+                        </div>
+                         </div> </div>`
+                    });
+                }
+                else {
+                   
+                        tooltip.DOM.$divContents
+                        .html(`<div class="container-fluid p-0" onclick="window.location.href ='/facebook.com'" style="background-color: white; color: black; border-radius: inherit; cursor: pointer;  margin-top: 16px">   
+                            <div class="row">
+                                <div class="col-5 p-0 " >
+                            <img style="width: 20px" src="/icon/isearch.png" alt=""><span>Search for:</span>
+                        </div> 
+                        <div class="col-7 p-0" style="text-align: left;">
+                         ${name}
+                        </div>
+                         </div> </div>`)
+                }
+
+                tooltip.show();
+
+            });
+
+
+        });
+    </script>
 </body>
+
 </html>
