@@ -12,6 +12,11 @@
     <artifactId>Controller</artifactId>
     <dependencies>
         <dependency>
+			<groupId>com.corundumstudio.socketio</groupId>
+			<artifactId>netty-socketio</artifactId>
+			<version>1.7.16</version>
+		</dependency>
+        <dependency>
             <groupId>com.kshrd</groupId>
             <artifactId>Service</artifactId>
             <version>0.0.1-SNAPSHOT</version>
@@ -55,7 +60,7 @@
             <artifactId>thymeleaf-extras-springsecurity5</artifactId>
             <version>3.0.4.RELEASE</version>
         </dependency>
-
+ 
     </dependencies>
 
 </project>

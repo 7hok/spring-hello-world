@@ -76,5 +76,18 @@
                  
             </div>
         </div>
+        <div layout:fragment="content-js">
+            <script src="/js/socket.io.js"></script>
+            <script>
+                const socketUrl = location.protocol + "//" + location.hostname + ":15657";
+                const socket = io.connect(socketUrl);
+                socket.on('connect',function(){
+                    socket.emit('gettingstart',"hmmmmmm"); 
+                })
+                socket.on('client',function(data){
+                    console.log(data)
+                })
+            </script>
+        </div>
     </body>
 </html>
