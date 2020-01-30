@@ -168,8 +168,7 @@ public class HomeController {
 //        model.addAttribute("contents", contentRepository.findContentsByCategoryId(id));
 //        System.out.println("id in cR :"+ contentRepository.findContentsByCategoryId(id));
         System.out.println("Hello");
-        model.addAttribute("myContent", contentRepository.findFirst2ByCategoryId(id));
-        System.out.println("why u"+contentRepository.findFirst2ByCategoryId(id));
+
 
 
         return "content-by-category-test";
