@@ -14,7 +14,10 @@ public class ContentServiceImpl {
     @Autowired
     private ContentRepository contentRepository;
 
-
+//    @Override
+//    public List<Content> findAll() {
+//        return contentRepository.findAll();
+//    }
 
 
 }
