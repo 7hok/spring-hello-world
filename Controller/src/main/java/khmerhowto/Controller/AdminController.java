@@ -112,6 +112,7 @@ public class AdminController {
             page = userService.findAll(pageable);
         }
         
+
         // System.out.println(user.getName());
         model.addAttribute("page",page);
         model.addAttribute("users",page.getContent());

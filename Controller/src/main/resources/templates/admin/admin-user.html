@@ -24,7 +24,11 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
 
 
         <h4>User Information and Update</h4>
-        <input type="text" class="form-control-one-line w-25 " placeholder=" Search" th:object="${user}">
+        <div>
+            <input type="text" class="form-control-one-line w-50 " placeholder=" Search" id="input_search">
+            <button class="btn btn-success " id="btn-search"> Search</button>
+
+        </div>
 
     </div>
     <div class="div-parent-table my-3 table-responsive-sm">
@@ -89,6 +93,14 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
             </ul>
         </nav>
     </div>
+</div>
+<div layout:fragment="content-js">
+    <script>
+        $("#btn-search").on("click",function(){
+            let text =  $("#input_search").val();
+            location.href = `?search=${text}`;
+        })    
+    </script>
 </div>
 </body>
 </html>

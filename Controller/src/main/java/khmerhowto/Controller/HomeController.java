@@ -1,12 +1,13 @@
 package khmerhowto.Controller;
 
+import java.security.Principal;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import khmerhowto.Repository.CategoryRepository;
-import khmerhowto.Repository.ContentRepository;
-import khmerhowto.Repository.Model.Content;
+import javax.servlet.http.HttpServletRequest;
 
-import khmerhowto.Service.ServiceImplement.CategoryServiceImpl;
-import khmerhowto.Service.ServiceImplement.ContentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 
@@ -21,12 +22,25 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
+import khmerhowto.Repository.CategoryRepository;
+import khmerhowto.Repository.ContentRepository;
+import khmerhowto.Repository.Model.Category;
 import khmerhowto.Repository.Model.Content;
+import khmerhowto.Repository.Model.User;
 import khmerhowto.Service.CommentService;
 import khmerhowto.Service.ContentService;
+import khmerhowto.Service.ServiceImplement.CategoryServiceImpl;
+import khmerhowto.Service.ServiceImplement.ContentServiceImpl;
 import khmerhowto.Service.ServiceImplement.InterestedServiceImp;
+import khmerhowto.Service.ServiceImplement.UserServiceImp;
 
 import org.springframework.ui.Model;
 
@@ -44,6 +58,8 @@ public class HomeController {
     InterestedServiceImp interestedServiceImp;
     @Autowired
     CommentService cmt;
+    @Autowired
+    UserServiceImp userServiceImp;
     @GetMapping("/about")
     String showAboutUs() {
 
@@ -101,29 +117,56 @@ public class HomeController {
         return "client-home";
     }
 
-    @GetMapping({ "/logPage", "/" })
+    @GetMapping({ "/login", "/" })
     String loginPage() {
-        return "loginPage";
+        return "oauth_login";
     }
 
     @GetMapping("/favorite/chosen")
-    String favorite() {
+    String favorite(ModelMap modelMap){
+        List<Category> categories= categoryRepository.findByStatus(1);
+        modelMap.addAttribute("CATEGORIES", categories);
         return "clients/CategoryChoosen";
     }
 
     @GetMapping("/signup")
-    String signUp() {
+    String signUp(HttpServletRequest request,ModelMap modelMap) {
+        User user = null;
+        try {
+           user = (User) request.getSession().getAttribute("USER");
+           request.getSession().setAttribute("USER", null);
+            // user = new User();  
+        } catch (Exception e) {
+            System.out.println(e);
+           user = null;
+        }
+        User _user=null;
+        
+        if(user ==null ){
+            System.out.println("user is null");
+            _user = new User();
+        }else{
+            System.out.println("user is found");
+            _user = user;
+        }
+        modelMap.addAttribute("USER", _user);
         return "sign-up";
     }
-
+    @PostMapping("/signup")
+    @ResponseBody
+    String registerToData(User user){
+        System.out.println(user);
+        userServiceImp.saveUser(user);
+        return "redirect:/favorite/chosen";
+    }
     @GetMapping("/detail")
     String detail() {
         return "clients/contentDetail";
     }
 
     @GetMapping("/contentByCategory")
-//<<<<<<< HEAD
     String contentByCategory(Model model){
+        model.addAttribute("CURRENT_PAGE", "category");
         return "content-by-category";
     }
 
@@ -145,28 +188,18 @@ public class HomeController {
         model.addAttribute("categories",categoryServiceImpl.findAll());
         System.out.println(categoryServiceImpl.findAll());
         System.out.println("JPQfL"+categoryRepository.findByCategoryIdAndStatus());
-//=======
-//    String contentByCategory(Model model) {
-//        model.addAttribute("CURRENT_PAGE", "category");
-//        return "content-by-category";
-//    }
-//
-//    @GetMapping("test/contentByCategory")
-//    String contentByCategoryTest(Model model) {
-//        model.addAttribute("CURRENT_PAGE", "category");
-//>>>>>>> d4dd1a047db20884e5aa37da3505b53530ef2a3b
+
         return "content-by-category-test";
 
     }
 
-//<<<<<<< HEAD
+
     @GetMapping("/category/{id}")
     String categoryLeft(Model model, @PathVariable Integer id){
         System.out.println("jab ban id: " + id);
         model.addAttribute("categories",categoryServiceImpl.findAll());
         model.addAttribute("OneCategory",categoryRepository.findByCategoryIdAndStatus());
-//        model.addAttribute("contents", contentRepository.findContentsByCategoryId(id));
-//        System.out.println("id in cR :"+ contentRepository.findContentsByCategoryId(id));
+
         System.out.println("Hello");
 
 
@@ -174,16 +207,11 @@ public class HomeController {
         return "content-by-category-test";
     }
 
-@GetMapping("/test/contentByCategory")
-    String contentByCategoryTest(){
-//        List <Content> contents = contentService.findAll();
-//        System.out.println(contents);
-////        model.addAttribute("CURRENT_PAGE", "category");
-//        model.addAttribute("contents", contents);
+    @GetMapping("/test/contentByCategory")
+    String contentByCategoryTest(Model model){
+
+        model.addAttribute("CURRENT_PAGE", "category");
+
             return "content-by-category-test";
             }
-            //End of Chamroeun
-            }
-//=======
-//}
-//>>>>>>> d4dd1a047db20884e5aa37da3505b53530ef2a3b
+}
