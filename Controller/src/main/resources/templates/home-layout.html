@@ -21,8 +21,88 @@
     <div th:replace="~{navbar/__navbar}"></div>
     <div class="" layout:fragment="content"></div>
     <div th:replace="~{footer/__footer}"></div>
+    <div sec:authorize="isAuthenticated()">
+        <span id="isAuth" class="d-none" th:text="${#authentication.getPrincipal().getCurrentUser().getLastNotificationClick()}">true</span>  
+    </div>
     <th:block th:include="~{fragment/__javascript_link}"></th:block>
     <div class="" layout:fragment="content-js"></div>
+    <script>
+           const updateLastReadIfClick = async( ) => {
+            let json = null;
+           try {
+            let res =   await fetch(`/user/update/lastread`,{
+               method : `POST`
+            });
+            json = await res.json();
+            console.log(json)
+
+           } catch (error) {
+               console.log(error)
+           }
+           
+           //findAllByOrderByIdDesc
+           //api/contents/search/findAllByOrderByIdDesc?number=1&projection=ContentNotificationProjection
+
+        }
+    
+        const updateLastReadIfClickShowContentList = async () => {
+            let res =   await fetch(`api/contents/search/findAllByOrderByIdDesc?number=&projection=ContentNotificationProjection`,{
+               method : `GET`
+            });
+            json = await res.json();
+            let = contents = json._embedded.contents;
+        
+            contents.forEach(content => {
+                $("#notification_div_body").append(convertJsonToNotificationList(content.id,content.category.name,content.timestamp))
+            })
+        }
+        const getNotification =  () => {
+            let _last_read = $("#isAuth").text();
+            if(_last_read == ""){
+                /*unauthenticateed */
+                console.log(`unauthenticateed`)
+            }else{
+                /*authenticated*/
+                console.log(`authenticateed`)
+                console.log(_last_read);
+                let _unread_amount = getAmountNotiFromApi(_last_read)
+                _unread_amount.then(amount => {
+                    numberToNotificationAmount(amount)
+                })
+
+                $("#dLabel").on('click',function() {
+                    updateLastReadIfClickShowContentList()
+                    updateLastReadIfClick()
+                })
+            }
+
+        };
+
+        const getAmountNotiFromApi = async (datetime) => {
+            const response = await fetch(`/api/contents/search/findUnreadContentByDate?date=${datetime}`);
+            const notification_json_amount = await response.json();
+            console.log(notification_json_amount)
+            return notification_json_amount;
+        }
+
+        const numberToNotificationAmount = (amount) => {
+            if( parseInt(amount) > 0){
+                $("#num_of_notification").text(amount)
+            }else{
+
+            }
+        }
+        const convertJsonToNotificationList = (article_id,category_name,time) => {
+            return ` <a class="notifications-content" href="/detail/${article_id}">
+                                <div class="notifications-item border-bottom">
+                                    <p class="item-title">New article has been posted in <b> ${category_name}</b></p>
+                                    <p class="item-info text-muted">${time}</p>
+                                </div>
+
+                    </a>`
+        }
+        getNotification()
+    </script>
     <script>
           
         </script>

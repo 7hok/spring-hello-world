@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Title</title>
     <th:block th:include="~{fragment/__bootstrap_link}"></th:block>
-
+    
 </head>
 
 <body>
@@ -17,21 +17,21 @@
                 <img class="vh-100 w-100" src="/img/loginPic.jpg" alt="">
             </div>
             <div class="col-sm h-100 my-auto" style="padding-left: 14%; padding-right: 14%; ">
-                <form class="p-form" style="text-align: center;" method="POST" th:object="${USER}" action="/signup">
-                    <h5 style="line-height: 60px; margin-bottom: 3px; font-size: x-large;" class="font-weight-bold"> Khmer How To</h5>
+                <form  id="form-submit" class="p-form" style="text-align: center;" method="POST" th:object="${USER}" action="/signup">
+                    <h3 style="line-height: 60px; margin-bottom: 3px; font-size: x-large;" class="font-weight-bold"> KUNLOES</h3>
                     <!-- <span class="title-log ">Khmer How To</span> -->
-                    <p class="line-m" style="line-height: 100%; font-size: small;">Sign up with Khmer How To
+                    <p class="line-m" style="line-height: 100%; font-size: small;">Sign up with <b>KUNLOES</b>
                         Account</p>
 
                     <div style=" text-align: start; margin-bottom: 7%; margin-top: 7%;">
                         <span style="text-align: left; margin-bottom: 0px !important;font-size: small; font-weight: 550; ">Name</span>
                         <input style="text-align: left; margin-top: 2px; font-size: small" type="text"
-                            class="t-span form-control" th:field="*{name}" placeholder="Name">
+                           id="name_input"  class="t-span form-control" th:field="*{name}" placeholder="Name">
                     </div>
                     <div style="text-align: start;">
                         <span class="t-span" style="margin-bottom: 0px; font-size: small;font-weight: 550; ">E-mail</span>
                         <input type="text" class="t-span form-control"
-                            style="margin-top: 2px; margin-bottom: 8%; font-size: small " th:field="*{email}" placeholder="ABC@gmail.com">
+                        id="email_input"  style="margin-top: 2px; margin-bottom: 8%; font-size: small " th:field="*{email}" placeholder="ABC@gmail.com">
                     </div>
 
                     <div style="text-align: start; ">
@@ -57,20 +57,20 @@
                     <div style=" text-align: start; margin-bottom: 8%; margin-top: 5%;">
                         <span style="text-align: left; margin-bottom: 0px !important;font-size: small;font-weight: 550;  ">Password</span>
                         <input style="text-align: left; margin-top: 3px; font-size: small " type="password"
-                            class="t-span form-control" th:field="*{password}" placeholder="Password">
+                           id="password"  class="t-span form-control" th:field="*{password}" placeholder="Password">
                     </div>
                     <div style=" text-align: start; margin-bottom: 11%; margin-top: 5%;">
                         <span style="text-align: left; margin-bottom: 0px !important;font-size: small;font-weight: 550;  ">Confirm Password</span>
                         <input style="text-align: left; margin-top: 3px; font-size: small " type="password"
-                            class="t-span form-control" placeholder="Password">
+                        id="c_password" class="t-span form-control" placeholder="Password">
                     </div>
                     <div class="container-fluid mb-2">
                         <div class="row">
                             <div class="col-6 px-0 text-left">
-                                <button style="width: 90px;background-color: #a9a9a954;" type="submit" class="btn right-al"><span class="t-span">Log in</span></button>
+                                <a style="width: 90px;background-color: #FF2A19;" href="/login"  class="btn text-white right-al"><span class="t-span ">Log in</span></a>
                             </div>
                             <div class="col-6 px-0 text-right">
-                                <button style="width: 90px;" type="submit" class="btn btn-primary left-al"><span class="t-span">Sign Up</span>
+                                <button style="width: 90px;" type="submit" class="btn btn-primary left-al"><span class="t-span">SignUp > </span>
                                 </button>
                                 
                             </div>
@@ -82,7 +82,19 @@
 
         </div>
     </div>
+    <script src="/node_module/jquery/dist/jquery.min.js"></script>
 
+    <script>
+        $("#form-submit").submit(function(e){
+          if( $("#password").val() == $("#c_password").val() | $("#name_input").val() != "" | $("#email_input").val()!= "" ){
+
+          }else{
+              e.preventDefault();
+              alert("Incorrect Password")
+          }
+        })
+    </script>
+   
 </body>
 
 </html>

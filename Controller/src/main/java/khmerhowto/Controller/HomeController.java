@@ -32,6 +32,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import khmerhowto.Repository.CategoryRepository;
 import khmerhowto.Repository.ContentRepository;
+import khmerhowto.Repository.Model.Category;
 import khmerhowto.Repository.Model.Content;
 import khmerhowto.Repository.Model.User;
 import khmerhowto.Service.CommentService;
@@ -116,13 +117,15 @@ public class HomeController {
         return "client-home";
     }
 
-    @GetMapping({ "/logPage", "/" })
+    @GetMapping({ "/login", "/" })
     String loginPage() {
-        return "loginPage";
+        return "oauth_login";
     }
 
     @GetMapping("/favorite/chosen")
-    String favorite() {
+    String favorite(ModelMap modelMap){
+        List<Category> categories= categoryRepository.findByStatus(1);
+        modelMap.addAttribute("CATEGORIES", categories);
         return "clients/CategoryChoosen";
     }
 
@@ -154,26 +157,11 @@ public class HomeController {
     String registerToData(User user){
         System.out.println(user);
         userServiceImp.saveUser(user);
-        return user.toString();
+        return "redirect:/favorite/chosen";
     }
     @GetMapping("/detail")
     String detail() {
         return "clients/contentDetail";
-    }
-
-    @GetMapping("/imtester")
-    String imTester(HttpServletRequest request){
-       
-        User user = new User();
-        user.setName("hahahaLMAO");
-        user.setEmail("email");
-        user.setPhoneNumber("phoneNumber");
-        user.setPassword("password");
-
-        request.getSession().setAttribute("USER", user);
-         return "redirect:/signup";
-       // return signUp(user,modelMap);
-        
     }
 
     @GetMapping("/contentByCategory")

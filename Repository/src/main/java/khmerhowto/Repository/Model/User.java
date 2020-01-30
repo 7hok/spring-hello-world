@@ -23,11 +23,13 @@ public class User {
     private String location;
     private LocalDateTime timestamp;
     private Integer status;
-    
+    /** for save user last click on history  */
+    private LocalDateTime lastNotificationClick;
     @PrePersist
     public void prePersist(){
         this.status = 1;
         this.timestamp = LocalDateTime.now();
+        this.lastNotificationClick = LocalDateTime.now();
     }
 
     public User() {
@@ -36,7 +38,7 @@ public class User {
         this.name = name;
         this.password = password;
     }
-    public User(int id, String name, String profilePicture, String sex, String email, String phoneNumber, String bio, String location, LocalDateTime timestamp,Integer status,String password) {
+    public User(int id, String name, String profilePicture, String sex, String email, String phoneNumber, String bio, String location, LocalDateTime timestamp,Integer status,String password,LocalDateTime lastNotificationClick) {
         this.id=id;
         this.name=name;
         this.profilePicture=profilePicture;
@@ -48,6 +50,7 @@ public class User {
         this.location=location;
         this.timestamp=timestamp;
         this.status = status;
+        this.lastNotificationClick = lastNotificationClick;
     }
 
     public int getId() {
@@ -144,6 +147,19 @@ public class User {
     public String getPassword() {
         return password;
     }
+    /**
+     * @param lastNotificationClick the lastNotificationClick to set
+     */
+    public void setLastNotificationClick(LocalDateTime lastNotificationClick) {
+        this.lastNotificationClick = lastNotificationClick;
+    }
+
+    /**
+     * @return the lastNotificationClick
+     */
+    public LocalDateTime getLastNotificationClick() {
+        return lastNotificationClick;
+    }
     @Override
     public String toString() {
         return "User{" +
@@ -157,6 +173,7 @@ public class User {
                 ", location='" + location + '\'' +
                 ", timestamp=" + timestamp +
                 ", password=" + password+
+                ", click=" + lastNotificationClick+'\''+
                 '}';
     }
 }

@@ -21,8 +21,15 @@ public class GlobalFunctionHelper {
     }
 
     public static User getCurrentUser(){
-        UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user= ((MyUser)userDetails).getCurrentUser();
-        return user;
+        try{
+            UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+            User user=  ((MyUser)userDetails).getCurrentUser();
+            return user;
+        }catch(Exception e){
+            return null;
+        }
+        
+       
     }
 }
