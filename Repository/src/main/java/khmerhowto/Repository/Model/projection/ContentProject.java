@@ -15,6 +15,8 @@ public interface ContentProject {
     @Value("#{target.id}")
     Integer getId();
     CategoryInfo getCategory();
+    String getThumbnail();
+    String getTitle();
     interface CategoryInfo {
         String getName();
     }

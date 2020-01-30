@@ -201,8 +201,7 @@ public class HomeController {
         model.addAttribute("OneCategory",categoryRepository.findByCategoryIdAndStatus());
 
         System.out.println("Hello");
-        model.addAttribute("myContent", contentRepository.findFirst2ByCategoryId(id));
-        System.out.println("why u"+contentRepository.findFirst2ByCategoryId(id));
+
 
 
         return "content-by-category-test";

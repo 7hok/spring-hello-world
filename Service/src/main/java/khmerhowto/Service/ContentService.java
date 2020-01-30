@@ -9,5 +9,5 @@ public interface ContentService {
     public Page<Content> findAll(Pageable pageable);
     public Page<Content> findByName(String string,Pageable pageable);
     public Page<Content> findAllByOrderByIdDesc(Pageable pageable);
-
+    Page<Content> findByTitleContainingIgnoreCase(String title, Pageable pageable);
 }

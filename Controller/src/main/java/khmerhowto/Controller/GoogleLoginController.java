@@ -43,9 +43,8 @@ public class GoogleLoginController {
 
     @GetMapping("/log")
     @ResponseBody
-    public Principal user(Principal principal){
-        // System.out.println(((UserDetails)principal).getUsername());
-       System.out.println( GlobalFunctionHelper.getCurrentUser());;
+    public Principal user(Principal principal){ 
+        System.out.println( GlobalFunctionHelper.getCurrentUser()); 
         return principal;
     }
    
@@ -137,5 +136,6 @@ public class GoogleLoginController {
             return false;
         }
         return true;
+ 
     }
 }

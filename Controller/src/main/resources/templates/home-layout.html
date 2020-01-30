@@ -1,22 +1,24 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link href="https://fonts.googleapis.com/css?family=Hanuman&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">    
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://storage.googleapis.com/non-spec-apps/mio-icons/latest/outline.css">
 
     <th:block th:include="~{fragment/__bootstrap_link}"></th:block>
     <th:block th:include="~{navbar/__navbar_css}"></th:block>
     <style>
-    .bg-color-two {
-        background-color: #E5EAED;
-    }
+        .bg-color-two {
+            background-color: #E5EAED;
+        }
     </style>
 </head>
+
 <body>
     <div th:replace="~{navbar/__navbar}"></div>
     <div class="" layout:fragment="content"></div>
@@ -27,41 +29,117 @@
     <th:block th:include="~{fragment/__javascript_link}"></th:block>
     <div class="" layout:fragment="content-js"></div>
     <script>
-           const updateLastReadIfClick = async( ) => {
-            let json = null;
-           try {
-            let res =   await fetch(`/user/update/lastread`,{
-               method : `POST`
-            });
-            json = await res.json();
-            console.log(json)
 
-           } catch (error) {
-               console.log(error)
-           }
-           
-           //findAllByOrderByIdDesc
-           //api/contents/search/findAllByOrderByIdDesc?number=1&projection=ContentNotificationProjection
+         
+        // Document ready function
+        $(function () {
+            var button = $('#srch');
+            var tooltip;
+
+            button.focusout(function () {
+                // tooltip.hide();
+            });
+            var l = 0;
+            button.on("change paste keyup", function () {
+                var name = $("#srch").val();
+                if (l == 0) {
+
+                    l = 1;
+                    tooltip = new maTooltip(button, {
+                        inline_style: 'max-width: none; border-radius: 4px; width: 250px; overflow: hidden',
+                        full_visibility_duration: 999999999,
+                        position: maTooltip.POSITION.BOTTOM,
+                        static_message: `<div class="container-fluid p-0" onclick="window.location.href ='facebook.com'" style="background-color: white; overflow: hidden; color: black; border-radius: inherit; cursor: pointer;  margin-top: 16px">   
+                        <div class="row p-0">
+                                <div class="col-5 p-0">
+                            <img style="width: 20px" src="/icon/isearch.png" alt=""><span>Search for:</span>
+                        </div>
+                        <div class="col-7 p-0" style="text-align: left;">
+                         ${name}
+                        </div>
+                         </div> 
+                         <div class="row">
+                            <div class="col-4"><img style="width: 20px" src="https://upload.wikimedia.org/wikipedia/en/thumb/6/63/IMG_%28business%29.svg/1200px-IMG_%28business%29.svg.png" alt=""></div>
+                            <div class="col-8">kladjfl;akdjfl;kjadl;kfj adlkfjl;akdf alkjsdf aksdjf akjf jk a dflkj akjdflkj;lkjlkajdflkjadf</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4"><img style="width: 20px" src="https://upload.wikimedia.org/wikipedia/en/thumb/6/63/IMG_%28business%29.svg/1200px-IMG_%28business%29.svg.png" alt=""></div>
+                            <div class="col-8">kladjfl;akdjfl;kjadl;kfj adlkfjl;akdf alkjsdf aksdjf akjf jk a dflkj akjdflkj;lkjlkajdflkjadf</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4"><img style="width: 20px" src="https://upload.wikimedia.org/wikipedia/en/thumb/6/63/IMG_%28business%29.svg/1200px-IMG_%28business%29.svg.png" alt=""></div>
+                            <div class="col-8">kladjfl;akdjfl;kjadl;kfj adlkfjl;akdf alkjsdf aksdjf akjf jk a dflkj akjdflkj;lkjlkajdflkjadf</div>
+                        </div>
+                         </div>`
+                    });
+                }
+                else {
+
+                    tooltip.DOM.$divContents
+                        .html(`<div class="container-fluid p-0" onclick="window.location.href ='/facebook.com'" style="background-color: white; color: black; border-radius: inherit; cursor: pointer;  margin-top: 16px">   
+                            <div class="row">
+                                <div class="col-5 p-0 " >
+                            <img style="width: 20px" src="/icon/isearch.png" alt=""><span>Search for:</span>
+                        </div> 
+                        <div class="col-7 p-0" style="text-align: left;">
+                         ${name}
+                        </div>
+                         </div> 
+                         <div class="row" style="border-bottom: 1px solid black;">
+                            <div class="col-4"><img style="width: 20px" src="https://upload.wikimedia.org/wikipedia/en/thumb/6/63/IMG_%28business%29.svg/1200px-IMG_%28business%29.svg.png" alt=""></div>
+                            <div class="col-8">kladjfl;akdjfl;kjadl;kfj adlkfjl;akdf alkjsdf aksdjf akjf jk a dflkj akjdflkj;lkjlkajdflkjadf</div>
+                        </div>
+                        <div class="row" style="border-bottom: 1px solid black;">
+                            <div class="col-4"><img style="width: 20px" src="https://upload.wikimedia.org/wikipedia/en/thumb/6/63/IMG_%28business%29.svg/1200px-IMG_%28business%29.svg.png" alt=""></div>
+                            <div class="col-8">kladjfl;akdjfl;kjadl;kfj adlkfjl;akdf alkjsdf aksdjf akjf jk a dflkj akjdflkj;lkjlkajdflkjadf</div>
+                        </div>
+                        <div class="row" style="border-bottom: 1px solid black;">
+                            <div class="col-4"><img style="width: 20px" src="https://upload.wikimedia.org/wikipedia/en/thumb/6/63/IMG_%28business%29.svg/1200px-IMG_%28business%29.svg.png" alt=""></div>
+                            <div class="col-8">kladjfl;akdjfl;kjadl;kfj adlkfjl;akdf alkjsdf aksdjf akjf jk a dflkj akjdflkj;lkjlkajdflkjadf</div>
+                        </div>
+                         </div>`)
+                }
+
+                tooltip.show();
+
+            });
+        });
+
+        const updateLastReadIfClick = async () => {
+            let json = null;
+            try {
+                let res = await fetch(`/user/update/lastread`, {
+                    method: `POST`
+                });
+                json = await res.json();
+                console.log(json)
+
+            } catch (error) {
+                console.log(error)
+            }
+
+            //findAllByOrderByIdDesc
+            //api/contents/search/findAllByOrderByIdDesc?number=1&projection=ContentNotificationProjection
 
         }
-    
+
         const updateLastReadIfClickShowContentList = async () => {
-            let res =   await fetch(`api/contents/search/findAllByOrderByIdDesc?number=&projection=ContentNotificationProjection`,{
-               method : `GET`
+            let res = await fetch(`api/contents/search/findAllByOrderByIdDesc?number=&projection=ContentNotificationProjection`, {
+                method: `GET`
             });
             json = await res.json();
             let = contents = json._embedded.contents;
-        
+
             contents.forEach(content => {
-                $("#notification_div_body").append(convertJsonToNotificationList(content.id,content.category.name,content.timestamp))
+                $("#notification_div_body").append(convertJsonToNotificationList(content.id, content.category.name, content.timestamp))
             })
         }
-        const getNotification =  () => {
+        const getNotification = () => {
             let _last_read = $("#isAuth").text();
-            if(_last_read == ""){
+            if (_last_read == "") {
                 /*unauthenticateed */
                 console.log(`unauthenticateed`)
-            }else{
+            } else {
                 /*authenticated*/
                 console.log(`authenticateed`)
                 console.log(_last_read);
@@ -70,7 +148,7 @@
                     numberToNotificationAmount(amount)
                 })
 
-                $("#dLabel").on('click',function() {
+                $("#dLabel").on('click', function () {
                     updateLastReadIfClickShowContentList()
                     updateLastReadIfClick()
                 })
@@ -86,25 +164,27 @@
         }
 
         const numberToNotificationAmount = (amount) => {
-            if( parseInt(amount) > 0){
+            if (parseInt(amount) > 0) {
                 $("#num_of_notification").text(amount)
-            }else{
+            } else {
 
             }
         }
-        const convertJsonToNotificationList = (article_id,category_name,time) => {
+        const convertJsonToNotificationList = (article_id, category_name, time) => {
             return ` <a class="notifications-content" href="/detail/${article_id}">
-                                <div class="notifications-item border-bottom">
-                                    <p class="item-title">New article has been posted in <b> ${category_name}</b></p>
-                                    <p class="item-info text-muted">${time}</p>
-                                </div>
+                            <div class="notifications-item border-bottom">
+                                <p class="item-title">New article has been posted in <b> ${category_name}</b></p>
+                                <p class="item-info text-muted">${time}</p>
+                            </div>
 
-                    </a>`
+                </a>`
         }
         getNotification()
     </script>
-    <script>
-          
-        </script>
+<script>
+
+</script>
+
 </body>
+
 </html>
