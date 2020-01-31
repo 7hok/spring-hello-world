@@ -156,6 +156,9 @@
             font-size: 17px !important;
         }
 
+        /*Fixed card image heigh*/
+
+
 
 
 
@@ -539,9 +542,6 @@
                         <a class="text-decoration-none" id="loadMorePopular" href=""><h4 class="text-primary p-2 bg-light load-more ">Load More</h4></a>
                         <button type="button" class="btn btn-primary">Primary</button>
 
-                        <div id="theCount"></div>
-                        <br/>
-                        <button id="addMe">Add 1</button>
                     </div>
                 </div>
 
@@ -568,10 +568,6 @@
                 url: "/api/contents/search/findAllBycategoryId?id=1&page=0&size=3",
                 method: 'GET',
                 success: function(obj) {
-
-                    console.log("sos");
-                    console.log(obj);
-
                     ele1=`<div class="carousel-item active" >
                         <img src=${obj._embedded.contents[0].thumbnail} class="d-block w-100" alt="...">
                         <div class="latest-post-caption carousel-caption d-none d-md-block text-left ">
@@ -615,9 +611,6 @@
                 url: "/api/contents/search/findAllBycategoryId?id=1&page=1&size=3",
                 method: 'GET',
                 success: function(objRecent) {
-                    var eleRecent;
-                    var i = 0;
-
                     eleRecent1=`   <div class="card mb-3">
                             <div class="row no-gutters">
                                 <div class="col-md-7">
@@ -720,29 +713,22 @@
             // End of Append Three Card Recent Post
 
 
-            var counter = 0;
-
-            $(document).ready(function() {
-
-                $("#addMe").click(function(){
-                    counter++;
-
-                    $("#theCount").text(counter);
-                });
-
-            });
-
             // Append Load More Six Card Recent Post
+            var i= 2;
+            var j=3;
+            var k=0;
+            var l=0;
             $("#loadMoreRecentBtn").click(function () {
 
 
                 $.ajax({
-                    url: "/api/contents/search/findAllBycategoryId?id=1&page=2&size=3",
+                    url: `/api/contents/search/findAllBycategoryId?id=1&page=${i}&size=3`,
                     method: 'GET',
                     success: function(objRecentLoad) {
-                        console.log(objRecentLoad);
-                        var rowLoad=`<div class="row" id="rowLoadMore"></div>`;
-                        $(rowLoad).insertAfter("#conttRecentLoad1");
+                        i=i+2;
+                        console.log("ti 1")
+                        var rowLoad1=`<div class="row" id="rowLoadMore1"></div>`;
+                        $(rowLoad1).insertAfter("#conttRecentLoad1");
 
                         var eleRecentLoad1=`<div class="col-md-6 col-sm-12 mb-3">
                         <div class="card">
@@ -803,6 +789,12 @@
                             </div>
                         </div>
                     </div>`;
+                        $("#rowLoadMore1").append(eleRecentLoad1);
+                        $("#rowLoadMore1").append(eleRecentLoad2);
+
+                        var rowLoad2=`<div class="row" id="rowLoadMore2"></div>`;
+                        $(rowLoad2).insertAfter("#rowLoadMore1");
+
                         var eleRecentLoad3=`<div class="col-md-6 col-sm-12 mb-3">
                         <div class="card">
                             <img class="card-img-top img-thumbnail" src="${objRecentLoad._embedded.contents[2].thumbnail}" alt="Card image cap">
@@ -832,17 +824,18 @@
                             </div>
                         </div>
                     </div>`;
-                        $("#rowLoadMore").append(eleRecentLoad1);
-                        $("#rowLoadMore").append(eleRecentLoad2);
-                        $("#rowLoadMore").append(eleRecentLoad3);
-                    }
-                });
-                $.ajax({
-                    url: "/api/contents/search/findAllBycategoryId?id=1&page=3&size=3",
-                    method: 'GET',
-                    success: function(objRecentLoad2) {
 
-                        var eleRecentLoad4 =`<div class="col-md-6 col-sm-12">
+                        $("#rowLoadMore2").append(eleRecentLoad3);
+
+
+                        // 3 Card More
+                        $.ajax({
+                            url: `/api/contents/search/findAllBycategoryId?id=1&page=${j}&size=3`,
+                            method: 'GET',
+                            success: function(objRecentLoad2) {
+                                j=j+2;
+                                console.log("ti 2");
+                                var eleRecentLoad4 =`<div class="col-md-6 col-sm-12">
                         <div class="card">
                             <img class="card-img-top img-thumbnail" src="${objRecentLoad2._embedded.contents[0].thumbnail}" alt="Card image cap">
                             <div class="card-body text-center">
@@ -870,8 +863,12 @@
                             </div>
                         </div>
                     </div>`;
+                                $("#rowLoadMore2").append(eleRecentLoad4);
 
-                        var eleRecentLoad5=`<div class="col-md-6 col-sm-12 mb-3">
+                                var rowLoad3=`<div class="row" id="rowLoadMore3"></div>`;
+                                $(rowLoad3).insertAfter("#rowLoadMore2");
+
+                                var eleRecentLoad5=`<div class="col-md-6 col-sm-12 mb-3">
                         <div class="card">
                             <img class="card-img-top img-thumbnail" src="${objRecentLoad2._embedded.contents[1].thumbnail}" alt="Card image cap">
                             <div class="card-body text-center">
@@ -902,7 +899,7 @@
                     </div>`;
 
 
-                        var eleRecentLoad6=`<div class="col-md-6 col-sm-12">
+                                var eleRecentLoad6=`<div class="col-md-6 col-sm-12">
                         <div class="card">
                             <img class="card-img-top img-thumbnail" src="${objRecentLoad2._embedded.contents[2].thumbnail}" alt="Card image cap">
                             <div class="card-body text-center">
@@ -931,12 +928,16 @@
                         </div>
                     </div>`;
 
-                        $("#rowLoadMore").append(eleRecentLoad4);
-                        $("#rowLoadMore").append(eleRecentLoad5);
-                        $("#rowLoadMore").append(eleRecentLoad6);
 
+                                $("#rowLoadMore3").append(eleRecentLoad5);
+                                $("#rowLoadMore3").append(eleRecentLoad6);
+
+                            }
+                        });
+                        // End of 3 Card More
                     }
                 });
+
             });
 
             // End of Load More Six Card Recent Post
@@ -947,9 +948,6 @@
                 url: "/api/contents/search/findAllBycategoryId?id=1&page=2&size=3",
                 method: 'GET',
                 success: function(objPopular) {
-                    var eleRecent;
-                    var i = 0;
-
                     elePopular1=`<div class="card mb-3">
                             <div class="row no-gutters">
                                 <div class="col-md-7">
