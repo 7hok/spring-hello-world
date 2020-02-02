@@ -16,6 +16,26 @@
         .bg-color-two {
             background-color: #E5EAED;
         }
+
+        .outerDiv {
+            display: inline-flex;
+            /* height: 400px; */
+            /* background-color: red; */
+            /* color: white; */
+        }
+
+        .innerDiv:hover {
+            text-decoration: underline;
+        }
+
+        .innerDiv {
+            margin: auto 5px;
+        }
+
+        .mr:hover {
+            text-decoration: underline;
+            color: #96a0a5;
+        }
     </style>
 </head>
 
@@ -30,81 +50,82 @@
     <div class="" layout:fragment="content-js"></div>
     <script>
 
-         
+
         // Document ready function
         $(function () {
             var button = $('#srch');
             var tooltip;
 
-            button.focusout(function () {
-                // tooltip.hide();
-            });
             var l = 0;
-            button.on("change paste keyup", function () {
-                var name = $("#srch").val();
-                $.ajax({
-                    url: `/api/contents/search/findByTitleContainingIgnoreCase?title=${name}&page=0&size=3&projection=ContentNotificationProjection`,
-                    method: 'GET',
-                    success: function (obj) {
-                        console.log(obj)
-                        $('.er').remove()
-                        var elem = "";
-                        elem += `<div class ="row er p-2"  >
-                                     <div class="col-6" style="font-size: 18px; text-align: left;">
-                                        TITLE
-                                     </div>
-                                     <div class="col-6" style="font-size: 18px; text-align: right; opacity: 0.8; cursor: pointer" onclick="window.location.href ='/findMore/${name}'">
-                                         MORE
-                                     </div>
-                                 </div>`
-                        for (i = 0; i < 3; i++) {
-                            elem += `
-                        <div onclick="window.location.href ='/detail/${obj._embedded.contents[i].id}'" class="row er    mb-3 pt-3" style=" !important; border-top: 1px  solid black; cursor: pointer" >
-                            <div class="col-3 " ><img class=" rounded-circle z-depth-2 myButton point" style="width: 60px; height: 60px" src=${obj._embedded.contents[0].thumbnail} alt=""></div>
-                            <div class="col-9 pl-0 outerDiv" style="font-size: 18px; text-align: left; vertical-align: middle;"><div class ="innerDiv" style="line-height: 1.4;">${obj._embedded.contents[i].title}</div></div>
-                        </div>
-                        `
 
+            button.on("  paste keyup", function () {
+
+                var name = $("#srch").val();
+
+
+                if (l == 0) {
                     l = 1;
                     tooltip = new maTooltip(button, {
-                        inline_style: 'max-width: none; border-radius: 4px; width: 250px; overflow: hidden',
+                        inline_style: 'max-width: none; border-radius:8px; width: 270px; overflow: hidden; padding: 0pc;background-color: #fbfbfbfb;',
                         full_visibility_duration: 999999999,
                         position: maTooltip.POSITION.BOTTOM,
-                        static_message: `<div id="srh" class="container-fluid p-0" onclick="window.location.href ='/facebook.com'" style="    background-color: #fbfbfb; color: black; border-radius: inherit;   ">   
+                        static_message: `<div id="srh" class="container-fluid p-0" style="    background-color: #fbfbfb; color: black; border-radius: inherit;   ">   
                             
                          </div>`
                     });
                 }
-                else {
 
-                    tooltip.DOM.$divContents
-                        .html(`<div class="container-fluid p-0" onclick="window.location.href ='/facebook.com'" style="background-color: white; color: black; border-radius: inherit; cursor: pointer;  margin-top: 16px">   
-                            <div class="row">
-                                <div class="col-5 p-0 " >
-                            <img style="width: 20px" src="/icon/isearch.png" alt=""><span>Search for:</span>
-                        </div> 
-                        <div class="col-7 p-0" style="text-align: left;">
-                         ${name}
+                $.ajax({
+                    url: `/api/contents/search/findByTitleContainingIgnoreCase?title=${name}&page=0&size=3&projection=ContentNotificationProjection`,
+                    method: 'GET',
+                    success: function (obj) {
+                        tooltip.show();
+                        $('.er').remove()
+                        if (obj._embedded.contents.length == 0) {
+                            $('.maTooltip-BOTTOM').remove()
+                        }
+                        var elem = "";
+                        elem += `<div class ="row er p-2"  style="border-bottom: 1px  solid black;">
+                                     <div class="col-6" style="font-size: 14px; text-align: left;">
+                                        TITLE
+                                     </div>
+                                     <div class="col-6 mr" style="font-size: 14px; text-align: right; opacity: 0.8; cursor: pointer" onclick="window.location.href ='/search/${name}?type=2'">
+                                         MORE
+                                     </div>
+                                 </div>`
+                        for (i = 0; i < obj._embedded.contents.length; i++) {
+                            elem += `
+                        <div onclick="window.location.href ='/detail/${obj._embedded.contents[i].id}'" class="row er    mb-2 pt-2" style=" !important;  cursor: pointer" >
+                            <div class="col-3 " ><img class=" rounded-circle z-depth-2 myButton point" style="width: 32px;margin-right: -20px; height: 32px" src=${obj._embedded.contents[i].thumbnail} alt=""></div>
+                            <div class="col-9 pl-0 outerDiv" style="font-size: 14px; text-align: left; vertical-align: middle;"><div class ="innerDiv" style="line-height: 1.4;">${obj._embedded.contents[i].title}</div></div>
                         </div>
-                         </div> 
-                         <div class="row" style="border-bottom: 1px solid black;">
-                            <div class="col-4"><img style="width: 20px" src="https://upload.wikimedia.org/wikipedia/en/thumb/6/63/IMG_%28business%29.svg/1200px-IMG_%28business%29.svg.png" alt=""></div>
-                            <div class="col-8">kladjfl;akdjfl;kjadl;kfj adlkfjl;akdf alkjsdf aksdjf akjf jk a dflkj akjdflkj;lkjlkajdflkjadf</div>
-                        </div>
-                        <div class="row" style="border-bottom: 1px solid black;">
-                            <div class="col-4"><img style="width: 20px" src="https://upload.wikimedia.org/wikipedia/en/thumb/6/63/IMG_%28business%29.svg/1200px-IMG_%28business%29.svg.png" alt=""></div>
-                            <div class="col-8">kladjfl;akdjfl;kjadl;kfj adlkfjl;akdf alkjsdf aksdjf akjf jk a dflkj akjdflkj;lkjlkajdflkjadf</div>
-                        </div>
-                        <div class="row" style="border-bottom: 1px solid black;">
-                            <div class="col-4"><img style="width: 20px" src="https://upload.wikimedia.org/wikipedia/en/thumb/6/63/IMG_%28business%29.svg/1200px-IMG_%28business%29.svg.png" alt=""></div>
-                            <div class="col-8">kladjfl;akdjfl;kjadl;kfj adlkfjl;akdf alkjsdf aksdjf akjf jk a dflkj akjdflkj;lkjlkajdflkjadf</div>
-                        </div>
-                         </div>`)
-                }
+                        `
 
-                tooltip.show();
+                        }
+
+                        $("#srh").append(elem)
+
+                    },
+                    error: function (err) {
+
+                        console.log(err);
+                    }
+                });
+
 
             });
+
+
+
+            button.blur(function () {
+                tooltip.hide();
+            });
+
+            $("#srchBody").click(function () {
+                 $("#srch").val();
+                 window.location.replace('/search/'+$("#srch").val()+'?type=1')
+            });
+
         });
 
         const updateLastReadIfClick = async () => {
@@ -120,8 +141,7 @@
                 console.log(error)
             }
 
-            //findAllByOrderByIdDesc
-            //api/contents/search/findAllByOrderByIdDesc?number=1&projection=ContentNotificationProjection
+
 
         }
 

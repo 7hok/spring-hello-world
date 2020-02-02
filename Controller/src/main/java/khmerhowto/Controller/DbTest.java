@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import groovyjarjarpicocli.CommandLine.Model;
@@ -30,9 +31,12 @@ public class DbTest {
         return "clients/contentDetail";
     }
 
-    @GetMapping("/c")
-    public String ckEdit() {
-        return "loginPage";
+    @GetMapping("/search/{str}")
+    public String search(@PathVariable("str") String body,@RequestParam String type,ModelMap map) {
+        map.addAttribute("type", type);
+ 
+        map.addAttribute("body", body);
+        return "search-body";
     }
 
     @GetMapping("/s")
