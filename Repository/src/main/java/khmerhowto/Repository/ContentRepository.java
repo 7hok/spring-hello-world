@@ -28,4 +28,6 @@ public interface ContentRepository extends JpaRepository<Content, Integer> {
 
 	Page<Content> findByTitleContainingIgnoreCaseAndCategoryIdAndStatus(@Param("title") String title, Integer c_id, int i, Pageable pageable);
 	public Page<Content> findAllByOrderByIdDesc(Pageable pageable);
+
+	Page<Content> findByBodyContainingIgnoreCase(@Param("body") String body, Pageable pageable);
 }
