@@ -34,6 +34,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -43,9 +44,17 @@ import java.util.Optional;
 
 /**
  * AdminController
+ * MOST of algorithm 
+ *   1.  ALL :  SERVICE -> REPOSITORY : FindByStatus1
+ *   2.  FILTER : REQUEST PARAM AS Parameter
+ *   3.  CONDITION 
+ *   3.1      IF REQUEST PARAM = NULL
+ *   3.1.1         ALL
+ *   3.2      ELSE
+ *   3.2.1         FILTER      
  */
 @Controller
-//@RequestMapping("/dynas/")
+@SessionAttributes("user")
 public class AdminController {
     @Autowired
     private RoleService roleService;
@@ -95,7 +104,6 @@ public class AdminController {
         }else{
             page = contentRequestService.findByDate(date,pageable);
         }
-        page = contentRequestService.findAll(pageable);
         List<ContentRequest>questions = page.getContent();
         model.addAttribute("page",page);
         model.addAttribute("questions",questions);
@@ -106,19 +114,16 @@ public class AdminController {
     String manageUser(@RequestParam(value = "search" , required = false)String userName, @PageableDefault(size = 10)Pageable pageable, Model model){
 
         Page<User> page =null;
-        // userService.findAll(pageable);    
-      
-        // model.addAttribute("user",user);
+    
         if(userName!=null){
             page =userService.findByName(userName,pageable);
 
         }else {
-            // page =page.getContent();
+    
             page = userService.findAll(pageable);
         }
         
 
-        // System.out.println(user.getName());
         model.addAttribute("page",page);
         model.addAttribute("users",page.getContent());
 
@@ -146,7 +151,6 @@ public class AdminController {
         model.addAttribute("categories",categoryService.findCategoryByStatus(1));
         return "admin/admin-category";
     }
-
 
     @GetMapping("/admin/customize/{id}")
     String customizeInfo(@PathVariable("id")Integer id,Model model){

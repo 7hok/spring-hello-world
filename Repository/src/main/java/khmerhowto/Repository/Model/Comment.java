@@ -1,5 +1,7 @@
 package khmerhowto.Repository.Model;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.*;
 
 import jdk.nashorn.internal.runtime.GlobalFunctions;
@@ -14,12 +16,12 @@ public class Comment {
     @ManyToOne
     @RestResource(exported = false)
     private User user;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @RestResource(exported = false)
     private Content content;
     private String text;
-    private boolean status;
-    private int timestamp;
+    private Integer status;
+    private LocalDateTime timestamp;
 
     @PrePersist
     public void prePersist() {
@@ -30,7 +32,7 @@ public class Comment {
     public Comment() {
     }
 
-    public Comment(int id, User user, Content content, String text, boolean status, int timestamp) {
+    public Comment(int id, User user, Content content, String text, Integer status, LocalDateTime timestamp) {
         this.id=id;
         this.user=user;
         this.content=content;
@@ -71,19 +73,19 @@ public class Comment {
         this.text = text;
     }
 
-    public boolean isStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
-    public int getTimestamp() {
+    public LocalDateTime getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(int timestamp) {
+    public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
     }
 

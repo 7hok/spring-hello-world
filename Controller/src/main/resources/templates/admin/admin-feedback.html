@@ -84,7 +84,7 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
     <div id="feedback_modal" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-head d-flex justify-content-around py-3">
+                <div class="modal-head d-flex justify-content-around py-3" id="modal-head"> 
                     <!-- <h6 id="modal_content"> Feedback From Client</h6> -->
                     <div class="">
                         <img class="rounded-circle" id="modal_user_img" style="height: 50px; width:45px;" src="" alt="" srcset="">
@@ -99,7 +99,7 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
                 </div>    
                 
                 <div class="modal-body border-top ">
-                    <span > May /2 /2020:</span>
+                    <span >Go To Article - <a id="modal_article_id" href="">Click Here</a> </span>
                     <p class="px-2" id="modal_paragraph"></p>
                 </div>
             </div>
@@ -151,8 +151,8 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
                         $("#modal_user_img").attr("src",feedback.user.profilePicture)
                         $("#modal_user_name").text(feedback.user.name)
                         $("#modal_timestamp").text(feedback.timestamp)
-                        // $("#modal_paragraph").text(feedback.text)
-                        $("#modal_paragraph").text(feedback.toString());
+                        $("#modal_article_id").attr("href",`/detail/${feedback.content.id}`)
+                        $("#modal_paragraph").text(`${feedback.text}`);
                         $('#feedback_modal').modal('toggle');
                     })
                 }

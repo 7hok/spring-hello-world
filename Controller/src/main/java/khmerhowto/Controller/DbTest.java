@@ -26,7 +26,7 @@ public class DbTest {
     private CategoryServiceImp categoryService;
     @GetMapping("/detail/{id}")
     public String testDetail(ModelMap modelMap, @PathVariable Integer id) {
-
+        System.out.println("jab ban id content detail hz: "+id);
         modelMap.addAttribute("id", id);
         if(GlobalFunctionHelper.getCurrentUser()==null){
 

@@ -28,6 +28,10 @@ public class Category implements Serializable{
     }
     public Category() {
     }
+    public Category(Integer id) {
+        this.id=id;
+    }
+    
 
     public Category(int id, String name, String image, String description, Integer status, LocalDateTime timestamp) {
         this.id=id;

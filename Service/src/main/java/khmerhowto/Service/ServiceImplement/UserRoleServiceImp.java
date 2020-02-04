@@ -34,6 +34,6 @@ public class UserRoleServiceImp implements UserRoleSrvice {
 
     @Override
     public List<UserRole> findRoleByUserId(Integer id) {
-        return userRoleRepository.findByUser(id);
+        return userRoleRepository.findByUserId(id);
     }
 }

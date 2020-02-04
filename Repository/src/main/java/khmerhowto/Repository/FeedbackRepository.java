@@ -14,7 +14,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.transaction.annotation.Transactional;
 
-@RepositoryRestResource
+@RepositoryRestResource(collectionResourceRel = "feedback_data", path = "feedbacks")
 public interface FeedbackRepository extends JpaRepository<Feedback,Integer> {
     // @RestResource(rel = "update_status",path = "/delete")
     @Transactional
@@ -26,4 +26,7 @@ public interface FeedbackRepository extends JpaRepository<Feedback,Integer> {
 	Page<Feedback> findByDate(LocalDateTime start_date, LocalDateTime end_date, Pageable pageable);
 
 	Page<Feedback> findByStatus(int i, Pageable pageable);
+
+//	Chamroeun
+    
 }
