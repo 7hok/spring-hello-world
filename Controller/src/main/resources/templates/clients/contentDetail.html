@@ -106,7 +106,41 @@
                                     <td class="p-1 point"><img style="max-width: 30px;color: #46464e;"
                                             src="/icon/facebook.svg" alt=""></td>
                                     <td class=" point"> <img style="max-width: 30px; margin-left: 2.6px; " src="/icon/d.svg"
-                                            alt="">
+                                            alt="" onclick="" data-toggle="modal" data-target="#feedbackModal" data-whatever="@mdo">
+
+
+                                        <div class="modal fade" id="feedbackModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Feedback</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form>
+<!--                                                            <div class="form-group">-->
+<!--                                                                <label for="recipient-name" class="col-form-label">Recipient:</label>-->
+<!--                                                                <input type="text" class="form-control" id="recipient-name">-->
+<!--                                                            </div>-->
+
+                                                            <div class="form-group">
+                                                                <label for="feedback-message" class="col-form-label mb-2" >Your Message</label>
+
+                                                                <textarea class="form-control" id="feedback-message"></textarea>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="sendFeedback()">Send</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
 
                                 </tr>
                             </table>
@@ -477,28 +511,58 @@
 
             function LikeContent(userId){
 
-                        var obj={
-                        "user": 
+                var obj={
+                    "user":
                         {
-                        "id": parseInt(userId)
+                            "id": parseInt(userId)
                         },
-                        "content":{
-                            "id":[[${id}]]
-                        } 
-                        }
-                        $.ajax({
-                                    type: "POST",
-                                    url: 'http://localhost:8080/api/interesteds',
-                                    data: JSON.stringify(obj),
-                                    success: function (data) {
-                                       $("#likeNum").text(parseInt($('#likeNum').text()) + 1)
-                                    },
-                                    error: function (data) {
-                                    console.log(data)
-                                    },
-                                    contentType: "application/json"
-                                });
+                    "content":{
+                        "id":[[${id}]]
+                    }
+                }
+                $.ajax({
+                    type: "POST",
+                    url: 'http://localhost:8080/api/interesteds',
+                    data: JSON.stringify(obj),
+                    success: function (data) {
+                        $("#likeNum").text(parseInt($('#likeNum').text()) + 1)
+                    },
+                    error: function (data) {
+                        console.log(data)
+                    },
+                    contentType: "application/json"
+                });
 
+            }
+
+
+            function sendFeedback(){
+                        var feedbackText = $("#feedback-message").val();
+                        // alert(feedbackText);
+
+                var feedback={
+
+                    "text": feedbackText,
+                    "status": 1,
+                    "user": {
+                        "id": 1
+                    },
+                    "content":{
+                        "id": [[${id}]]
+                    }
+                }
+                $.ajax({
+                    type: "POST",
+                    url: 'http://localhost:8080/api/feedbacks',
+                    data: JSON.stringify(feedback),
+                    success: function (data) {
+                        console.log("successfully send feedback")
+                    },
+                    error: function (data) {
+                        console.log(data)
+                    },
+                    contentType: "application/json"
+                });
             }
         </script>
     </div>

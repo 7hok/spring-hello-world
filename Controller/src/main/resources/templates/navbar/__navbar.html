@@ -312,15 +312,17 @@
                         </div>
                        
                         <div class="">
-                           <ul class="list-group list-group-flush border-top">
+                           <ul class="list-group list-group-flush border-top" th:switch="${'CLIENT'}">
                             <li class="list-group-item text-center click-list-user-profile" onclick="location.href='/admin/customize';">Customize</li>
-                            <li class="list-group-item text-center click-list-user-profile" onclick="location.href='/admin';">Admin</li>
+                            <li th:case="'CLIENT'" class="list-group-item text-center click-list-user-profile onclick=" data-toggle="modal" data-target="#requestModal" data-whatever="@mdo">Request</li>
+
+                            <li th:case="'ADMIN'" class="list-group-item text-center click-list-user-profile" onclick="location.href='/admin';">Admin</li><li class="list-group-item text-center click-list-user-profile" onclick="location.href='/admin';">Admin</li>
                             <li class="list-group-item text-center click-list-user-profile" onclick="location.href='/logout';">Logout</li>
                            </ul>
+
                         </div>
                     </div>
                   </div>
-                
             </li>
             <li th:class="${#authorization.expression('isAuthenticated()') == true} ? 'd-none' : 'nav-item' ">
                 <a class="nav-link text-center text-dark" href="/login">
@@ -350,5 +352,36 @@
             </li>
             
         </ul> 
+    </div>
+
+
+    <div class="modal fade" id="requestModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Content Request</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="content-request-title" class="col-form-label">Title</label>
+                            <input type="text" placeholder="Please input content title here" class="form-control" id="content-request-title">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="content-request-message" class="col-form-label mb-2" >Your Message</label>
+                            <textarea class="form-control" id="content-request-message"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="requestContent()">Send</button>
+                </div>
+            </div>
+        </div>
     </div>
 </nav>
