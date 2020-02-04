@@ -243,7 +243,7 @@ public class HomeController {
         System.out.println(categoryServiceImpl.findAll());
         System.out.println("JPQfL"+categoryRepository.findByCategoryIdAndStatus());
 
-        return "content-by-category-test";
+        return "test-cate";
 
     }
 

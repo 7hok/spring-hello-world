@@ -14,6 +14,7 @@ import khmerhowto.Repository.Model.Content;
 public interface ContentProject {
     @Value("#{target.id}")
     Integer getId();
+    String getBody();
     CategoryInfo getCategory();
     String getThumbnail();
     String getTitle();

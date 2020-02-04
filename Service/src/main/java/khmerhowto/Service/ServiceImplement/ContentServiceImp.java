@@ -55,6 +55,6 @@ public class ContentServiceImp implements ContentService {
     @Override
     public Page<Content> findByTitleContainingIgnoreCase(String title, Pageable pageable) {
        
-        return  contentRepository.findByTitleContainingIgnoreCase(title, pageable);;
+        return  contentRepository.findByTitleContainingIgnoreCase(title, pageable);
     }
 }
