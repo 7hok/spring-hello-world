@@ -19,6 +19,7 @@ import java.util.Map;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,8 +33,10 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import khmerhowto.Repository.CategoryRepository;
 import khmerhowto.Repository.ContentRepository;
+import khmerhowto.Repository.FavoriteCategoryRepository;
 import khmerhowto.Repository.Model.Category;
 import khmerhowto.Repository.Model.Content;
+import khmerhowto.Repository.Model.FavoriteCategory;
 import khmerhowto.Repository.Model.User;
 import khmerhowto.Service.CommentService;
 import khmerhowto.Service.ContentService;
@@ -41,6 +44,7 @@ import khmerhowto.Service.ServiceImplement.CategoryServiceImpl;
 import khmerhowto.Service.ServiceImplement.ContentServiceImpl;
 import khmerhowto.Service.ServiceImplement.InterestedServiceImp;
 import khmerhowto.Service.ServiceImplement.UserServiceImp;
+import khmerhowto.globalFunction.GlobalFunctionHelper;
 
 import org.springframework.ui.Model;
 
@@ -60,6 +64,12 @@ public class HomeController {
     CommentService cmt;
     @Autowired
     UserServiceImp userServiceImp;
+    @Autowired
+    FavoriteCategoryRepository favoriteCategoryRepository;
+    
+    @Autowired
+    AuthenticationManager authenticationManager;
+
     @GetMapping("/about")
     String showAboutUs() {
 
@@ -128,7 +138,39 @@ public class HomeController {
         modelMap.addAttribute("CATEGORIES", categories);
         return "clients/CategoryChoosen";
     }
+    @PostMapping("/favorite/chosen")
+    String postFavorite(@RequestBody Map<String,Object> category){
+         
+            try {
+                Integer user_id =GlobalFunctionHelper.getCurrentUser().getId();
+                List<Integer> category_id =  (ArrayList<Integer>) category.get("category");
+                List<FavoriteCategory> favList = new ArrayList<>();
+                for (Integer integer : category_id) {
+                    
+                    favList.add(new FavoriteCategory(new User(user_id),new Category(integer)) );
+                }
 
+                favoriteCategoryRepository.saveAll(favList);
+                return "redirect:/home";
+            } catch (Exception e) {
+                /**
+                 * CATCH WORK WHEN USER IS NOT AUTHENTICATED
+                 */
+                return "redirect:/login";
+            }
+    }
+    /**
+     * 
+     * @param request
+     * @param modelMap
+     * @return
+     *  IF user == Null THEN
+     *      new OBJECT => ModelMap
+     *  ELSE
+     *      GOOGLE REDIRECT => OBJECT => ModelMap
+     *  FORM ON SUBMIT
+     *      @POST => /signup
+     */
     @GetMapping("/signup")
     String signUp(HttpServletRequest request,ModelMap modelMap) {
         User user = null;
@@ -152,11 +194,23 @@ public class HomeController {
         modelMap.addAttribute("USER", _user);
         return "sign-up";
     }
+    /**
+     * 
+     * @param user
+     * @return
+     * AFTER 
+     *      saveUser => autologin
+     * 
+     */
     @PostMapping("/signup")
-    @ResponseBody
-    String registerToData(User user){
+    String registerToData(User user,HttpServletRequest httpServletRequest){
         System.out.println(user);
-        userServiceImp.saveUser(user);
+        Boolean stt = userServiceImp.saveUser(user);
+        if(stt == true){
+            GlobalFunctionHelper.autoLogin(user.getEmail(), user.getPassword(), httpServletRequest,authenticationManager);
+        }else{
+            return "redirect:/login";
+        }
         return "redirect:/favorite/chosen";
     }
     @GetMapping("/detail")

@@ -2,6 +2,8 @@ package khmerhowto.Repository.Model;
 
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -15,6 +17,7 @@ public class User {
     @Column(name = "profile_picture")
     private String profilePicture;
     private String sex;
+    @Column(unique = true)
     private String email;
     private String password;
     @Column(name = "phone_number")
@@ -25,14 +28,25 @@ public class User {
     private Integer status;
     /** for save user last click on history  */
     private LocalDateTime lastNotificationClick;
+    private String userRole;
+     /** 
+     * FOR OUR NEXT VERSION 
+     * IF A USER HAS MORE THAN A ROLE 
+        @OneToMany(mappedBy = "user",cascade = CascadeType.PERSIST)
+        private List<UserRole> userRole;
+    */
     @PrePersist
     public void prePersist(){
         this.status = 1;
         this.timestamp = LocalDateTime.now();
-        this.lastNotificationClick = LocalDateTime.now();
+        this.lastNotificationClick = LocalDateTime.now(); 
+        this.userRole = "ADMIN";
     }
 
     public User() {
+    }
+    public User(Integer id) {
+        this.id = id;
     }
     public User(String name,String password){
         this.name = name;
@@ -53,6 +67,30 @@ public class User {
         this.lastNotificationClick = lastNotificationClick;
     }
 
+    public User(int id, String name, String profilePicture, String sex, String email, String password, String phoneNumber, String bio, String location, LocalDateTime timestamp, Integer status, LocalDateTime lastNotificationClick, String userRole) {
+        this.id = id;
+        this.name = name;
+        this.profilePicture = profilePicture;
+        this.sex = sex;
+        this.email = email;
+        this.password = password;
+        this.phoneNumber = phoneNumber;
+        this.bio = bio;
+        this.location = location;
+        this.timestamp = timestamp;
+        this.status = status;
+        this.lastNotificationClick = lastNotificationClick;
+        this.userRole = userRole;
+    }
+   
+    public String getUserRole() {
+        return this.userRole;
+    }
+
+    public void setUserRole(String userRole) {
+        this.userRole = userRole;
+    }
+    
     public int getId() {
         return id;
     }
@@ -174,6 +212,7 @@ public class User {
                 ", timestamp=" + timestamp +
                 ", password=" + password+
                 ", click=" + lastNotificationClick+'\''+
+                ", role=" + userRole+'\''+
                 '}';
     }
 }

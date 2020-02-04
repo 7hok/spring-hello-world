@@ -292,19 +292,19 @@
                     <a class="nav-link text-center  d-none d-lg-block" href="#" id="profile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">  
                         <img class="" src="/icon/user-navbar-v2.svg" style="width: 30px; height: 30px;" alt="">
                     </a>
-                <div class="dropdown-menu dropdown-menu-customized dropdown-menu-right mt-3" aria-labelledby="profile">
+                <div class="dropdown-menu dropdown-menu-customized dropdown-menu-right mt-3" aria-labelledby="profile" th:object="${#authentication.getPrincipal().getCurrentUser()}">
                     <div class="card border-0">
                         <div class="card-title ">
                                 <div class="text-center pt-2">
-                                    <img class="rounded-circle" src="https://cdn.dribbble.com/users/2620325/screenshots/6699707/2-01_2x.jpg" style="width: 50px; height: 50px;" alt="">
+                                    <img class="rounded-circle" th:src="*{profilePicture}" onerror="this.src='https://cdn.dribbble.com/users/2620325/screenshots/6699707/2-01_2x.jpg'" style="width: 50px; height: 50px;" alt="">
                                     <br>
-                                    <h6 class="pt-2"> Administrator</h6>
+                                    <h6 class="pt-2" th:text="*{name}"> Administrator</h6>
                             
                                 </div>
                         </div>
                         <div class="card-body">
                             <b>BIO : <br> </b>
-                            <p class="px-4">
+                            <p class="px-4"  th:text="*{bio}">
                                
                                 Ben Arfa ចូល​រួម​ជាមួយ​ក្លឹប Ronaldo ក្រោយ​ខាន​លេង​បាល់​ជាង​កន្លះ​ឆ្នាំ
                                 
@@ -319,10 +319,10 @@
                             <li th:case="'ADMIN'" class="list-group-item text-center click-list-user-profile" onclick="location.href='/admin';">Admin</li><li class="list-group-item text-center click-list-user-profile" onclick="location.href='/admin';">Admin</li>
                             <li class="list-group-item text-center click-list-user-profile" onclick="location.href='/logout';">Logout</li>
                            </ul>
-
                         </div>
                     </div>
                   </div>
+                
             </li>
             <li th:class="${#authorization.expression('isAuthenticated()') == true} ? 'd-none' : 'nav-item' ">
                 <a class="nav-link text-center text-dark" href="/login">
@@ -352,36 +352,5 @@
             </li>
             
         </ul> 
-    </div>
-
-
-    <div class="modal fade" id="requestModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Content Request</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="form-group">
-                            <label for="content-request-title" class="col-form-label">Title</label>
-                            <input type="text" placeholder="Please input content title here" class="form-control" id="content-request-title">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="content-request-message" class="col-form-label mb-2" >Your Message</label>
-                            <textarea class="form-control" id="content-request-message"></textarea>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="requestContent()">Send</button>
-                </div>
-            </div>
-        </div>
     </div>
 </nav>
