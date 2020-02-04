@@ -49,6 +49,39 @@
     <th:block th:include="~{fragment/__javascript_link}"></th:block>
     <div class="" layout:fragment="content-js"></div>
     <script>
+        //Chamroeun
+        function requestContent(){
+            var feedbackText = $("#feedback-message").val();
+            // alert(feedbackText);
+
+
+            var feedback={
+
+                "text": feedbackText,
+                "status": 1,
+                "user": {
+                    "id": 1
+                },
+                "content":{
+                    "id": [[${id}]]
+                }
+            }
+            $.ajax({
+                type: "POST",
+                url: 'http://localhost:8080/api/feedbacks',
+                data: JSON.stringify(feedback),
+                success: function (data) {
+                    console.log("successfully send feedback")
+                },
+                error: function (data) {
+                    console.log(data)
+                },
+                contentType: "application/json"
+            });
+        }
+
+
+
 
 
         // Document ready function

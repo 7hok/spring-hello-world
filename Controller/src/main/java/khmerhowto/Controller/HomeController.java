@@ -231,7 +231,6 @@ public class HomeController {
     }
 
     //Chamroeun
-
     @Autowired
     private CategoryRepository categoryRepository;
 
@@ -243,26 +242,21 @@ public class HomeController {
     @Autowired
     private ContentRepository contentRepository;
 
-    @GetMapping("/category")
-    String category(Model model){
+    @GetMapping("/category/{id}")
+    String category(Model model,@PathVariable("id") Integer id){
         model.addAttribute("categories",categoryServiceImpl.findAll());
-        System.out.println(categoryServiceImpl.findAll());
-        System.out.println("JPQfL"+categoryRepository.findByCategoryIdAndStatus());
+        model.addAttribute("id",id);
 
         return "test-cate";
 
     }
 
 
-    @GetMapping("/category/{id}")
+    @GetMapping("/category/s/{id}")
     String categoryLeft(Model model, @PathVariable Integer id){
         System.out.println("jab ban id: " + id);
         model.addAttribute("categories",categoryServiceImpl.findAll());
-        model.addAttribute("OneCategory",categoryRepository.findByCategoryIdAndStatus());
-
-        System.out.println("Hello");
-
-
+        model.addAttribute("OneCategory",categoryRepository.findByIdAndStatus(id,1));
 
         return "content-by-category-test";
     }

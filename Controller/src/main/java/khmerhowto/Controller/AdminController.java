@@ -36,6 +36,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
@@ -68,11 +70,14 @@ public class AdminController {
     private FeedBackServiceImp feedbackservice;
     @Autowired 
     private ContentServiceImp  articleService;
-
+    @PersistenceContext
+    EntityManager em;
     @GetMapping("/admin/article/edit/{id}")
-    String editArticle(@PathVariable String id, ModelMap model) {
-        model.addAttribute("categories",categoryService.findCategoryByStatus(1));
-        
+    String editArticle(@PathVariable Integer id, ModelMap model) {
+        List<Category> lst=categoryService.findCategoryByStatus(1);
+        model.addAttribute("categories",lst);
+        Content con=em.find(Content.class,id);
+        model.addAttribute("cId", con.getCategory().getId());
         model.addAttribute("id", id);
         return "admin/admin-article-edit";
     }

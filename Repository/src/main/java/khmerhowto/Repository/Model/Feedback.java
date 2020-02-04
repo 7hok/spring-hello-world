@@ -13,12 +13,20 @@ public class Feedback {
     private int id;
     private String text;
     @ManyToOne
+    @RestResource(exported = false)
     private User user;
-    @RestResource(exported = true)
     @ManyToOne
+    @RestResource(exported = false)
     private Content content;
     private LocalDateTime timestamp;
     private Integer status;
+
+
+    @PrePersist
+    public void prePersist() {
+        timestamp = LocalDateTime.now();
+        status = 1;
+    }
 
     public Feedback() {
     }
