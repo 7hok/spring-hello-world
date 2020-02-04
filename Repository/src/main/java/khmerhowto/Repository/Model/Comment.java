@@ -2,6 +2,7 @@ package khmerhowto.Repository.Model;
 
 import javax.persistence.*;
 
+import jdk.nashorn.internal.runtime.GlobalFunctions;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 @Entity
@@ -22,6 +23,7 @@ public class Comment {
 
     @PrePersist
     public void prePersist() {
+
         timestamp = 10000000;
         status = true;
     }

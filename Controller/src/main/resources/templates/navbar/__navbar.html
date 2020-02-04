@@ -289,9 +289,10 @@
             <li class="nav-item "  sec:authorize="isAuthenticated()">
                 <div class="dropdown ">
 
-                    <a class="nav-link text-center  d-none d-lg-block" href="#" id="profile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">  
+                    <a class="nav-link text-center  d-none d-lg-block" href="#" id="profile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <img class="" src="/icon/user-navbar-v2.svg" style="width: 30px; height: 30px;" alt="">
                     </a>
+                </div>
                 <div class="dropdown-menu dropdown-menu-customized dropdown-menu-right mt-3" aria-labelledby="profile">
                     <div class="card border-0">
                         <div class="card-title ">
@@ -299,18 +300,18 @@
                                     <img class="rounded-circle" src="https://cdn.dribbble.com/users/2620325/screenshots/6699707/2-01_2x.jpg" style="width: 50px; height: 50px;" alt="">
                                     <br>
                                     <h6 class="pt-2"> Administrator</h6>
-                            
+
                                 </div>
                         </div>
                         <div class="card-body">
                             <b>BIO : <br> </b>
                             <p class="px-4">
-                               
+
                                 Ben Arfa ចូល​រួម​ជាមួយ​ក្លឹប Ronaldo ក្រោយ​ខាន​លេង​បាល់​ជាង​កន្លះ​ឆ្នាំ
-                                
+
                             </p>
                         </div>
-                       
+
                         <div class="">
                            <ul class="list-group list-group-flush border-top">
                             <li class="list-group-item text-center click-list-user-profile" onclick="location.href='/admin/customize';">Customize</li>
@@ -320,7 +321,7 @@
                         </div>
                     </div>
                   </div>
-                
+
             </li>
             <li th:class="${#authorization.expression('isAuthenticated()') == true} ? 'd-none' : 'nav-item' ">
                 <a class="nav-link text-center text-dark" href="/login">

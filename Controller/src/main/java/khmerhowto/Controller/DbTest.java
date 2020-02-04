@@ -1,5 +1,6 @@
 package khmerhowto.Controller;
 
+import khmerhowto.globalFunction.GlobalFunctionHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -25,7 +26,15 @@ public class DbTest {
     private CategoryServiceImp categoryService;
     @GetMapping("/detail/{id}")
     public String testDetail(ModelMap modelMap, @PathVariable Integer id) {
+
         modelMap.addAttribute("id", id);
+        if(GlobalFunctionHelper.getCurrentUser()==null){
+
+        }
+        else {
+            modelMap.addAttribute("currentUser", GlobalFunctionHelper.getCurrentUser());
+        }
+
         modelMap.addAttribute("totalCmt", cmt.getTotalComment(id));
         modelMap.addAttribute("like", interestedServiceImp.getTotalLike(id));
         return "clients/contentDetail";
