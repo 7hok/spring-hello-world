@@ -9,6 +9,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import khmerhowto.Repository.Model.User;
+import khmerhowto.Repository.Model.UserRole;
 
 /**
  * MyUser
@@ -32,8 +33,10 @@ public class MyUser implements UserDetails {
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
 		List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
-
-        list.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+		//Integer role = 
+		
+		
+        list.add(new SimpleGrantedAuthority("ROLE_"+ user.getUserRole() ));
 
         return list;
 	}

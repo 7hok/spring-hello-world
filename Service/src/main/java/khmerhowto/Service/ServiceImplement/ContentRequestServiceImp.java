@@ -24,6 +24,7 @@ public class ContentRequestServiceImp implements ContentRequestService {
     public Page<ContentRequest> findByDate(String date,Pageable pageable){
         LocalDateTime start_date = LocalDateTime.of(LocalDate.parse(date),LocalTime.of(0,0,0));
         LocalDateTime end_date = LocalDateTime.of(LocalDate.parse(date),LocalTime.of(23,59,59));
+        System.out.println(start_date.toString()+end_date.toString());
         Page<ContentRequest> pages = contentRequestRepository.findByDate(start_date,end_date,pageable);
         return pages;
     }

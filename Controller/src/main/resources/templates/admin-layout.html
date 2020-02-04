@@ -30,10 +30,14 @@
             </div>
         </div>  
     </div>
-   
+    <div sec:authorize="isAuthenticated()">
+        <span id="isAuth" th:data-role="${#authentication.getPrincipal().getCurrentUser().getUserRole()}" class="d-none" th:text="${#authentication.getPrincipal().getCurrentUser().getLastNotificationClick()}">true</span>  
+    </div>
     <th:block th:include="~{fragment/__javascript_link}"></th:block>
     <div class="" layout:fragment="content-js"></div>
     <script>
+       
+
         $(function(){
             
            
@@ -76,8 +80,76 @@
             }else{
                 console.log(`-1 is selected`)
             }
+            getNotification()
            
     })
+    const updateLastReadIfClickShowContentList = async () => {
+            // let res = await fetch(`api/contents/search/findAllByOrderByIdDesc?projection=ContentNotificationProjection`, {
+            let res = await fetch(`/notification/get`, {
+                method: `POST`
+            });
+            json = await res.json();
+            console.log(json)
+            if(json.type == 0){
+                let contents = json.body;
+
+                contents.forEach(content => {
+                    $("#notification_div_body").append(convertJsonToNotificationList(content.id, content.category.name, content.timestamp))
+                })
+            }else if(json.type ==1 ){
+                let comments = json.body;
+                comments.forEach(comment => {
+                    $("#notification_div_body").append(convertAdminJsonToNotificationList(comment.content.id,comment.text,  comment.timestamp))
+                    // convertAdminJsonToNotificationList
+                })
+            }
+            
+        }
+        const updateLastReadIfClick = async () => {
+            let json = null;
+            try {
+                let res = await fetch(`/user/update/lastread`, {
+                    method: `POST`
+                });
+                json = await res.json();
+                console.log(json)
+
+            } catch (error) {
+                console.log(error)
+            }
+
+        }
+        const convertAdminJsonToNotificationList = (article_id,comment_body,time) => {
+            return ` <a class="notifications-content" href="${article_id}">
+                            <div class="notifications-item border-bottom">
+                                <p class="item-title">${comment_body}</b></p>
+                                <p class="item-info text-muted">${time}</p>
+                            </div>
+
+                </a>`
+        }
+        const numberToNotificationAmount = (amount) => {
+            if (parseInt(amount) > 0) {
+                $("#num_of_notification").text(amount)
+            } else {
+
+            }
+        }
+        var isClick = false;
+        const getNotification = async () => {
+            let _last_read = $("#isAuth").text();
+            let _response= await fetch(`/api/comments/search/findUnreadCommentByDate?date=${_last_read}`);
+            let notification_json_amount = await _response.json();
+            numberToNotificationAmount(notification_json_amount)
+            $("#dLabel").on('click', function () {
+                if(isClick == false){
+                    updateLastReadIfClickShowContentList()
+                    updateLastReadIfClick();
+                    isClick = true
+                    $("#num_of_notification").text("")
+                }
+            })   
+        }
     </script>
 </body>
 </html>

@@ -3,7 +3,9 @@ package khmerhowto.Repository.Model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Favorite_Category")
+@Table(name = "Favorite_Category",uniqueConstraints={
+    @UniqueConstraint(columnNames = {"user_id", "category_id"})
+})
 public class FavoriteCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -12,12 +14,19 @@ public class FavoriteCategory {
     private User user;
     @ManyToOne
     private Category category;
-    private boolean status;
+    private Integer status;
 
+    @PrePersist
+    private void prePersist(){
+        this.status = 1;
+    }
     public FavoriteCategory() {
     }
-
-    public FavoriteCategory(int id, User user, Category category, boolean status) {
+    public FavoriteCategory( User user, Category category) {
+        this.user=user;
+        this.category=category;
+    }
+    public FavoriteCategory(int id, User user, Category category, Integer status) {
         this.id=id;
         this.user=user;
         this.category=category;
@@ -50,11 +59,11 @@ public class FavoriteCategory {
         this.category = category;
     }
 
-    public boolean isStatus() {
+    public Integer isStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
