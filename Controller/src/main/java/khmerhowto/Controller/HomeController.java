@@ -129,7 +129,13 @@ public class HomeController {
 
     @GetMapping({ "/login", "/" })
     String loginPage() {
+       try{
+            GlobalFunctionHelper.getCurrentUser().getId();
+            return "redirect:/home";
+        }catch(Exception ex){
         return "oauth_login";
+       }
+        
     }
 
     @GetMapping("/favorite/chosen")
