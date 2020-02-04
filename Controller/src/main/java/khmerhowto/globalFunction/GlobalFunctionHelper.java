@@ -29,7 +29,5 @@ public class GlobalFunctionHelper {
         }catch(Exception e){
             return null;
         }
-        
-       
     }
 }
