@@ -99,8 +99,8 @@
                 <div class="col-2 col-sm-2 col-md-2 col-lg-2 pr-0">
                     <table style="float: right; margin-top: 3%;">
                         <tr>
-                            <td class="p-1 point"> <img style="max-width: 31px;color: #46464e;"
-                                                        src="/icon/print.svg" alt="">
+                            <td class="p-1 point"><img onclick="printContent()" style="max-width: 31px;color: #46464e;"
+                                                       src="/icon/print.svg" alt="">
                             </td>
 
                             <td class="p-1 point"><img style="max-width: 30px;color: #46464e;"
@@ -334,6 +334,17 @@
 </div>
 
 <div layout:fragment="content-js">
+    <script src="/pdf/jspdf.min.js"></script>
+    <script>
+        const printContent = () => {
+            var doc = new jsPDF()
+            doc.text('Hello world!', 10, 10)
+            let _title = document.getElementById("tt").innerText
+            console.log(_title)
+            // doc.fromHTML(source,10,10);
+            doc.save(`${_title}.pdf`)
+        }
+    </script>
     <script>
         var articleId = window.location.pathname;
 

@@ -158,7 +158,24 @@
                     padding : 0px !important;
                 }
             }
-           
+           .scroll_div::-webkit-scrollbar-track
+        {
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+            background-color: #F5F5F5;
+        }
+
+        .scroll_div::-webkit-scrollbar
+        {
+            width: 10px;
+            background-color: #F5F5F5;
+        }
+
+        .scroll_div::-webkit-scrollbar-thumb
+        {
+            background-color: #393939;
+            border: 2px solid #555555;
+        }
+
         </style>
         
         <div id="carouselExampleControls " class="carousel slide d-none" data-ride="carousel" >
@@ -229,22 +246,38 @@
                         <div class="my-3">
                             <h4 style="color : #393939">Categories</h4>
                             <hr>
-                            <div class="text-left category-list">
-                                <p>Technology</p>
-                                <p>Business</p>
+                            <div class="text-left category-list scroll_div" style="max-height: 35vh; overflow:scroll; overflow-x: hidden;">
+                                <p th:each=" category : ${CATEGORIES}"><a style="text-decoration: none !important" th:href="'/category/'+${category.id}"  th:text="${category.name}" >Technology</a></p>
+                                <!-- <p>Business</p>
                                 <p>Hosting</p>
                                 <p>Donate</p>
                                 <p>Support</p>
                                 <p>Developers</p>
-                                <p>Get Involved</p>
+                                <p>Get Involved</p> -->
                             </div>
                         </div>
 
                         <div class="py-3">
                             <h4 style="color : #393939">Popular post</h4>
                             <hr>
-                            <div class="">
-                                <div class="d-flex  align-items-center">
+                            <div class="scroll_div" style="max-height: 45vh; overflow: scroll;overflow-x: hidden;">
+                                <div class="d-flex  align-items-center" th:each="article : ${POPULAR_POST}" th:object="${article}">
+                                    <img onerror="this.src = 'image-static/face_recognition_dribbble.png'" th:src="*{thumbnail}" class="rounded-circle m-2" style="width: 90px; height: 90px;" alt="">
+                                    <div class="d-inline-block pl-2">
+                                        <span class="overflow-hidden w-100"><b class="kht-text-color" th:text="*{title}">How tech recognize human face </b></span>
+                                        <br>
+                                        <sub th:text="*{timestamp}">5 days ago</sub>
+                                    </div>
+                                </div>
+                                <div class="d-flex  align-items-center" th:each="article : ${POPULAR_POST}" th:object="${article}">
+                                    <img onerror="this.src = 'image-static/face_recognition_dribbble.png'" th:src="*{thumbnail}" class="rounded-circle m-2" style="width: 90px; height: 90px;" alt="">
+                                    <div class="d-inline-block pl-2">
+                                        <span class="overflow-hidden w-100"><b class="kht-text-color" th:text="*{title}">How tech recognize human face </b></span>
+                                        <br>
+                                        <sub th:text="*{timestamp}">5 days ago</sub>
+                                    </div>
+                                </div>
+                                <!-- <div class="d-flex  align-items-center">
                                     <img src="image-static/face_recognition_dribbble.png" class="rounded-circle m-2" style="width: 90px; height: 90px;" alt="">
                                     <div class="d-inline-block pl-2">
                                         <span class="overflow-hidden w-100"><b class="kht-text-color">How tech recognize human face </b></span>
@@ -259,19 +292,11 @@
                                         <br>
                                         <sub>5 days ago</sub>
                                     </div>
-                                </div>
-                                <div class="d-flex  align-items-center">
-                                    <img src="image-static/face_recognition_dribbble.png" class="rounded-circle m-2" style="width: 90px; height: 90px;" alt="">
-                                    <div class="d-inline-block pl-2">
-                                        <span class="overflow-hidden w-100"><b class="kht-text-color">How tech recognize human face </b></span>
-                                        <br>
-                                        <sub>5 days ago</sub>
-                                    </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
 
-                        <div class="py-3">
+                        <!-- <div class="py-3">
                             <h4 style="color : #393939">Recent Post</h4>
                             <hr>
                             <div class="">
@@ -300,7 +325,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <!-- recent post -->
                     </div>
                 </div>

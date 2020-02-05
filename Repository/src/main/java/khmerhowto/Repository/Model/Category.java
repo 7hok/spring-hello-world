@@ -4,11 +4,14 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.PrePersist;
 
+import khmerhowto.Repository.Model.audit.AuditListener;
+@EntityListeners(AuditListener.class)
 @Entity
 public class Category implements Serializable{
     @Id
