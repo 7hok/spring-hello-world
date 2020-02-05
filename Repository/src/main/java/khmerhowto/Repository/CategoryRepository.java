@@ -22,8 +22,7 @@ public interface CategoryRepository extends JpaRepository<Category,Integer> {
     @Query(value = "Update Category c set c.status = 0 Where c.id = :id ")
     void deleteById(@Param("id") Integer id);
 
-    @Query("SELECT  c FROM Category c WHERE c.id = 1")
-    List<Category> findByCategoryIdAndStatus();
+    List<Category> findByIdAndStatus(Integer id,Integer st);
 
 	List<Category> findByStatus(Integer status);
 

@@ -239,9 +239,9 @@ public class HomeController {
     @GetMapping("/category")
     String category(Model model ){
         model.addAttribute("categories",categoryServiceImpl.findAll());
-        return "test-cate";
+        return "content-by-category";
 
-    } 
+    }
     @GetMapping("/category/s/{id}")
     String categoryLeft(Model model, @PathVariable Integer id){
         System.out.println("jab ban id: " + id);
