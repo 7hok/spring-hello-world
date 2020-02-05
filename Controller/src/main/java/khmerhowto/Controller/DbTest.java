@@ -27,6 +27,8 @@ public class DbTest {
     @GetMapping("/detail/{id}")
     public String testDetail(ModelMap modelMap, @PathVariable Integer id) {
         System.out.println("jab ban id content detail hz: "+id);
+        modelMap.addAttribute("currentUser", GlobalFunctionHelper.getCurrentUser().getId());
+        System.out.println("Global Function"+GlobalFunctionHelper.getCurrentUser().getId());
         modelMap.addAttribute("id", id);
         if(GlobalFunctionHelper.getCurrentUser()==null){
 
