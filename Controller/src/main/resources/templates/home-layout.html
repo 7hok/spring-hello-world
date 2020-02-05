@@ -51,27 +51,26 @@
     <script>
         //Chamroeun
         function requestContent(){
-            var feedbackText = $("#feedback-message").val();
-            // alert(feedbackText);
+            var requestTitle = $("#content-request-title").val();
+            var requestMessage = $("#content-request-message").val();
+
+            // alert(requestTitle);
 
 
-            var feedback={
-
-                "text": feedbackText,
+            var request={
+                "title": requestTitle,
+                "text": requestMessage,
                 "status": 1,
                 "user": {
                     "id": 1
                 },
-                "content":{
-                     "id": [[${id}]]
-                }
             }
             $.ajax({
                 type: "POST",
-                url: 'http://localhost:8080/api/feedbacks',
-                data: JSON.stringify(feedback),
+                url: '/api/requests',
+                data: JSON.stringify(request),
                 success: function (data) {
-                    console.log("successfully send feedback")
+                    console.log("successfully send request")
                 },
                 error: function (data) {
                     console.log(data)

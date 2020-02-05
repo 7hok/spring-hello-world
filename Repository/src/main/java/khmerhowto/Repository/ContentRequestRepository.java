@@ -11,7 +11,7 @@ import java.awt.print.Pageable;
 import java.time.LocalDateTime;
  
 
-@RepositoryRestResource(collectionResourceRel = "requests")
+@RepositoryRestResource(collectionResourceRel = "requests", path = "requests")
 public interface ContentRequestRepository extends JpaRepository<ContentRequest,Integer> {
 
     Page<ContentRequest> findByStatus(int i, org.springframework.data.domain.Pageable pageable);

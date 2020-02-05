@@ -243,9 +243,6 @@
                         </li>
                     </ul>
 
-
-
-
                 </div>
                 <!-- End of Left Container (Category)  -->
 
@@ -361,7 +358,8 @@
                     url: "/api/contents/search/findAllBycategoryId?id=1&page=0&size=3",
                     method: 'GET',
                     success: function (obj) {
-                        ele1 = `<div class="carousel-item active" >
+                        if (objRecet._embedded.contents.length>0) {
+                            ele1 = `<div class="carousel-item active" >
                         <img src=${obj._embedded.contents[0].thumbnail} class="d-block w-100" alt="...">
                         <div class="latest-post-caption carousel-caption d-none d-md-block text-left ">
                             <h5  class="vw vw-10 mb-3 mb-md-3 mb-sm-3"><span class="carousel-control-next-icon" aria-hidden="true"></span>Latest Post</h5>
@@ -369,8 +367,9 @@
                             <a href=""><button type="button" class=" latest-category-button btn btn-outline-primary btn-round-lg btn-lg">Keep Reading</button></a>
                         </div>
                     </div>`;
-
-                        ele2 = `<div class="carousel-item " >
+                        }
+                        if (objRecet._embedded.contents.length>1) {
+                            ele2 = `<div class="carousel-item " >
                         <img src=${obj._embedded.contents[1].thumbnail} class="d-block w-100" alt="...">
                         <div class="latest-post-caption carousel-caption d-none d-md-block text-left ">
                             <h5  class="vw vw-10 mb-3 mb-md-3 mb-sm-3"><span class="carousel-control-next-icon" aria-hidden="true"></span>Latest Post</h5>
@@ -378,7 +377,9 @@
                             <a href=""><button type="button" class=" latest-category-button btn btn-outline-primary btn-round-lg btn-lg">Keep Reading</button></a>
                         </div>
                     </div>`;
-                        ele3 = `<div class="carousel-item " >
+                        }
+                        if (objRecet._embedded.contents.length>2) {
+                            ele3 = `<div class="carousel-item " >
                         <img src=${obj._embedded.contents[2].thumbnail} class="d-block w-100" alt="...">
                         <div class="latest-post-caption carousel-caption d-none d-md-block text-left ">
                             <h5  class="vw vw-10 mb-3 mb-md-3 mb-sm-3"><span class="carousel-control-next-icon" aria-hidden="true"></span>Latest Post</h5>
@@ -386,6 +387,7 @@
                             <a href=""><button type="button" class=" latest-category-button btn btn-outline-primary btn-round-lg btn-lg">Keep Reading</button></a>
                         </div>
                     </div>`;
+                        }
 
                         $("#contt").append(ele1);
                         $("#contt").append(ele2);
@@ -404,7 +406,10 @@
                         url: `/api/contents/search/findAllBycategoryId?id=1&page=${page}&size=3`,
                         method: 'GET',
                         success: function (objRecent) {
-                            eleRecent1 = `   <div class="card mb-3">
+                            if (objRecent._embedded.contents.length>0){
+
+
+                            eleRecent1 = ` <div class="card mb-3">
                             <div class="row no-gutters">
                                 <div class="col-md-7">
                                     <img src="${objRecent._embedded.contents[0].thumbnail}" class="card-img first-card-image-category img-thumbnail"
@@ -439,8 +444,11 @@
                                 </div>
                             </div>
                         </div>`;
+                                $("#conttRecent1").append(eleRecent1);
+                            }
 
-                            eleRecent2 = ` <div class="card">
+                            if (objRecent._embedded.contents.length>1) {
+                                eleRecent2 = ` <div class="card">
                             <img class="card-img-top img-thumbnail" src="${objRecent._embedded.contents[1].thumbnail}" alt="Card image cap">
                             <div class="card-body text-center">
                                 <h5 class="card-title">${objRecent._embedded.contents[1].title}</h5>
@@ -467,9 +475,10 @@
                                 </div>
                             </div>
                         </div>`;
-
-
-                            var eleRecent3 = `<div class="card">
+                                $("#conttRecent2").append(eleRecent2);
+                            }
+                            if (objRecent._embedded.contents.length>2) {
+                                var eleRecent3 = `<div class="card">
                             <img class="card-img-top img-thumbnail" src="${objRecent._embedded.contents[2].thumbnail}" alt="Card image cap">
                             <div class="card-body text-center">
                                 <h5 class="card-title">${objRecent._embedded.contents[2].title}</h5>
@@ -496,9 +505,10 @@
                             </div>
                         </div>`;
 
-                            $("#conttRecent1").append(eleRecent1);
-                            $("#conttRecent2").append(eleRecent2);
-                            $("#conttRecent3").append(eleRecent3);
+                                $("#conttRecent3").append(eleRecent3);
+
+                            }
+
 
 
                         }

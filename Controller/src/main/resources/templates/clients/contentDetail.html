@@ -92,53 +92,9 @@
                                               data-toggle="tooltip" data-html="true"> Kong Pengsea</span>
                             </div>
                         </div>
-
-                        <div class="row">
-                            <div class="col-12 pl-0" style="color: #948383; font-size: 14px;">16-Sep-1998</div>
-                                    <td class="p-1 point"><img style="max-width: 30px;color: #46464e;"
-                                            src="/icon/facebook.svg" alt=""></td>
-                                    <td class=" point"> <img style="max-width: 30px; margin-left: 2.6px; " src="/icon/d.svg"
-                                            alt="" onclick="" data-toggle="modal" data-target="#feedbackModal" data-whatever="@mdo">
-
-
-                                        <div class="modal fade" id="feedbackModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Feedback</h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <form>
-<!--                                                            <div class="form-group">-->
-<!--                                                                <label for="recipient-name" class="col-form-label">Recipient:</label>-->
-<!--                                                                <input type="text" class="form-control" id="recipient-name">-->
-<!--                                                            </div>-->
-
-                                                            <div class="form-group">
-                                                                <label for="feedback-message" class="col-form-label mb-2" >Your Message</label>
-
-                                                                <textarea class="form-control" id="feedback-message"></textarea>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="sendFeedback()">Send</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-
-                                </tr>
-                            </table>
-                        </div>
                     </div>
                 </div>
+
                 <div class="col-2 col-sm-2 col-md-2 col-lg-2 pr-0">
                     <table style="float: right; margin-top: 3%;">
                         <tr>
@@ -148,8 +104,43 @@
 
                             <td class="p-1 point"><img style="max-width: 30px;color: #46464e;"
                                                        src="/icon/facebook.svg" alt=""></td>
-                            <td class=" point"><img style="max-width: 30px; margin-left: 2.6px; " src="/icon/d.svg"
-                                                    alt="">
+                            <td class=" point"> <img style="max-width: 30px; margin-left: 2.6px; " src="/icon/d.svg"
+                                                     alt="" onclick="" data-toggle="modal" data-target="#feedbackModal" data-whatever="@mdo">
+
+                            </td>
+
+                                <div class="modal fade" id="feedbackModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Feedback</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form>
+                                                    <!--                                                            <div class="form-group">-->
+                                                    <!--                                                                <label for="recipient-name" class="col-form-label">Recipient:</label>-->
+                                                    <!--                                                                <input type="text" class="form-control" id="recipient-name">-->
+                                                    <!--                                                            </div>-->
+
+                                                    <div class="form-group">
+                                                        <label for="feedback-message" class="col-form-label mb-2" >Your Message</label>
+
+                                                        <textarea class="form-control" id="feedback-message"></textarea>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="sendFeedback()">Send</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
 
                         </tr>
                     </table>
@@ -164,7 +155,7 @@
 
             </div>
             <div class="row " style="   margin-top: 2%;">
-                <div class="col-1 pr-0 point">
+                <div class="col-1 pr-0 point" sec:authorize="isAuthenticated()">
 
                     <!-- <div class="my-auto ">  -->
                     <!-- <i class="material-icons-new outline-favorite_border"
@@ -175,7 +166,7 @@
                     <!-- </div>  -->
 
                 </div>
-                <div class="col-1 pl-0 my-auto"><span id="likeNum" class="pb-3" th:text=${like}></span></div>
+                <div class="col-1 pl-0 my-auto" sec:authorize="isAuthenticated()"><span id="likeNum" class="pb-3" th:text=${like}></span></div>
                 <div class="col-10 ">
                     <div id="category"
                          style="padding: 6px;display: inline;border-radius: 4px;  background-color: rgb(168, 167, 167)">
@@ -270,7 +261,6 @@
                                 <a href="" style="font-size: smaller; text-decoration: none;">see more >
                                 </a>
                             </div>
-
                         </div>
                     </div>
 
@@ -282,7 +272,8 @@
     <div class="row" style=" margin-left:1px;">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-2 pl-0 pr-0"><img class="img-fluid z-depth-2" style=" border-radius: 4px;"
+                <div class="col-2 pl-0 pr-0">
+                    <img class="img-fluid z-depth-2" style=" border-radius: 4px;"
                                                   src="https://cdn.mos.cms.futurecdn.net/xgc36EhSDW9Zu3RGLCfLEg-970-80.jpg"
                                                   data-holder-rendered="true">
                 </div>
@@ -371,7 +362,6 @@
 
                     $('#bContent').append(data["body"]);
                     $('#myButton').text(data["user"].name);
-
                     $('#ownerImg').attr('src', data["user"].profilePicture);
                     $('#tt').html(data["title"]);
                     $('#category').html(data.category.name);
@@ -415,9 +405,7 @@
                 "content": {
                     "id": [[${id}]]
                 },
-                "user": {
-                    "id": null
-                }
+
             }
             if (e.which == 13) {
                 if ($("#commentInp").val() == "") {
@@ -468,11 +456,11 @@
         function showComment(page) {
             $.ajax({
                 type: 'GET',
-                url: '/api/comments/search/findAllBycontentIdOrderById?id=' + [[${id}]] + '&page=' + page + '&size=3',
+                url: 'http://localhost:8080/api/comments/search/findAllBycontentIdOrderById?id=' + [[${id}]] + '&page=' + page + '&size=3',
                 contentType: false,
                 processData: false,
                 success: function (data) {
-
+console.log(data)
                     for (var i = 0; i < data['_embedded'].comments.length; i++) {
 
                         $("#cmt").append(`
@@ -504,7 +492,7 @@
                         // $('#showCmt').
                         $("#showCmt").css("display", "none");
                     }
-                    var p = parseInt(page) + parseInt("1");
+                    var p = parseInt(page) +1;
                     $("#showCmt").attr('onClick', 'showComment(' + p + ')');
 
                 },
@@ -516,36 +504,28 @@
 
         }
 
+
+        function LikeContent() {
+
+            var obj = {
+
+                "content": {
+                    "id": [[${id}]]
                 }
-                var obj={
-                    "user":
-                            "id": parseInt(userId)
-                        },
-                        {
-                        "id":[[${id}]]
-                    "content":{
-                    }
-                    type: "POST",
+            }
                 $.ajax({
+                    type: "POST",
                     url: 'http://localhost:8080/api/interesteds',
                     data: JSON.stringify(obj),
                     success: function (data) {
                         $("#likeNum").text(parseInt($('#likeNum').text()) + 1)
                     },
                     error: function (data) {
-                    },
                         console.log(data)
+                    },
                     contentType: "application/json"
                 });
 
-            var obj = {
-                "user":
-                    {
-                        "id": null
-                    },
-                "content": {
-                    "id": [[${id}]]
-                }
             }
 
 
@@ -554,11 +534,10 @@
                         // alert(feedbackText);
 
                 var feedback={
-
                     "text": feedbackText,
                     "status": 1,
                     "user": {
-                        "id": 1
+                        "id": [[${currentUser}]]
                     },
                     "content":{
                         "id": [[${id}]]
@@ -576,11 +555,11 @@
                     },
                     contentType: "application/json"
                 });
-            }
-        </script>
-    </div>
 
-        }
+            }
+
+
+
     </script>
 </div>
 
