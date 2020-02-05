@@ -24,19 +24,22 @@
                         Account</p>
 
                     <div style=" text-align: start; margin-bottom: 7%; margin-top: 7%;">
-                        <span style="text-align: left; margin-bottom: 0px !important;font-size: small; font-weight: 550; ">Name</span>
+                        <span style="text-align: left; margin-bottom: 0px !important;font-size: small; font-weight: 550; " id="nameLabel">Name</span>
+                        <span id="nameRequired" style="text-align: left; color: red; margin-bottom: 0px !important;font-size: xx-small; font-weight: 550;">*required</span>
                         <input style="text-align: left; margin-top: 2px; font-size: small" type="text"
                            id="name_input"  class="t-span form-control" th:field="*{name}" placeholder="Name">
                     </div>
                     <div style="text-align: start;">
-                        <span class="t-span" style="margin-bottom: 0px; font-size: small;font-weight: 550; ">E-mail</span>
+                        <span class="t-span" style="margin-bottom: 0px; font-size: small;font-weight: 550; " id="emailLabel">E-mail</span>
+                        <span id="emailRequired" style="text-align: left; color: red; margin-bottom: 0px !important;font-size: xx-small; font-weight: 550; " >*required</span>
                         <input type="text" class="t-span form-control"
-                        id="email_input"  style="margin-top: 2px; margin-bottom: 8%; font-size: small " th:field="*{email}" placeholder="ABC@gmail.com">
+                        id="email_input" style="margin-top: 2px; margin-bottom: 8%; font-size: small " th:field="*{email}" placeholder="youremail@email.com">
                     </div>
 
                     <div style="text-align: start; ">
 
-                        <span class="t-span" style="display: block; margin-bottom: -1px; font-size: small;font-weight: 550; ">Gender</span>
+                        <span class="t-span" style="display: block; margin-bottom: -1px; font-size: small;font-weight: 550;" id="gender">Gender<span id="sexRequired" style="text-align: left; color: red; margin-bottom: 0px !important;font-size: xx-small; font-weight: 550;">&nbsp;*required</span></span>
+
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" style="font-size: small " type="radio"
                                 name="inlineRadioOptions" id="inlineRadio1" th:field="*{sex}" value="male">
@@ -55,12 +58,14 @@
                     </div>
                  
                     <div style=" text-align: start; margin-bottom: 8%; margin-top: 5%;">
-                        <span style="text-align: left; margin-bottom: 0px !important;font-size: small;font-weight: 550;  ">Password</span>
+                        <span style="text-align: left; margin-bottom: 0px !important;font-size: small;font-weight: 550;  " id="passwordLabel">Password</span>
+                        <span id="passwordRequired" style="text-align: left; color: red; margin-bottom: 0px !important;font-size: xx-small; font-weight: 550;">*required</span>
                         <input style="text-align: left; margin-top: 3px; font-size: small " type="password"
                            id="password"  class="t-span form-control" th:field="*{password}" placeholder="Password">
                     </div>
                     <div style=" text-align: start; margin-bottom: 11%; margin-top: 5%;">
                         <span style="text-align: left; margin-bottom: 0px !important;font-size: small;font-weight: 550;  ">Confirm Password</span>
+                        <span id="passwordNotMatched" style="text-align: left; color: red; margin-bottom: 0px !important;font-size: xx-small; font-weight: 550;">*not matched</span>
                         <input style="text-align: left; margin-top: 3px; font-size: small " type="password"
                         id="c_password" class="t-span form-control" placeholder="Password">
                     </div>
@@ -70,7 +75,7 @@
                                 <a style="width: 90px;background-color: #FF2A19;" href="/login"  class="btn text-white right-al"><span class="t-span ">Log in</span></a>
                             </div>
                             <div class="col-6 px-0 text-right">
-                                <button style="width: 90px;" type="submit" class="btn btn-primary left-al"><span class="t-span">SignUp > </span>
+                                <button style="width: 90px;" id="btnSubmit"  type="submit" class="btn btn-primary left-al"><span class="t-span">SignUp</span>
                                 </button>
                                 
                             </div>
@@ -85,14 +90,66 @@
     <script src="/node_module/jquery/dist/jquery.min.js"></script>
 
     <script>
-        $("#form-submit").submit(function(e){
-          if( $("#password").val() == $("#c_password").val() | $("#name_input").val() != "" | $("#email_input").val()!= "" ){
 
-          }else{
-              e.preventDefault();
-              alert("Incorrect Password")
-          }
-        })
+
+
+        $( document ).ready(function() {
+            $("#nameRequired").hide();
+            $("#emailRequired").hide();
+            $("#sexRequired").hide();
+            $("#passwordRequired").hide();
+            $("#passwordNotMatched").hide();
+            // $("#inlineRadio1").attr("checked");
+
+
+            $("#form-submit").submit(function(e){
+
+                if($("#name_input").val() != ""){
+                }else {
+                    e.preventDefault();
+                    $("#nameRequired").show();
+                }
+
+                // if($("#email_input").val() != ""){
+                // }else {
+                //     e.preventDefault();
+                //     $("#emailRequired").show();
+                // }
+
+                if ($('#inlineRadio1').prop('checked')|$('#inlineRadio2').prop('checked')|$('#inlineRadio3').prop('checked')){
+                }else {
+                    e.preventDefault();
+                    $("#sexRequired").show();
+                }
+
+
+                if($("#password").val() !=""){
+                }else {
+                    e.preventDefault();
+                    $("#passwordRequired").show();
+                }
+
+                if($("#password").val() == $("#c_password").val()){
+                }else {
+                    e.preventDefault();
+                    $("#passwordNotMatched").show();
+                }
+
+
+                var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+                if($("#email_input").val().match(mailformat) && $("#email_input").val() != ""){
+                }else{
+                    e.preventDefault();
+                    $("#emailRequired").show();
+                    alert("You have entered an invalid email address!");
+                }
+
+
+
+            })
+
+        });
+
     </script>
    
 </body>

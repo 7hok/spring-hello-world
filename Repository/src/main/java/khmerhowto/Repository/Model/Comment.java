@@ -23,12 +23,11 @@ public class Comment {
     private Integer status;
     private LocalDateTime timestamp;
 
-    @PrePersist
-    public void prePersist() {
-
-        timestamp = 10000000;
-        status = true;
-    }
+//    @PrePersist
+//    public void prePersist() {
+//        timestamp = 10000000;
+//        status = true;
+//    }
     public Comment() {
     }
 
