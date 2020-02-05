@@ -1,5 +1,6 @@
 package khmerhowto.Controller;
 
+import khmerhowto.Repository.Model.User;
 import khmerhowto.globalFunction.GlobalFunctionHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,7 +15,6 @@ import khmerhowto.Service.CommentService;
 import khmerhowto.Service.ServiceImplement.CategoryServiceImp;
 import khmerhowto.Service.ServiceImplement.InterestedServiceImp;
 
- 
 
 @Controller
 public class DbTest {
@@ -24,17 +24,15 @@ public class DbTest {
     InterestedServiceImp interestedServiceImp;
     @Autowired
     private CategoryServiceImp categoryService;
+
     @GetMapping("/detail/{id}")
     public String testDetail(ModelMap modelMap, @PathVariable Integer id) {
-        System.out.println("jab ban id content detail hz: "+id);
-        modelMap.addAttribute("currentUser", GlobalFunctionHelper.getCurrentUser().getId());
-        System.out.println("Global Function"+GlobalFunctionHelper.getCurrentUser().getId());
         modelMap.addAttribute("id", id);
-        if(GlobalFunctionHelper.getCurrentUser()==null){
-
-        }
-        else {
+        if (GlobalFunctionHelper.getCurrentUser() == null) {
+            modelMap.addAttribute("currentUser", new User());
+        } else {
             modelMap.addAttribute("currentUser", GlobalFunctionHelper.getCurrentUser());
+
         }
 
         modelMap.addAttribute("totalCmt", cmt.getTotalComment(id));
@@ -43,9 +41,9 @@ public class DbTest {
     }
 
     @GetMapping("/search/{str}")
-    public String search(@PathVariable("str") String body,@RequestParam String type,ModelMap map) {
+    public String search(@PathVariable("str") String body, @RequestParam String type, ModelMap map) {
         map.addAttribute("type", type);
- 
+
         map.addAttribute("body", body);
         return "search-body";
     }
@@ -62,7 +60,13 @@ public class DbTest {
 
     @GetMapping("/admin/article/insert")
     String insertArticle(ModelMap map) {
-        map.addAttribute("categories",categoryService.findCategoryByStatus(1));
+        map.addAttribute("categories", categoryService.findCategoryByStatus(1));
+        if (GlobalFunctionHelper.getCurrentUser() == null) {
+            map.addAttribute("currentUser", new User());
+        } else {
+            map.addAttribute("currentUser", GlobalFunctionHelper.getCurrentUser());
+            System.out.println("s"+ GlobalFunctionHelper.getCurrentUser());
+        }
         return "admin/admin-article-insert";
     }
 
