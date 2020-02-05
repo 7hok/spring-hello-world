@@ -4,6 +4,8 @@ import khmerhowto.Repository.Model.Category;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -25,6 +27,14 @@ public interface CategoryRepository extends JpaRepository<Category,Integer> {
     @Query("SELECT  c FROM Category c WHERE c.id = 1")
     List<Category> findByCategoryIdAndStatus();
 
-	List<Category> findByStatus(Integer status);
+    List<Category> findByStatus(Integer status);
+    /**
+     * TODO  : FIND POPULAR ARTICLE BASED ON ARTICLE;
+     *
+     * history_click_category = view
+     *  combine history_click(view) + inner join category
+     */
+    @Query(value = "select * from history_click_category where cate_id = :category_id" , nativeQuery = true)
+    Page<Category> findPopularArticleBaseOnClick(@Param("category_id") Integer category_id,Pageable pageable);
 
 }

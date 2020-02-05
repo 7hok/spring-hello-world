@@ -1,4 +1,4 @@
-<div class="sidebar left-side-menu-sidebar border-right w-100">
+<div class="sidebar left-side-menu-sidebar border-right w-100" sec:authorize="isAuthenticated()">
     <span class="d-none" id="span_current_page" th:text="${CURRENT_PAGE}"></span>
     <style>
         li.list-group-item {
@@ -40,7 +40,7 @@
             <img class="" src="/icon/feedback-v2.svg" style="width: 30px; height: 30px;" alt="">
             <h6 class="py-2 left-side-text">Feedback</h6>
         </li>
-        <li onclick="location.href='/admin/customize'"   class="list-group-item text-center">
+        <li onclick="location.href='/admin/customize/'+$('#user_id').text();"   class="list-group-item text-center">
             <br>
             <img class="" src="/icon/setting-v4.svg" style="width: 30px; height: 30px;" alt="">
             <h6 class="py-2 left-side-text">Setting</h6>
