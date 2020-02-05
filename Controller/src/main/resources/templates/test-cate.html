@@ -486,9 +486,9 @@
             showSlide(1);
             function showSlide(cid){
     var ele1='',ele2='',ele3='';
-    alert(cid)
+
             $.ajax({
-                url: `/api/contents/search/findAllBycategoryId&AndStatus?id= ${cid}&st=1&page=0&size=3&projection=ContentNotificationProjection`,
+                url: `/api/contents/search/findAllBycategoryIdAndStatus?id= ${cid}&st=1&page=0&size=3&projection=ContentNotificationProjection`,
                 method: 'GET',
                 success: function (obj) {
                     if (obj._embedded.contents.length>0) {
@@ -536,7 +536,7 @@
                 var eleRecent1='',eleRecent2='',eleRecent3='';
                 // Append Three Card Recent Post
                 $.ajax({
-                    url: `/api/contents/search/findAllBycategoryId?id= ${cid} &page=${page}&size=3&projection=ContentNotificationProjection`,
+                    url: `/api/contents/search/findAllBycategoryIdAndStatus?id=${cid}&st=1&page=${page}&size=3&projection=ContentNotificationProjection`,
                     method: 'GET',
                     success: function (objRecent) {
                         console.log(objRecent)
@@ -640,12 +640,13 @@
 
                         $("#conttRecentLoad1").append(elet);
 
-                    }
+                    },
+                    error: function(data){
+                        console.log(data)
+                }
                 });
                 // End of Append Three Card Recent Post
             }
-
-
 
             var i = 2;
             var allEle ;
@@ -653,40 +654,53 @@
             function addMoreCard(cid){
                 $.ajax({
 
-                    url: `/api/contents/search/findAllBycategoryId?id=${cid}&page=${i}&size=3&projection=ContentNotificationProjection`,
+                    url: `/api/contents/search/findAllBycategoryIdAndStatus?id=${cid}&st=1&page=${i}&size=3&projection=ContentNotificationProjection`,
                     method: 'GET',
                     success: function (objRecentLoad) {
                         console.log(objRecentLoad)
                         var elements = "";
                         i++;
 
-                        for (let p = 0; p < objRecentLoad._embedded.contents.length - 1; p++) {
-                            elements += generateCard(objRecentLoad._embedded.contents[p]);
+                        if(objRecentLoad._embedded.contents.length >1) {
+                            for (let p = 0; p < 2; p++) {
+                                elements += generateCard(objRecentLoad._embedded.contents[p]);
 
+                            }
+                        }
+                        else {
+                            return;
                         }
                         if(objRecentLoad._embedded.contents.length>2) {
                             leftCol = generateCard(objRecentLoad._embedded.contents[2]);
                             allEle += `<div class="row" id="rowLoadMore1">${elements}</div><div class="row" id="rowLoadMore2">${leftCol}`;
                         }
+                        else {
+                            $("#conttRecentLoad1").after(`<div class="row" id="rowLoadMore3">${elements}</div>`);
+                        }
 
+                        console.log("before")
+                        console.log(allEle)
                         // 3 Card More
                         $.ajax({
 
-                            url: `/api/contents/search/findAllBycategoryId?id=1&page=${i}&size=3&projection=ContentNotificationProjection`,
+                            url: `/api/contents/search/findAllBycategoryIdAndStatus?id=1&st=1&page=${i}&size=3&projection=ContentNotificationProjection`,
                             method: 'GET',
                             success: function (objRecentLoad2) {
                                 var elements2 = "";
+                                console.log(objRecentLoad2)
+                                alert(objRecentLoad2._embedded.contents.length)
                                 if(objRecentLoad2._embedded.contents.length>0) {
                                     allEle += generateCard(objRecentLoad2._embedded.contents[0]) + `</div>`
-                                }
-                                for ( let p = 1; p < objRecentLoad2._embedded.contents.length; p++) {
-                                    elements2 += generateCard(objRecentLoad._embedded.contents[p]);
-                                }
-                                if(objRecentLoad2._embedded.contents.length>2) {
-                                    allEle += `<div class="row" id="rowLoadMore3">${elements2}</div>`
-                                }
-                                    i++;
 
+                                }
+                              if(objRecentLoad2._embedded.contents.length>1) {
+                                  for (let p = 1; p < objRecentLoad2._embedded.contents.length; p++) {
+                                      elements2 += generateCard(objRecentLoad._embedded.contents[p]);
+                                  }
+                              }
+                                allEle += `<div class="row" id="rowLoadMore3">${elements2}</div>`
+                                i++;
+                                console.log(allEle)
                                 $("#conttRecentLoad1").after(allEle);
                             },
                             error: function(er){
@@ -713,7 +727,7 @@
             function showCardBottom(page) {
                 // Append Three Card Recent Post
                 $.ajax({
-                    url: `/api/contents/search/findAllBycategoryId?id=1&page=${page}&size=3&projection=ContentNotificationProjection`,
+                    url: `/api/contents/search/findAllBycategoryIdAndStatus?id=1&st=1&page=${page}&size=3&projection=ContentNotificationProjection`,
                     method: 'GET',
                     success: function (objRecent) {
                         eleRecent1 = `   <div class="card mb-3" onclick="window.location.href ='/detail/${objRecent._embedded.contents[0].id}'">
