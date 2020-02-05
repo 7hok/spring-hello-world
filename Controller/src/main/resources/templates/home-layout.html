@@ -67,7 +67,7 @@
             }
             $.ajax({
                 type: "POST",
-                url: 'http://localhost:8080/api/requests',
+                url: '/api/requests',
                 data: JSON.stringify(request),
                 success: function (data) {
                     console.log("successfully send request")
@@ -277,7 +277,7 @@
 <script>
 
 </script>
-
+    <th:block th:include="~{fragment/__notify_client}"></th:block>
 </body>
 
 </html>

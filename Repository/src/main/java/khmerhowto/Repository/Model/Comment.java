@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 
 import javax.persistence.*;
 
-import jdk.nashorn.internal.runtime.GlobalFunctions;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 @Entity
@@ -23,21 +22,26 @@ public class Comment {
     private Integer status;
     private LocalDateTime timestamp;
 
-//    @PrePersist
-//    public void prePersist() {
-//        timestamp = 10000000;
-//        status = true;
-//    }
+
+
+    @PrePersist
+    public void prePersist() {
+
+        timestamp = LocalDateTime.now();
+        status = 1;
+    }
+
+
     public Comment() {
     }
 
     public Comment(int id, User user, Content content, String text, Integer status, LocalDateTime timestamp) {
-        this.id=id;
-        this.user=user;
-        this.content=content;
-        this.text=text;
-        this.status=status;
-        this.timestamp=timestamp;
+        this.id = id;
+        this.user = user;
+        this.content = content;
+        this.text = text;
+        this.status = status;
+        this.timestamp = timestamp;
     }
 
     public int getId() {
@@ -92,12 +96,12 @@ public class Comment {
     @Override
     public String toString() {
         return "Comment{" +
-                "id=" + id +
-                ", user=" + user +
-                ", content=" + content +
-                ", text='" + text + '\'' +
-                ", status=" + status +
-                ", timestamp=" + timestamp +
-                '}';
+            "id=" + id +
+            ", user=" + user +
+            ", content=" + content +
+            ", text='" + text + '\'' +
+            ", status=" + status +
+            ", timestamp=" + timestamp +
+            '}';
     }
 }

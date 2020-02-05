@@ -8,6 +8,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.corundumstudio.socketio.SocketIOServer;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 
@@ -18,7 +20,9 @@ import java.util.Map;
 
 
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -118,8 +122,12 @@ public class HomeController {
     }
 
     @GetMapping(value = { "/homepage", "/home" })
-    String home(Model model) {
+    String home(Model model,@PageableDefault(size = 10)Pageable pageable) {
+        Page<Content> pages = contentRepository.findPopularContent(pageable);
+        List<Category> categories = categoryRepository.findByStatus(1);
         model.addAttribute("CURRENT_PAGE", "home");
+        model.addAttribute("POPULAR_POST",pages.getContent());
+        model.addAttribute("CATEGORIES", categories);
         // Page<Content> lst = con.findAll(PageRequest.of(0, 3,
         // Sort.by(Sort.Direction.DESC, "Id")));
         // model.addAttribute("contents", lst.getContent());
@@ -129,7 +137,13 @@ public class HomeController {
 
     @GetMapping({ "/login", "/" })
     String loginPage() {
+       try{
+        GlobalFunctionHelper.getCurrentUser().getId();
+            return "redirect:/home";
+        }catch(Exception ex){
         return "oauth_login";
+       }
+        
     }
 
     @GetMapping("/favorite/chosen")
@@ -236,16 +250,12 @@ public class HomeController {
     @Autowired
     private ContentRepository contentRepository;
 
-    @GetMapping("/category/{id}")
-    String category(Model model,@PathVariable("id") Integer id){
+    @GetMapping("/category")
+    String category(Model model ){
         model.addAttribute("categories",categoryServiceImpl.findAll());
-        model.addAttribute("id",id);
-
         return "test-cate";
 
-    }
-
-
+    } 
     @GetMapping("/category/s/{id}")
     String categoryLeft(Model model, @PathVariable Integer id){
         System.out.println("jab ban id: " + id);
@@ -262,4 +272,12 @@ public class HomeController {
 
             return "content-by-category-test";
             }
+    @Autowired
+    SocketIOServer socket;
+    @GetMapping("/testsocket")
+    @ResponseBody
+    String broadCasting (){
+        socket.getBroadcastOperations().sendEvent("client",new User("menghok","menghok"));
+        return "hahahha";
+    }        
 }

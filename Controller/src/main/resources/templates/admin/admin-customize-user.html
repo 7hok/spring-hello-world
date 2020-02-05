@@ -34,7 +34,7 @@
                 <div class="  text-center  d-flex px-5">
                   
                     <div class="border border-dark rounded-circle user-profile-div m-5 p-2 d-none d-lg-block" >
-                        <img src="/image-static/machine-learning.svg" class="card-img-top border border-dark user-profile rounded-circle " alt="...">
+                        <img th:src="${user.profilePicture}" onerror="this.src='/image-static/machine-learning.svg'" class="card-img-top border border-dark user-profile rounded-circle " alt="...">
                     </div>
                     <div class="align-self-center">
                         <h2>User Administrator</h2>

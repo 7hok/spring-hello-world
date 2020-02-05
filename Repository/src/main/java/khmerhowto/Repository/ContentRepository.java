@@ -30,4 +30,6 @@ public interface ContentRepository extends JpaRepository<Content, Integer> {
 	public Page<Content> findAllByOrderByIdDesc(Pageable pageable);
 
 	Page<Content> findByBodyContainingIgnoreCase(@Param("body") String body, Pageable pageable);
+	@Query(value = "select click,c.* from history_click as h right join content as c on h.content_id = c.id where status = 1" ,nativeQuery = true)
+	Page<Content> findPopularContent(Pageable pageable);
 }
