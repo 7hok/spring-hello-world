@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.PrePersist;
 
 import khmerhowto.Repository.Model.audit.AuditListener;
-@EntityListeners(AuditListener.class)
+//@EntityListeners(AuditListener.class)
 @Entity
 public class Category implements Serializable{
     @Id
