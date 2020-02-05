@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    xmlns="http://www.w3.org/1999/xhtml" layout:decorator="~{home-layout}">
+      xmlns="http://www.w3.org/1999/xhtml" layout:decorator="~{home-layout}">
 
 <head>
     <meta charset="UTF-8">
@@ -12,97 +12,89 @@
 
 <body>
 
-    <div layout:fragment="content"
-        class="container pr-md-5 pr-sm-4 pr-3 pr-xl-5 pr-lg-5 pl-md-5 pl-sm-4 pl-3 pl-lg-5 pl-xl-5 pt-md-5 pt-sm-4 pt-3 pt-lg-5"
-        style="background-color: rgb(255, 255, 255);">
-        <style>
-            body {
-                background-color: rgb(255, 255, 255) !important;
-            }
+<div layout:fragment="content"
+     class="container pr-md-5 pr-sm-4 pr-3 pr-xl-5 pr-lg-5 pl-md-5 pl-sm-4 pl-3 pl-lg-5 pl-xl-5 pt-md-5 pt-sm-4 pt-3 pt-lg-5"
+     style="background-color: rgb(255, 255, 255);">
+    <style>
+        body {
+            background-color: rgb(255, 255, 255) !important;
+        }
 
-            .row {
-                margin-bottom: 15px;
-            }
+        .row {
+            margin-bottom: 15px;
+        }
 
-            .point {
-                cursor: pointer;
-            }
+        .point {
+            cursor: pointer;
+        }
 
-            .card-hover .reveal {
-                visibility: hidden;
-                opacity: 0;
-                height: 0;
-                padding: 0;
-            }
+        .card-hover .reveal {
+            visibility: hidden;
+            opacity: 0;
+            height: 0;
+            padding: 0;
+        }
 
-            /* .maTooltip {
-                opacity: 1.8 !important;
-            } */
-            .maTooltip-contents {
-                padding: 0%;
-                border: none;
-            }
+        /* .maTooltip {
+            opacity: 1.8 !important;
+        } */
+        .maTooltip-contents {
+            padding: 0%;
+            border: none;
+        }
 
-            .card-hover:hover .reveal {
-                height: auto;
-                visibility: visible;
-                opacity: 10;
-                transition: opacity 1s ease;
-            }
+        .card-hover:hover .reveal {
+            height: auto;
+            visibility: visible;
+            opacity: 10;
+            transition: opacity 1s ease;
+        }
 
-            .avatar {
-                border: 0.3rem solid rgba(#fff, 0.3);
-                margin-top: -6rem;
-                margin-bottom: 1rem;
-                max-width: 9rem;
-            }
+        .avatar {
+            border: 0.3rem solid rgba(#fff, 0.3);
+            margin-top: -6rem;
+            margin-bottom: 1rem;
+            max-width: 9rem;
+        }
 
-        </style>
-        <link rel="stylesheet" href="../css/maTooltip.css">
-        <div class="row">
-            <div class="col-12">
-                <p class="head-size font-weight-bold" id="tt" style="color: #46464e;">
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit
-                </p>
-            </div>
+    </style>
+    <link rel="stylesheet" href="../css/maTooltip.css">
+    <div class="row">
+        <div class="col-12">
+            <p class="head-size font-weight-bold" id="tt" style="color: #46464e;">
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit
+            </p>
         </div>
-        <div class="row">
-            <div class="col-12">
-                <!-- <div class="container-fluid"> -->
-                    <div class="row" style="margin-bottom: 23px;">
-                        <div class="col-2 col-sm-2 col-md-1 col-lg-1 pl-0" id="pfpic"
-                            style="  padding-left: 0; text-align: right; margin-bottom: 23px;">
-                            <!-- <img src="" alt=""> -->
-                            <img class=" rounded-circle z-depth-2 myButton point"
-                                style="width: 80px; width: 60px; height: 60px;" alt="100x100"
-                                src="https://cdn.mos.cms.futurecdn.net/xgc36EhSDW9Zu3RGLCfLEg-970-80.jpg"
-                                data-holder-rendered="true">
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <!-- <div class="container-fluid"> -->
+            <div class="row" style="margin-bottom: 23px;">
+                <div class="col-2 col-sm-2 col-md-1 col-lg-1 pl-0" id="pfpic"
+                     style="  padding-left: 0; text-align: right; margin-bottom: 23px;">
+                    <!-- <img src="" alt=""> -->
+                    <img class=" rounded-circle z-depth-2 myButton point"
+                         style="width: 80px; width: 60px; height: 60px;" alt="100x100"
+                         id="ownerImg"
+                         src="https://cdn.mos.cms.futurecdn.net/xgc36EhSDW9Zu3RGLCfLEg-970-80.jpg"
+                         data-holder-rendered="true">
 
-                        </div>
- 
-                        <div class="col-8 col-sm-8 col-md-9 col-lg-9" style="padding-left: 0;">
+                </div>
 
-                            <div class="container ml-0 pt-1">
-                                <div class="row mb-0">
-                                    <!-- <input  type="button" value="Click me!"> -->
-                                    <div class="col-12 pl-0">
-                                        <span id="myButton" style="color: #46464e;" class="point myButton"
-                                            data-toggle="tooltip" data-html="true"> Kong Pengsea</span>
-                                    </div>
-                                </div>
+                <div class="col-8 col-sm-8 col-md-9 col-lg-9" style="padding-left: 0;">
 
-                                <div class="row">
-                                    <div class="col-12 pl-0" style="color: #948383; font-size: 14px;">16-Sep-1998</div>
-                                </div>
+                    <div class="container ml-0 pt-1">
+                        <div class="row mb-0">
+                            <!-- <input  type="button" value="Click me!"> -->
+                            <div class="col-12 pl-0">
+                                        <span id="myButton" style="color: #46464e;" bio="" location=""
+                                              class="point myButton"
+                                              data-toggle="tooltip" data-html="true"> Kong Pengsea</span>
                             </div>
                         </div>
-                        <div class="col-2 col-sm-2 col-md-2 col-lg-2 pr-0">
-                            <table style="float: right; margin-top: 3%;">
-                                <tr>
-                                    <td class="p-1 point"> <img style="max-width: 31px;color: #46464e;"
-                                            src="/icon/print.svg" alt="">
-                                    </td>
 
+                        <div class="row">
+                            <div class="col-12 pl-0" style="color: #948383; font-size: 14px;">16-Sep-1998</div>
                                     <td class="p-1 point"><img style="max-width: 30px;color: #46464e;"
                                             src="/icon/facebook.svg" alt=""></td>
                                     <td class=" point"> <img style="max-width: 30px; margin-left: 2.6px; " src="/icon/d.svg"
@@ -146,236 +138,220 @@
                             </table>
                         </div>
                     </div>
+                </div>
+                <div class="col-2 col-sm-2 col-md-2 col-lg-2 pr-0">
+                    <table style="float: right; margin-top: 3%;">
+                        <tr>
+                            <td class="p-1 point"><img style="max-width: 31px;color: #46464e;"
+                                                       src="/icon/print.svg" alt="">
+                            </td>
 
-                    <!-- <div class="row">
-                        <img class="vh-90 w-100" src="img/960x0.jpg" alt="">
-                    </div> -->
+                            <td class="p-1 point"><img style="max-width: 30px;color: #46464e;"
+                                                       src="/icon/facebook.svg" alt=""></td>
+                            <td class=" point"><img style="max-width: 30px; margin-left: 2.6px; " src="/icon/d.svg"
+                                                    alt="">
+
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- <div class="row">
+                <img class="vh-90 w-100" src="img/960x0.jpg" alt="">
+            </div> -->
+            <div class="row">
+                <div class="col-12" id="bContent"></div>
+
+            </div>
+            <div class="row " style="   margin-top: 2%;">
+                <div class="col-1 pr-0 point">
+
+                    <!-- <div class="my-auto ">  -->
+                    <!-- <i class="material-icons-new outline-favorite_border"
+                        style="float: right;width: 26px; height: 22px;">
+
+                    </i> -->
+                    <img onclick="LikeContent()" src="/icon/congrat.svg" style="width: 73px;" alt="">
+                    <!-- </div>  -->
+
+                </div>
+                <div class="col-1 pl-0 my-auto"><span id="likeNum" class="pb-3" th:text=${like}></span></div>
+                <div class="col-10 ">
+                    <div id="category"
+                         style="padding: 6px;display: inline;border-radius: 4px;  background-color: rgb(168, 167, 167)">
+                    </div>
+
+                </div>
+            </div>
+            <div class="row" style="margin-top: 3%; margin-left: 0;; margin-bottom: 3%;  ">
+                <div class="col-4 col-sm-6 col-md-4 col-lg-2 pl-0"
+                     style="border-bottom: 3px solid rgb(9, 190, 235);">
+                    <span id="nCmt" th:text=${totalCmt}></span> Comments
+                </div>
+                <div class="col-8 col-sm-6 col-md-8 col-lg-10"
+                     style="border-bottom: 3px solid rgb(217, 217, 226);">
+                </div>
+
+            </div>
+            <div class="row" style="    margin-bottom: 2%;" sec:authorize="isAuthenticated()">
+                <div class="col-2 col-sm-2 col-md-1 col-lg-1 pl-0" style=" text-align: right;">
+                    <!-- <img src="" alt=""> -->
+                    <img class=" rounded-circle z-depth-2" style="width: 80px; width: 60px; height: 60px;"
+                         alt="100x100" th:src=${currentUser.getProfilePicture()}
+                         data-holder-rendered="true">
+
+                </div>
+                <div class="col-9 col-sm-9 col-md-10 col-lg-11 pr-0 pl-0 my-auto">
+                    <div class="form-group my-auto">
+                        <input type="email" class="form-control" id="commentInp" placeholder="Comment">
+                    </div>
+                    <!--  <input style="width: -webkit-fill-available;" placeholder="comment" type="text" name="" id="">-->
+                </div>
+                <div class="col-1 col-sm-1 col-md-1   btn-send" style="    padding-top: 10px;">
+                    <input type="button" value="send">
+                </div>
+            </div>
+
+            <div class="row" style="border-bottom: 1px solid #dadada;">
+                <div class="ml-3 mr-0 container-fluid">
+
                     <div class="row">
-                        <div class="col-12" id="bContent"></div>
+                        <div class="col-12">
 
-                    </div>
-                    <div class="row " style="   margin-top: 2%;">
-                        <div class="col-1 pr-0 point">
-
-                            <!-- <div class="my-auto ">  -->
-                            <!-- <i class="material-icons-new outline-favorite_border"
-                                style="float: right;width: 26px; height: 22px;">
-
-                            </i> -->
-                            <img onclick="LikeContent(1)" src="/icon/congrat.svg" style="width: 73px;" alt="">
-                            <!-- </div>  -->
-
-                        </div>
-                        <div class="col-1 pl-0 my-auto"> <span id="likeNum" class="pb-3" th:text=${like}></span></div>
-                        <div class="col-10 ">
-                            <div id="category"
-                                style="padding: 6px;display: inline;border-radius: 4px;  background-color: rgb(168, 167, 167)">
-                                </div>
-
-                        </div>
-                    </div>
-                    <div class="row" style="margin-top: 3%; margin-left: 0;; margin-bottom: 3%;  ">
-                        <div class="col-4 col-sm-6 col-md-4 col-lg-2 pl-0"
-                            style="border-bottom: 3px solid rgb(9, 190, 235);">
-                            <span id="nCmt" th:text=${totalCmt}></span> Comments</div>
-                        <div class="col-8 col-sm-6 col-md-8 col-lg-10"
-                            style="border-bottom: 3px solid rgb(217, 217, 226);">
-                        </div>
-
-                    </div>
-                    <div class="row" style="    margin-bottom: 2%;">
-                        <div class="col-2 col-sm-2 col-md-1 col-lg-1 pl-0" style=" text-align: right;">
-                            <!-- <img src="" alt=""> -->
-                            <img class=" rounded-circle z-depth-2" style="width: 80px; width: 60px; height: 60px;"
-                                alt="100x100" src="https://cdn.mos.cms.futurecdn.net/xgc36EhSDW9Zu3RGLCfLEg-970-80.jpg"
-                                data-holder-rendered="true">
-
-                        </div>
-                        <div class="col-9 col-sm-9 col-md-10 col-lg-11 pr-0 pl-0 my-auto">
-                            <div class="form-group my-auto">
-                                <input type="email" class="form-control" id="commentInp" placeholder="Comment">
-                            </div>
-                            <!--  <input style="width: -webkit-fill-available;" placeholder="comment" type="text" name="" id="">-->
-                        </div>
-                        <div class="col-1 col-sm-1 col-md-1   btn-send" style="    padding-top: 10px;">
-                            <input type="button" value="send">
-                        </div>
-                    </div>
-
-                    <div class="row" style="border-bottom: 1px solid #dadada;">
-                        <div class="ml-3 mr-0 container-fluid">
-
-                            <div class="row">
-                                <div class="col-12">
-
-                                    <div class="container-fluid" id="cmt">
-                                        <div class="row"></div>
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                            <div class="row">
-                                <div class="col-1 col-sm-3 col-md-3"></div>
-                                <div class="col-10 col-sm-6 col-md-6" style="text-align: center; margin-bottom: 4%;">
-                                    <button type="button" class="btn  w-auto btn-primary btn-block" id="showCmt"
-                                        style="border-radius: 30px; margin-left: 25%;">Show More Comments</button>
-                                </div>
-                                <div class="col-1 col-sm-3 col-md-3"></div>
+                            <div class="container-fluid" id="cmt">
+                                <div class="row"></div>
                             </div>
 
                         </div>
+
                     </div>
-                </div>
 
-            <!-- </div> -->
-        </div>
-
-
-        <div class="row" style=" margin-left: 1px;">
-            <h4>អត្ថបទដែលគួរអាន</h4>
-
-        </div>
-        <div class="row" style=" margin-left: 1px;">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-2 pl-0 pr-0">
-                        <img class="img-fluid z-depth-2" style="width: 200px; border-radius: 4px;"
-                            src="https://cdn.mos.cms.futurecdn.net/xgc36EhSDW9Zu3RGLCfLEg-970-80.jpg"
-                            data-holder-rendered="true">
-                    </div>
-                    <div class="col-10">
-                        <div class="container-fluid">
-                            <div class="row mb-0">
-                                <h5 style="color: #46464e;margin-top: 0;">Lorem ipsum, dolor sit amet consectetur </h5>
-                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facere officiis, praesentium
-                                tempora cumque illo mollitia deserunt ad, asperiores totam minima quae commodi
-                                necessitatibus,
-                            </div>
-                            <div class="row">
-                                <div class="col-12" style="position: relative;width: max-content;position: absolute;right: 0px;bottom: 0px;
-                                float: right;">
-                                    <a href="" style="font-size: smaller; text-decoration: none;">see more >
-                                    </a>
-                                </div>
-
-                            </div>
+                    <div class="row">
+                        <div class="col-1 col-sm-3 col-md-3"></div>
+                        <div class="col-10 col-sm-6 col-md-6" style="text-align: center; margin-bottom: 4%;">
+                            <button type="button" class="btn  w-auto btn-primary btn-block" id="showCmt"
+                                    style="border-radius: 30px; margin-left: 25%;">Show More Comments
+                            </button>
                         </div>
-
-                    </div>
-
-                </div>
-            </div>
-        </div>
-        <div class="row" style=" margin-left:1px;">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-2 pl-0 pr-0"> <img class="img-fluid z-depth-2" style=" border-radius: 4px;"
-                            src="https://cdn.mos.cms.futurecdn.net/xgc36EhSDW9Zu3RGLCfLEg-970-80.jpg"
-                            data-holder-rendered="true">
-                    </div>
-                    <div class="col-10">
-                        <div class="container-fluid">
-                            <div class="row mb-0">
-                                <h5 style="color: #46464e;margin-top: 0;">Lorem ipsum, dolor sit amet consectetur </h5>
-                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facere officiis, praesentium
-                                tempora cumque illo mollitia deserunt ad, asperiores totam minima quae commodi
-                                necessitatibus,
-                            </div>
-                            <div class="row">
-                                <div class="col-12" style="position: relative;width: max-content;position: absolute;right: 0px;bottom: 0px;
-                                float: right;">
-                                    <a href="" style="font-size: smaller; text-decoration: none;">see more >
-                                    </a>
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
-        </div>
-        <div class="row" style=" margin-left: 1px;">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-2 pl-0 pr-0"> <img class="img-fluid z-depth-2" style=" border-radius: 4px;"
-                            src="https://cdn.mos.cms.futurecdn.net/xgc36EhSDW9Zu3RGLCfLEg-970-80.jpg"
-                            data-holder-rendered="true">
-                    </div>
-                    <div class="col-10">
-                        <div class="container-fluid">
-                            <div class="row mb-0" style="color:  #46464e;">
-                                <h5 style="color: #46464e;margin-top: 0;">Lorem ipsum, dolor sit amet consectetur </h5>
-                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facere officiis, praesentium
-                                tempora cumque illo mollitia deserunt ad, asperiores totam minima quae commodi
-                                necessitatibus,
-                            </div>
-                            <div class="row">
-                                <div class="col-12" style="position: relative;width: max-content;position: absolute;right: 0px;bottom: 0px;
-                                float: right;">
-                                    <a href="" style="font-size: smaller; text-decoration: none;">see more >
-                                    </a>
-                                </div>
-
-                            </div>
-                        </div>
-
+                        <div class="col-1 col-sm-3 col-md-3"></div>
                     </div>
 
                 </div>
             </div>
         </div>
 
-
+        <!-- </div> -->
     </div>
 
-    <div layout:fragment="content-js">
-        <script>
-            var articleId = window.location.pathname;
 
-            // Document ready function
-            $(function () {
-                var button = $('#myButton');
-                var tooltip = new maTooltip(button, {
-                    inline_style: 'max-width: none;',
-                    full_visibility_duration: 99000,
-                    position: maTooltip.POSITION.BOTTOM,
-                    static_message: '<div style="background-color: white; color: black; border-radius: inherit;"><div>  <img class=" rounded-circle z-depth-2" style="margin-top: 20px; margin-bottom: 10px; width: 60px; height: 60px;" alt="100x100" src="https://cdn.mos.cms.futurecdn.net/xgc36EhSDW9Zu3RGLCfLEg-970-80.jpg" data-holder-rendered="true"></div><h3 style="color: #46464e">Hum Chamroeun</h3><p style="color: #46464e">From Takeo</p><p style="color: #46464e">I am so happy</p><hr><div style="height: 32px;border-radius: inherit;background-color: white; color: black;"><a href="" style="margin-left: 20px;margin-right: 20px ">Favorite Category</a><a style="margin-left: 20px;margin-right: 20px " href="">Education</a><a href="" style="margin-left: 20px;margin-right: 20px ">Technology</a></div></div>'
-                });
+    <div class="row" style=" margin-left: 1px;">
+        <h4>អត្ថបទដែលគួរអាន</h4>
+
+    </div>
+    <div class="row" style=" margin-left: 1px;">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-2 pl-0 pr-0">
+                    <img class="img-fluid z-depth-2" style="width: 200px; border-radius: 4px;"
+                         src="https://cdn.mos.cms.futurecdn.net/xgc36EhSDW9Zu3RGLCfLEg-970-80.jpg"
+                         data-holder-rendered="true">
+                </div>
+                <div class="col-10">
+                    <div class="container-fluid">
+                        <div class="row mb-0">
+                            <h5 style="color: #46464e;margin-top: 0;">Lorem ipsum, dolor sit amet consectetur </h5>
+                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facere officiis, praesentium
+                            tempora cumque illo mollitia deserunt ad, asperiores totam minima quae commodi
+                            necessitatibus,
+                        </div>
+                        <div class="row">
+                            <div class="col-12" style="position: relative;width: max-content;position: absolute;right: 0px;bottom: 0px;
+                                float: right;">
+                                <a href="" style="font-size: smaller; text-decoration: none;">see more >
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="row" style=" margin-left:1px;">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-2 pl-0 pr-0"><img class="img-fluid z-depth-2" style=" border-radius: 4px;"
+                                                  src="https://cdn.mos.cms.futurecdn.net/xgc36EhSDW9Zu3RGLCfLEg-970-80.jpg"
+                                                  data-holder-rendered="true">
+                </div>
+                <div class="col-10">
+                    <div class="container-fluid">
+                        <div class="row mb-0">
+                            <h5 style="color: #46464e;margin-top: 0;">Lorem ipsum, dolor sit amet consectetur </h5>
+                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facere officiis, praesentium
+                            tempora cumque illo mollitia deserunt ad, asperiores totam minima quae commodi
+                            necessitatibus,
+                        </div>
+                        <div class="row">
+                            <div class="col-12" style="position: relative;width: max-content;position: absolute;right: 0px;bottom: 0px;
+                                float: right;">
+                                <a href="" style="font-size: smaller; text-decoration: none;">see more >
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="row" style=" margin-left: 1px;">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-2 pl-0 pr-0"><img class="img-fluid z-depth-2" style=" border-radius: 4px;"
+                                                  src="https://cdn.mos.cms.futurecdn.net/xgc36EhSDW9Zu3RGLCfLEg-970-80.jpg"
+                                                  data-holder-rendered="true">
+                </div>
+                <div class="col-10">
+                    <div class="container-fluid">
+                        <div class="row mb-0" style="color:  #46464e;">
+                            <h5 style="color: #46464e;margin-top: 0;">Lorem ipsum, dolor sit amet consectetur </h5>
+                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facere officiis, praesentium
+                            tempora cumque illo mollitia deserunt ad, asperiores totam minima quae commodi
+                            necessitatibus,
+                        </div>
+                        <div class="row">
+                            <div class="col-12" style="position: relative;width: max-content;position: absolute;right: 0px;bottom: 0px;
+                                float: right;">
+                                <a href="" style="font-size: smaller; text-decoration: none;">see more >
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
 
 
-                //  var tooltip = new maTooltip( button, {  } );
-                button.hover(function () {
-                    tooltip.show();
-                });
-                button.mouseout('click', function () {
-                    tooltip.hide();
-                });
-                $("#pfpic").hover(function () {
-                    tooltip.show();
-                })
-                $("#pfpic").mouseout(function () {
-                    tooltip.hide();
-                })
-            });
-            $(function () {
-                var button = $('#myButton');
-                var tooltip = new maTooltip(button, {
-                    inline_style: 'max-width: none;',
-                    full_visibility_duration: 31000,
-                    position: maTooltip.POSITION.BOTTOM,
-                    static_message: '<div style="background-color: white; color: black; border-radius: inherit;"><div>  <img class="img-fluid rounded-circle z-depth-2" style="width: 80px; min-width: 40px;" alt="100x100" src="https://mdbootstrap.com/img/Photos/Avatars/img%20(31).jpg" data-holder-rendered="true"></div><h3>Hum Chamroeun</h3><p>From Takeo</p><p>I am so happy</p><hr><div style="height: 32px;border-radius: inherit;background-color: white; color: black;"><a href="" style="margin-left: 20px;margin-right: 20px ">Favorite Category</a><a style="margin-left: 20px;margin-right: 20px " href="">Education</a><a href="" style="margin-left: 20px;margin-right: 20px ">Technology</a></div></div>'
-                });
+</div>
+
+<div layout:fragment="content-js">
+    <script>
+        var articleId = window.location.pathname;
+
+        // Document ready function
 
 
-                //  var tooltip = new maTooltip( button, {  } );
-                button.on('click', function () {
-                    tooltip.show();
-                });
-            });
+        $(document).ready(function () {
+
             $.ajax({
                 type: 'GET',
                 url: 'http://localhost:8080/api/contents/[[${id}]]',
@@ -384,148 +360,89 @@
                 success: function (data) {
 
                     $('#bContent').append(data["body"]);
+                    $('#myButton').text(data["user"].name);
+
+                    $('#ownerImg').attr('src', data["user"].profilePicture);
                     $('#tt').html(data["title"]);
                     $('#category').html(data.category.name);
-                    if([[${totalCmt}]]>0){
-                        showComment(0);
-                    }
-                    
+                    var locate = data["user"].location //getter
+                    var bio = data["user"].bio;
+                    var src = data["user"].profilePicture;
+                    var name = data["user"].name;
+                    var button = $('#myButton');
+                    var tooltip = new maTooltip(button, {
+                        inline_style: 'max-width: none;',
+                        full_visibility_duration: 31000,
+                        position: maTooltip.POSITION.BOTTOM,
+                        static_message: `<div style="background-color: white; color: black; border-radius: inherit;"><div>  <img class="img-fluid rounded-circle z-depth-2" style="width: 60px; height: 60px; min-height: 40px; min-width: 40px;" alt="100x100" src=${src} data-holder-rendered="true"></div><h3>${name}</h3><p>${locate}</p><p>${bio}</p><hr><div style="height: 32px;border-radius: inherit;background-color: white; color: black;"><a href="" style="margin-left: 20px;margin-right: 20px ">Favorite Category</a><a style="margin-left: 20px;margin-right: 20px " href="">Education</a><a href="" style="margin-left: 20px;margin-right: 20px ">Technology</a></div></div>`
+                    });
+                    //  var tooltip = new maTooltip( button, {  } );
+                    button.hover(function () {
+                        tooltip.show();
+                    });
+                    button.mouseout('click', function () {
+                        tooltip.hide();
+                    });
+                    $("#pfpic").hover(function () {
+                        tooltip.show();
+                    })
+                    $("#pfpic").mouseout(function () {
+                        tooltip.hide();
+                    })
+                    showComment(0)
                 },
                 error: function (data) {
                     console.log(data)
                 }
 
             });
+        })
+        $("#commentInp").on('keypress', function (e) {
 
-            $("#commentInp").on('keypress', function (e) {
-                
-                var obj = {
+            var obj = {
 
-                    "text": $("#commentInp").val(),
-                    "content": {
-                        "id": [[${id}]]
-                    },
-                    "user": {
-                        "id": 1
-                    }
+                "text": $("#commentInp").val(),
+                "content": {
+                    "id": [[${id}]]
+                },
+                "user": {
+                    "id": null
                 }
-                if (e.which == 13) {
-                    if($("#commentInp").val()==""){
+            }
+            if (e.which == 13) {
+                if ($("#commentInp").val() == "") {
+
                     return;
                 }
-                    $.ajax({
-                        type: "POST",
-                        url: 'http://localhost:8080/api/comments',
-                        data: JSON.stringify(obj),
-                        success: function (data) {
-                            
-                            $("#cmt").prepend(`
-                        
+                $.ajax({
+                    type: "POST",
+                    url: 'http://localhost:8080/api/comments',
+                    data: JSON.stringify(obj),
+                    success: function (data) {
+                        console.log(data)
+                        $("#cmt").prepend(`
                                 <div class="row" style=" margin-left: 0;">
-                                        <div class="col-2 col-sm-2 col-md-1  pr-0"> 
+                                        <div class="col-2 col-sm-2 col-md-1  pr-0">
                                             <img class=" rounded-circle z-depth-2"
-                                                style="width: 80px; width: 60px; height: 60px; float: right;" alt="100x100"
-                                                src="https://cdn.mos.cms.futurecdn.net/xgc36EhSDW9Zu3RGLCfLEg-970-80.jpg"
+                                                style="width: 80px; width: 60px; height: 60px; float: right;" alt="100x100" src= ""
                                                 data-holder-rendered="true">
                                         </div>
                                         <div class="col-10 col-sm-10 col-md-11">
                                             <div class="container-fluid ml-0 pr-0 mr-0">
                                                 <div class="row">
-                                                    <span style="color: #07D">kong pengsea</span>
+                                                    <span style="color: #07D" >ds</span>
                                                     <span style="color: #918989; font-size: 12px; padding-top: 4px;">
                                                         &nbsp;&nbsp;&nbsp;&#8226; 22 days ago</span>
                                                 </div>
                                             <div class="row" style="color: #46464e;" id="cmt">` +
-                                                $("#commentInp").val() + `
+                            $("#commentInp").val() + `
                                                 </div>
                                             </div>
                                         </div>
                                 </div>
-                        
+
                 `);
-                $("#commentInp").val("");
-                        },
-                        error: function (data) {
- 
-                        },
-                        contentType: "application/json"
-                    });
-
-                 
-                    $('#nCmt').html(parseInt($("#nCmt").text()) + 1);
-                }
-            });
-
-            //show comment by page
-            function showComment(page) {
-                $.ajax({
-                    type: 'GET',
-                    url: 'http://localhost:8080/api/comments/search/findAllBycontentIdOrderById?id=' + [[${id}]] + '&page=' + page + '&size=3',
-                    contentType: false,
-                    processData: false,
-                    success: function (data) {
-
-                        for (var i = 0; i < data['_embedded'].comments.length; i++) {
-
-                            $("#cmt").append(`
-                        
-                                <div class="row" style=" margin-left: 0;">
-                                        <div class="col-2 col-sm-2 col-md-1  pr-0"> 
-                                            <img class=" rounded-circle z-depth-2"
-                                                style="width: 80px; width: 60px; height: 60px; float: right;" alt="100x100"
-                                                src="https://cdn.mos.cms.futurecdn.net/xgc36EhSDW9Zu3RGLCfLEg-970-80.jpg"
-                                                data-holder-rendered="true">
-                                        </div>
-                                        <div class="col-10 col-sm-10 col-md-11">
-                                            <div class="container-fluid ml-0 pr-0 mr-0">
-                                                <div class="row">
-                                                    <span style="color: #07D">`+data['_embedded'].comments[i].user.name+`</span>
-                                                    <span style="color: #918989; font-size: 12px; padding-top: 4px;">
-                                                        &nbsp;&nbsp;&nbsp;&#8226; 22 days ago</span>
-                                                </div>
-                                            <div class="row" style="color: #46464e;" id="cmt">` +
-                                                         data['_embedded'].comments[i].text + `
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                
-                        `)
-
-                        }
-                        if(data.page.totalPages-1==page){
-                            // $('#showCmt').
-                            $("#showCmt").css("display", "none");
-                        }
-                            var p = parseInt(page) + parseInt("1");
-                            $("#showCmt").attr('onClick', 'showComment(' + p + ')');
-                         
-                    },
-                    error: function (data) {
-                        console.log("error");
-                        console.log(data);
-                    }
-                });
-
-            }
-
-            function LikeContent(userId){
-
-                var obj={
-                    "user":
-                        {
-                            "id": parseInt(userId)
-                        },
-                    "content":{
-                        "id":[[${id}]]
-                    }
-                }
-                $.ajax({
-                    type: "POST",
-                    url: 'http://localhost:8080/api/interesteds',
-                    data: JSON.stringify(obj),
-                    success: function (data) {
-                        $("#likeNum").text(parseInt($('#likeNum').text()) + 1)
+                        $("#commentInp").val("");
                     },
                     error: function (data) {
                         console.log(data)
@@ -533,6 +450,92 @@
                     contentType: "application/json"
                 });
 
+                $('#nCmt').html(parseInt($("#nCmt").text()) + 1);
+            }
+        });
+
+        //show comment by page
+        function showComment(page) {
+            $.ajax({
+                type: 'GET',
+                url: '/api/comments/search/findAllBycontentIdOrderById?id=' + [[${id}]] + '&page=' + page + '&size=3',
+                contentType: false,
+                processData: false,
+                success: function (data) {
+
+                    for (var i = 0; i < data['_embedded'].comments.length; i++) {
+
+                        $("#cmt").append(`
+
+                                <div class="row" style=" margin-left: 0;">
+                                        <div class="col-2 col-sm-2 col-md-1  pr-0">
+                                            <img class=" rounded-circle z-depth-2"
+                                                style="width: 80px; width: 60px; height: 60px; float: right;" alt="100x100"
+                                                src=${data['_embedded'].comments[i].user.profilePicture}
+                                                data-holder-rendered="true">
+                                        </div>
+                                        <div class="col-10 col-sm-10 col-md-11">
+                                            <div class="container-fluid ml-0 pr-0 mr-0">
+                                                <div class="row">
+                                                   <span style="color: #07D">` + data['_embedded'].comments[i].user.name + `</span>
+                                                    <span style="color: #918989; font-size: 12px; padding-top: 4px;">
+                                                        &nbsp;&nbsp;&nbsp;&#8226; 22 days ago</span>
+                                                </div>
+                                            <div class="row" style="color: #46464e;" id="cmt">` +
+                            data['_embedded'].comments[i].text + `
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                        `)
+                    }
+                    if (data.page.totalPages - 1 == page) {
+                        // $('#showCmt').
+                        $("#showCmt").css("display", "none");
+                    }
+                    var p = parseInt(page) + parseInt("1");
+                    $("#showCmt").attr('onClick', 'showComment(' + p + ')');
+
+                },
+                error: function (data) {
+                    console.log("error");
+                    console.log(data);
+                }
+            });
+
+        }
+
+                }
+                var obj={
+                    "user":
+                            "id": parseInt(userId)
+                        },
+                        {
+                        "id":[[${id}]]
+                    "content":{
+                    }
+                    type: "POST",
+                $.ajax({
+                    url: 'http://localhost:8080/api/interesteds',
+                    data: JSON.stringify(obj),
+                    success: function (data) {
+                        $("#likeNum").text(parseInt($('#likeNum').text()) + 1)
+                    },
+                    error: function (data) {
+                    },
+                        console.log(data)
+                    contentType: "application/json"
+                });
+
+            var obj = {
+                "user":
+                    {
+                        "id": null
+                    },
+                "content": {
+                    "id": [[${id}]]
+                }
             }
 
 
@@ -566,6 +569,10 @@
             }
         </script>
     </div>
+
+        }
+    </script>
+</div>
 
 </body>
 

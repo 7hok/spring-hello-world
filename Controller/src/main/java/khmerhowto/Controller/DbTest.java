@@ -30,6 +30,13 @@ public class DbTest {
         modelMap.addAttribute("currentUser", GlobalFunctionHelper.getCurrentUser().getId());
         System.out.println("Global Function"+GlobalFunctionHelper.getCurrentUser().getId());
         modelMap.addAttribute("id", id);
+        if(GlobalFunctionHelper.getCurrentUser()==null){
+
+        }
+        else {
+            modelMap.addAttribute("currentUser", GlobalFunctionHelper.getCurrentUser());
+        }
+
         modelMap.addAttribute("totalCmt", cmt.getTotalComment(id));
         modelMap.addAttribute("like", interestedServiceImp.getTotalLike(id));
         return "clients/contentDetail";

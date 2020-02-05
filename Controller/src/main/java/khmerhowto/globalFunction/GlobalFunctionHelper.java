@@ -35,8 +35,6 @@ public class GlobalFunctionHelper {
         }catch(Exception e){
             return null;
         }
-        
-       
     }
 
     public static Boolean autoLogin(String userName,String password,HttpServletRequest request,AuthenticationManager authenticationManager){

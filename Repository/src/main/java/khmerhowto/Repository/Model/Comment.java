@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 import javax.persistence.*;
 
+import jdk.nashorn.internal.runtime.GlobalFunctions;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 @Entity
@@ -24,8 +25,9 @@ public class Comment {
 
     @PrePersist
     public void prePersist() {
-        timestamp = LocalDateTime.now();
-        status = 1;
+
+        timestamp = 10000000;
+        status = true;
     }
     public Comment() {
     }
