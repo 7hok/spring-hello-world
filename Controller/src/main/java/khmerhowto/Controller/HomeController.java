@@ -236,16 +236,12 @@ public class HomeController {
     @Autowired
     private ContentRepository contentRepository;
 
-    @GetMapping("/category ")
+    @GetMapping("/category")
     String category(Model model ){
         model.addAttribute("categories",categoryServiceImpl.findAll());
-
-
         return "test-cate";
 
-    }
-
-
+    } 
     @GetMapping("/category/s/{id}")
     String categoryLeft(Model model, @PathVariable Integer id){
         System.out.println("jab ban id: " + id);
