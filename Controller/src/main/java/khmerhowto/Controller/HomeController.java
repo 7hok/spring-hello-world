@@ -236,10 +236,10 @@ public class HomeController {
     @Autowired
     private ContentRepository contentRepository;
 
-    @GetMapping("/category/{id}")
-    String category(Model model,@PathVariable("id") Integer id){
+    @GetMapping("/category ")
+    String category(Model model ){
         model.addAttribute("categories",categoryServiceImpl.findAll());
-        model.addAttribute("id",id);
+
 
         return "test-cate";
 

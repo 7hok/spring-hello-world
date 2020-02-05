@@ -28,14 +28,5 @@ public class CategoryController {
         return categoryService.findCategoryByStatus(1);
     }
 
-    @GetMapping("/categories/{id}")
-    public ResponseEntity<Map<String, Object>> find(@PathVariable("id") Integer id){
-        // System.out.println(id);
-        Map<String, Object> response = new HashMap<>();
-        Category category = categoryService.findCategoryById(id);
-        response.put("category", category);
-        System.out.println(response);
-        return new ResponseEntity<>(response,HttpStatus.OK);
-    }
 
 }
