@@ -17,7 +17,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @RepositoryRestResource
 public interface ContentRepository extends JpaRepository<Content, Integer> {
-
+	@Query(nativeQuery = true,value = "select * from favorite_category_article_suggestion(:user_id)")
+	Page<Content> findContentBasedOnFavoriteCategory( @Param("user_id") Integer user_id,Pageable pageable);
 	@Query(nativeQuery = true, value = "SELECT count(*) FROM content WHERE timestamp > :date")
 	Integer findUnreadContentByDate(@Param("date")@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime convert);
 
