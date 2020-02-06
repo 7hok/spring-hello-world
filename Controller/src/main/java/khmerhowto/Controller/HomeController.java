@@ -85,8 +85,11 @@ public class HomeController {
     @GetMapping("/detail/{id}")
     public String testDetail(ModelMap modelMap, @PathVariable Integer id) {
         modelMap.addAttribute("id", id);
+        Page<Content> click_pages = null;
         if (GlobalFunctionHelper.getCurrentUser() == null) {
             modelMap.addAttribute("currentUser", new User());
+            click_pages = contentRepository.findPopularContent(new PageRequest(0, 3));
+            modelMap.addAttribute("RECOMMEND_ARTICLE", click_pages.getContent());
         } else {
             User cur_user =  GlobalFunctionHelper.getCurrentUser();
             try {
@@ -94,8 +97,11 @@ public class HomeController {
             } catch (Exception e) {
             }
             modelMap.addAttribute("currentUser",cur_user);
-
-        }
+            click_pages = contentRepository.findContentBasedOnUserHistoryClick(cur_user.getId(),new PageRequest(0, 3));
+            modelMap.addAttribute("RECOMMEND_ARTICLE", click_pages.getContent());
+        } 
+            
+       
 
         modelMap.addAttribute("totalCmt", cmt.getTotalComment(id));
         modelMap.addAttribute("like", interestedServiceImp.getTotalLike(id));
@@ -196,15 +202,18 @@ public class HomeController {
 
     @GetMapping(value = { "/homepage", "/home" ,"/"})
     String home(Model model, @PageableDefault(size = 10) Pageable pageable) {
-        Page<Content> pages = contentRepository.findPopularContent(pageable);
+        Page<Content> pages = contentRepository.findPopularContent(new PageRequest(0, 3));
         List<Category> categories = categoryRepository.findByStatus(1);
         model.addAttribute("CURRENT_PAGE", "home");
         model.addAttribute("POPULAR_POST", pages.getContent());
         model.addAttribute("CATEGORIES", categories);
-        // Page<Content> lst = con.findAll(PageRequest.of(0, 3,
-        // Sort.by(Sort.Direction.DESC, "Id")));
-        // model.addAttribute("contents", lst.getContent());
-        // System.out.println(lst.getContent().get(0).getTitle());
+        User cur_user = GlobalFunctionHelper.getCurrentUser();
+        if(cur_user == null){
+            
+        }else{
+            Page<Content> click_pages = contentRepository.findContentBasedOnFavoriteCategory(cur_user.getId(),new PageRequest(0, 3));
+            model.addAttribute("FAVORITE_CATEGORY_TOP_ARTICLE", click_pages.getContent());
+        }
         return "client-home";
     }
 

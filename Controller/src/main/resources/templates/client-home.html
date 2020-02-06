@@ -289,11 +289,19 @@
                             </div>
                         </div>
 
-                        <!-- <div class="py-3">
-                            <h4 style="color : #393939">Recent Post</h4>
+                        <div class="py-3" th:if="${FAVORITE_CATEGORY_TOP_ARTICLE != null}">
+                            <h4 style="color : #393939">Your Favorite Category</h4>
                             <hr>
-                            <div class="">
-                                <div class="d-flex  align-items-center">
+                            <div class="scroll_div" style="max-height: 45vh; overflow: scroll;overflow-x: hidden;">
+                                <div class="d-flex  align-items-center" th:each="article : ${FAVORITE_CATEGORY_TOP_ARTICLE}" th:object="${article}">
+                                    <img onerror="this.src = 'image-static/face_recognition_dribbble.png'" th:src="*{thumbnail}" class="rounded-circle m-2" style="width: 90px; height: 90px; max-height: 10vh;" alt="">
+                                    <div class="d-inline-block pl-2">
+                                        <span class="overflow-hidden w-100"><b class="kht-text-color" th:text="*{title}">How tech recognize human face </b></span>
+                                        <br>
+                                        <sub class="content-timestamp" th:text="*{timestamp}">5 days ago</sub>
+                                    </div>
+                                </div>
+                                <!-- <div class="d-flex  align-items-center">
                                     <img src="image-static/girlnightcupview.jpg" class="rounded-circle m-2" style="width: 90px; height: 90px;" alt="">
                                     <div class="d-inline-block pl-2">
                                         <span class="overflow-hidden w-100"><b class="kht-text-color">How to listen to understand</b> </span>
@@ -316,9 +324,9 @@
                                         <br>
                                         <sub>2 days ago </sub>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
-                        </div> -->
+                        </div> 
                         <!-- recent post -->
                     </div>
                 </div>

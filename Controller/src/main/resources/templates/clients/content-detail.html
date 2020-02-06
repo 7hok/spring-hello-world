@@ -234,101 +234,133 @@
     </div>
 
 
-    <div class="row" style=" margin-left: 1px;">
-        <h4>អត្ថបទដែលគួរអាន</h4>
+   <div class="recomment-div" th:if="${RECOMMEND_ARTICLE != null}">
+        <div class="row" style=" margin-left: 1px;">
+            <h4>អត្ថបទដែលគួរអាន</h4>
 
-    </div>
-    <div class="row" style=" margin-left: 1px;">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-2 pl-0 pr-0">
-                    <img class="img-fluid z-depth-2" style="width: 200px; border-radius: 4px;"
-                         src="https://cdn.mos.cms.futurecdn.net/xgc36EhSDW9Zu3RGLCfLEg-970-80.jpg"
-                         data-holder-rendered="true">
-                </div>
-                <div class="col-10">
-                    <div class="container-fluid">
-                        <div class="row mb-0">
-                            <h5 style="color: #46464e;margin-top: 0;">Lorem ipsum, dolor sit amet consectetur </h5>
-                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facere officiis, praesentium
-                            tempora cumque illo mollitia deserunt ad, asperiores totam minima quae commodi
-                            necessitatibus,
-                        </div>
-                        <div class="row">
-                            <div class="col-12" style="position: relative;width: max-content;position: absolute;right: 0px;bottom: 0px;
-                                float: right;">
-                                <a href="" style="font-size: smaller; text-decoration: none;">see more >
-                                </a>
+        </div>
+        <div th:each=" article : ${RECOMMEND_ARTICLE}" th:object="${article}" class="row" style=" margin-left: 1px;">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-2 pl-0 pr-0">
+                        <img class="img-fluid z-depth-2" style="width: 200px; border-radius: 4px;"
+                            th:src="*{thumbnail}"
+                            data-holder-rendered="true">
+                    </div>
+                    <div class="col-10">
+                        <div class="container-fluid">
+                            <div class="row mb-0">
+                                <h5 style="color: #46464e;margin-top: 0;" th:text="*{title}">Lorem ipsum, dolor sit amet consectetur </h5>
+                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facere officiis, praesentium
+                                tempora cumque illo mollitia deserunt ad, asperiores totam minima quae commodi
+                                necessitatibus,
+                            </div>
+                            <div class="row">
+                                <div class="col-12" style="position: relative;width: max-content;position: absolute;right: 0px;bottom: 0px;
+                                    float: right;">
+                                    <a th:href="'/detail/'+*{id}" style="font-size: smaller; text-decoration: none;">see more >
+                                    </a>
+                                </div>
                             </div>
                         </div>
+
                     </div>
 
                 </div>
-
             </div>
         </div>
-    </div>
-    <div class="row" style=" margin-left:1px;">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-2 pl-0 pr-0">
-                    <img class="img-fluid z-depth-2" style=" border-radius: 4px;"
-                                                  src="https://cdn.mos.cms.futurecdn.net/xgc36EhSDW9Zu3RGLCfLEg-970-80.jpg"
-                                                  data-holder-rendered="true">
-                </div>
-                <div class="col-10">
-                    <div class="container-fluid">
-                        <div class="row mb-0">
-                            <h5 style="color: #46464e;margin-top: 0;">Lorem ipsum, dolor sit amet consectetur </h5>
-                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facere officiis, praesentium
-                            tempora cumque illo mollitia deserunt ad, asperiores totam minima quae commodi
-                            necessitatibus,
-                        </div>
-                        <div class="row">
-                            <div class="col-12" style="position: relative;width: max-content;position: absolute;right: 0px;bottom: 0px;
-                                float: right;">
-                                <a href="" style="font-size: smaller; text-decoration: none;">see more >
-                                </a>
+        <div class="row d-none" style=" margin-left: 1px;">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-2 pl-0 pr-0">
+                        <img class="img-fluid z-depth-2" style="width: 200px; border-radius: 4px;"
+                            src="https://cdn.mos.cms.futurecdn.net/xgc36EhSDW9Zu3RGLCfLEg-970-80.jpg"
+                            data-holder-rendered="true">
+                    </div>
+                    <div class="col-10">
+                        <div class="container-fluid">
+                            <div class="row mb-0">
+                                <h5 style="color: #46464e;margin-top: 0;">Lorem ipsum, dolor sit amet consectetur </h5>
+                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facere officiis, praesentium
+                                tempora cumque illo mollitia deserunt ad, asperiores totam minima quae commodi
+                                necessitatibus,
                             </div>
-
+                            <div class="row">
+                                <div class="col-12" style="position: relative;width: max-content;position: absolute;right: 0px;bottom: 0px;
+                                    float: right;">
+                                    <a href="" style="font-size: smaller; text-decoration: none;">see more >
+                                    </a>
+                                </div>
+                            </div>
                         </div>
+
                     </div>
 
                 </div>
-
             </div>
         </div>
-    </div>
-    <div class="row" style=" margin-left: 1px;">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-2 pl-0 pr-0"><img class="img-fluid z-depth-2" style=" border-radius: 4px;"
-                                                  src="https://cdn.mos.cms.futurecdn.net/xgc36EhSDW9Zu3RGLCfLEg-970-80.jpg"
-                                                  data-holder-rendered="true">
-                </div>
-                <div class="col-10">
-                    <div class="container-fluid">
-                        <div class="row mb-0" style="color:  #46464e;">
-                            <h5 style="color: #46464e;margin-top: 0;">Lorem ipsum, dolor sit amet consectetur </h5>
-                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facere officiis, praesentium
-                            tempora cumque illo mollitia deserunt ad, asperiores totam minima quae commodi
-                            necessitatibus,
-                        </div>
-                        <div class="row">
-                            <div class="col-12" style="position: relative;width: max-content;position: absolute;right: 0px;bottom: 0px;
-                                float: right;">
-                                <a href="" style="font-size: smaller; text-decoration: none;">see more >
-                                </a>
+        <div class="row  d-none" style=" margin-left:1px;">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-2 pl-0 pr-0">
+                        <img class="img-fluid z-depth-2" style=" border-radius: 4px;"
+                                                    src="https://cdn.mos.cms.futurecdn.net/xgc36EhSDW9Zu3RGLCfLEg-970-80.jpg"
+                                                    data-holder-rendered="true">
+                    </div>
+                    <div class="col-10">
+                        <div class="container-fluid">
+                            <div class="row mb-0">
+                                <h5 style="color: #46464e;margin-top: 0;">Lorem ipsum, dolor sit amet consectetur </h5>
+                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facere officiis, praesentium
+                                tempora cumque illo mollitia deserunt ad, asperiores totam minima quae commodi
+                                necessitatibus,
                             </div>
+                            <div class="row">
+                                <div class="col-12" style="position: relative;width: max-content;position: absolute;right: 0px;bottom: 0px;
+                                    float: right;">
+                                    <a href="" style="font-size: smaller; text-decoration: none;">see more >
+                                    </a>
+                                </div>
 
+                            </div>
                         </div>
+
                     </div>
 
                 </div>
-
             </div>
         </div>
-    </div>
+        <div class="row d-none" style=" margin-left: 1px;">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-2 pl-0 pr-0"><img class="img-fluid z-depth-2" style=" border-radius: 4px;"
+                                                    src="https://cdn.mos.cms.futurecdn.net/xgc36EhSDW9Zu3RGLCfLEg-970-80.jpg"
+                                                    data-holder-rendered="true">
+                    </div>
+                    <div class="col-10">
+                        <div class="container-fluid">
+                            <div class="row mb-0" style="color:  #46464e;">
+                                <h5 style="color: #46464e;margin-top: 0;">Lorem ipsum, dolor sit amet consectetur </h5>
+                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facere officiis, praesentium
+                                tempora cumque illo mollitia deserunt ad, asperiores totam minima quae commodi
+                                necessitatibus,
+                            </div>
+                            <div class="row">
+                                <div class="col-12" style="position: relative;width: max-content;position: absolute;right: 0px;bottom: 0px;
+                                    float: right;">
+                                    <a href="" style="font-size: smaller; text-decoration: none;">see more >
+                                    </a>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+   </div>
 
 
 </div>
