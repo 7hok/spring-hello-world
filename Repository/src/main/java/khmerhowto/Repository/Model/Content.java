@@ -52,7 +52,11 @@ public class Content {
 
     }
 
-    public User getUser() {
+    public Content(int id) {
+        this.id = id;
+	}
+
+	public User getUser() {
         return user;
     }
 

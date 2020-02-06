@@ -6,13 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link href="https://fonts.googleapis.com/css?family=Hanuman&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Hanuman|Roboto&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://storage.googleapis.com/non-spec-apps/mio-icons/latest/outline.css">
 
     <th:block th:include="~{fragment/__bootstrap_link}"></th:block>
     <th:block th:include="~{navbar/__navbar_css}"></th:block>
     <style>
+        body{
+            font-family: 'Montserrat','Hanuman' ,sans-serif, serif ;
+            
+        }
         .bg-color-two {
             background-color: #E5EAED;
         }
@@ -157,7 +161,8 @@
                  $("#srch").val();
                  window.location.replace('/search/'+$("#srch").val()+'?type=1')
             });
-
+            
+          
         });
 
         const updateLastReadIfClick = async () => {
@@ -273,6 +278,19 @@
                 </a>`
         }
         getNotification()
+        moment.locale("km")
+        const convertTimeToFormat = () => {
+            
+            let _time_contents = $(".content-timestamp");
+            _time_contents.each(function(){
+                let _time = $(this).text();
+                $(this).text(moment(_time).fromNow());
+            })
+        }    
+        setTimeout(function(){
+            convertTimeToFormat()
+        }, 1000);
+
     </script>
 <script>
 
