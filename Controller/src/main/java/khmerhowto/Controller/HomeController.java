@@ -137,7 +137,7 @@ public class HomeController {
         return "fragment/__content_card::contentList";
     }
 
-    @GetMapping(value = { "/homepage", "/home" })
+    @GetMapping(value = { "/homepage", "/home" ,"/"})
     String home(Model model, @PageableDefault(size = 10) Pageable pageable) {
         Page<Content> pages = contentRepository.findPopularContent(pageable);
         List<Category> categories = categoryRepository.findByStatus(1);
@@ -151,7 +151,7 @@ public class HomeController {
         return "client-home";
     }
 
-    @GetMapping({ "/login", "/" })
+    @GetMapping({ "/login" })
     String loginPage() {
         try {
             GlobalFunctionHelper.getCurrentUser().getId();
@@ -182,13 +182,16 @@ public class HomeController {
             }
 
             favoriteCategoryRepository.saveAll(favList);
-            return "redirect:/home";
+            // return "redirect:/home";
         } catch (Exception e) {
             /**
              * CATCH WORK WHEN USER IS NOT AUTHENTICATED
              */
-            return "redirect:/login";
+            System.out.println(e.getStackTrace());
+            // return "redirect:/login";
         }
+            return "redirect:/home";
+        
     }
 
     /**
