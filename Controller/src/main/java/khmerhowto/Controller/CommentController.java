@@ -10,6 +10,6 @@ public class CommentController {
     @Autowired
     CommentRepository repository;
 
-    @GetMapping("/api/comment/insert")
-    public String
+//    @GetMapping("/api/comment/insert")
+//    public String
 }

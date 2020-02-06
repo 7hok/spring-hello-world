@@ -19,6 +19,7 @@ import khmerhowto.Service.UserService;
 import khmerhowto.Service.ServiceImplement.CategoryServiceImp;
 import khmerhowto.Service.ServiceImplement.FeedBackServiceImp;
 import khmerhowto.Service.ServiceImplement.ContentServiceImp;
+import khmerhowto.globalFunction.GlobalFunctionHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -176,7 +177,17 @@ public class AdminController {
             }
     }
 
-
+    @GetMapping("/admin/article/insert")
+    String insertArticle(ModelMap map) {
+        map.addAttribute("categories", categoryService.findCategoryByStatus(1));
+        if (GlobalFunctionHelper.getCurrentUser() == null) {
+            map.addAttribute("currentUser", new User());
+        } else {
+            map.addAttribute("currentUser", GlobalFunctionHelper.getCurrentUser());
+            System.out.println("s"+ GlobalFunctionHelper.getCurrentUser());
+        }
+        return "admin/admin-article-insert";
+    }
 
     @GetMapping("/admin/article")
     String manageArticle(@PageableDefault(size = 10)Pageable pageable,@RequestParam(value = "category_id", defaultValue ="0",required = false)Integer c_id,@RequestParam(value = "search" ,required = false) String search_text ,Model model){

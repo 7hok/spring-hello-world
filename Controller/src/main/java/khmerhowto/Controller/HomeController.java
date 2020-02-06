@@ -74,6 +74,29 @@ public class HomeController {
     @Autowired
     AuthenticationManager authenticationManager;
 
+    @GetMapping("/detail/{id}")
+    public String testDetail(ModelMap modelMap, @PathVariable Integer id) {
+        modelMap.addAttribute("id", id);
+        if (GlobalFunctionHelper.getCurrentUser() == null) {
+            modelMap.addAttribute("currentUser", new User());
+        } else {
+            modelMap.addAttribute("currentUser", GlobalFunctionHelper.getCurrentUser());
+
+        }
+
+        modelMap.addAttribute("totalCmt", cmt.getTotalComment(id));
+        modelMap.addAttribute("like", interestedServiceImp.getTotalLike(id));
+        return "clients/content-detail";
+    }
+
+    @GetMapping("/search/{str}")
+    public String search(@PathVariable("str") String body, @RequestParam String type, ModelMap map) {
+        map.addAttribute("type", type);
+
+        map.addAttribute("body", body);
+        return "search-body";
+    }
+
     @GetMapping("/about")
     String showAboutUs() {
 
@@ -93,10 +116,19 @@ public class HomeController {
     @GetMapping(value = "/conCard/{no}")
     String contentCard(ModelMap map, @PathVariable("no") Integer i) {
         Page<Content> lst;
+        String b;
+        List<Content> list=new ArrayList<>();
             lst = con.findAll(PageRequest.of(i, 3, Sort.by(Sort.Direction.DESC, "Id")));
-        map.addAttribute("contents", lst.getContent());
-        System.out.println(lst.getContent().get(0).getThumbnail());
-        // map.addAttribute("totalCmt", cmt.getTotalComment(id));
+        for(int l=0;l<lst.getContent().size();l++){
+            list.add((Content) lst.getContent().get(i));
+            b= list.get(l).getBody().replaceAll("<[^\\P{Graph}>]+(?: [^>]*)?>", "");
+            list.get(l).setBody(b);
+            System.out.println(b);
+        }
+
+        map.addAttribute("contents",list);
+
+
         Map<Integer, Integer> numCmt = new HashMap<>();
         for (int j = 0; j <= lst.getContent().size()-1; j++) {
             numCmt.put(lst.getContent().get(j).getId(), cmt.getTotalComment(lst.getContent().get(j).getId()));
@@ -116,8 +148,16 @@ public class HomeController {
 
     String content(ModelMap map) {
         Page<Content> lst = con.findAll(PageRequest.of(0, 3, Sort.by(Sort.Direction.DESC, "Id")));
-        map.addAttribute("contents", lst.getContent());
-        System.out.println(lst.getContent());
+        List<Content> list=new ArrayList<>();
+        String b;
+        for(Integer i=0;i<lst.getContent().size();i++){
+          list.add((Content) lst.getContent().get(i));
+          b= list.get(i).getBody().replaceAll("<[^\\P{Graph}>]+(?: [^>]*)?>", "");
+          list.get(i).setBody(b);
+            System.out.println(b);
+        }
+        map.addAttribute("contents", list);
+
         return "fragment/__content_card::contentList";
     }
 
