@@ -43,13 +43,13 @@ public class GlobalFunctionHelper {
             authToken.setDetails(new WebAuthenticationDetails(request));
             Authentication authentication = authenticationManager.authenticate(authToken);
             SecurityContextHolder.getContext().setAuthentication(authentication);
-            
+
         } catch (Exception e) {
             //TODO: handle exception
             System.out.println(e);
             return false;
         }
         return true;
- 
+
     }
 }

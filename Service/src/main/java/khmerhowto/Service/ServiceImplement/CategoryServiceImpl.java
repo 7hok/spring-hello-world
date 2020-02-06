@@ -5,6 +5,7 @@ import khmerhowto.Repository.CategoryRepository;
 import khmerhowto.Repository.Model.Category;
 import khmerhowto.Service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,6 +17,6 @@ public class CategoryServiceImpl implements CategoryService {
     CategoryRepository categoryRepository;
     @Override
     public List<Category> findAll() {
-        return categoryRepository.findAll();
+        return categoryRepository.findAll(Sort.by("id"));
     }
 }

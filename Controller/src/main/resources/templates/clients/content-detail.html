@@ -91,7 +91,7 @@
                                               class="point myButton"
                                               data-toggle="tooltip" data-html="true"> Kong Pengsea</span>
                             </div>
-                            <span id="time"></span>
+                            <span id="time" class="content-timestamp"></span>
                         </div>
                     </div>
                 </div>
@@ -465,7 +465,11 @@
                 contentType: false,
                 processData: false,
                 success: function (data) {
-console.log(data)
+                 console.log(data)
+                    if(data['_embedded'].comments.length<3){
+                        $("#showCmt").css("display", "none");
+                    }
+
                     for (var i = 0; i < data['_embedded'].comments.length; i++) {
 
                         $("#cmt").append(`

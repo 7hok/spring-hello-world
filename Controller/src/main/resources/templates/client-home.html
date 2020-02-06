@@ -247,7 +247,7 @@
                             <h4 style="color : #393939">Categories</h4>
                             <hr>
                             <div class="text-left category-list scroll_div" style="max-height: 35vh; overflow:scroll; overflow-x: hidden;">
-                                <p th:each=" category : ${CATEGORIES}"><a style="text-decoration: none !important" th:href="'/category?category_id'+${category.id}"  th:text="${category.name}" >Technology</a></p>
+                                <p th:each=" category : ${CATEGORIES}"><a style="text-decoration: none !important" th:href="'/category?category_id='+${category.id}"  th:text="${category.name}" >Technology</a></p>
                                 <!-- <p>Business</p>
                                 <p>Hosting</p>
                                 <p>Donate</p>

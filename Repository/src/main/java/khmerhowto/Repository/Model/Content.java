@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import khmerhowto.Repository.globalFunction.GlobalFunctionHelper;
+//import khmerhowto.Repository.globalFunction.GlobalFunctionHelper;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 @Entity
