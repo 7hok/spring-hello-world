@@ -12,7 +12,7 @@
 <th:block th:fragment="contentList" th:each="content: ${contents}">
      
     <div th:onclick="'window.location.href = \'' + @{/detail/{id}(id=${content.getId()})} + '\''" th:style="'background:url(' + @{${content.getThumbnail()}} +') no-repeat center;'+' background-size: cover; cursor: pointer;' " 
-        class="border  border-dark h-100  group-one-c-one d-flex align-items-end justify-content-center mysl">
+        class="h-100  group-one-c-one d-flex align-items-end justify-content-center mysl">
          
        
         <div class="text-center mw-50">

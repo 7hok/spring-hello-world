@@ -18,7 +18,8 @@
     } 
 </script>
 <script>
-          const socketUrl = location.protocol + "//" + location.hostname + ":15657";
+    try {
+        const socketUrl = location.protocol + "//" + location.hostname + ":15657";
           const socket = io.connect(socketUrl);
           let _socket_role =  $("#isAuth").attr("data-role")
          
@@ -40,5 +41,9 @@
                 })
 
             }
+         
+    } catch (error) {
+        
+    }
          
 </script>
