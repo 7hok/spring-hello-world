@@ -16,6 +16,7 @@ import org.springframework.data.domain.Page;
 import java.util.HashMap;
 
 import java.util.Map;
+import java.util.logging.Handler;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -138,20 +139,25 @@ public class HomeController {
     @GetMapping(value = "/conCard/{no}")
     String contentCard(ModelMap map, @PathVariable("no") Integer i) {
         Page<Content> lst;
-
         String b;
         List<Content> list=new ArrayList<>();
             lst = con.findAll(PageRequest.of(i, 3, Sort.by(Sort.Direction.DESC, "Id")));
-        for(int l=0;l<lst.getContent().size();l++){
-            list.add((Content) lst.getContent().get(i));
-            b= list.get(l).getBody().replaceAll("<[^\\P{Graph}>]+(?: [^>]*)?>", "");
-            list.get(l).setBody(b);
-            System.out.println(b);
-        }
+        System.out.println("size is " + lst.getContent().size());
+        try {
+            for (int l = 0; l < lst.getContent().size(); l++) {
+                list.add((Content) lst.getContent().get(l));
+                b = list.get(l).getBody().replaceAll("<[^\\P{Graph}>]+(?: [^>]*)?>", "");
 
+                list.get(l).setBody(b);
+
+            }
+        }
+        catch(Exception e){
+
+        }
         map.addAttribute("contents",list);
 
-        lst = con.findAll(PageRequest.of(i, 3, Sort.by(Sort.Direction.DESC, "Id")));
+      //  lst = con.findAll(PageRequest.of(i, 3, Sort.by(Sort.Direction.DESC, "Id")));
         map.addAttribute("contents", lst.getContent());
         System.out.println(lst.getContent().get(0).getThumbnail());
         // map.addAttribute("totalCmt", cmt.getTotalComment(id));
