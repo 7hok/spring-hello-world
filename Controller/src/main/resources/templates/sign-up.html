@@ -36,7 +36,7 @@
                         id="email_input" style="margin-top: 2px; margin-bottom: 8%; font-size: small " th:field="*{email}" placeholder="youremail@email.com">
                     </div>
 
-                    <div style="text-align: start; ">
+                    <div id="radioSex" style="text-align: start; ">
 
                         <span class="t-span" style="display: block; margin-bottom: -1px; font-size: small;font-weight: 550;" id="gender">Gender<span id="sexRequired" style="text-align: left; color: red; margin-bottom: 0px !important;font-size: xx-small; font-weight: 550;">&nbsp;*required</span></span>
 
@@ -104,11 +104,21 @@
 
             $("#form-submit").submit(function(e){
 
+
+
                 if($("#name_input").val() != ""){
                 }else {
                     e.preventDefault();
                     $("#nameRequired").show();
                 }
+                $( "#name_input" ).change(function() {
+                    if($("#name_input").val() != ""){
+                        $("#nameRequired").hide();
+                    }else {
+                        e.preventDefault();
+                        $("#nameRequired").show();
+                    }
+                });
 
                 // if($("#email_input").val() != ""){
                 // }else {
@@ -121,6 +131,15 @@
                     e.preventDefault();
                     $("#sexRequired").show();
                 }
+                $( "#radioSex" ).change(function() {
+                    if($('#inlineRadio1').prop('checked')|$('#inlineRadio2').prop('checked')|$('#inlineRadio3').prop('checked')){
+                        $("#sexRequired").hide();
+                    }else {
+                        e.preventDefault();
+                        $("#sexRequired").show();
+                    }
+                });
+
 
 
                 if($("#password").val() !=""){
@@ -128,12 +147,30 @@
                     e.preventDefault();
                     $("#passwordRequired").show();
                 }
+                $( "#password" ).change(function() {
+                    if($("#password").val() != ""){
+                        $("#passwordRequired").hide();
+                    }else {
+                        e.preventDefault();
+                        $("#passwordRequired").show();
+                    }
+                });
 
-                if($("#password").val() == $("#c_password").val()){
+
+                if(($("#password").val() == $("#c_password").val()) && $("#c_password").val()!=""){
                 }else {
                     e.preventDefault();
                     $("#passwordNotMatched").show();
                 }
+                $( "#c_password" ).change(function() {
+                    if(($("#password").val() == $("#c_password").val()) && $("#c_password").val()!=""){
+                        $("#passwordNotMatched").hide();
+                    }else {
+                        e.preventDefault();
+                        $("#passwordNotMatched").show();
+                    }
+                });
+
 
 
                 var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -143,6 +180,18 @@
                     $("#emailRequired").show();
                     alert("You have entered an invalid email address!");
                 }
+
+                $( "#email_input" ).change(function() {
+                    if($("#email_input").val().match(mailformat) && $("#email_input").val() != ""){
+                        $("#emailRequired").hide();
+                    }else {
+                        e.preventDefault();
+                        $("#emailRequired").show();
+                    }
+                });
+
+
+
 
 
 
