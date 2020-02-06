@@ -5,6 +5,8 @@
 <head>
     <meta  charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Hanuman|Roboto&display=swap" rel="stylesheet">
+
     <title>Title</title>
     <th:block th:include="~{fragment/__bootstrap_link}"></th:block>
     <meta name="google-signin-client_id" content="836845369110-sqgfnf0i6lkpl8jb28bvprvf935tarlq.apps.googleusercontent.com">       
@@ -23,6 +25,12 @@
           });
         }
       </script>
+      <style>
+       body{
+            font-family: 'Montserrat','Hanuman' ,sans-serif, serif ;
+            
+        }
+      </style>
 </head>
 
 <body>
@@ -41,7 +49,7 @@
                 <div th:if="${param.logout}" class="alert alert-success"> 
                     You have been logged out.
                 </div>
-                <h5 style="line-height: 65px; margin-bottom: 4px; font-size: x-large;" class="font-weight-bold">How To Khmer</h5>
+                <h5 style="line-height: 65px; margin-bottom: 4px; font-size: x-large;" class="font-weight-bold">KUNLOES</h5>
                 <!-- <span class="title-log ">Khmer How To</span> -->
                 <p class="line-m" style="line-height: 100%; font-size: small;">Please login or sign up for an account</p>
 

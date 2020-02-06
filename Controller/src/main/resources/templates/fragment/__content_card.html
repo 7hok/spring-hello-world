@@ -18,7 +18,7 @@
         <div class="text-center mw-50">
             <h5 class="text-white" th:text=${content.getTitle()}>
             </h5>
-            <span class="text-white" th:text="${content.getTimestamp()}">
+            <span class="text-white content-timestamp" th:text="${content.getTimestamp()}">
                 Jul/2/2020
             </span>
         </div>
@@ -28,8 +28,8 @@
 
 <th:block th:fragment="cardList" th:each="content: ${contents}">
 <div class="card" style="cursor: pointer;" th:onclick="'window.location.href = \'' + @{/detail/{id}(id=${content.getId()})} + '\''">
-    <div class="card-header text-center">
-        <a class="rounded" th:text="${content.getCategory().getName()}">Romance </a><span>&nbsp;-</span><span  th:text="${content.getTimestamp()}"> May 13, 2018</span>
+    <div class="card-header ">
+        <a class="rounded" style="padding-bottom: 3px" th:text="${content.getCategory().getName()}">Romance </a><span>&nbsp;-</span><span  class="content-timestamp" th:text="${content.getTimestamp()}"> May 13, 2018</span>
         <h5 class="article-title-h5" th:text=${content.getTitle()}>How tech recognize human face</h5>
         <div class="mt-2 w-100 vh-30 " th:style="'background:url(' + @{${content.getThumbnail()}} +') no-repeat center;'+' background-size: cover;' ">
         </div>
@@ -37,7 +37,7 @@
     
     <div class="card-body overflow-hidden px-0">
         <div>
-            <p class="card-text " th:text=${content.getBody()}>
+            <p class="card-text " th:inline="text" th:text=${content.getBody()}  >
                 There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc
             </p>
         </div>

@@ -59,7 +59,7 @@
                             <th th:text="${article.id}">5</th>
                             <td th:text="${article.title}">How to have a fresh morning after a night without sleeping </td>
                             <td th:text="${article.category?.name}">Science</td>
-                            <td th:text="${article.writer}">@Hok</td>
+                            <td th:text="${article.user?.name}">@Hok</td>
                             <td th:text="${article.timestamp}">3/10/18</td>
                              <td>
                                 <a class="btn btn-outline-primary btn-view" th:href="'/detail/'+${article.id}" >View</a>

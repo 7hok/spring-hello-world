@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    xmlns="http://www.w3.org/1999/xhtml" layout:decorator="~{admin-layout}">
+    xmlns="http://www.w3.org/1999/xhtml" layout:decorator="~{home-layout}">
 
     <head>
         <meta charset="UTF-8">
@@ -33,19 +33,19 @@
                
                 <div class="  text-center  d-flex px-5">
                   
-                    <div class="border border-dark rounded-circle m-5 p-2 d-none d-lg-block" >
-                        <img  th:src="${user.profilePicture}" onerror="this.src='/image-static/machine-learning.svg'" class="card-img-top border border-dark user-profile rounded-circle user-profile-div " alt="...">
+                    <div class="border border-dark rounded-circle  m-5 p-2 d-none d-lg-block" >
+                        <img id="img-preview" th:src="${user.getProfilePicture()}" onerror="this.src='/image-static/machine-learning.svg'" class="card-img-top border border-dark user-profile rounded-circle user-profile-div" alt="...">
                     </div>
                     <div class="align-self-center">
-                        <h2>User Administrator</h2>
-                        <h6>Honoi , Vietnam</h6>
+                        <h2 class="text-uppercase" th:text="${user.name}">User</h2>
+                        <h6 th:text="${user.location}" >Honoi , Vietnam</h6 >
                     </div>
                     
                 </div>
                 <!-- upper -->
                 <!-- middle -->
                 <div>
-                    <form class="right-side-bar-form" th:action="@{/admin/customize/__${user.id}__}" th:object="${user}"  method="POST" >
+                    <form class="right-side-bar-form" th:action="@{/customize}" th:object="${user}"  method="POST" enctype="multipart/form-data" >
                         <div class="py-4 d-flex justify-content-around">
                             <div class="">
                                 <label>Name</label>
@@ -69,18 +69,14 @@
                         </div>
                         <!-- last  -->
                         <div class="py-4 d-flex justify-content-around">
-                            <div class="">
+                            <div class=""> 
                                 <label>Bio</label>
                                 <input type="text" class="form-control bg-color-two" placeholder="In love with JS" th:field="*{bio}" th:value="*{getBio()}">
                             </div>
                             <div class="">
                                
-                                <label>Role</label>
-                                <select class="form-control form-control-one-line w-25" name="dropdown-test" th:field="*{userRole}" >
-                                    <option value="ADMIN"  >Admin</option>
-                                    <option value="CLIENT">User</option>
-
-                                </select>
+                                <label>Profile Picture</label>
+                               <input class="form-control  bg-color-two" type="file" name="files"  id="file-selector" multiple="multiple">
                             </div>
                         </div>
 
@@ -97,55 +93,20 @@
         </div>
         <div layout:fragment="content-js">
             <script>
-                $("#role_click").on("click",function() {
-                    convertToModalContent($(this).attr("data-id"))
-                })
-                const convertToModalContent = async (id) => {
-                    let res = await fetch(`/api/userRoles/search/findByUserId?userId=${id}&projection=RoleSimpleProjection`);
-                    let json = await res.json();
-                    let _id = json._embedded.userRoles[0].role.id
-                    $("#modal_content").empty()
-                    $("#modal_content").append(dataAndSelection(_id),json._embedded.id);
-                }
-                const dataAndSelection = (role_id,unique_id) => {
-                    console.log(role_id)
-                    return `<div class="d-flex justify-content-center">
-                                <div>
-                                    <h3  data-id="${unique_id}" id="unique_id">User Role</h3>
-                                </div>
-                                <select class="form-control form-control-one-line w-25" name="dropdown-test" id="dropdown_role"  >
-                                    <option value="1" ${role_id == 1? 'selected' : ''} >User</option>
-                                    <option value="2" ${role_id == 2? 'selected' : ''} >Admin</option>
-
-                                </select> 
-                               
-                            </div>`;
-                }
-                $("#btn_role_save").click(function(e){
-                    e.preventDefault();
-                   let dropdown_role_id =  $("#dropdown_role").val();
-                   let unique_id = $("#unique_id").val();
-                   let user_id = $("#role_click").attr("data-id")
-                   alert(`asdasdasdads`)
-                   console.log(`btn click`)
-                   updateRole(unique_id,user_id,dropdown_role_id)
-                })
-
-                const updateRole = async(unique_id,_user_id,_role_id) => {
-                    let update_res =  await fetch(`/api/userRoles/${unique_id}`,{
-                                method : 'PUT',
-                                data : {
-                                    "role"  : {
-                                        "id" :_role_id
-                                    },
-                                    "user" : {
-                                        "id" : _user_id
-                                    }
-                                }
-                            });
-                    console.log(update_res)
-
-                } 
+                $(document).ready(function () {
+                    function readURL(input) {
+                        if (input.files && input.files[0]) {
+                            let reader = new FileReader();
+                            reader.onload = function (e) {
+                                $('#img-preview').attr('src', e.target.result);
+                            };
+                            reader.readAsDataURL(input.files[0]);
+                        }
+                    }
+                    $("#file-selector").change(function () {
+                        readURL(this);
+                    });
+                });
             </script>
         </div>
     </body>
