@@ -262,22 +262,14 @@
                             <hr>
                             <div class="scroll_div" style="max-height: 45vh; overflow: scroll;overflow-x: hidden;">
                                 <div class="d-flex  align-items-center" th:each="article : ${POPULAR_POST}" th:object="${article}">
-                                    <img onerror="this.src = 'image-static/face_recognition_dribbble.png'" th:src="*{thumbnail}" class="rounded-circle m-2" style="width: 90px; height: 90px;" alt="">
+                                    <img onerror="this.src = 'image-static/face_recognition_dribbble.png'" th:src="*{thumbnail}" class="rounded-circle m-2" style="width: 90px; height: 90px; max-height: 10vh;" alt="">
                                     <div class="d-inline-block pl-2">
                                         <span class="overflow-hidden w-100"><b class="kht-text-color" th:text="*{title}">How tech recognize human face </b></span>
                                         <br>
                                         <sub class="content-timestamp" th:text="*{timestamp}">5 days ago</sub>
                                     </div>
                                 </div>
-                                <div class="d-flex  align-items-center" th:each="article : ${POPULAR_POST}" th:object="${article}" style="max-height: 8vh;
-                                overflow: hidden;">
-                                    <img onerror="this.src = 'image-static/face_recognition_dribbble.png'" th:src="*{thumbnail}" class="rounded-circle m-2" style="width: 90px; height: 90px;" alt="">
-                                    <div class="d-inline-block pl-2">
-                                        <span class="overflow-hidden w-100"><b class="kht-text-color" th:text="*{title}">How tech recognize human face </b></span>
-                                        <br>
-                                        <sub th:text="*{timestamp}">5 days ago</sub>
-                                    </div>
-                                </div>
+                              
                                 <!-- <div class="d-flex  align-items-center">
                                     <img src="image-static/face_recognition_dribbble.png" class="rounded-circle m-2" style="width: 90px; height: 90px;" alt="">
                                     <div class="d-inline-block pl-2">
