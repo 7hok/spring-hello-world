@@ -10,8 +10,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.PrePersist;
 
-import khmerhowto.Repository.Model.audit.AuditListener;
-@EntityListeners(AuditListener.class)
+//import khmerhowto.Repository.Model.audit.AuditListener;
+//import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+//@EntityListeners(AuditingEntityListener.class)
 @Entity
 public class Category implements Serializable{
     @Id
