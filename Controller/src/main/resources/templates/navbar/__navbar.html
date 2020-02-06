@@ -202,7 +202,7 @@
             <li class="nav-item  d-none d-lg-block">
 
                 <a class="nav-link text-center text-dark" href="/homepage">
-                    <h5 th:class="${CURRENT_PAGE == 'home'}?'icon-linear-color page-active':'icon-linear-color'" style="width: 60%;">Home</h5>
+                    <h5 th:class="${CURRENT_PAGE == 'home'}?'icon-linear-color page-active':'icon-linear-color'" style="width: 75%;">Home</h5>
 
                 </a>
             </li>
@@ -314,7 +314,7 @@
 
                             <div class="">
                             <ul th:switch="*{getUserRole()}" class="list-group list-group-flush border-top">
-                                <li class="list-group-item text-center click-list-user-profile" onclick="location.href='/admin/customize';">Customize</li>
+                                <li class="list-group-item text-center click-list-user-profile" onclick="location.href='/customize';">Customize</li>
                                 <li th:case="'CLIENT'" class="list-group-item text-center click-list-user-profile" onclick="" data-toggle="modal" data-target="#requestModal" data-whatever="@mdo">Request</li>
                                 <li th:case="'ADMIN'" class="list-group-item text-center click-list-user-profile" onclick="location.href='/admin';">Admin</lith:case="'CLIENT'">
                                 <li class="list-group-item text-center click-list-user-profile" onclick="location.href='/logout';">Logout</li>

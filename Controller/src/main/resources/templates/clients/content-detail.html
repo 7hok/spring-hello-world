@@ -338,10 +338,11 @@
     <script>
         const printContent = () => {
             var doc = new jsPDF()
-            doc.text('Hello world!', 10, 10)
-            let _title = document.getElementById("tt").innerText
+            // doc.text('Hello world!', 10, 10)
+            let _title = document.getElementById("tt").innerHTML
+            let _body = document.getElementById("bContent").innerHTML
             console.log(_title)
-            // doc.fromHTML(source,10,10);
+            doc.fromHTML(`<h3>${_title}</h3><br><br>`+ _body,10,10);
             doc.save(`${_title}.pdf`)
         }
     </script>

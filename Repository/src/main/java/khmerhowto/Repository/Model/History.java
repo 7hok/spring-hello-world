@@ -1,10 +1,13 @@
 package khmerhowto.Repository.Model;
 
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 
 @Entity
 public class History {
@@ -15,14 +18,22 @@ public class History {
     private User user;
     @ManyToOne
     private Content content;
-    private int timestamp;
+    private LocalDateTime timestamp;
 
+    @PrePersist
+    private void prePersist(){
+        this.timestamp = LocalDateTime.now();
+    }
 
     public History() {
     }
+    public History(User user, Content content) {
+       
+        this.user=user;
+        this.content=content;
+    }
 
-
-    public History(int id, User user, Content content, int timestamp) {
+    public History(int id, User user, Content content, LocalDateTime timestamp) {
         this.id=id;
         this.user=user;
         this.content=content;
@@ -54,11 +65,11 @@ public class History {
         this.content = content;
     }
 
-    public int getTimestamp() {
+    public LocalDateTime getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(int timestamp) {
+    public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
     }
 

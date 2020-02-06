@@ -36,4 +36,5 @@ public interface CategoryRepository extends JpaRepository<Category,Integer> {
     @Query(value = "select * from history_click_category where cate_id = :category_id" , nativeQuery = true)
     Page<Category> findPopularArticleBaseOnClick(@Param("category_id") Integer category_id,Pageable pageable);
 
+    Category findByIdAndStatus(Integer id, int i);
 }

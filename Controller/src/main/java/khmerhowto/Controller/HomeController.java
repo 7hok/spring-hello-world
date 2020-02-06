@@ -13,11 +13,9 @@ import com.corundumstudio.socketio.SocketIOServer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 
-
 import java.util.HashMap;
 
 import java.util.Map;
-
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -26,11 +24,14 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
@@ -38,9 +39,12 @@ import org.springframework.web.servlet.view.RedirectView;
 import khmerhowto.Repository.CategoryRepository;
 import khmerhowto.Repository.ContentRepository;
 import khmerhowto.Repository.FavoriteCategoryRepository;
+import khmerhowto.Repository.HistoryRepository;
+import khmerhowto.Repository.UserRepository;
 import khmerhowto.Repository.Model.Category;
 import khmerhowto.Repository.Model.Content;
 import khmerhowto.Repository.Model.FavoriteCategory;
+import khmerhowto.Repository.Model.History;
 import khmerhowto.Repository.Model.User;
 import khmerhowto.Service.CommentService;
 import khmerhowto.Service.ContentService;
@@ -58,6 +62,7 @@ import org.springframework.ui.ModelMap;
  * HomeController
  */
 @Controller
+@SessionAttributes("user")
 public class HomeController {
 
     @Autowired
@@ -70,9 +75,11 @@ public class HomeController {
     UserServiceImp userServiceImp;
     @Autowired
     FavoriteCategoryRepository favoriteCategoryRepository;
-    
+    @Autowired
+    HistoryRepository historyRepository;
     @Autowired
     AuthenticationManager authenticationManager;
+
 
     @GetMapping("/detail/{id}")
     public String testDetail(ModelMap modelMap, @PathVariable Integer id) {
@@ -96,10 +103,20 @@ public class HomeController {
         map.addAttribute("body", body);
         return "search-body";
     }
+    Boolean saveHistory(User user, Content content) {
+        try {
+            History history = new History(user, content);
+            historyRepository.save(history);
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+
+    }
 
     @GetMapping("/about")
     String showAboutUs() {
-
+        saveHistory(new User(1), new Content(1));
         return "clients/about";
     }
 
@@ -116,6 +133,7 @@ public class HomeController {
     @GetMapping(value = "/conCard/{no}")
     String contentCard(ModelMap map, @PathVariable("no") Integer i) {
         Page<Content> lst;
+
         String b;
         List<Content> list=new ArrayList<>();
             lst = con.findAll(PageRequest.of(i, 3, Sort.by(Sort.Direction.DESC, "Id")));
@@ -128,19 +146,23 @@ public class HomeController {
 
         map.addAttribute("contents",list);
 
+        lst = con.findAll(PageRequest.of(i, 3, Sort.by(Sort.Direction.DESC, "Id")));
+        map.addAttribute("contents", lst.getContent());
+        System.out.println(lst.getContent().get(0).getThumbnail());
+        // map.addAttribute("totalCmt", cmt.getTotalComment(id));
 
         Map<Integer, Integer> numCmt = new HashMap<>();
-        for (int j = 0; j <= lst.getContent().size()-1; j++) {
+        for (int j = 0; j <= lst.getContent().size() - 1; j++) {
             numCmt.put(lst.getContent().get(j).getId(), cmt.getTotalComment(lst.getContent().get(j).getId()));
 
         }
         Map<Integer, Integer> m = new HashMap<>();
-        for (int j = 0; j <= lst.getContent().size()-1; j++) {
+        for (int j = 0; j <= lst.getContent().size() - 1; j++) {
             m.put(lst.getContent().get(j).getId(), interestedServiceImp.getTotalLike(lst.getContent().get(j).getId()));
 
         }
         map.addAttribute("likes", m);
-        map.addAttribute("cmts",numCmt);
+        map.addAttribute("cmts", numCmt);
         return "fragment/__content_card::cardList";
     }
 
@@ -162,11 +184,11 @@ public class HomeController {
     }
 
     @GetMapping(value = { "/homepage", "/home" })
-    String home(Model model,@PageableDefault(size = 10)Pageable pageable) {
+    String home(Model model, @PageableDefault(size = 10) Pageable pageable) {
         Page<Content> pages = contentRepository.findPopularContent(pageable);
         List<Category> categories = categoryRepository.findByStatus(1);
         model.addAttribute("CURRENT_PAGE", "home");
-        model.addAttribute("POPULAR_POST",pages.getContent());
+        model.addAttribute("POPULAR_POST", pages.getContent());
         model.addAttribute("CATEGORIES", categories);
         // Page<Content> lst = con.findAll(PageRequest.of(0, 3,
         // Sort.by(Sort.Direction.DESC, "Id")));
@@ -177,95 +199,118 @@ public class HomeController {
 
     @GetMapping({ "/login", "/" })
     String loginPage() {
-       try{
-        GlobalFunctionHelper.getCurrentUser().getId();
+        try {
+            GlobalFunctionHelper.getCurrentUser().getId();
             return "redirect:/home";
-        }catch(Exception ex){
-        return "oauth_login";
-       }
-        
+        } catch (Exception ex) {
+            return "oauth_login";
+        }
+
     }
 
     @GetMapping("/favorite/chosen")
-    String favorite(ModelMap modelMap){
-        List<Category> categories= categoryRepository.findByStatus(1);
+    String favorite(ModelMap modelMap) {
+        List<Category> categories = categoryRepository.findByStatus(1);
         modelMap.addAttribute("CATEGORIES", categories);
         return "clients/CategoryChoosen";
     }
-    @PostMapping("/favorite/chosen")
-    String postFavorite(@RequestBody Map<String,Object> category){
-         
-            try {
-                Integer user_id =GlobalFunctionHelper.getCurrentUser().getId();
-                List<Integer> category_id =  (ArrayList<Integer>) category.get("category");
-                List<FavoriteCategory> favList = new ArrayList<>();
-                for (Integer integer : category_id) {
-                    
-                    favList.add(new FavoriteCategory(new User(user_id),new Category(integer)) );
-                }
 
-                favoriteCategoryRepository.saveAll(favList);
-                return "redirect:/home";
-            } catch (Exception e) {
-                /**
-                 * CATCH WORK WHEN USER IS NOT AUTHENTICATED
-                 */
-                return "redirect:/login";
+    @PostMapping("/favorite/chosen")
+    String postFavorite(@RequestBody Map<String, Object> category) {
+
+        try {
+            Integer user_id = GlobalFunctionHelper.getCurrentUser().getId();
+            List<Integer> category_id = (ArrayList<Integer>) category.get("category");
+            List<FavoriteCategory> favList = new ArrayList<>();
+            for (Integer integer : category_id) {
+
+                favList.add(new FavoriteCategory(new User(user_id), new Category(integer)));
             }
+
+            favoriteCategoryRepository.saveAll(favList);
+            return "redirect:/home";
+        } catch (Exception e) {
+            /**
+             * CATCH WORK WHEN USER IS NOT AUTHENTICATED
+             */
+            return "redirect:/login";
+        }
     }
+
     /**
      * 
      * @param request
      * @param modelMap
-     * @return
-     *  IF user == Null THEN
-     *      new OBJECT => ModelMap
-     *  ELSE
-     *      GOOGLE REDIRECT => OBJECT => ModelMap
-     *  FORM ON SUBMIT
-     *      @POST => /signup
+     * @return IF user == Null THEN new OBJECT => ModelMap ELSE GOOGLE REDIRECT =>
+     *         OBJECT => ModelMap FORM ON SUBMIT
+     * @POST => /signup
      */
     @GetMapping("/signup")
-    String signUp(HttpServletRequest request,ModelMap modelMap) {
+    String signUp(HttpServletRequest request, ModelMap modelMap) {
         User user = null;
         try {
-           user = (User) request.getSession().getAttribute("USER");
-           request.getSession().setAttribute("USER", null);
-            // user = new User();  
+            user = (User) request.getSession().getAttribute("USER");
+            request.getSession().setAttribute("USER", null);
+            // user = new User();
         } catch (Exception e) {
             System.out.println(e);
-           user = null;
+            user = null;
         }
-        User _user=null;
-        
-        if(user ==null ){
+        User _user = null;
+
+        if (user == null) {
             System.out.println("user is null");
             _user = new User();
-        }else{
+        } else {
             System.out.println("user is found");
             _user = user;
         }
         modelMap.addAttribute("USER", _user);
         return "sign-up";
     }
+
     /**
      * 
      * @param user
-     * @return
-     * AFTER 
-     *      saveUser => autologin
+     * @return AFTER saveUser => autologin
      * 
      */
     @PostMapping("/signup")
-    String registerToData(User user,HttpServletRequest httpServletRequest){
+    String registerToData(User user, HttpServletRequest httpServletRequest) {
         System.out.println(user);
         Boolean stt = userServiceImp.saveUser(user);
-        if(stt == true){
-            GlobalFunctionHelper.autoLogin(user.getEmail(), user.getPassword(), httpServletRequest,authenticationManager);
-        }else{
+        if (stt == true) {
+            GlobalFunctionHelper.autoLogin(user.getEmail(), user.getPassword(), httpServletRequest,
+                    authenticationManager);
+        } else {
             return "redirect:/login";
         }
         return "redirect:/favorite/chosen";
+    }
+
+    @GetMapping("/customize")
+    String customizeUser(Model model) {
+        User user = GlobalFunctionHelper.getCurrentUser();
+        model.addAttribute("user", user);
+        return "clients/userCustomize";
+    }
+
+    @PostMapping("/customize")
+    String customizeUser(@ModelAttribute("user") User user, @RequestParam("files") MultipartFile file) {
+        if (file.isEmpty()) {
+
+        } else {
+
+            try {
+                user.setProfilePicture("/images/"+GlobalFunctionHelper.uploaded(file));
+            } catch (Exception e) {
+               
+                e.printStackTrace();
+            }
+
+        }
+        userServiceImp.saveUser(user);
+        return "redirect:/home";
     }
     @GetMapping("/detail")
     String detail() {
