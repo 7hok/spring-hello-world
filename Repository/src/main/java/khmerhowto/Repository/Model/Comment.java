@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 
 import javax.persistence.*;
 
-import khmerhowto.Repository.globalFunction.GlobalFunctionHelper;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 @Entity
@@ -23,12 +22,15 @@ public class Comment {
     private Integer status;
     private LocalDateTime timestamp;
 
+
+
     @PrePersist
     public void prePersist() {
 
         timestamp = LocalDateTime.now();
         status = 1;
     }
+
 
     public Comment() {
     }
