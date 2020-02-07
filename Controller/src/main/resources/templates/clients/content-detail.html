@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src=""></script>
-</head>
+ </head>
 
 <body>
 
@@ -114,7 +114,7 @@
                                                        src="/icon/print.svg" alt="">
                             </td>
 
-                            <td class="p-1 point"><img style="max-width: 30px;color: #46464e;"
+                            <td class="p-1 point"><img onclick="setSrc()" style="max-width: 30px;color: #46464e;"
                                                        src="/icon/facebook.svg" alt=""></td>
                             <td class=" point"> <img style="max-width: 30px; margin-left: 2.6px; " src="/icon/d.svg"
                                                      alt="" onclick="" data-toggle="modal" data-target="#feedbackModal" data-whatever="@mdo">
@@ -365,7 +365,7 @@
         </div>
    </div>
 
-
+    <iframe id="share_to_fb" src="https://www.facebook.com/plugins/share_button.php?href=http://news.sabay.com.kh/article/1188282#utm_campaign=onpage&layout=button&size=large&appId=1242809985886635&width=77&height=28" width="77" height="28" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
 </div>
 
 <div layout:fragment="content-js">
@@ -412,7 +412,11 @@
             var element = document.getElementById('bContent');
             var work = html2pdf().set(opt).from(element).save();
         }
-       
+        function setSrc(){
+            var url=document.URL;
+            $('#share_to_fb').attr('src',"https://www.facebook.com/plugins/share_button.php?href="+url+"&layout=button&size=large&appId=1242809985886635&width=77&height=28");
+            $('._2tga ').click();
+        }
     </script>
     <script>
         var articleId = window.location.pathname;
@@ -422,6 +426,11 @@
 
         $(document).ready(function () {
 
+
+            /*
+            * request content
+            * append to body of div
+            * */
             $.ajax({
                 type: 'GET',
                 url: '/api/contents/[[${id}]]',
@@ -432,33 +441,50 @@
                     $('#bContent').append(data["body"]);
                     $('#myButton').text(data["user"].name);
                     $('#ownerImg').attr('src', data["user"].profilePicture);
+
+                    /*
+                    * set title
+                    * */
                     $('#tt').html(data["title"]);
+                    /*
+                    * set category name
+                    * */
                     $('#category').html(data.category.name);
+                    //set timestamp
                     $('#time').html(data["timestamp"])
+
+
                     var locate = data["user"].location //getter
                     var bio = data["user"].bio;
                     var src = data["user"].profilePicture;
                     var name = data["user"].name;
                     var button = $('#myButton');
+                    /*
+                    * instance obj tooltip to display when hover on name and profile picture
+                    * */
                     var tooltip = new maTooltip(button, {
                         inline_style: 'max-width: none;',
                         full_visibility_duration: 31000,
                         position: maTooltip.POSITION.BOTTOM,
                         static_message: `<div style="background-color: white; color: black; border-radius: inherit;"><div>  <img class="img-fluid rounded-circle z-depth-2" style="width: 60px; height: 60px; min-height: 40px; min-width: 40px;" alt="100x100" src=${src} data-holder-rendered="true"></div><h3>${name}</h3><p>${locate}</p><p>${bio}</p><hr><div style="height: 32px;border-radius: inherit;background-color: white; color: black;"><a href="" style="margin-left: 20px;margin-right: 20px ">Favorite Category</a><a style="margin-left: 20px;margin-right: 20px " href="">Education</a><a href="" style="margin-left: 20px;margin-right: 20px ">Technology</a></div></div>`
                     });
-                    //  var tooltip = new maTooltip( button, {  } );
+                    //to show tooltip on hover
                     button.hover(function () {
                         tooltip.show();
                     });
+                    //to hide on mouse out
                     button.mouseout('click', function () {
                         tooltip.hide();
                     });
+                    //on pf pic
                     $("#pfpic").hover(function () {
                         tooltip.show();
                     })
                     $("#pfpic").mouseout(function () {
                         tooltip.hide();
                     })
+
+                    //call function on page 0 -> first load
                     showComment(0)
                 },
                 error: function (data) {
@@ -467,6 +493,7 @@
 
             });
         })
+        //To comment on article
         $("#commentInp").on('keypress', function (e) {
 
             var obj = {
@@ -477,8 +504,6 @@
                 "content": {
                     "id": [[${id}]]
                 }
-
-
             }
             if (e.which == 13) {
                 if ($("#commentInp").val() == "") {
@@ -490,7 +515,7 @@
                     url: '/api/comments',
                     data: JSON.stringify(obj),
                     success: function (data) {
-                        console.log(data)
+
                         $("#cmt").prepend(`
                                 <div class="row" style=" margin-left: 0;">
                                         <div class="col-2 col-sm-2 col-md-1  pr-0">
@@ -522,6 +547,7 @@
                     contentType: "application/json"
                 });
 
+                //increase number of cmt
                 $('#nCmt').html(parseInt($("#nCmt").text()) + 1);
             }
         });
@@ -565,10 +591,13 @@
                                     </div>
 
                         `)
+                        //call method to convert time
                         convertTimeToFormat()
                     }
+
+                    //to hide button show more comment
                     if (data.page.totalPages - 1 == page) {
-                        // $('#showCmt').
+
                         $("#showCmt").css("display", "none");
                     }
                     var p = parseInt(page) +1;
@@ -583,6 +612,7 @@
 
         }
 
+        //unlike the content
         function UnLikeContent() {
             $.ajax({
                 type: "GET",
@@ -602,7 +632,7 @@
             });
 
         }
-
+        //to like content
         function LikeContent() {
 
             var obj = {
@@ -631,7 +661,7 @@
 
             }
 
-
+            //send feedback
             function sendFeedback(){
                         var feedbackText = $("#feedback-message").val();
                         // alert(feedbackText);

@@ -248,7 +248,7 @@
                 CKEDITOR.on("instanceReady", function (event) {
                     $.ajax({
                         type: 'GET',
-                        url: 'http://localhost:8080/api/contents/[[${id}]]',
+                        url: '/api/contents/[[${id}]]',
                         contentType: false,
                         processData: false,
                         success: function (data) {
@@ -286,7 +286,6 @@
                         "id": [[${id}]],
                         "status": "1",
                         "thumbnail": thImg,
-                        "timestamp":null,
                         "title": $("#search").val(),
                         "writer": "string",
                         "category": {
@@ -295,7 +294,7 @@
                     }
                     $.ajax({
                         type: "POST",
-                        url: "http://localhost:8080/api/contents",
+                        url: "/api/contents",
                         data: JSON.stringify(dataObj),
                         contentType: "application/json",
                         success: function (respone) {
@@ -320,7 +319,7 @@
                     fd.append('file', chooseImg.files[0]);
                     $.ajax({
                         type: 'POST',
-                        url: 'http://localhost:8080/upload',
+                        url: '/upload',
                         data: fd,
                         contentType: false,
                         processData: false,
@@ -328,7 +327,7 @@
                             console.log(data);
                             var srcimg = data["Data"]
                             var im =
-                                `<span><img width='200px' src='http://localhost:8080/img/${srcimg}'><span>`;
+                                `<span><img width='200px' src='/img/${srcimg}'><span>`;
 
                             CKEDITOR.instances.editor1.insertHtml(im);
 
@@ -341,30 +340,6 @@
                 });
 
 
-                // $("#myTh").change(function () {
-
-                // });
-                // $("#thumnailFrm").submit(function (e) {
-                //     event.preventDefault();
-
-                //     var fd = new FormData();
-                //     fd.append('file', myTh.files[0]);
-                //     $.ajax({
-                //         type: 'POST',
-                //         url: 'http://localhost:8080/upload',
-                //         data: fd,
-                //         contentType: false,
-                //         processData: false,
-                //         success: function (data) {
-                //             var srcimg = data["Data"]
-                //             thImg = srcimg;
-                //         },
-                //         error: function (data) {
-                //             console.log("error");
-                //             console.log(data);
-                //         }
-                //     });
-                // });
 
                 function chooseThum() {
                     $("#myTh").click();
