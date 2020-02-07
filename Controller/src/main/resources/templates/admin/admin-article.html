@@ -63,7 +63,7 @@
                              <td>
                                 <a class="btn btn-outline-primary btn-view" th:href="'/detail/'+${article.id}" >View</a>
                                 <a class="btn btn-outline-primary btn-edit" th:href="'/admin/article/edit/'+${article.id}">Edit</a>
-                                <a class="btn btn-outline-primary btn-remove" th:href="${article.id}">Delete</a>
+                                <a class="btn btn-outline-primary btn-remove" th:onclick="'removeArticle('+${article.id}+')'">Delete</a>
                             </td>
                         </tr>  
                         
@@ -112,6 +112,18 @@
             $(document).on("click",'.btn-view',function() {
                 $(this).attr("")
             })
+            const removeArticle = async (_id)=> {
+              try {
+                let res = await fetch(`/api/contents/${_id}`,{
+                    method : 'DELETE'  
+                })
+                location.reload();
+              } catch (error) {
+                  alert("remove fail")
+                  console.log(error)
+              }
+                //location.reload();
+            }
             </script>
         </div>
     </body>

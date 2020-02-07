@@ -6,9 +6,12 @@ import khmerhowto.Repository.Model.Content;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
@@ -41,5 +44,10 @@ public interface ContentRepository extends JpaRepository<Content, Integer> {
 
     @Query(value = "select * from history_click_category where cate_id = :category_id" , nativeQuery = true)
     Page<Content> findPopularArticleBaseOnClick(@Param("category_id") Integer category_id,Pageable pageable);
+	@Transactional
+	@Modifying
+	@Query(value ="UPDATE content set status = 0 where id = :article_id" ,nativeQuery = true)
+	void deleteById(@Param("article_id") Integer id);
 
+	Page<Content> findByStatus(int i, Pageable pageable);
 }
