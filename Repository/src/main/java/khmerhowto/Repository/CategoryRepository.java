@@ -34,5 +34,7 @@ public interface CategoryRepository extends JpaRepository<Category,Integer> {
      *  combine history_click(view) + inner join category
      */
 
+	List<Category> findByStatusOrderByIdDesc(int i);
+
 //    Category findByIdAndStatus(Integer id, int i);
 }
