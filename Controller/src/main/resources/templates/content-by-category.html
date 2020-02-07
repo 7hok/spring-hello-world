@@ -204,7 +204,7 @@
 
     <div class="px-5">
         <!-- Scroll Category -->
-        <div class="row mt-2">
+        <div class="row  ">
 
             <div class="category-bg-color scrollmenu  top-category  w-100" >
                 <th:block th:each="category:${categories}">
@@ -218,12 +218,12 @@
         <!--        The row of Category and Content-->
         <div class="row mt-4">
             <!-- The beginning of Left Container (Category)  -->
-            <div class="col-md-0 col-lg-3 col-sm-12 left-category category-width pointer" >
+            <div class="col-md-0 col-lg-3 col-sm-12 left-category category-width  " >
                 <ul class="list-group">
                     <li class="list-group-item category-border-color active category-bg-color font-weight-bold ">Categories</li>
-                    <li class="list-group-item" style="cursor: pointer">
+                    <li class="list-group-item  " style="cursor: pointer">
 
-                        <div class="custom-control custom-radio mt-2 pt-2" th:each="category:${categories}">
+                        <div class="custom-control custom-radio pt-2" th:each="category:${categories}">
                             <th:block th:if="${category.id == 1}">
                                 <input type="radio" style="cursor: pointer" checked th:value="${category.id}" th:id="${category.id}" name="customRadio" class="custom-control-input">
                                 <div  class="custom-control-label pointer" ><label style="cursor: pointer; display:inline-block; width:90%;" th:text="${category.name}" th:for="${category.id}"></label> </div>
@@ -231,8 +231,8 @@
 
                             </th:block>
                             <th:block th:unless="${category.id == 1}">
-                                <input type="radio" style="cursor: pointer" th:value="${category.id}" th:id="${category.id}" name="customRadio" class="custom-control-input">
-                                <div style="cursor: pointer" class="custom-control-label pointer" ><label style=" display:inline-block; cursor: pointer width:90%;" th:text="${category.name}" th:for="${category.id}"></label> </div>
+                                <input type="radio" style="cursor: pointer" checked th:value="${category.id}" th:id="${category.id}" name="customRadio" class="custom-control-input">
+                                <div  class="custom-control-label pointer" ><label style="cursor: pointer; display:inline-block; width:90%;" th:text="${category.name}" th:for="${category.id}"></label> </div>
                             </th:block>
                         </div>
                     </li>
@@ -288,135 +288,29 @@
                 <div class="row ml-1 mt-5">
                     <h4 class="text-primary recent-popular-post-weight">Popular Post</h4>
                 </div>
-                <div class="mt-n3">
+                <div class="mt-n3" id="popular_post">
                     <hr>
                 </div>
 
                 <!--One Horizontal Card in Popular Post-->
                 <div class="row mt-5">
-                    <div class="col-md-12 col-sm-12 mb-md-2">
-                        <div class="card mb-3">
-                            <div class="row no-gutters">
-                                <div class="col-md-7">
-                                    <img src="img/rice.jpg" class="card-img first-card-image-category img-thumbnail"
-                                         alt="...">
-                                </div>
-                                <div class="col-md-5">
-                                    <div class="card-body text-center">
-                                        <h5 class="card-title">7 Secret for Leadership Success</h5>
-                                        <p class="card-text text-left">Business leaders know they need to engage their workforce
-                                            more in strategy;
-                                            they know several of their senior players do not model...</p>
+                    <div class="col-md-12 col-sm-12 mb-md-2" id="pop_post">
 
-                                        <p class="cart-text"><small class="text-muted">3 days ago /</small> <small
-                                            class="text-muted">by Hum Chamroeun /</small> <small class="text-muted">11
-                                            min read </small></p>
-                                        <div class="d-inline d-flex justify-content-end  align-items-end text-right mr-2">
-                                            <div class="">
-                                                <a class="text-decoration-none" href="">
-                                                    <i class="material-icons-new outline-favorite_border"
-                                                       style="width: 22px; height: 22px;">
-                                                    </i>
-                                                </a>
-                                                <sup>12</sup>
-                                                <a class="text-decoration-none" href="">
-                                                    <i class="material-icons-new outline-mode_comment"
-                                                       style="width: 22px; height: 22px;">
-                                                    </i>
-                                                </a>
-                                                <sup>24</sup>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <!--End One Horizontal Card in Popular Post-->
 
 
                 <!-- Two Card in Popular Post -->
-                <div class="row">
-                    <!-- First in Two Popular Post -->
-                    <div class="col-md-6 col-sm-12 mb-3">
-                        <div class="card">
-                            <img class="card-img-top img-thumbnail" src="img/view.jpg" alt="Card image cap">
-                            <div class="card-body text-center">
-                                <h5 class="card-title">Lazy Beach, Koh Rong Samloem</h5>
-                                <p class="card-text"><small class="text-muted">3 days ago /</small> <small
-                                    class="text-muted">by Hum Chamroeun /</small> <small class="text-muted">11 min
-                                    read </small></p>
-                                <p class="card-text text-left">While the island of Koh Rong Samloem is a long way off from
-                                    becoming over-run by
-                                    tourists, if you truly want to escape.</p>
-                                <div class="d-inline d-flex justify-content-end  align-items-end text-right mr-2">
-                                    <div>
-                                        <a class="text-decoration-none" href="">
-                                            <i class="material-icons-new outline-favorite_border"
-                                               style="width: 22px; height: 22px;">
-                                            </i>
-                                        </a>
-                                        <sup>12</sup>
-                                        <a class="text-decoration-none" href="">
-                                            <i class="material-icons-new outline-mode_comment"
-                                               style="width: 22px; height: 22px;">
-                                            </i>
-                                        </a>
-                                        <sup>24</sup>
-                                    </div>
-                                </div>                            </div>
+                <div class="row" id="card_popular">
 
-                        </div>
-                    </div>
-
-                    <!-- End of First in Two Popular Post-->
-
-                    <!-- Second in Two Popular Post -->
-                    <div class="col-md-6 col-sm-12">
-                        <div class="card">
-                            <img class="card-img-top img-thumbnail" src="img/sea.jpg" alt="Card image cap">
-                            <div class="card-body text-center">
-                                <h5 class="card-title">Otres Beach, Sihanoukville</h5>
-                                <p class="card-text"><small class="text-muted">3 days ago /</small> <small
-                                    class="text-muted">by Hum Chamroeun /</small> <small class="text-muted">11 min
-                                    read </small></p>
-                                <p class="card-text text-left">Although undoubtedly still a quieter alternative to Sihanoukville’s
-                                    other
-                                    offerings the best of the best in the world.</p>
-                                <div class="d-inline d-flex justify-content-end  align-items-end text-right mr-2">
-                                    <div>
-                                        <a class="text-decoration-none" href="">
-                                            <i class="material-icons-new outline-favorite_border"
-                                               style="width: 22px; height: 22px;">
-                                            </i>
-                                        </a>
-                                        <sup>12</sup>
-                                        <a class="text-decoration-none" href="">&nbsp;
-                                            <i class="material-icons-new outline-mode_comment"
-                                               style="width: 22px; height: 22px;">
-                                            </i>
-                                        </a>
-                                        <sup>24</sup>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End of Second in Two Popular Post  -->
                 </div>
                 <!-- End of Two Card in Popular Post -->
-
-
-
                 <div class="row mt-5 mb-5">
                     <div class="col-md-12 col-sm-12 text-center">
-                        <h4 class="text-primary p-2 bg-light load-more" style="cursor: pointer" id=" ">  Load More </h4>
+                        <h4 class="text-primary p-2 bg-light load-more" style="cursor: pointer" id="loadmore_popular">  Load More </h4>
                     </div>
                 </div>
-
-
-
             </div>
             <!-- The end of Right Container -->
         </div>
@@ -431,26 +325,27 @@
 <div layout:fragment="content-js">
     <script>
         var cateId=1;
+        const getParamRequest = () => {
+            let _urlParams = new URLSearchParams(window.location.search);
+            if (_urlParams.has("category_id")){
+                /* click on category with that id*/
+                let _category_id = _urlParams.get("category_id");
+                $('#'+_category_id).click();
+            }else{
+                /* user request default*/
+            }
+        }
         $(document).ready(function () {
 
-            const getParamRequest = () => {
-                let _urlParams = new URLSearchParams(window.location.search);
-                if (_urlParams.has("category_id")){
-                    /* click on category with that id*/
-                    let _category_id = _urlParams.get("category_id");
-                }else{
-                    /* user request default*/
-                }
-            }
+
             function generateCard(obj) {
                 return `<div class="col-md-6 col-sm-12 mb-3">
                         <div class="card" onclick="window.location.href ='/detail/${obj.id}'">
                             <img class="card-img-top img-thumbnail" src="${obj.thumbnail}" alt="Card image cap">
                             <div class="card-body text-center">
                                 <h5 class="card-title">${obj.title}</h5>
-                                <p class="card-text"><small class="text-muted">3 days ago /</small> <small
-                                        class="text-muted">by Hum Chamroeun /</small> <small class="text-muted">11 min
-                                    read </small></p>
+                                <p class="card-text"><small class="text-muted content-timestamp">${obj.timestamp}</small> <small
+                                        class="text-muted"> </small> <small class="text-muted">  </small></p>
                                 <p class="card-text text-left">${obj.body.replace(/(<([^>]+)>)/ig, "").substring(0, 200)}</p>
                                 <div class="d-inline d-flex justify-content-end  align-items-end text-right mr-2">
                                     <div>
@@ -530,7 +425,7 @@
                     url: `/api/contents/search/findAllBycategoryIdAndStatus?id=${cid}&st=1&page=${page}&size=3&projection=ContentNotificationProjection`,
                     method: 'GET',
                     success: function (objRecent) {
-                        console.log(objRecent)
+
                         if (objRecent._embedded.contents.length>0) {
                             var eleRecent1 = `   <div class="card mb-3" onclick="window.location.href ='/detail/${objRecent._embedded.contents[0].id}'">
                             <div class="row no-gutters">
@@ -543,25 +438,10 @@
                                         <h5 class="card-title">${objRecent._embedded.contents[0].title}</h5>
                                         <p class="card-text text-left">${objRecent._embedded.contents[0].body.replace(/(<([^>]+)>)/ig, "").substring(0, 200)}</p>
 
-                                        <p class="cart-text"><small class="text-muted">3 days ago /</small> <small
-                                                class="text-muted">by Hum Chamroeun /</small> <small class="text-muted">11
-                                            min read </small></p>
+                                        <p class="cart-text"><small class="text-muted content-timestamp">${objRecent._embedded.contents[0].timestamp}</small> <small
+                                                class="text-muted"> </small> <small class="text-muted"> </small></p>
                                         <div class="d-inline d-flex justify-content-end  align-items-end text-right mr-2">
-<!--                                            <div class="">-->
-                                <!--                                                <a class="text-decoration-none" href="">-->
-                                <!--                                                <i class="material-icons-new outline-favorite_border"-->
-                                <!--                                                   style="width: 22px; height: 22px;">-->
-                                <!--                                                </i>-->
-                                <!--                                                </a>-->
-                                <!--                                                <sup>12</sup>-->
-                                <!--                                                <a class="text-decoration-none" href="">-->
-                                <!--                                                <i class="material-icons-new outline-mode_comment"-->
-                                <!--                                                   style="width: 22px; height: 22px;">-->
-                                <!--                                                </i>-->
-                                <!--                                                </a>-->
-                                <!--                                                <sup>24</sup>-->
 
-                                <!--                                            </div>-->
                                 </div>
                                 </div>
                                 </div>
@@ -573,9 +453,8 @@
                             <img class="card-img-top img-thumbnail" src="${objRecent._embedded.contents[1].thumbnail}" alt="Card image cap">
                             <div class="card-body text-center">
                                 <h5 class="card-title">${objRecent._embedded.contents[1].title}</h5>
-                                <p class="card-text"><small class="text-muted">3 days ago /</small> <small
-                                        class="text-muted">by Hum Chamroeun /</small> <small class="text-muted">11 min
-                                    read </small></p>
+                                <p class="card-text"><small class="text-muted content-timestamp">${objRecent._embedded.contents[1].timestamp}</small> <small
+                                        class="text-muted"></small> <small class="text-muted"></small></p>
                                 <p class="card-text text-left">${objRecent._embedded.contents[1].body.replace(/(<([^>]+)>)/ig, "").substring(0, 200)}</p>
                                 <div class="d-inline d-flex justify-content-end  align-items-end text-right mr-2">
 <!--                                    <div>-->
@@ -603,25 +482,11 @@
                             <img class="card-img-top img-thumbnail" src="${objRecent._embedded.contents[2].thumbnail}" alt="Card image cap">
                             <div class="card-body text-center">
                                 <h5 class="card-title">${objRecent._embedded.contents[2].title}</h5>
-                                <p class="card-text"><small class="text-muted">3 days ago /</small> <small
-                                        class="text-muted">by Hum Chamroeun /</small> <small class="text-muted">11 min
-                                    read </small></p>
+                                <p class="card-text"><small class="text-muted content-timestamp">${objRecent._embedded.contents[2].timestamp}</small> <small
+                                        class="text-muted"  > </small></p>
                                 <p class="card-text text-left">${objRecent._embedded.contents[2].body.replace(/(<([^>]+)>)/ig, "").substring(0, 200)}</p>
                                 <div class="d-inline d-flex justify-content-end  align-items-end text-right mr-2">
-<!--                                    <div>-->
-                                <!--                                        <a class="text-decoration-none" href="">-->
-                                <!--                                        <i class="material-icons-new outline-favorite_border"-->
-                                <!--                                           style="width: 22px; height: 22px;">-->
-                                <!--                                        </i>-->
-                                <!--                                        </a>-->
-                                <!--                                        <sup>12</sup>-->
-                                <!--                                        <a class="text-decoration-none" href="">-->
-                                <!--                                        <i class="material-icons-new outline-mode_comment"-->
-                                <!--                                           style="width: 22px; height: 22px;">-->
-                                <!--                                        </i>-->
-                                <!--                                        </a>-->
-                                <!--                                        <sup>24</sup>-->
-                                <!--                                    </div>-->
+
                                 </div>
                                 </div>
                                 </div>`;
@@ -630,7 +495,7 @@
                         $("#conttRecent1").append(eleRecent1);
 
                         $("#conttRecentLoad1").append(elet);
-
+                        convertTimeToFormat();
                     },
                     error: function(data){
                         console.log(data)
@@ -667,10 +532,9 @@
                         }
                         else {
                             $("#conttRecentLoad1").after(`<div class="row" id="rowLoadMore3">${elements}</div>`);
+                            convertTimeToFormat();
                         }
 
-                        console.log("before")
-                        console.log(allEle)
                         // 3 Card More
                         $.ajax({
 
@@ -693,6 +557,7 @@
                                 i++;
                                 console.log(allEle)
                                 $("#conttRecentLoad1").after(allEle);
+                                convertTimeToFormat();
                             },
                             error: function(er){
                                 console.log(er)
@@ -711,17 +576,91 @@
                 allEle = ``;
                 leftCol="";
                 addMoreCard(cateId);
-            });
 
-            //popular post ??
-            // showCardBottom(0);  //show on first load
-            function showCardBottom(page) {
-                // Append Three Card Recent Post
-                $.ajax({
-                    url: `/api/contents/search/findAllBycategoryIdAndStatus?id=1&st=1&page=${page}&size=3&projection=ContentNotificationProjection`,
-                    method: 'GET',
-                    success: function (objRecent) {
-                        eleRecent1 = `   <div class="card mb-3" onclick="window.location.href ='/detail/${objRecent._embedded.contents[0].id}'">
+            });
+            $(document).ready(function () {
+                var allElementOfCardPopular = '';
+                var page = 1;
+
+                function addMoreCardPopularPost(cid) {
+                    $.ajax({
+
+                        url: `/api/contents/search/findPopularArticleBaseOnClick?category_id=${cid}&page=${page}&size=3&projection=ContentNotificationProjection`,
+                        method: 'GET',
+                        success: function (objRecentLoad) {
+                            console.log(objRecentLoad)
+                            var elements = "";
+                            page++;
+
+                            if (objRecentLoad._embedded.contents.length > 1) {
+                                for (let p = 0; p < 2; p++) {
+                                    elements += generateCard(objRecentLoad._embedded.contents[p]);
+
+                                }
+                            } else {
+                                return;
+                            }
+                            if (objRecentLoad._embedded.contents.length > 2) {
+                                leftCol = generateCard(objRecentLoad._embedded.contents[2]);
+                                allElementOfCardPopular += `<div class="row" id="rowLoadMore1">${elements}</div><div class="row" id="rowLoadMore2">${leftCol}`;
+                            } else {
+                                $("#card_popular").after(`<div class="row" id="rowLoadMore3">${elements}</div>`);
+
+                                convertTimeToFormat();
+                            }
+
+                            // 3 Card More
+                            $.ajax({
+
+                                url: `/api/contents/search/findPopularArticleBaseOnClick?category_id=${cid}&page=${page}&size=3&projection=ContentNotificationProjection`,
+                                method: 'GET',
+                                success: function (objRecentLoad2) {
+                                    console.log(objRecentLoad2)
+                                    var elements2 = "";
+
+
+                                    if (objRecentLoad2._embedded.contents.length > 0) {
+                                        allElementOfCardPopular += generateCard(objRecentLoad2._embedded.contents[0]) + `</div>`
+
+                                    }
+                                    if (objRecentLoad2._embedded.contents.length > 1) {
+                                        for (let p = 1; p < objRecentLoad2._embedded.contents.length; p++) {
+                                            elements2 += generateCard(objRecentLoad._embedded.contents[p]);
+                                        }
+                                    }
+                                    allElementOfCardPopular += `<div class="row" id="rowLoadMore3">${elements2}</div>`
+                                    page++;
+                                    console.log(allElementOfCardPopular)
+                                    console.log($("#card_popular"))
+                                    $("#card_popular").after(allElementOfCardPopular);
+                                    convertTimeToFormat();
+                                },
+                                error: function (er) {
+                                    console.log(er)
+                                }
+                            });
+                            // End of 3 Card More
+
+                        },
+                        error: function (er) {
+                            console.log(er);
+                        }
+                    });
+                }
+
+
+                showCardBottomPopular(0, 1);
+
+                function showCardBottomPopular(page, cid) {
+                    var eleRecent1 = '', eleRecent2 = '', eleRecent3 = '';
+
+                    $.ajax({
+                        url: `/api/contents/search/findPopularArticleBaseOnClick?category_id=${cid}&page=${page}&size=3&projection=ContentNotificationProjection`,
+                        method: 'GET',
+                        success: function (objRecent) {
+                            console.log(objRecent)
+                            if (objRecent._embedded.contents.length > 0) {
+                                eleRecent1 = `   <div class="card mb-3" onclick="window.location.href ='/detail/${objRecent._embedded.contents[0].id}'">
                             <div class="row no-gutters">
                                 <div class="col-md-7">
                                     <img src="${objRecent._embedded.contents[0].thumbnail}" class="card-img first-card-image-category img-thumbnail"
@@ -732,81 +671,64 @@
                                         <h5 class="card-title">${objRecent._embedded.contents[0].title}</h5>
                                         <p class="card-text text-left">${objRecent._embedded.contents[0].body.replace(/(<([^>]+)>)/ig, "").substring(0, 200)}</p>
 
-                                        <p class="cart-text"><small class="text-muted">3 days ago /</small> <small
-                                                class="text-muted">by Hum Chamroeun /</small> <small class="text-muted">11
-                                            min read </small></p>
+                                        <p class="cart-text"><small class="text-muted content-timestamp"> ${objRecent._embedded.contents[2].timestamp}</small> <small
+                                                class="text-muted"> </small> <small class="text-muted">  </small></p>
+                                        <div class="d-inline d-flex justify-content-end  align-items-end text-right mr-2">
 
-                                    </div>
                                 </div>
-                            </div>
-                        </div>`;
-
-                        eleRecent2 = ` <div class="card" onclick="window.location.href ='/detail/${objRecent._embedded.contents[1].id}'">
+                                </div>
+                                </div>
+                                </div>
+                                </div>`;
+                            }
+                            if (objRecent._embedded.contents.length > 1) {
+                                eleRecent2 = ` <div class="card" onclick="window.location.href ='/detail/${objRecent._embedded.contents[1].id}'">
                             <img class="card-img-top img-thumbnail" src="${objRecent._embedded.contents[1].thumbnail}" alt="Card image cap">
                             <div class="card-body text-center">
                                 <h5 class="card-title">${objRecent._embedded.contents[1].title}</h5>
-                                <p class="card-text"><small class="text-muted">3 days ago /</small> <small
-                                        class="text-muted">by Hum Chamroeun /</small> <small class="text-muted">11 min
-                                    read </small></p>
+                                <p class="card-text"><small class="text-muted content-timestamp">${objRecent._embedded.contents[2].timestamp}</small> <small
+                                        class="text-muted"> </small> <small class="text-muted">  </small></p>
                                 <p class="card-text text-left">${objRecent._embedded.contents[1].body.replace(/(<([^>]+)>)/ig, "").substring(0, 200)}</p>
                                 <div class="d-inline d-flex justify-content-end  align-items-end text-right mr-2">
-<!--                                    <div>-->
-                            <!--                                        <a class="text-decoration-none" href="">-->
-                            <!--                                        <i class="material-icons-new outline-favorite_border"-->
-                            <!--                                           style="width: 22px; height: 22px;">-->
-                            <!--                                        </i>-->
-                            <!--                                        </a>-->
 
-                            <!--                                        <sup>12</sup>-->
-                            <!--                                        &nbsp;<a class="text-decoration-none" href="">-->
-                            <!--                                        <i class="material-icons-new outline-mode_comment"-->
-                            <!--                                           style="width: 22px; height: 22px;">-->
-                            <!--                                        </i>-->
-                            <!--                                        </a>-->
-                            <!--                                        <sup>24</sup>-->
-                            <!--                                    </div>-->
-                            </div>
-                            </div>
-                            </div>`;
+                                </div>
+                                </div>
+                                </div>`;
 
-
-                            var eleRecent3 = `<div class="card" onclick="window.location.href ='/detail/${objRecent._embedded.contents[2].id}'">
+                            }
+                            if (objRecent._embedded.contents.length > 2) {
+                                eleRecent3 = `<div class="card" onclick="window.location.href ='/detail/${objRecent._embedded.contents[2].id}'">
                             <img class="card-img-top img-thumbnail" src="${objRecent._embedded.contents[2].thumbnail}" alt="Card image cap">
                             <div class="card-body text-center">
                                 <h5 class="card-title">${objRecent._embedded.contents[2].title}</h5>
-                                <p class="card-text"><small class="text-muted">3 days ago /</small> <small
-                                        class="text-muted">by Hum Chamroeun /</small> <small class="text-muted">11 min
-                                    read </small></p>
+                                <p class="card-text"><small class="text-muted content-timestamp">${objRecent._embedded.contents[2].timestamp}</small> <small
+                                        class="text-muted"> </small> <small class="text-muted">  </small></p>
                                 <p class="card-text text-left">${objRecent._embedded.contents[2].body.replace(/(<([^>]+)>)/ig, "").substring(0, 200)}</p>
                                 <div class="d-inline d-flex justify-content-end  align-items-end text-right mr-2">
-<!--                                    <div>-->
-                        <!--                                        <a class="text-decoration-none" href="">-->
-                        <!--                                        <i class="material-icons-new outline-favorite_border"-->
-                        <!--                                           style="width: 22px; height: 22px;">-->
-                    <!--                                        </i>-->
-                        <!--                                        </a>-->
-                        <!--                                        <sup>12</sup>-->
-                        <!--                                        <a class="text-decoration-none" href="">-->
-                        <!--                                        <i class="material-icons-new outline-mode_comment"-->
-                        <!--                                           style="width: 22px; height: 22px;">-->
-                        <!--                                        </i>-->
-                        <!--                                        </a>-->
-                        <!--                                        <sup>24</sup>-->
-                        <!--                                    </div>-->
-                        </div>
-                        </div>
-                        </div>`;
 
-                        $("#conttRecent1").append(eleRecent1);
-                        $("#conttRecent2").append(eleRecent2);
-                        $("#conttRecent3").append(eleRecent3);
+                                </div>
+                                </div>
+                                </div>`;
+                            }
+                            var elet = `<div class= "col-md-6 col-sm-12 mb-3 " id= "conttRecent2 ">${eleRecent2}</div><div class= "col-md-6 col-sm-12 mb-3 " id= "conttRecent3 ">${eleRecent3}</div>`
+                            $("#pop_post").append(eleRecent1);
+                            $("#card_popular").append(elet);
+                            convertTimeToFormat();
+                        },
+                        error: function (data) {
+                            console.log(data)
+                        }
+                    });
 
+                }
 
-                    }
+                $('#loadmore_popular').click(function () {
+                    allEle = ``;
+                    leftCol = "";
+                    addMoreCardPopularPost(cateId);
                 });
-                // End of Append Three Card Recent Post
-            }
 
+            })
             $('.custom-control-input').click(function(){
                 if ($(this).is(':checked'))
                 {
@@ -820,7 +742,9 @@
                     showSlide(cateId);
                 }
             });
-
+            setTimeout(function(){
+                getParamRequest()
+            }, 500);
         })
     </script>
 </div>
