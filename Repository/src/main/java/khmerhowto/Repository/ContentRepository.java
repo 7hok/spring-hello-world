@@ -38,4 +38,8 @@ public interface ContentRepository extends JpaRepository<Content, Integer> {
 	Page<Content> findByBodyContainingIgnoreCase(@Param("body") String body, Pageable pageable);
 	@Query(value = "SELECT click,c.* FROM history_click as h RIGHT JOIN content as c on h.content_id = c.id WHERE status = 1 ORDER BY click desc NULLS LAST " ,nativeQuery = true)
 	Page<Content> findPopularContent(Pageable pageable);
+
+    @Query(value = "select * from history_click_category where cate_id = :category_id" , nativeQuery = true)
+    Page<Content> findPopularArticleBaseOnClick(@Param("category_id") Integer category_id,Pageable pageable);
+
 }

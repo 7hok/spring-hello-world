@@ -40,6 +40,9 @@
             text-decoration: underline;
             color: #96a0a5;
         }
+        .card_buttom:hover{
+            background-color: #f3f3f3;
+        }
     </style>
 </head>
 
@@ -283,8 +286,21 @@
             
             let _time_contents = $(".content-timestamp");
             _time_contents.each(function(){
-                let _time = $(this).text();
-                $(this).text(moment(_time).fromNow());
+
+                try{
+                    let _time = $(this).text();
+                    let _casted_time =  moment(_time).fromNow();
+                    if(_casted_time == "Invalid date"){
+                        console.log(`if`)
+                    }else{
+                        console.log(`else`)
+                        $(this).text(_casted_time);
+                    }
+
+                }catch (e) {
+                    console.log(`x`)
+                }
+
             })
         }    
         setTimeout(function(){
