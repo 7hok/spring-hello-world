@@ -156,7 +156,7 @@
 
             </div>
             <div class="row " style="   margin-top: 2%;">
-                <div class="col-1 pr-0 point" sec:authorize="isAuthenticated()">
+                <div class="col-3 pr-0 col-md-2 col-lg-1 pl-lg-3 point" sec:authorize="isAuthenticated()">
 
                     <!-- <div class="my-auto ">  -->
                     <!-- <i class="material-icons-new outline-favorite_border"
@@ -167,8 +167,10 @@
                     <!-- </div>  -->
 
                 </div>
-                <div class="col-1 pl-0 my-auto" sec:authorize="isAuthenticated()"><span id="likeNum" class="pb-3" th:text=${like}></span></div>
-                <div class="col-10 ">
+                <div class="col-1 col-md-1 col-lg-1 pl-0 my-auto " style=" " sec:authorize="isAuthenticated()">
+                    <span id="likeNum" class="pb-3" th:text=${like}></span>
+                </div>
+                <div class="col-8 col-md-9 col-lg-9">
                     <div id="category"
                          style="padding: 6px;display: inline;border-radius: 4px;  background-color: rgb(168, 167, 167)">
                     </div>
@@ -373,8 +375,9 @@
             // doc.text('Hello world!', 10, 10)
             let _title = document.getElementById("tt").innerHTML
             let _body = document.getElementById("bContent").innerHTML
+            _body = _body.replace(/<img[^>]*>/g,"");
             console.log(_title)
-            doc.fromHTML(`<h3>${_title}</h3><br><br>`+ _body,10,10);
+            doc.fromHTML(`<h3 class="text-center">${_title}</h3><br><br>`+ _body,10,10);
             doc.save(`${_title}.pdf`)
         }
     </script>
@@ -601,6 +604,7 @@
                 });
 
             }
+
 
 
 
