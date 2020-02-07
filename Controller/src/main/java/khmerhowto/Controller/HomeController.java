@@ -98,10 +98,17 @@ public class HomeController {
         Page<Content> click_pages = null;
         if (GlobalFunctionHelper.getCurrentUser() == null) {
             modelMap.addAttribute("currentUser", new User());
+
             click_pages = contentRepository.findPopularContent(new PageRequest(0, 3));
             modelMap.addAttribute("RECOMMEND_ARTICLE", click_pages.getContent());
-        } else {
+            } else {
             User cur_user =  GlobalFunctionHelper.getCurrentUser();
+            if(interestedServiceImp.findByuserIdAndContentId(cur_user.getId(),id).size()==0){
+                modelMap.addAttribute("liked","0");
+            }
+            else {
+                modelMap.addAttribute("liked","1");
+            }
             try {
                 saveHistory(cur_user, new Content(id));
             } catch (Exception e) {
@@ -109,9 +116,7 @@ public class HomeController {
             modelMap.addAttribute("currentUser",cur_user);
             click_pages = contentRepository.findContentBasedOnUserHistoryClick(cur_user.getId(),new PageRequest(0, 3));
             modelMap.addAttribute("RECOMMEND_ARTICLE", click_pages.getContent());
-        } 
-            
-       
+        }
 
         modelMap.addAttribute("totalCmt", cmt.getTotalComment(id));
         modelMap.addAttribute("like", interestedServiceImp.getTotalLike(id));

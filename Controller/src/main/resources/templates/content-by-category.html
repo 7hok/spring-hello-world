@@ -177,7 +177,7 @@
     </style>
 
 
-    <div class="row ml-0 mr-0">
+    <div class="row ml-0 mr-0 remove_slide_on_null">
         <div class="col-md-12 col-sm-12 col-12 pl-0 pr-0">
 
             <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
@@ -190,14 +190,7 @@
 
                 </div>
 
-                <!--                <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">-->
-                <!--                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>-->
-                <!--                    <span class="sr-only">Previous</span>-->
-                <!--                </a>-->
-                <!--                <a class=" carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">-->
-                <!--                    <span class="carousel-control-next-icon" aria-hidden="true"></span>-->
-                <!--                    <span class="sr-only">Next</span>-->
-                <!--                </a>-->
+
             </div>
         </div>
     </div>
@@ -226,13 +219,15 @@
                         <div class="custom-control custom-radio pt-2" th:each="category:${categories}">
                             <th:block th:if="${category.id == 1}">
                                 <input type="radio" style="cursor: pointer" checked th:value="${category.id}" th:id="${category.id}" name="customRadio" class="custom-control-input">
-                                <div  class="custom-control-label pointer" ><label style="cursor: pointer; display:inline-block; width:90%;" th:text="${category.name}" th:for="${category.id}"></label> </div>
-
-
+                                <div  class="custom-control-label pointer" >
+                                    <label style="cursor: pointer; display:inline-block; width:90%;" th:text="${category.name}" th:for="${category.id}"></label>
+                                </div>
                             </th:block>
                             <th:block th:unless="${category.id == 1}">
                                 <input type="radio" style="cursor: pointer" checked th:value="${category.id}" th:id="${category.id}" name="customRadio" class="custom-control-input">
-                                <div  class="custom-control-label pointer" ><label style="cursor: pointer; display:inline-block; width:90%;" th:text="${category.name}" th:for="${category.id}"></label> </div>
+                                <div  class="custom-control-label pointer" >
+                                    <label style="cursor: pointer; display:inline-block; width:90%;" th:text="${category.name}" th:for="${category.id}"></label>
+                                </div>
                             </th:block>
                         </div>
                     </li>
@@ -245,12 +240,12 @@
 
             <!-- The beginning of Right Container -->
             <div class=" col-lg-9 col-sm-12">
-                <div class="row ml-1">
+                <div class="row ml-1 to_remove_on_null">
                     <h4 class="text-primary recent-popular-post-weight">Recent Post</h4>
                 </div>
 
                 <!--One Horizontal Card-->
-                <div class="row">
+                <div class="row " >
                     <div class="col-md-12 col-sm-12 mb-md-2" id="conttRecent1">
                         <!-- Test Horizontal -->
 
@@ -276,7 +271,7 @@
                 </div>
                 <!-- End of Two Card in Recent Post -->
 
-                <div class="row mt-5">
+                <div class="row mt-5 mb-5 to_remove_on_null">
                     <div class="col-md-12 col-sm-12 text-center">
                         <h4 class="text-primary p-2 bg-light load-more" style="cursor: pointer" id="load">  Load More </h4>
                     </div>
@@ -285,7 +280,7 @@
 
 
 
-                <div class="row ml-1 mt-5">
+                <div class="row ml-1  ">
                     <h4 class="text-primary recent-popular-post-weight">Popular Post</h4>
                 </div>
                 <div class="mt-n3" id="popular_post">
@@ -377,6 +372,10 @@
                     url: `/api/contents/search/findAllBycategoryIdAndStatus?id= ${cid}&st=1&page=0&size=3&projection=ContentNotificationProjection`,
                     method: 'GET',
                     success: function (obj) {
+                        $('.remove_slide_on_null').removeClass("d-none");
+                        if (obj._embedded.contents.length<1){
+                            $('.remove_slide_on_null').addClass("d-none");
+                        }
                         if (obj._embedded.contents.length>0) {
                             ele1 = `<div class="carousel-item active" onclick="window.location.href ='/detail/${obj._embedded.contents[0].id}'" style="height: 400px;background:url(${obj._embedded.contents[0].thumbnail}) no-repeat center; background-size: cover; cursor: pointer;" class="border  border-dark h-100  group-one-c-one d-flex align-items-end justify-content-center mysl">
 <!--                        <img src=${obj._embedded.contents[0].thumbnail} class="d-block w-100" alt="..."> -->
@@ -425,7 +424,10 @@
                     url: `/api/contents/search/findAllBycategoryIdAndStatus?id=${cid}&st=1&page=${page}&size=3&projection=ContentNotificationProjection`,
                     method: 'GET',
                     success: function (objRecent) {
-
+                        $('.to_remove_on_null').removeClass("d-none");
+                        if (objRecent._embedded.contents.length<1){
+                            $('.to_remove_on_null').addClass("d-none");
+                        }
                         if (objRecent._embedded.contents.length>0) {
                             var eleRecent1 = `   <div class="card mb-3" onclick="window.location.href ='/detail/${objRecent._embedded.contents[0].id}'">
                             <div class="row no-gutters">
