@@ -47,6 +47,20 @@ public class GoogleLoginController {
         System.out.println( GlobalFunctionHelper.getCurrentUser()); 
         return principal;
     }
+    /**
+     * 
+     * 
+     * Email 100% getting because of verified from login
+     * After getting email from sending access token
+     * check whether email is registered 
+     * IF true
+     *     AutoLogin
+     * ELSE
+     *     Redirected Register        
+     * @param code
+     * @param request
+     * @return
+     */
    
     @PostMapping(value="/auth/code")
     public  ResponseEntity<Map<String, Object>> postMethodName(@RequestParam("code") String code,HttpServletRequest request) {
@@ -77,15 +91,6 @@ public class GoogleLoginController {
                 String familyName = (String) payload.get("family_name");
                 String givenName = (String) payload.get("given_name");
              * 
-             */
-            /**
-             * Email 100% getting because of verified from login
-             * After getting email from sending access token
-             * check whether email is registered 
-             * IF true
-             *     AutoLogin
-             * ELSE
-             *     Redirected Register
              */
             String email = payload.getEmail();
             Boolean userChecked = checkUserByEmailIfTrueLoggedIn(email, request);

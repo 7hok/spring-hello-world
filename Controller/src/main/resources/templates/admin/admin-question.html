@@ -6,7 +6,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
     <style>
         body {
             background-color: #d4dbe0;
@@ -46,7 +45,7 @@
 
                         <td>
                             <button class="btn btn-outline-primary  btn-view"  th:btn-id="${q.id}">View</button>
-                            <button class="btn btn-outline-primary">Delete</button>
+                            <button class="btn btn-outline-primary btn-delete" th:btn-id="${q.id}">Delete</button>
                         </td>
                     </tr>
                     <!-- dynasmic -->
@@ -179,6 +178,31 @@
                     location.href = `?date=${search_date}`;
                 }
             })
+        $(document).on("click",".btn-delete",function(){
+            let _id = $(this).attr("btn-id");
+
+            let _response = removeRequest(_id);
+                console.log(_response)
+                if(_response ==null ){
+                    alert("remove fail")
+                }else{
+                  
+                }
+        })    
+        const removeRequest = async(id) => {
+            const response = await fetch(`/api/requests/${id}`,{
+                method : "DELETE"
+            });
+            try {
+                location.reload();
+                const json_data = await response.json();
+                console.log(json_data)
+                return json_data;
+            } catch (error) {
+                console.log(error)
+                return null
+            }
+        }
     </script>
 </div>
 </body>

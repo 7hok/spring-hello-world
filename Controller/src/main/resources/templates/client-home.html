@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title >KUNLOES</title>
 </head>
 <body>
     <div class="content bg-white" layout:fragment="content">
@@ -42,7 +42,7 @@
                 /* filter:brightness(10%); */
                 /*     */
                 transition: transform .5s ease;
-                transform: scale(1.1);
+                transform: scaleY(1.08);
                 /* background-color: hsl(0, 100%, 30%);          */
                  }
             
@@ -98,7 +98,7 @@
                 padding-left: 10%;
 
             }
-            .category-list> p:hover {
+            .category-list> p:hover , .article_object_list:hover{
                 cursor: pointer;
                 background-color: #e5eaed;
             }
@@ -261,7 +261,7 @@
                             <h4 style="color : #393939">Popular post</h4>
                             <hr>
                             <div class="scroll_div" style="max-height: 45vh; overflow: scroll;overflow-x: hidden;">
-                                <div class="d-flex  align-items-center" th:each="article : ${POPULAR_POST}" th:object="${article}">
+                                <div class="d-flex  align-items-center article_object_list" th:each="article : ${POPULAR_POST}" th:object="${article}" th:onclick="'onClickRedirectTo('+*{id}+')'">
                                     <img onerror="this.src = 'image-static/face_recognition_dribbble.png'" th:src="*{thumbnail}" class="rounded-circle m-2" style="width: 90px; height: 90px; max-height: 10vh;" alt="">
                                     <div class="d-inline-block pl-2">
                                         <span class="overflow-hidden w-100"><b class="kht-text-color" th:text="*{title}">How tech recognize human face </b></span>
@@ -293,7 +293,7 @@
                             <h4 style="color : #393939">Your Favorite Category</h4>
                             <hr>
                             <div class="scroll_div" style="max-height: 45vh; overflow: scroll;overflow-x: hidden;">
-                                <div class="d-flex  align-items-center" th:each="article : ${FAVORITE_CATEGORY_TOP_ARTICLE}" th:object="${article}">
+                                <div class="d-flex  align-items-center article_object_list" th:each="article : ${FAVORITE_CATEGORY_TOP_ARTICLE}" th:object="${article}" th:onclick="onClickRedirectTo(*{id})">
                                     <img onerror="this.src = 'image-static/face_recognition_dribbble.png'" th:src="*{thumbnail}" class="rounded-circle m-2" style="width: 90px; height: 90px; max-height: 10vh;" alt="">
                                     <div class="d-inline-block pl-2">
                                         <span class="overflow-hidden w-100"><b class="kht-text-color" th:text="*{title}">How tech recognize human face </b></span>
@@ -435,7 +435,9 @@
             } 
             }, _throttleDelay);
         }
-
+        const onClickRedirectTo= (x) => {
+            location.href = `/detail/${x}`;
+        }
      
 //         $(document).ready(function() {
 //     var myContent = '<p><code>var _throttleTimer = null; var _throttleDelay = 100; var $window = $(window); var $document = $(document); $document.ready(function () { $window .off(&#39;scroll&#39;, ScrollHandler) .on(&#39;scroll&#39;, ScrollHandler); }); function ScrollHandler(e) { //throttle event: clearTimeout(_throttleTimer); _throttleTimer = setTimeout(function () { console.log(&#39;scroll&#39;); //do work if ($window.scrollTop() + $window.height() &gt; $document.height() - 100) { alert(&quot;near bottom!&quot;); } }, _throttleDelay); }</code></p>';
