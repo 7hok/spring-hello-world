@@ -81,7 +81,17 @@ public class HomeController {
     @Autowired
     AuthenticationManager authenticationManager;
 
-
+    /**
+     * PROCESS 
+     *      IF USER LOGGED IN 
+     *          SAVE HISTORY CLICK 
+     *          SUGGEST RELATED COMMON READ ARTICLE
+     *      ELSE 
+     *          SUGGEST POPUALAR POST
+     * @param modelMap
+     * @param id
+     * @return
+     */
     @GetMapping("/detail/{id}")
     public String testDetail(ModelMap modelMap, @PathVariable Integer id) {
         modelMap.addAttribute("id", id);
@@ -269,8 +279,11 @@ public class HomeController {
      * 
      * @param request
      * @param modelMap
-     * @return IF user == Null THEN new OBJECT => ModelMap ELSE GOOGLE REDIRECT =>
-     *         OBJECT => ModelMap FORM ON SUBMIT
+     * @return 
+     * IF user == Null THEN 
+     *      new OBJECT => ModelMap ELSE GOOGLE REDIRECT =>
+     * ELSE        
+     *      OBJECT => ModelMap FORM ON SUBMIT
      * @POST => /signup
      */
     @GetMapping("/signup")
@@ -365,32 +378,17 @@ public class HomeController {
 
     @GetMapping("/category")
     String category(Model model ){
+        model.addAttribute("CURRENT_PAGE", "category");
         model.addAttribute("categories",categoryServiceImpl.findAll());
         return "content-by-category";
 
     }
     @GetMapping("/category/s/{id}")
     String categoryLeft(Model model, @PathVariable Integer id){
-        System.out.println("jab ban id: " + id);
-        model.addAttribute("categories",categoryServiceImpl.findAll());
+\        model.addAttribute("categories",categoryServiceImpl.findAll());
         model.addAttribute("OneCategory",categoryRepository.findByIdAndStatus(id,1));
 
         return "content-by-category-test";
     }
-
-    @GetMapping("/test/contentByCategory")
-    String contentByCategoryTest(Model model){
-
-        model.addAttribute("CURRENT_PAGE", "category");
-
-            return "content-by-category-test";
-            }
-    @Autowired
-    SocketIOServer socket;
-    @GetMapping("/testsocket")
-    @ResponseBody
-    String broadCasting (){
-        socket.getBroadcastOperations().sendEvent("client",new User("menghok","menghok"));
-        return "hahahha";
-    }        
+  
 }

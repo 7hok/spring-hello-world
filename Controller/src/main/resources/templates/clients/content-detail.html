@@ -6,7 +6,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
     <script src=""></script>
 </head>
 
@@ -56,7 +55,10 @@
             margin-bottom: 1rem;
             max-width: 9rem;
         }
-
+        .article_object_list:hover{
+            cursor: pointer;
+            background-color: #e5eaed;
+        }
     </style>
     <link rel="stylesheet" href="../css/maTooltip.css">
     <div class="row">
@@ -239,7 +241,7 @@
             <h4>អត្ថបទដែលគួរអាន</h4>
 
         </div>
-        <div th:each=" article : ${RECOMMEND_ARTICLE}" th:object="${article}" class="row" style=" margin-left: 1px;">
+        <div th:each=" article : ${RECOMMEND_ARTICLE}" th:object="${article}" class="article_object_list row" style=" margin-left: 1px;" th:onclick="'onClickRedirectTo('+*{id}+')'">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-2 pl-0 pr-0">
@@ -626,7 +628,9 @@
 
             }
 
-
+            const onClickRedirectTo= (x) => {
+                location.href = `/detail/${x}`;
+            }
 
 
     </script>

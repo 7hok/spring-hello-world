@@ -6,7 +6,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
 </head>
 <body>
 <th:block th:fragment="contentList" th:each="content: ${contents}">
@@ -19,6 +18,7 @@
             <h5 class="text-white" th:text=${content.getTitle()}>
             </h5>
             <span class="text-white content-timestamp" th:text="${content.getTimestamp()}"></span>
+            <p></p>
         </div>
     </div>
  
