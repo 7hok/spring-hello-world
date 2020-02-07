@@ -248,12 +248,7 @@
                             <hr>
                             <div class="text-left category-list scroll_div" style="max-height: 35vh; overflow:scroll; overflow-x: hidden;">
                                 <p th:each=" category : ${CATEGORIES}"><a style="text-decoration: none !important" th:href="'/category?category_id='+${category.id}"  th:text="${category.name}" >Technology</a></p>
-                                <!-- <p>Business</p>
-                                <p>Hosting</p>
-                                <p>Donate</p>
-                                <p>Support</p>
-                                <p>Developers</p>
-                                <p>Get Involved</p> -->
+
                             </div>
                         </div>
 
@@ -269,23 +264,7 @@
                                         <sub class="content-timestamp" th:text="*{timestamp}">5 days ago</sub>
                                     </div>
                                 </div>
-                              
-                                <!-- <div class="d-flex  align-items-center">
-                                    <img src="image-static/face_recognition_dribbble.png" class="rounded-circle m-2" style="width: 90px; height: 90px;" alt="">
-                                    <div class="d-inline-block pl-2">
-                                        <span class="overflow-hidden w-100"><b class="kht-text-color">How tech recognize human face </b></span>
-                                        <br>
-                                        <sub>5 days ago</sub>
-                                    </div>
-                                </div>
-                                <div class="d-flex  align-items-center">
-                                    <img src="image-static/face_recognition_dribbble.png" class="rounded-circle m-2" style="width: 90px; height: 90px;" alt="">
-                                    <div class="d-inline-block pl-2">
-                                        <span class="overflow-hidden w-100"><b class="kht-text-color">How tech recognize human face </b></span>
-                                        <br>
-                                        <sub>5 days ago</sub>
-                                    </div>
-                                </div> -->
+
                             </div>
                         </div>
 
@@ -301,30 +280,7 @@
                                         <sub class="content-timestamp" th:text="*{timestamp}">5 days ago</sub>
                                     </div>
                                 </div>
-                                <!-- <div class="d-flex  align-items-center">
-                                    <img src="image-static/girlnightcupview.jpg" class="rounded-circle m-2" style="width: 90px; height: 90px;" alt="">
-                                    <div class="d-inline-block pl-2">
-                                        <span class="overflow-hidden w-100"><b class="kht-text-color">How to listen to understand</b> </span>
-                                        <br>
-                                        <sub>2 days ago </sub>
-                                    </div>
-                                </div>
-                                <div class="d-flex  align-items-center">
-                                    <img src="image-static/girlnightcupview.jpg" class="rounded-circle m-2" style="width: 90px; height: 90px;" alt="">
-                                    <div class="d-inline-block pl-2">
-                                        <span class="overflow-hidden w-100"><b class="kht-text-color">How to listen to understand</b> </span>
-                                        <br>
-                                        <sub>2 days ago </sub>
-                                    </div>
-                                </div>
-                                <div class="d-flex  align-items-center">
-                                    <img src="image-static/girlnightcupview.jpg" class="rounded-circle m-2" style="width: 90px; height: 90px;" alt="">
-                                    <div class="d-inline-block pl-2">
-                                        <span class="overflow-hidden w-100"><b class="kht-text-color">How to listen to understand</b> </span>
-                                        <br>
-                                        <sub>2 days ago </sub>
-                                    </div>
-                                </div> -->
+
                             </div>
                         </div> 
                         <!-- recent post -->
@@ -437,11 +393,7 @@
         }
 
      
-//         $(document).ready(function() {
-//     var myContent = '<p><code>var _throttleTimer = null; var _throttleDelay = 100; var $window = $(window); var $document = $(document); $document.ready(function () { $window .off(&#39;scroll&#39;, ScrollHandler) .on(&#39;scroll&#39;, ScrollHandler); }); function ScrollHandler(e) { //throttle event: clearTimeout(_throttleTimer); _throttleTimer = setTimeout(function () { console.log(&#39;scroll&#39;); //do work if ($window.scrollTop() + $window.height() &gt; $document.height() - 100) { alert(&quot;near bottom!&quot;); } }, _throttleDelay); }</code></p>';
-//     alert(myContent.replace(/(<([^>]+)>)/ig,""));
-// });
-             
+
 </script>
     </div>
 </body>

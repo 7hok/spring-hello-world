@@ -148,31 +148,29 @@
                 </div>
             </div>
 
-            <!-- <div class="row">
-                <img class="vh-90 w-100" src="img/960x0.jpg" alt="">
-            </div> -->
             <div class="row">
                 <div class="col-12" id="bContent"></div>
 
             </div>
             <div class="row " style="   margin-top: 2%;">
-                <div class="col-3 pr-0 col-md-2 col-lg-1 pl-lg-3 point" sec:authorize="isAuthenticated()">
+                <div class="col-1 pr-0 col-md-1 col-lg-1 pl-lg-3 point" sec:authorize="isAuthenticated()">
+                    <th:block th:if="${liked}=='1'">
+                        <img onclick="UnLikeContent()"  src="/icon/firework.svg" id="like_button"  style="width: 28px; " alt="">
+                        <img onclick="LikeContent()"   src="/icon/fireworkunfill.svg" class="d-none" id="unlike_button" style="width: 28px; " alt="">
+                    </th:block>
 
-                    <!-- <div class="my-auto ">  -->
-                    <!-- <i class="material-icons-new outline-favorite_border"
-                        style="float: right;width: 26px; height: 22px;">
-
-                    </i> -->
-                    <img onclick="LikeContent()" src="/icon/congrat.svg" style="width: 73px;" alt="">
-                    <!-- </div>  -->
+                    <th:block  th:if="${liked}=='0'" >
+                        <img onclick="UnLikeContent()"  src="/icon/firework.svg" id="like_button" class="d-none"  style="width: 28px;  " alt="">
+                        <img onclick="LikeContent()" src="/icon/fireworkunfill.svg" id="unlike_button" style="width: 28px;  " alt="">
+                    </th:block>
 
                 </div>
-                <div class="col-1 col-md-1 col-lg-1 pl-0 my-auto " style=" " sec:authorize="isAuthenticated()">
-                    <span id="likeNum" class="pb-3" th:text=${like}></span>
+                <div class="col-1 col-md-1 col-lg-1  my-auto pl-1 pl-md-0 pl-lg-0" style=" " sec:authorize="isAuthenticated()">
+                    <span id="likeNum" class="pb-3 " th:text=${like}></span>
                 </div>
-                <div class="col-8 col-md-9 col-lg-9">
+                <div class="col-10 col-md-10 col-lg-10">
                     <div id="category"
-                         style="padding: 6px;display: inline;border-radius: 4px;  background-color: rgb(168, 167, 167)">
+                         style="padding: 6px;display: inline;border-radius: 4px;  background-color:rgb(251, 248, 248);">
                     </div>
 
                 </div>
@@ -210,7 +208,7 @@
                     <div class="row">
                         <div class="col-12">
 
-                            <div class="container-fluid" id="cmt">
+                            <div class="container-fluid" id="cmt" style="margin-top: -8px;">
                                 <div class="row"></div>
                             </div>
 
@@ -469,10 +467,10 @@
                                             <div class="container-fluid ml-0 pr-0 mr-0">
                                                 <div class="row">
                                                     <span style="color: #07D" >[[${currentUser.getName()}]] </span>
-                                                    <span style="color: #918989; font-size: 12px; padding-top: 4px;">
-                                                        &nbsp;&nbsp;&nbsp;&#8226; 22 days ago</span>
+                                                    <span style="color: #918989; font-size: 12px; padding-top: 4px;" >
+                                                        &nbsp;&nbsp;&nbsp;&#8226;<span class="content-timestamp">`+data.timestamp+`</span> </span>
                                                 </div>
-                                            <div class="row" style="color: #46464e;" id="cmt">` +
+                                            <div class="row" style="color: #46464e; margin-top: -8px;" id="cmt">` +
                                                       $("#commentInp").val() + `
                                                 </div>
                                             </div>
@@ -480,6 +478,7 @@
                                 </div>
 
                 `);
+                        convertTimeToFormat();
                         $("#commentInp").val("");
                     },
                     error: function (data) {
@@ -520,10 +519,10 @@
                                             <div class="container-fluid ml-0 pr-0 mr-0">
                                                 <div class="row">
                                                    <span style="color: #07D">` + data['_embedded'].comments[i].user.name + `</span>
-                                                    <span style="color: #918989; font-size: 12px; padding-top: 4px;">
-                                                        &nbsp;&nbsp;&nbsp;&#8226; 22 days ago</span>
+                                                    <span style="color: #918989; font-size: 12px; padding-top: 4px;"  >
+                                                        &nbsp;&nbsp;&nbsp;&#8226;<span class="content-timestamp">`+data['_embedded'].comments[i].timestamp+`</span></span>
                                                 </div>
-                                            <div class="row" style="color: #46464e;" id="cmt">` +
+                                            <div class="row" style="color: #46464e;margin-top: -8px;" id="cmt" >` +
                             data['_embedded'].comments[i].text + `
                                                 </div>
                                             </div>
@@ -531,6 +530,7 @@
                                     </div>
 
                         `)
+                        convertTimeToFormat()
                     }
                     if (data.page.totalPages - 1 == page) {
                         // $('#showCmt').
@@ -548,6 +548,25 @@
 
         }
 
+        function UnLikeContent() {
+            $.ajax({
+                type: "GET",
+                url: `/api/interesteds/search/deleteByuserIdAndContentId?u_id=`+[[${currentUser.getId()}]] +`&c_id=`+[[${id}]],
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                     console.log(data);
+                     $('#like_button').addClass("d-none");
+                     $('#unlike_button').removeClass("d-none");
+                     $("#likeNum").text(parseInt($('#likeNum').text()) - 1)
+                },
+                error: function (data) {
+                    console.log(data);
+                },
+
+            });
+
+        }
 
         function LikeContent() {
 
@@ -565,6 +584,8 @@
                     url: '/api/interesteds',
                     data: JSON.stringify(obj),
                     success: function (data) {
+                        $('#unlike_button').addClass("d-none");
+                        $('#like_button').removeClass("d-none");
                         $("#likeNum").text(parseInt($('#likeNum').text()) + 1)
                     },
                     error: function (data) {

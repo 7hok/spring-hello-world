@@ -27,7 +27,7 @@
 <th:block th:fragment="cardList" th:each="content: ${contents}">
 <div class="card card_buttom" style="cursor: pointer;" th:onclick="'window.location.href = \'' + @{/detail/{id}(id=${content.getId()})} + '\''">
     <div class="card-header ">
-        <a class="rounded" style="padding-bottom: 3px" th:text="${content.getCategory().getName()}">Romance </a><span>&nbsp;-</span><span  class="content-timestamp" th:text="${content.getTimestamp()}"></span>
+        <a class="rounded" style="padding-bottom: 0px" th:text="${content.getCategory().getName()}">Romance </a><span>&nbsp;-</span><span  class="content-timestamp" th:text="${content.getTimestamp()}"></span>
         <h5 class="article-title-h5" th:text=${content.getTitle()}>How tech recognize human face</h5>
         <div class="mt-2 w-100 vh-30 " th:style="'background:url(' + @{${content.getThumbnail()}} +') no-repeat center;'+' background-size: cover;' ">
         </div>
