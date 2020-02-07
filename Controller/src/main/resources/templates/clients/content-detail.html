@@ -59,6 +59,15 @@
             cursor: pointer;
             background-color: #e5eaed;
         }
+        .body-text{
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 2;
+                /* padding : 1% 0%; */
+                margin-bottom: 2%;
+            }
     </style>
     <link rel="stylesheet" href="../css/maTooltip.css">
     <div class="row">
@@ -245,7 +254,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-2 pl-0 pr-0">
-                        <img class="img-fluid z-depth-2" style="width: 200px; border-radius: 4px;"
+                        <img class="img-fluid z-depth-2" style="width: 200px; height: 120px; border-radius: 4px;"
                             th:src="*{thumbnail}"
                             data-holder-rendered="true">
                     </div>
@@ -253,9 +262,7 @@
                         <div class="container-fluid">
                             <div class="row mb-0">
                                 <h5 style="color: #46464e;margin-top: 0;" th:text="*{title}">Lorem ipsum, dolor sit amet consectetur </h5>
-                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facere officiis, praesentium
-                                tempora cumque illo mollitia deserunt ad, asperiores totam minima quae commodi
-                                necessitatibus,
+                                <div class="body-text" th:text="*{body}"></div>
                             </div>
                             <div class="row">
                                 <div class="col-12" style="position: relative;width: max-content;position: absolute;right: 0px;bottom: 0px;
@@ -275,7 +282,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-2 pl-0 pr-0">
-                        <img class="img-fluid z-depth-2" style="width: 200px; border-radius: 4px;"
+                        <img class="img-fluid z-depth-2" style="width: 200px; height: 120px; border-radius: 4px;"
                             src="https://cdn.mos.cms.futurecdn.net/xgc36EhSDW9Zu3RGLCfLEg-970-80.jpg"
                             data-holder-rendered="true">
                     </div>
@@ -283,9 +290,7 @@
                         <div class="container-fluid">
                             <div class="row mb-0">
                                 <h5 style="color: #46464e;margin-top: 0;">Lorem ipsum, dolor sit amet consectetur </h5>
-                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facere officiis, praesentium
-                                tempora cumque illo mollitia deserunt ad, asperiores totam minima quae commodi
-                                necessitatibus,
+                                <p></p>
                             </div>
                             <div class="row">
                                 <div class="col-12" style="position: relative;width: max-content;position: absolute;right: 0px;bottom: 0px;
