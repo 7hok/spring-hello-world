@@ -1,6 +1,5 @@
 package khmerhowto.Controller;
 
-import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,17 +9,17 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.corundumstudio.socketio.SocketIOServer;
 
+import com.nimbusds.oauth2.sdk.http.HTTPRequest;
+import khmerhowto.Repository.Model.SendEmail.SendEmailToUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-
-import java.util.HashMap;
-
-import java.util.Map;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,15 +31,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.view.RedirectView;
 
 import khmerhowto.Repository.CategoryRepository;
 import khmerhowto.Repository.ContentRepository;
 import khmerhowto.Repository.FavoriteCategoryRepository;
 import khmerhowto.Repository.HistoryRepository;
-import khmerhowto.Repository.UserRepository;
 import khmerhowto.Repository.Model.Category;
 import khmerhowto.Repository.Model.Content;
 import khmerhowto.Repository.Model.FavoriteCategory;
@@ -80,6 +75,20 @@ public class HomeController {
     @Autowired
     AuthenticationManager authenticationManager;
 
+    @Autowired
+    JavaMailSender javaMailSender;
+
+    @GetMapping("/sendEmailHz")
+    @ResponseBody
+    public  void sendEmail() {
+        SimpleMailMessage msg = new SimpleMailMessage();
+        String[] emailArray= {"humchamroeunhrd@gmail.com", "humchamroeuncs@gmail.com", "humchamroeunmmo@gmail.com"};
+        msg.setTo(emailArray);
+        msg.setSubject("Kunloes Update");
+        msg.setText("Find a beautiful piece of art. If you fall in love with Van Gogh or Matisse or John Oliver Killens, or if you fall love with the music of Coltrane, the music of Aretha Franklin, or the music of Chopin - find some beautiful art and admire it, and realize that that was created by human beings just like you, no more human, no less. Read more at https://www.brainyquote.com/topics/beautiful-quotes");
+        javaMailSender.send(msg);
+        System.out.println("send email");
+    }
 
     @GetMapping("/detail/{id}")
     public String testDetail(ModelMap modelMap, @PathVariable Integer id) {
