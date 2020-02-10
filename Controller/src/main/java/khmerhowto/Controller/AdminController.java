@@ -80,6 +80,13 @@ public class AdminController {
         Content con=em.find(Content.class,id);
         model.addAttribute("cId", con.getCategory().getId());
         model.addAttribute("id", id);
+        model.addAttribute("categories", categoryService.findCategoryByStatus(1));
+        if (GlobalFunctionHelper.getCurrentUser() == null) {
+            model.addAttribute("currentUser", new User());
+        } else {
+            model.addAttribute("currentUser", GlobalFunctionHelper.getCurrentUser());
+
+        }
         return "admin/admin-article-edit";
     }
 

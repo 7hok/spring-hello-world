@@ -3,7 +3,7 @@ package khmerhowto.Repository.Model;
 
 import javax.persistence.*;
 
-import khmerhowto.Repository.globalFunction.GlobalFunctionHelper;
+//import khmerhowto.Repository.globalFunction.GlobalFunctionHelper;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 import java.time.LocalDateTime;
@@ -21,7 +21,7 @@ public class Interested {
     private Content content;
     @PrePersist
     public void prePersist() {
-//        user = GlobalFunctionHelper.getCurrentUser();
+
     }
     public Interested() {
     }

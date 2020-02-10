@@ -185,7 +185,7 @@ public class HomeController {
         }
         map.addAttribute("contents",list);
 
-         map.addAttribute("contents", lst.getContent());
+        map.addAttribute("contents", lst.getContent());
         System.out.println(lst.getContent().get(0).getThumbnail());
 
         Map<Integer, Integer> numCmt = new HashMap<>();
@@ -328,7 +328,13 @@ public class HomeController {
      */
     @PostMapping("/signup")
     String registerToData(User user, HttpServletRequest httpServletRequest) {
-        System.out.println(user);
+
+        if(user.getBio()==null){
+            user.setBio("");
+        }
+        if (user.getLocation()==null){
+            user.setLocation("");
+        }
         Boolean stt = userServiceImp.saveUser(user);
         if (stt == true) {
             GlobalFunctionHelper.autoLogin(user.getEmail(), user.getPassword(), httpServletRequest,
