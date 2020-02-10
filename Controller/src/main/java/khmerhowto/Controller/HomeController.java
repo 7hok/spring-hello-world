@@ -125,6 +125,9 @@ public class HomeController {
         return "clients/content-detail";
     }
 
+    /*
+    * SEARCH ARTICLE BY BODY OF CONTENT
+    * */
     @GetMapping("/search/{str}")
     public String search(@PathVariable("str") String body, @RequestParam String type, ModelMap map) {
         map.addAttribute("type", type);
@@ -159,6 +162,10 @@ public class HomeController {
         return "myhometest";
     }
 
+    /*
+    * REQUEST CONTENT AND USE THYMELEAF TO GENERATE CARD BY PAGE NUMBER
+    * GET 3 CONTENTS
+    * */
     @GetMapping(value = "/conCard/{no}")
     String contentCard(ModelMap map, @PathVariable("no") Integer i) {
         Page<Content> lst;
@@ -180,10 +187,8 @@ public class HomeController {
         }
         map.addAttribute("contents",list);
 
-      //  lst = con.findAll(PageRequest.of(i, 3, Sort.by(Sort.Direction.DESC, "Id")));
         map.addAttribute("contents", lst.getContent());
         System.out.println(lst.getContent().get(0).getThumbnail());
-        // map.addAttribute("totalCmt", cmt.getTotalComment(id));
 
         Map<Integer, Integer> numCmt = new HashMap<>();
         for (int j = 0; j <= lst.getContent().size() - 1; j++) {
@@ -200,8 +205,13 @@ public class HomeController {
         return "fragment/__content_card::cardList";
     }
 
-    @GetMapping(value = "/conCard")
+    /*
+    *   TO GENERATE CONTENTS CARD ON HOME PAGE
+    *   USE THYMELEAF WITH FRAGMENT
+    *   QUERY 3 CONTENT ON 1 PAGE
+    * */
 
+    @GetMapping(value = "/conCard")
     String content(ModelMap map) {
         Page<Content> lst = con.findAll(PageRequest.of(0, 3, Sort.by(Sort.Direction.DESC, "Id")));
         List<Content> list=new ArrayList<>();
@@ -320,7 +330,13 @@ public class HomeController {
      */
     @PostMapping("/signup")
     String registerToData(User user, HttpServletRequest httpServletRequest) {
-        System.out.println(user);
+
+        if(user.getBio()==null){
+            user.setBio("");
+        }
+        if (user.getLocation()==null){
+            user.setLocation("");
+        }
         Boolean stt = userServiceImp.saveUser(user);
         if (stt == true) {
             GlobalFunctionHelper.autoLogin(user.getEmail(), user.getPassword(), httpServletRequest,
@@ -374,10 +390,11 @@ public class HomeController {
     private CategoryServiceImpl categoryServiceImpl;
 
     @Autowired
-    private ContentServiceImpl contentService;
-    @Autowired
     private ContentRepository contentRepository;
 
+    /*
+    *   TO GET CONTENTS BY CATEGORY
+    * */
     @GetMapping("/category")
     String category(Model model ){
         model.addAttribute("CURRENT_PAGE", "category");

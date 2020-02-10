@@ -21,7 +21,7 @@ public class Interested {
     private Content content;
     @PrePersist
     public void prePersist() {
-//        user = GlobalFunctionHelper.getCurrentUser();
+
     }
     public Interested() {
     }

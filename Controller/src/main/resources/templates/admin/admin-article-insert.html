@@ -250,10 +250,11 @@
                     allowedContent: true
                 });
 
+                //TO CLICK THE FILE THAT DISPLAY NONE
                 function chooseImage() {
                     $("#chooseImg").click();
                 }
-
+                //TO GET DATA FROM CKEDITOR
                 function getData() {
                     var radioValue = $("input[name='radio']:checked").val();
                     if(radioValue){
@@ -295,10 +296,12 @@
                 }
 
 
+                //TO CLICK THE HIDE ELEMENT (FILE)
                 $("#chooseImg").change(function () {
                     $("#added").click();
                 });
 
+                //TO UPLOAD THE IMAGE
                 $("#frm").submit(function (e) {
                     event.preventDefault();
 
@@ -327,9 +330,8 @@
                 });
 
 
-                $("#myTh").change(function () {
 
-                });
+                //TO UPLOAD IMAGE TO SERVER (THUMBNAIL)
                 $("#thumnailFrm").submit(function (e) {
                     event.preventDefault();
 
@@ -369,6 +371,7 @@
                     readURL(this);
                     $("#addThumnail").click()
                 });
+                //TO SEARCH CATEGORIES
                 $(function(){
                     jQuery.expr[':'].icontains = function(a, i, m) {
                         return jQuery(a).text().toUpperCase()

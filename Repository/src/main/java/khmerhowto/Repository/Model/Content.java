@@ -38,6 +38,12 @@ public class Content {
         timestamp = LocalDateTime.now();
         status = 1;
     }
+    @PreUpdate
+    public void preUpdate() {
+
+        timestamp = LocalDateTime.now();
+        status = 1;
+    }
 
     public Content(int id, Category category, String thumbnail, String title, String body, User user, Integer status, LocalDateTime timestamp) {
 
