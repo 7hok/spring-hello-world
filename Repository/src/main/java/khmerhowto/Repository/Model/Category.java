@@ -10,7 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.PrePersist;
 
-import khmerhowto.Repository.Model.audit.AuditListener;
+//import khmerhowto.Repository.Model.audit.AuditListener;
 //@EntityListeners(AuditListener.class)
 @Entity
 public class Category implements Serializable{
