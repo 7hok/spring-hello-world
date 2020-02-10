@@ -1,5 +1,6 @@
 package khmerhowto.Controller;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,17 +10,18 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.corundumstudio.socketio.SocketIOServer;
 
-import com.nimbusds.oauth2.sdk.http.HTTPRequest;
-import khmerhowto.Repository.Model.SendEmail.SendEmailToUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+
+import java.util.HashMap;
+
+import java.util.Map;
+import java.util.logging.Handler;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,11 +33,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import khmerhowto.Repository.CategoryRepository;
 import khmerhowto.Repository.ContentRepository;
 import khmerhowto.Repository.FavoriteCategoryRepository;
 import khmerhowto.Repository.HistoryRepository;
+import khmerhowto.Repository.UserRepository;
 import khmerhowto.Repository.Model.Category;
 import khmerhowto.Repository.Model.Content;
 import khmerhowto.Repository.Model.FavoriteCategory;
@@ -75,29 +81,41 @@ public class HomeController {
     @Autowired
     AuthenticationManager authenticationManager;
 
-    @Autowired
-    JavaMailSender javaMailSender;
-
-    @GetMapping("/sendEmailHz")
-    @ResponseBody
-    public  void sendEmail() {
-        SimpleMailMessage msg = new SimpleMailMessage();
-        String[] emailArray= {"humchamroeunhrd@gmail.com", "humchamroeuncs@gmail.com", "humchamroeunmmo@gmail.com"};
-        msg.setTo(emailArray);
-        msg.setSubject("Kunloes Update");
-        msg.setText("Find a beautiful piece of art. If you fall in love with Van Gogh or Matisse or John Oliver Killens, or if you fall love with the music of Coltrane, the music of Aretha Franklin, or the music of Chopin - find some beautiful art and admire it, and realize that that was created by human beings just like you, no more human, no less. Read more at https://www.brainyquote.com/topics/beautiful-quotes");
-        javaMailSender.send(msg);
-        System.out.println("send email");
-    }
-
+    /**
+     * PROCESS 
+     *      IF USER LOGGED IN 
+     *          SAVE HISTORY CLICK 
+     *          SUGGEST RELATED COMMON READ ARTICLE
+     *      ELSE 
+     *          SUGGEST POPUALAR POST
+     * @param modelMap
+     * @param id
+     * @return
+     */
     @GetMapping("/detail/{id}")
     public String testDetail(ModelMap modelMap, @PathVariable Integer id) {
         modelMap.addAttribute("id", id);
+        Page<Content> click_pages = null;
         if (GlobalFunctionHelper.getCurrentUser() == null) {
             modelMap.addAttribute("currentUser", new User());
-        } else {
-            modelMap.addAttribute("currentUser", GlobalFunctionHelper.getCurrentUser());
 
+            click_pages = contentRepository.findPopularContent(new PageRequest(0, 3));
+            modelMap.addAttribute("RECOMMEND_ARTICLE", click_pages.getContent());
+            } else {
+            User cur_user =  GlobalFunctionHelper.getCurrentUser();
+            if(interestedServiceImp.findByuserIdAndContentId(cur_user.getId(),id).size()==0){
+                modelMap.addAttribute("liked","0");
+            }
+            else {
+                modelMap.addAttribute("liked","1");
+            }
+            try {
+                saveHistory(cur_user, new Content(id));
+            } catch (Exception e) {
+            }
+            modelMap.addAttribute("currentUser",cur_user);
+            click_pages = contentRepository.findContentBasedOnUserHistoryClick(cur_user.getId(),new PageRequest(0, 3));
+            modelMap.addAttribute("RECOMMEND_ARTICLE", click_pages.getContent());
         }
 
         modelMap.addAttribute("totalCmt", cmt.getTotalComment(id));
@@ -142,20 +160,25 @@ public class HomeController {
     @GetMapping(value = "/conCard/{no}")
     String contentCard(ModelMap map, @PathVariable("no") Integer i) {
         Page<Content> lst;
-
         String b;
         List<Content> list=new ArrayList<>();
             lst = con.findAll(PageRequest.of(i, 3, Sort.by(Sort.Direction.DESC, "Id")));
-        for(int l=0;l<lst.getContent().size();l++){
-            list.add((Content) lst.getContent().get(i));
-            b= list.get(l).getBody().replaceAll("<[^\\P{Graph}>]+(?: [^>]*)?>", "");
-            list.get(l).setBody(b);
-            System.out.println(b);
-        }
+        System.out.println("size is " + lst.getContent().size());
+        try {
+            for (int l = 0; l < lst.getContent().size(); l++) {
+                list.add((Content) lst.getContent().get(l));
+                b = list.get(l).getBody().replaceAll("<[^\\P{Graph}>]+(?: [^>]*)?>", "");
 
+                list.get(l).setBody(b);
+
+            }
+        }
+        catch(Exception e){
+
+        }
         map.addAttribute("contents",list);
 
-        lst = con.findAll(PageRequest.of(i, 3, Sort.by(Sort.Direction.DESC, "Id")));
+      //  lst = con.findAll(PageRequest.of(i, 3, Sort.by(Sort.Direction.DESC, "Id")));
         map.addAttribute("contents", lst.getContent());
         System.out.println(lst.getContent().get(0).getThumbnail());
         // map.addAttribute("totalCmt", cmt.getTotalComment(id));
@@ -192,21 +215,24 @@ public class HomeController {
         return "fragment/__content_card::contentList";
     }
 
-    @GetMapping(value = { "/homepage", "/home" })
+    @GetMapping(value = { "/homepage", "/home" ,"/"})
     String home(Model model, @PageableDefault(size = 10) Pageable pageable) {
-        Page<Content> pages = contentRepository.findPopularContent(pageable);
+        Page<Content> pages = contentRepository.findPopularContent(new PageRequest(0, 3));
         List<Category> categories = categoryRepository.findByStatus(1);
         model.addAttribute("CURRENT_PAGE", "home");
         model.addAttribute("POPULAR_POST", pages.getContent());
         model.addAttribute("CATEGORIES", categories);
-        // Page<Content> lst = con.findAll(PageRequest.of(0, 3,
-        // Sort.by(Sort.Direction.DESC, "Id")));
-        // model.addAttribute("contents", lst.getContent());
-        // System.out.println(lst.getContent().get(0).getTitle());
+        User cur_user = GlobalFunctionHelper.getCurrentUser();
+        if(cur_user == null){
+            
+        }else{
+            Page<Content> click_pages = contentRepository.findContentBasedOnFavoriteCategory(cur_user.getId(),new PageRequest(0, 3));
+            model.addAttribute("FAVORITE_CATEGORY_TOP_ARTICLE", click_pages.getContent());
+        }
         return "client-home";
     }
 
-    @GetMapping({ "/login", "/" })
+    @GetMapping({ "/login" })
     String loginPage() {
         try {
             GlobalFunctionHelper.getCurrentUser().getId();
@@ -237,21 +263,27 @@ public class HomeController {
             }
 
             favoriteCategoryRepository.saveAll(favList);
-            return "redirect:/home";
+            // return "redirect:/home";
         } catch (Exception e) {
             /**
              * CATCH WORK WHEN USER IS NOT AUTHENTICATED
              */
-            return "redirect:/login";
+            System.out.println(e.getStackTrace());
+            // return "redirect:/login";
         }
+            return "redirect:/home";
+        
     }
 
     /**
      * 
      * @param request
      * @param modelMap
-     * @return IF user == Null THEN new OBJECT => ModelMap ELSE GOOGLE REDIRECT =>
-     *         OBJECT => ModelMap FORM ON SUBMIT
+     * @return 
+     * IF user == Null THEN 
+     *      new OBJECT => ModelMap ELSE GOOGLE REDIRECT =>
+     * ELSE        
+     *      OBJECT => ModelMap FORM ON SUBMIT
      * @POST => /signup
      */
     @GetMapping("/signup")
@@ -346,32 +378,17 @@ public class HomeController {
 
     @GetMapping("/category")
     String category(Model model ){
+        model.addAttribute("CURRENT_PAGE", "category");
         model.addAttribute("categories",categoryServiceImpl.findAll());
         return "content-by-category";
 
     }
     @GetMapping("/category/s/{id}")
     String categoryLeft(Model model, @PathVariable Integer id){
-        System.out.println("jab ban id: " + id);
-        model.addAttribute("categories",categoryServiceImpl.findAll());
+\        model.addAttribute("categories",categoryServiceImpl.findAll());
         model.addAttribute("OneCategory",categoryRepository.findByIdAndStatus(id,1));
 
         return "content-by-category-test";
     }
-
-    @GetMapping("/test/contentByCategory")
-    String contentByCategoryTest(Model model){
-
-        model.addAttribute("CURRENT_PAGE", "category");
-
-            return "content-by-category-test";
-            }
-    @Autowired
-    SocketIOServer socket;
-    @GetMapping("/testsocket")
-    @ResponseBody
-    String broadCasting (){
-        socket.getBroadcastOperations().sendEvent("client",new User("menghok","menghok"));
-        return "hahahha";
-    }        
+  
 }

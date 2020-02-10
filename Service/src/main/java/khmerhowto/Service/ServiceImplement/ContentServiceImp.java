@@ -22,7 +22,7 @@ public class ContentServiceImp implements ContentService {
 //    public Page<Content> findTop3
 
     public Page<Content> findAll(Pageable pageable) {
-        return contentRepository.findAll(pageable);
+        return contentRepository.findByStatus(1,pageable);
     }
 
     public Page<Content> findByName(String string, Pageable pageable) {

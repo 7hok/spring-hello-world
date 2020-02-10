@@ -6,7 +6,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
     <script src=""></script>
 </head>
 
@@ -56,7 +55,19 @@
             margin-bottom: 1rem;
             max-width: 9rem;
         }
-
+        .article_object_list:hover{
+            cursor: pointer;
+            background-color: #e5eaed;
+        }
+        .body-text{
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 2;
+                /* padding : 1% 0%; */
+                margin-bottom: 2%;
+            }
     </style>
     <link rel="stylesheet" href="../css/maTooltip.css">
     <div class="row">
@@ -70,23 +81,23 @@
         <div class="col-12">
             <!-- <div class="container-fluid"> -->
             <div class="row" style="margin-bottom: 23px;">
-                <div class="col-2 col-sm-2 col-md-1 col-lg-1 pl-0" id="pfpic"
+                <div class="col-2 col-sm-2 col-md-2  col-lg-1 pl-2 pl-sm-2 pl-lg-2  " id="pfpic"
                      style="  padding-left: 0; text-align: right; margin-bottom: 23px;">
                     <!-- <img src="" alt=""> -->
-                    <img class=" rounded-circle z-depth-2 myButton point"
-                         style="width: 80px; width: 60px; height: 60px;" alt="100x100"
+                    <img class=" rounded-circle z-depth-2 myButton point mr-sm-3 "
+                         style="  width: 60px; height: 60px;" alt="100x100"
                          id="ownerImg"
                          src="https://cdn.mos.cms.futurecdn.net/xgc36EhSDW9Zu3RGLCfLEg-970-80.jpg"
                          data-holder-rendered="true">
 
                 </div>
 
-                <div class="col-8 col-sm-8 col-md-9 col-lg-9" style="padding-left: 0;">
+                <div class="col-6 col-sm-4 col-md-3 col-lg-3" style="padding-left: 0;">
 
-                    <div class="container ml-0 pt-1">
-                        <div class="row mb-0">
+                    <div class="container ml-0 pt-1" style="display: flow-root">
+                        <div class="row mb-0 pl-3 pl-sm-0 pl-dm-0 pl-lg-0">
                             <!-- <input  type="button" value="Click me!"> -->
-                            <div class="col-12 pl-0">
+                            <div class="col-12 pl-0 ">
                                         <span id="myButton" style="color: #46464e;" bio="" location=""
                                               class="point myButton"
                                               data-toggle="tooltip" data-html="true"> Kong Pengsea</span>
@@ -95,7 +106,7 @@
                         </div>
                     </div>
                 </div>
-
+                <div class="col-2 col-sm-4 col-md-5 col-lg-6"></div>
                 <div class="col-2 col-sm-2 col-md-2 col-lg-2 pr-0">
                     <table style="float: right; margin-top: 3%;">
                         <tr>
@@ -121,10 +132,6 @@
                                             </div>
                                             <div class="modal-body">
                                                 <form>
-                                                    <!--                                                            <div class="form-group">-->
-                                                    <!--                                                                <label for="recipient-name" class="col-form-label">Recipient:</label>-->
-                                                    <!--                                                                <input type="text" class="form-control" id="recipient-name">-->
-                                                    <!--                                                            </div>-->
 
                                                     <div class="form-group">
                                                         <label for="feedback-message" class="col-form-label mb-2" >Your Message</label>
@@ -148,29 +155,29 @@
                 </div>
             </div>
 
-            <!-- <div class="row">
-                <img class="vh-90 w-100" src="img/960x0.jpg" alt="">
-            </div> -->
             <div class="row">
                 <div class="col-12" id="bContent"></div>
 
             </div>
             <div class="row " style="   margin-top: 2%;">
-                <div class="col-1 pr-0 point" sec:authorize="isAuthenticated()">
+                <div class="col-1 pr-0 col-md-1 col-lg-1 pl-lg-3 point" sec:authorize="isAuthenticated()">
+                    <th:block th:if="${liked}=='1'">
+                        <img onclick="UnLikeContent()"  src="/icon/firework.svg" id="like_button"  style="width: 28px; " alt="">
+                        <img onclick="LikeContent()"   src="/icon/fireworkunfill.svg" class="d-none" id="unlike_button" style="width: 28px; " alt="">
+                    </th:block>
 
-                    <!-- <div class="my-auto ">  -->
-                    <!-- <i class="material-icons-new outline-favorite_border"
-                        style="float: right;width: 26px; height: 22px;">
-
-                    </i> -->
-                    <img onclick="LikeContent()" src="/icon/congrat.svg" style="width: 73px;" alt="">
-                    <!-- </div>  -->
+                    <th:block  th:if="${liked}=='0'" >
+                        <img onclick="UnLikeContent()"  src="/icon/firework.svg" id="like_button" class="d-none"  style="width: 28px;  " alt="">
+                        <img onclick="LikeContent()" src="/icon/fireworkunfill.svg" id="unlike_button" style="width: 28px;  " alt="">
+                    </th:block>
 
                 </div>
-                <div class="col-1 pl-0 my-auto" sec:authorize="isAuthenticated()"><span id="likeNum" class="pb-3" th:text=${like}></span></div>
-                <div class="col-10 ">
+                <div class="col-1 col-md-1 col-lg-1  my-auto pl-1 pl-md-0 pl-lg-0" style=" " sec:authorize="isAuthenticated()">
+                    <span id="likeNum" class="pb-3 " th:text=${like}></span>
+                </div>
+                <div class="col-10 col-md-10 col-lg-10">
                     <div id="category"
-                         style="padding: 6px;display: inline;border-radius: 4px;  background-color: rgb(168, 167, 167)">
+                         style="padding: 6px;display: inline;border-radius: 4px;  background-color:rgb(251, 248, 248);">
                     </div>
 
                 </div>
@@ -208,7 +215,7 @@
                     <div class="row">
                         <div class="col-12">
 
-                            <div class="container-fluid" id="cmt">
+                            <div class="container-fluid" id="cmt" style="margin-top: -8px;">
                                 <div class="row"></div>
                             </div>
 
@@ -234,117 +241,178 @@
     </div>
 
 
-    <div class="row" style=" margin-left: 1px;">
-        <h4>អត្ថបទដែលគួរអាន</h4>
+   <div class="recomment-div" th:if="${RECOMMEND_ARTICLE != null}">
+        <div class="row" style=" margin-left: 1px;">
+            <h4>អត្ថបទដែលគួរអាន</h4>
 
-    </div>
-    <div class="row" style=" margin-left: 1px;">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-2 pl-0 pr-0">
-                    <img class="img-fluid z-depth-2" style="width: 200px; border-radius: 4px;"
-                         src="https://cdn.mos.cms.futurecdn.net/xgc36EhSDW9Zu3RGLCfLEg-970-80.jpg"
-                         data-holder-rendered="true">
-                </div>
-                <div class="col-10">
-                    <div class="container-fluid">
-                        <div class="row mb-0">
-                            <h5 style="color: #46464e;margin-top: 0;">Lorem ipsum, dolor sit amet consectetur </h5>
-                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facere officiis, praesentium
-                            tempora cumque illo mollitia deserunt ad, asperiores totam minima quae commodi
-                            necessitatibus,
-                        </div>
-                        <div class="row">
-                            <div class="col-12" style="position: relative;width: max-content;position: absolute;right: 0px;bottom: 0px;
-                                float: right;">
-                                <a href="" style="font-size: smaller; text-decoration: none;">see more >
-                                </a>
+        </div>
+        <div th:each=" article : ${RECOMMEND_ARTICLE}" th:object="${article}" class="article_object_list row" style=" margin-left: 1px;" th:onclick="'onClickRedirectTo('+*{id}+')'">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-2 pl-0 pr-0">
+                        <img class="img-fluid z-depth-2" style="width: 200px; height: 120px; border-radius: 4px;"
+                            th:src="*{thumbnail}"
+                            data-holder-rendered="true">
+                    </div>
+                    <div class="col-10">
+                        <div class="container-fluid">
+                            <div class="row mb-0">
+                                <h5 style="color: #46464e;margin-top: 0;" th:text="*{title}">Lorem ipsum, dolor sit amet consectetur </h5>
+                                <div class="body-text" th:text="*{body}"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12" style="position: relative;width: max-content;position: absolute;right: 0px;bottom: 0px;
+                                    float: right;">
+                                    <a th:href="'/detail/'+*{id}" style="font-size: smaller; text-decoration: none;">see more >
+                                    </a>
+                                </div>
                             </div>
                         </div>
+
                     </div>
 
                 </div>
-
             </div>
         </div>
-    </div>
-    <div class="row" style=" margin-left:1px;">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-2 pl-0 pr-0">
-                    <img class="img-fluid z-depth-2" style=" border-radius: 4px;"
-                                                  src="https://cdn.mos.cms.futurecdn.net/xgc36EhSDW9Zu3RGLCfLEg-970-80.jpg"
-                                                  data-holder-rendered="true">
-                </div>
-                <div class="col-10">
-                    <div class="container-fluid">
-                        <div class="row mb-0">
-                            <h5 style="color: #46464e;margin-top: 0;">Lorem ipsum, dolor sit amet consectetur </h5>
-                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facere officiis, praesentium
-                            tempora cumque illo mollitia deserunt ad, asperiores totam minima quae commodi
-                            necessitatibus,
-                        </div>
-                        <div class="row">
-                            <div class="col-12" style="position: relative;width: max-content;position: absolute;right: 0px;bottom: 0px;
-                                float: right;">
-                                <a href="" style="font-size: smaller; text-decoration: none;">see more >
-                                </a>
+        <div class="row d-none" style=" margin-left: 1px;">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-2 pl-0 pr-0">
+                        <img class="img-fluid z-depth-2" style="width: 200px; height: 120px; border-radius: 4px;"
+                            src="https://cdn.mos.cms.futurecdn.net/xgc36EhSDW9Zu3RGLCfLEg-970-80.jpg"
+                            data-holder-rendered="true">
+                    </div>
+                    <div class="col-10">
+                        <div class="container-fluid">
+                            <div class="row mb-0">
+                                <h5 style="color: #46464e;margin-top: 0;">Lorem ipsum, dolor sit amet consectetur </h5>
+                                <p></p>
                             </div>
-
+                            <div class="row">
+                                <div class="col-12" style="position: relative;width: max-content;position: absolute;right: 0px;bottom: 0px;
+                                    float: right;">
+                                    <a href="" style="font-size: smaller; text-decoration: none;">see more >
+                                    </a>
+                                </div>
+                            </div>
                         </div>
+
                     </div>
 
                 </div>
-
             </div>
         </div>
-    </div>
-    <div class="row" style=" margin-left: 1px;">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-2 pl-0 pr-0"><img class="img-fluid z-depth-2" style=" border-radius: 4px;"
-                                                  src="https://cdn.mos.cms.futurecdn.net/xgc36EhSDW9Zu3RGLCfLEg-970-80.jpg"
-                                                  data-holder-rendered="true">
-                </div>
-                <div class="col-10">
-                    <div class="container-fluid">
-                        <div class="row mb-0" style="color:  #46464e;">
-                            <h5 style="color: #46464e;margin-top: 0;">Lorem ipsum, dolor sit amet consectetur </h5>
-                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facere officiis, praesentium
-                            tempora cumque illo mollitia deserunt ad, asperiores totam minima quae commodi
-                            necessitatibus,
-                        </div>
-                        <div class="row">
-                            <div class="col-12" style="position: relative;width: max-content;position: absolute;right: 0px;bottom: 0px;
-                                float: right;">
-                                <a href="" style="font-size: smaller; text-decoration: none;">see more >
-                                </a>
+        <div class="row  d-none" style=" margin-left:1px;">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-2 pl-0 pr-0">
+                        <img class="img-fluid z-depth-2" style=" border-radius: 4px;"
+                                                    src="https://cdn.mos.cms.futurecdn.net/xgc36EhSDW9Zu3RGLCfLEg-970-80.jpg"
+                                                    data-holder-rendered="true">
+                    </div>
+                    <div class="col-10">
+                        <div class="container-fluid">
+                            <div class="row mb-0">
+                                <h5 style="color: #46464e;margin-top: 0;">Lorem ipsum, dolor sit amet consectetur </h5>
+                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facere officiis, praesentium
+                                tempora cumque illo mollitia deserunt ad, asperiores totam minima quae commodi
+                                necessitatibus,
                             </div>
+                            <div class="row">
+                                <div class="col-12" style="position: relative;width: max-content;position: absolute;right: 0px;bottom: 0px;
+                                    float: right;">
+                                    <a href="" style="font-size: smaller; text-decoration: none;">see more >
+                                    </a>
+                                </div>
 
+                            </div>
                         </div>
+
                     </div>
 
                 </div>
-
             </div>
         </div>
-    </div>
+        <div class="row d-none" style=" margin-left: 1px;">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-2 pl-0 pr-0"><img class="img-fluid z-depth-2" style=" border-radius: 4px;"
+                                                    src="https://cdn.mos.cms.futurecdn.net/xgc36EhSDW9Zu3RGLCfLEg-970-80.jpg"
+                                                    data-holder-rendered="true">
+                    </div>
+                    <div class="col-10">
+                        <div class="container-fluid">
+                            <div class="row mb-0" style="color:  #46464e;">
+                                <h5 style="color: #46464e;margin-top: 0;">Lorem ipsum, dolor sit amet consectetur </h5>
+                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facere officiis, praesentium
+                                tempora cumque illo mollitia deserunt ad, asperiores totam minima quae commodi
+                                necessitatibus,
+                            </div>
+                            <div class="row">
+                                <div class="col-12" style="position: relative;width: max-content;position: absolute;right: 0px;bottom: 0px;
+                                    float: right;">
+                                    <a href="" style="font-size: smaller; text-decoration: none;">see more >
+                                    </a>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+   </div>
 
 
 </div>
 
 <div layout:fragment="content-js">
+    <script src="/js/es6-promise.auto.min.js"></script>
     <script src="/pdf/jspdf.min.js"></script>
+    <script src="/js/html2canvas.min.js"></script>
+    <script src="/js/html2pdf.js"></script>
     <script>
-        const printContent = () => {
-            var doc = new jsPDF()
-            // doc.text('Hello world!', 10, 10)
-            let _title = document.getElementById("tt").innerHTML
-            let _body = document.getElementById("bContent").innerHTML
-            console.log(_title)
-            doc.fromHTML(`<h3>${_title}</h3><br><br>`+ _body,10,10);
-            doc.save(`${_title}.pdf`)
+        function addScript(url) {
+            var script = document.createElement('script');
+            script.type = 'application/javascript';
+            script.src = url;
+            document.head.appendChild(script);
         }
+        addScript('https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js');
+        const printContent = () => {
+            /*
+            var doc = new jsPDF();
+            var elementHandler = {
+                '#ignorePDF': function (element, renderer) {
+                    return true;
+                }
+            };
+            // doc.text('Hello world!', 10, 10)
+            
+            let _body = document.getElementById("bContent").innerHTML
+            
+            console.log(_body)
+            doc.fromHTML(`<h3 class="text-center">${_title}</h3><br><br>`+ _body.replace(/<img[^>]*>/g,""),
+            15,
+            15,
+            {
+                'width': 180,'elementHandlers': elementHandler
+            });
+            doc.save(`${_title}.pdf`)
+            */
+            var opt = {
+                margin:       1,
+                filename:     'myfile.pdf',
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2 },
+                jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+            }
+            var element = document.getElementById('bContent');
+            var work = html2pdf().set(opt).from(element).save();
+        }
+       
     </script>
     <script>
         var articleId = window.location.pathname;
@@ -434,10 +502,10 @@
                                             <div class="container-fluid ml-0 pr-0 mr-0">
                                                 <div class="row">
                                                     <span style="color: #07D" >[[${currentUser.getName()}]] </span>
-                                                    <span style="color: #918989; font-size: 12px; padding-top: 4px;">
-                                                        &nbsp;&nbsp;&nbsp;&#8226; 22 days ago</span>
+                                                    <span style="color: #918989; font-size: 12px; padding-top: 4px;" >
+                                                        &nbsp;&nbsp;&nbsp;&#8226;<span class="content-timestamp">`+data.timestamp+`</span> </span>
                                                 </div>
-                                            <div class="row" style="color: #46464e;" id="cmt">` +
+                                            <div class="row" style="color: #46464e; margin-top: -8px;" id="cmt">` +
                                                       $("#commentInp").val() + `
                                                 </div>
                                             </div>
@@ -445,6 +513,7 @@
                                 </div>
 
                 `);
+                        convertTimeToFormat();
                         $("#commentInp").val("");
                     },
                     error: function (data) {
@@ -485,10 +554,10 @@
                                             <div class="container-fluid ml-0 pr-0 mr-0">
                                                 <div class="row">
                                                    <span style="color: #07D">` + data['_embedded'].comments[i].user.name + `</span>
-                                                    <span style="color: #918989; font-size: 12px; padding-top: 4px;">
-                                                        &nbsp;&nbsp;&nbsp;&#8226; 22 days ago</span>
+                                                    <span style="color: #918989; font-size: 12px; padding-top: 4px;"  >
+                                                        &nbsp;&nbsp;&nbsp;&#8226;<span class="content-timestamp">`+data['_embedded'].comments[i].timestamp+`</span></span>
                                                 </div>
-                                            <div class="row" style="color: #46464e;" id="cmt">` +
+                                            <div class="row" style="color: #46464e;margin-top: -8px;" id="cmt" >` +
                             data['_embedded'].comments[i].text + `
                                                 </div>
                                             </div>
@@ -496,6 +565,7 @@
                                     </div>
 
                         `)
+                        convertTimeToFormat()
                     }
                     if (data.page.totalPages - 1 == page) {
                         // $('#showCmt').
@@ -513,6 +583,25 @@
 
         }
 
+        function UnLikeContent() {
+            $.ajax({
+                type: "GET",
+                url: `/api/interesteds/search/deleteByuserIdAndContentId?u_id=`+[[${currentUser.getId()}]] +`&c_id=`+[[${id}]],
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                     console.log(data);
+                     $('#like_button').addClass("d-none");
+                     $('#unlike_button').removeClass("d-none");
+                     $("#likeNum").text(parseInt($('#likeNum').text()) - 1)
+                },
+                error: function (data) {
+                    console.log(data);
+                },
+
+            });
+
+        }
 
         function LikeContent() {
 
@@ -530,6 +619,8 @@
                     url: '/api/interesteds',
                     data: JSON.stringify(obj),
                     success: function (data) {
+                        $('#unlike_button').addClass("d-none");
+                        $('#like_button').removeClass("d-none");
                         $("#likeNum").text(parseInt($('#likeNum').text()) + 1)
                     },
                     error: function (data) {
@@ -570,6 +661,9 @@
 
             }
 
+            const onClickRedirectTo= (x) => {
+                location.href = `/detail/${x}`;
+            }
 
 
     </script>

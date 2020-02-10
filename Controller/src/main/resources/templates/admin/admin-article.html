@@ -6,7 +6,6 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Document</title>
     <style>
 
         body{
@@ -64,7 +63,7 @@
                              <td>
                                 <a class="btn btn-outline-primary btn-view" th:href="'/detail/'+${article.id}" >View</a>
                                 <a class="btn btn-outline-primary btn-edit" th:href="'/admin/article/edit/'+${article.id}">Edit</a>
-                                <a class="btn btn-outline-primary btn-remove" th:href="${article.id}">Delete</a>
+                                <a class="btn btn-outline-primary btn-remove" th:onclick="'removeArticle('+${article.id}+')'">Delete</a>
                             </td>
                         </tr>  
                         
@@ -77,24 +76,24 @@
             <div th:class="${page.getTotalPages() < 2 ? 'd-none' : ''}">
                 <nav aria-label="Page navigation example" class="">
                     <ul class="pagination justify-content-center">
-                        <li class="page-item">
+                        <!-- <li class="page-item">
                         <a class="page-link" href="#" aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span>
                             <span class="sr-only">Previous</span>
                         </a>
-                        </li>
+                        </li> -->
                         <li class="page-item " th:each="i : ${#numbers.sequence(1,page.getTotalPages() )}">
                             <a class="page-link" th:href="@{?(size=10,page=${i-1})}" th:text="${i}"></a>
                         </li>
                         <!-- <li class="page-item"><a class="page-link" href="#">1</a></li>
                         <li class="page-item"><a class="page-link" href="#">2</a></li>
                         <li class="page-item"><a class="page-link" href="#">3</a></li> -->
-                        <li class="page-item">
+                        <!-- <li class="page-item">
                         <a class="page-link" href="#" aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
                             <span class="sr-only">Next</span>
                         </a>
-                        </li>
+                        </li> -->
                     </ul>
                 </nav>
             </div>
@@ -113,6 +112,18 @@
             $(document).on("click",'.btn-view',function() {
                 $(this).attr("")
             })
+            const removeArticle = async (_id)=> {
+              try {
+                let res = await fetch(`/api/contents/${_id}`,{
+                    method : 'DELETE'  
+                })
+                location.reload();
+              } catch (error) {
+                  alert("remove fail")
+                  console.log(error)
+              }
+                //location.reload();
+            }
             </script>
         </div>
     </body>

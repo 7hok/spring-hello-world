@@ -6,7 +6,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
     <style>
         body {
             background-color: #d4dbe0;
@@ -170,12 +169,12 @@
                     <button onclick="chooseImage()" class="imgRes1"
                         style="position: absolute;left: 315px; margin-top: 10px; border: none; background-color: inherit;">
                         <span class="cke_button_icon cke_button__image_icon"
-                            style="background-image:url('http://localhost:8080/js/ckeditor/plugins/icons.png?t=JB9C');background-position:0 -360px;background-size:auto;">&nbsp;</span>
+                            style="background-image:url('/js/ckeditor/plugins/icons.png?t=JB9C');background-position:0 -360px;background-size:auto;">&nbsp;</span>
                     </button>
                     <button onclick="chooseImage()" class="imgRes"
                         style="position: absolute;left: 315px; margin-top: 10px; border: none; background-color: inherit;">
                         <span class="cke_button_icon cke_button__image_icon"
-                            style="background-image:url('http://localhost:8080/js/ckeditor/plugins/icons.png?t=JB9C');background-position:0 -360px;background-size:auto;">&nbsp;</span>
+                            style="background-image:url('/js/ckeditor/plugins/icons.png?t=JB9C');background-position:0 -360px;background-size:auto;">&nbsp;</span>
                     </button>
                     <textarea name="editor1" id="editor1"></textarea>
 
@@ -185,10 +184,10 @@
                     <div class="form-group">
                         <label for=" ">Title:</label>
                         <!-- <input type="text" style="width: 64%;" name="title" id=""> -->
-                        <div style="border: 1px solid rgb(104, 96, 96); width:  71%; border-radius: 9px;">
+                        <div style="border: 1px solid rgb(104, 96, 96); width:  80%; border-radius: 9px;">
                             <input autocomplete="off" type="text"
                                 style="padding: 5px; width: 100%; border: none; border-radius: 9px;" name="title"
-                                id="search">
+                                id="title_text">
                         </div>
                         <!-- <textarea id="mytitle" class="form-control  " style="resize: none; box-sizing: border-box;
                          width: 100% !important;"></textarea> -->
@@ -207,10 +206,10 @@
                     </div>
                     <div>Category:</div>
                     <div
-                        style="border: 1px solid rgb(104, 96, 96);margin-top: 10px;margin-bottom: 10px;; width:  64%; border-radius: 9px;">
+                        style="border: 1px solid rgb(104, 96, 96);margin-top: 10px;margin-bottom: 10px;; width:  80%; border-radius: 9px;">
                         <input autocomplete="off" type="text"
                             style="padding: 5px; width: 100%; border: none; border-radius: 9px;" name="title"
-                            id=" ">
+                            id="cate_search">
                     </div>
 
                     <div style="overflow-y: scroll; height:400px; padding-right: 10px;">
@@ -222,9 +221,9 @@
                             <div class="row text-center">
                                 <div class="funkyradio" style="width: -webkit-fill-available;">
                                     <th:block th:each="category : ${categories}">
-                                        <div class="funkyradio-default">
+                                        <div class="funkyradio-default check_category">
                                             <input type="radio"  th:value="${category.getId()}" name="radio" th:id="${category.getId()}" />
-                                            <label th:for="${category.getId()}" th:text="${category.getName()}">First Option default</label>
+                                            <label th:for="${category.getId()}" class="category_name" th:text="${category.getName()}">First Option default</label>
                                         </div>
 
                                     </th:block>
@@ -274,7 +273,7 @@
                         "status": "1",
                         "thumbnail": "/img/"+thImg,
 
-                        "title": $("#search").val(),
+                        "title": $("#title_text").val(),
 
                         "category": {
                             "id": radioValue //static
@@ -282,7 +281,7 @@
                     }
                     $.ajax({
                         type: "POST",
-                        url: "http://localhost:8080/api/contents",
+                        url: "/api/contents",
                         data: JSON.stringify(dataObj),
                         contentType: "application/json",
                         success: function (respone) {
@@ -307,7 +306,7 @@
                     fd.append('file', chooseImg.files[0]);
                     $.ajax({
                         type: 'POST',
-                        url: 'http://localhost:8080/upload',
+                        url: '/upload',
                         data: fd,
                         contentType: false,
                         processData: false,
@@ -315,7 +314,7 @@
                             console.log(data);
                             var srcimg = data["Data"]
                             var im =
-                                `<span><img width='200px' src='http://localhost:8080/img/${srcimg}'><span>`;
+                                `<span><img width='200px' src='/img/${srcimg}'><span>`;
 
                             CKEDITOR.instances.editor1.insertHtml(im);
                             //  editor.setData(im);
@@ -338,7 +337,7 @@
                     fd.append('file', myTh.files[0]);
                     $.ajax({
                         type: 'POST',
-                        url: 'http://localhost:8080/upload',
+                        url: '/upload',
                         data: fd,
                         contentType: false,
                         processData: false,
@@ -370,9 +369,20 @@
                     readURL(this);
                     $("#addThumnail").click()
                 });
+                $(function(){
+                    jQuery.expr[':'].icontains = function(a, i, m) {
+                        return jQuery(a).text().toUpperCase()
+                            .indexOf(m[3].toUpperCase()) >= 0;
+                    };
 
+                    $("#cate_search").on('input',function(){
 
-              
+                        $('.check_category').addClass('d-none');
+                        let val = $(this).val()
+
+                        $(".category_name:icontains("+val+")").parents('.check_category').removeClass('d-none');
+                    })
+                })
 
             </script>
         </div>

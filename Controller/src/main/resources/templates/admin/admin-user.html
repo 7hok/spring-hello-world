@@ -6,7 +6,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
     <style>
     .profile-image {
 vertical-align: middle;
@@ -47,7 +46,7 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
 
             <tr class=" " th:each="user1:${users}">
                 <th scope="row" th:text="${user1.id}"></th>
-                <td class=""><img th:src="@{${user1.getProfilePicture()}}" class=" profile-image img-fluid rounded-circle " alt="user-profile"></td>
+                <td class=""><img th:src="@{${user1.getProfilePicture()}}" onerror="this.src ='https://cdn.dribbble.com/users/2620325/screenshots/6699707/2-01_2x.jpg' " class=" profile-image img-fluid rounded-circle " alt="user-profile"></td>
                 <td th:text="${user1.name}"></td>
                 <td th:text="${user1.email}"></td>
                 <td th:text="${user1.phoneNumber}"></td>
@@ -75,21 +74,24 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
     <div th:class="${page.getTotalPages() < 2 ? 'd-none' : ''}">
         <nav aria-label="Page navigation example" class="">
             <ul class="pagination justify-content-center">
-                <li class="page-item" th:if="${page.hasPrevious()}">
+                <!-- <li class="page-item" th:if="${page.hasPrevious()}">
                     <a class="page-link" th:href="@{/(page=${page.number-1},size=${page.size})}" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
                         <span class="sr-only">Previous</span>
                     </a>
+                </li> -->
+                <!-- <li class="page-item" th:each="i: ${#numbers.sequence(0, page.totalPages - 1)}"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" th:if="${page.number == i}" >[[${i}+1]]</a></li> -->
+                <li class="page-item " th:each="i : ${#numbers.sequence(1,page.getTotalPages() )}">
+                    <a class="page-link" th:href="@{?(size=10,page=${i-1})}" th:text="${i}"></a>
                 </li>
-                <li class="page-item" th:each="i: ${#numbers.sequence(0, page.totalPages - 1)}"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" th:if="${page.number == i}" >[[${i}+1]]</a></li>
 <!--                <li class="page-item"><a class="page-link"th:unless="${page.number == i}" ></a></li>-->
-                <li class="page-item"  th:if="${page.hasNext()}">
+                <!-- <li class="page-item"  th:if="${page.hasNext()}">
                     <a class="page-link" href="#" aria-label="Next" th:href="@{/(page=${page.number+1},size=${page.size})}">
                         <span aria-hidden="true">&raquo;</span>
                         <span class="sr-only">Next</span>
                     </a>
-                </li>
+                </li> -->
             </ul>
         </nav>
     </div>

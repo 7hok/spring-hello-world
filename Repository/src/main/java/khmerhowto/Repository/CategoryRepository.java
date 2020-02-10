@@ -24,7 +24,7 @@ public interface CategoryRepository extends JpaRepository<Category,Integer> {
     @Query(value = "Update Category c set c.status = 0 Where c.id = :id ")
     void deleteById(@Param("id") Integer id);
 
-    List<Category> findByIdAndStatus(Integer id,Integer st);
+    List<Category> findByIdAndStatus( Integer id, Integer st);
 
     List<Category> findByStatus(Integer status);
     /**
@@ -33,8 +33,8 @@ public interface CategoryRepository extends JpaRepository<Category,Integer> {
      * history_click_category = view
      *  combine history_click(view) + inner join category
      */
-    @Query(value = "select * from history_click_category where cate_id = :category_id" , nativeQuery = true)
-    Page<Category> findPopularArticleBaseOnClick(@Param("category_id") Integer category_id,Pageable pageable);
 
-    Category findByIdAndStatus(Integer id, int i);
+	List<Category> findByStatusOrderByIdDesc(int i);
+
+//    Category findByIdAndStatus(Integer id, int i);
 }

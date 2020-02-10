@@ -164,6 +164,7 @@
         background-color: #E5EAED;
         cursor: pointer; 
     }
+    
 </style>
 <link rel="stylesheet" href="../css/maTooltip.css">
 <nav class="navbar navbar-expand-lg bg-white border-bottom" >
@@ -375,9 +376,9 @@
                         </div>
                     </form>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer" >
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="requestContent()">Send</button>
+                    <button type="button" sec:authorize="isAuthenticated()" class="btn btn-primary" data-dismiss="modal" th:onclick="'requestContent('+${#authentication.getPrincipal().getCurrentUser().getId()}+')'">Send</button>
                 </div>
             </div>
         </div>

@@ -17,6 +17,6 @@ public class CategoryServiceImpl implements CategoryService {
     CategoryRepository categoryRepository;
     @Override
     public List<Category> findAll() {
-        return categoryRepository.findAll(Sort.by("id"));
+        return categoryRepository.findByStatusOrderByIdDesc(1);
     }
 }

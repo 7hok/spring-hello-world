@@ -41,7 +41,8 @@ public class User implements Serializable {
         this.status = 1;
         this.timestamp = LocalDateTime.now();
         this.lastNotificationClick = LocalDateTime.now(); 
-        this.userRole = "ADMIN";
+        this.userRole = "CLIENT";
+        this.profilePicture = this.profilePicture == null ? "https://cdn.dribbble.com/users/13754/screenshots/6412198/reading-recommendations_2x.png" : this.profilePicture;
     }
 
     public User() {

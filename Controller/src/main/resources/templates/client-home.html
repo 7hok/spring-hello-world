@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title >KUNLOES</title>
 </head>
 <body>
     <div class="content bg-white" layout:fragment="content">
@@ -17,12 +17,12 @@
             .v-40-test {
                 height: 40vh;
             }
-            .vh-30 { 
+            .vh-30 {
                 height: 28vh;
             }
             .card{
                 border : 0px !important;
-               
+
             }
             .v-parent > div {
                 width: 48%;
@@ -42,24 +42,24 @@
                 /* filter:brightness(10%); */
                 /*     */
                 transition: transform .5s ease;
-                transform: scale(1.1);
+                transform: scaleY(1.08);
                 /* background-color: hsl(0, 100%, 30%);          */
                  }
             
             .group-one-c-one{
                 /* background: url("image-static/dribbble_starry_night.png") no-repeat center center; */
-                background-image:  url("image-static/dribbble_starry_night.png");
+                /*background-image:  url("image-static/dribbble_starry_night.png");*/
                 background-position: center center;
                 background-size: cover;
                 /* filter: brightness(60%); */
             }
             .group-one-c-two{
-                background: url("image-static/coupledrink.png") no-repeat center center;
+                /*background: url("image-static/coupledrink.png") no-repeat center center;*/
                 background-size: cover;
                 /* filter: brightness(60%) */
             }
             .group-one-c-three{
-                background: url("image-static/girlnightcupview.jpg") no-repeat center center;
+                /*background: url("image-static/girlnightcupview.jpg") no-repeat center center;*/
                 background-size: cover;
                 /* filter: brightness(60%) */
             }
@@ -98,7 +98,7 @@
                 padding-left: 10%;
 
             }
-            .category-list> p:hover {
+            .category-list> p:hover , .article_object_list:hover{
                 cursor: pointer;
                 background-color: #e5eaed;
             }
@@ -248,12 +248,7 @@
                             <hr>
                             <div class="text-left category-list scroll_div" style="max-height: 35vh; overflow:scroll; overflow-x: hidden;">
                                 <p th:each=" category : ${CATEGORIES}"><a style="text-decoration: none !important" th:href="'/category?category_id='+${category.id}"  th:text="${category.name}" >Technology</a></p>
-                                <!-- <p>Business</p>
-                                <p>Hosting</p>
-                                <p>Donate</p>
-                                <p>Support</p>
-                                <p>Developers</p>
-                                <p>Get Involved</p> -->
+
                             </div>
                         </div>
 
@@ -261,72 +256,33 @@
                             <h4 style="color : #393939">Popular post</h4>
                             <hr>
                             <div class="scroll_div" style="max-height: 45vh; overflow: scroll;overflow-x: hidden;">
-                                <div class="d-flex  align-items-center" th:each="article : ${POPULAR_POST}" th:object="${article}">
-                                    <img onerror="this.src = 'image-static/face_recognition_dribbble.png'" th:src="*{thumbnail}" class="rounded-circle m-2" style="width: 90px; height: 90px;" alt="">
+                                <div class="d-flex  align-items-center article_object_list" th:each="article : ${POPULAR_POST}" th:object="${article}" th:onclick="'onClickRedirectTo('+*{id}+')'">
+                                    <img onerror="this.src = 'image-static/face_recognition_dribbble.png'" th:src="*{thumbnail}" class="rounded-circle m-2" style="min-width: 70px; min-height: 70px; height: 70px; width: 70px" alt="">
                                     <div class="d-inline-block pl-2">
                                         <span class="overflow-hidden w-100"><b class="kht-text-color" th:text="*{title}">How tech recognize human face </b></span>
                                         <br>
                                         <sub class="content-timestamp" th:text="*{timestamp}">5 days ago</sub>
                                     </div>
                                 </div>
-                                <div class="d-flex  align-items-center" th:each="article : ${POPULAR_POST}" th:object="${article}" style="max-height: 8vh;
-                                overflow: hidden;">
-                                    <img onerror="this.src = 'image-static/face_recognition_dribbble.png'" th:src="*{thumbnail}" class="rounded-circle m-2" style="width: 90px; height: 90px;" alt="">
-                                    <div class="d-inline-block pl-2">
-                                        <span class="overflow-hidden w-100"><b class="kht-text-color" th:text="*{title}">How tech recognize human face </b></span>
-                                        <br>
-                                        <sub th:text="*{timestamp}">5 days ago</sub>
-                                    </div>
-                                </div>
-                                <!-- <div class="d-flex  align-items-center">
-                                    <img src="image-static/face_recognition_dribbble.png" class="rounded-circle m-2" style="width: 90px; height: 90px;" alt="">
-                                    <div class="d-inline-block pl-2">
-                                        <span class="overflow-hidden w-100"><b class="kht-text-color">How tech recognize human face </b></span>
-                                        <br>
-                                        <sub>5 days ago</sub>
-                                    </div>
-                                </div>
-                                <div class="d-flex  align-items-center">
-                                    <img src="image-static/face_recognition_dribbble.png" class="rounded-circle m-2" style="width: 90px; height: 90px;" alt="">
-                                    <div class="d-inline-block pl-2">
-                                        <span class="overflow-hidden w-100"><b class="kht-text-color">How tech recognize human face </b></span>
-                                        <br>
-                                        <sub>5 days ago</sub>
-                                    </div>
-                                </div> -->
+
                             </div>
                         </div>
 
-                        <!-- <div class="py-3">
-                            <h4 style="color : #393939">Recent Post</h4>
+                        <div class="py-3" th:if="${FAVORITE_CATEGORY_TOP_ARTICLE != null}">
+                            <h4 style="color : #393939">Your Favorite Category</h4>
                             <hr>
-                            <div class="">
-                                <div class="d-flex  align-items-center">
-                                    <img src="image-static/girlnightcupview.jpg" class="rounded-circle m-2" style="width: 90px; height: 90px;" alt="">
+                            <div class="scroll_div" style="max-height: 45vh; overflow: scroll;overflow-x: hidden;">
+                                <div class="d-flex  align-items-center article_object_list" th:each="article : ${FAVORITE_CATEGORY_TOP_ARTICLE}" th:object="${article}" th:onclick="onClickRedirectTo(*{id})">
+                                    <img onerror="this.src = 'image-static/face_recognition_dribbble.png'" th:src="*{thumbnail}" class="rounded-circle m-2" style="width: 90px; height: 90px; max-height: 10vh;" alt="">
                                     <div class="d-inline-block pl-2">
-                                        <span class="overflow-hidden w-100"><b class="kht-text-color">How to listen to understand</b> </span>
+                                        <span class="overflow-hidden w-100"><b class="kht-text-color" th:text="*{title}">How tech recognize human face </b></span>
                                         <br>
-                                        <sub>2 days ago </sub>
+                                        <sub class="content-timestamp" th:text="*{timestamp}">5 days ago</sub>
                                     </div>
                                 </div>
-                                <div class="d-flex  align-items-center">
-                                    <img src="image-static/girlnightcupview.jpg" class="rounded-circle m-2" style="width: 90px; height: 90px;" alt="">
-                                    <div class="d-inline-block pl-2">
-                                        <span class="overflow-hidden w-100"><b class="kht-text-color">How to listen to understand</b> </span>
-                                        <br>
-                                        <sub>2 days ago </sub>
-                                    </div>
-                                </div>
-                                <div class="d-flex  align-items-center">
-                                    <img src="image-static/girlnightcupview.jpg" class="rounded-circle m-2" style="width: 90px; height: 90px;" alt="">
-                                    <div class="d-inline-block pl-2">
-                                        <span class="overflow-hidden w-100"><b class="kht-text-color">How to listen to understand</b> </span>
-                                        <br>
-                                        <sub>2 days ago </sub>
-                                    </div>
-                                </div>
+
                             </div>
-                        </div> -->
+                        </div> 
                         <!-- recent post -->
                     </div>
                 </div>
@@ -398,7 +354,7 @@
             clearTimeout(_throttleTimer);
             _throttleTimer = setTimeout(function () {
                 console.log('scroll');
-
+                
             //do work
             if ($window.scrollTop() + $window.height() > $document.height() - 1000) {
                 //  alert(p)
@@ -435,13 +391,11 @@
             } 
             }, _throttleDelay);
         }
-
+        const onClickRedirectTo= (x) => {
+            location.href = `/detail/${x}`;
+        }
      
-//         $(document).ready(function() {
-//     var myContent = '<p><code>var _throttleTimer = null; var _throttleDelay = 100; var $window = $(window); var $document = $(document); $document.ready(function () { $window .off(&#39;scroll&#39;, ScrollHandler) .on(&#39;scroll&#39;, ScrollHandler); }); function ScrollHandler(e) { //throttle event: clearTimeout(_throttleTimer); _throttleTimer = setTimeout(function () { console.log(&#39;scroll&#39;); //do work if ($window.scrollTop() + $window.height() &gt; $document.height() - 100) { alert(&quot;near bottom!&quot;); } }, _throttleDelay); }</code></p>';
-//     alert(myContent.replace(/(<([^>]+)>)/ig,""));
-// });
-             
+
 </script>
     </div>
 </body>
