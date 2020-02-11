@@ -217,9 +217,9 @@
                         <!-- <textarea id="mytitle" class="form-control  " style="resize: none; box-sizing: border-box;
                      width: 100% !important;"></textarea> -->
                         <!-- </div> -->
-                        <div class="container">
+                        <div class="container-fluid">
                             <div class="row text-center">
-                                <div class="funkyradio" style="width: -webkit-fill-available;">
+                                <div class="funkyradio" style="width: 87%">
                                     <th:block th:each="category : ${categories}">
                                         <div class="funkyradio-default check_category">
                                             <input type="radio"  th:value="${category.getId()}" name="radio" th:id="${category.getId()}" />
@@ -236,7 +236,7 @@
             </div>
 
             <div class="row py-2">
-                <div class="col-12"><input style="float: right; width: 100px; " onclick="getData()" type="button"
+                <div class="col-12"><input style="float: right; width: 100px; " id="post" onclick="getData()" type="button"
                         value="Post" class="btn btn-primary"></div>
             </div>
 
@@ -256,16 +256,28 @@
                 }
                 //TO GET DATA FROM CKEDITOR
                 function getData() {
-                    var radioValue = $("input[name='radio']:checked").val();
-                    if(radioValue){
-                        // alert("Your are a - " + radioValue);
-                    }
+                     var radioValue = $("input[name='radio']:checked").val();
+                    // alert(radioValue)
                     var value = CKEDITOR.instances["editor1"].getData();
                     // alert(value)
-                    if(value==""){
-                    return;
+
+                    if(value==""||value.length<20){
+                        alert("អត្ថបទអោយបានត្រឹមត្រូវ");
+                        return;
+                    }
+                    if($("#title_text").val().length<1){
+                        alert("សូមបញ្ចូលចំណងើង");
+                        return;
+                    }
+                    if (radioValue === undefined){
+                        alert("សូមជ្រើសរើសប្រភេទអត្ថបទ");
+                        return;
                     }
 
+                    if(thImg==""){
+                        alert("សូមបញ្ចូលរូបតំណាង")
+                    }
+                    $("#post").attr("disabled", true);
                     var dataObj = {
                         "body": value,
                         "user":{
@@ -286,7 +298,8 @@
                         data: JSON.stringify(dataObj),
                         contentType: "application/json",
                         success: function (respone) {
-                            console.log(respone)
+
+                            window.location.replace("/detail/"+respone.id);
                         },
                         error: function (respone){
                             console.log(respone);

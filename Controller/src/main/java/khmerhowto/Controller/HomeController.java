@@ -171,15 +171,13 @@ public class HomeController {
         Page<Content> lst;
         String b;
         List<Content> list=new ArrayList<>();
-            lst = con.findAll(PageRequest.of(i, 3, Sort.by(Sort.Direction.DESC, "Id")));
-        System.out.println("size is " + lst.getContent().size());
-        try {
-            for (int l = 0; l < lst.getContent().size(); l++) {
-                list.add((Content) lst.getContent().get(l));
+        lst = con.findAll(PageRequest.of(i, 3, Sort.by(Sort.Direction.DESC, "Id")));
+         try {
+             list.addAll(lst.getContent());
+
+            for (int l = 0; l < list.size(); l++) {
                 b = list.get(l).getBody().replaceAll("<[^\\P{Graph}>]+(?: [^>]*)?>", "");
-
                 list.get(l).setBody(b);
-
             }
         }
         catch(Exception e){
@@ -187,18 +185,13 @@ public class HomeController {
         }
         map.addAttribute("contents",list);
 
-        map.addAttribute("contents", lst.getContent());
-        System.out.println(lst.getContent().get(0).getThumbnail());
-
         Map<Integer, Integer> numCmt = new HashMap<>();
         for (int j = 0; j <= lst.getContent().size() - 1; j++) {
             numCmt.put(lst.getContent().get(j).getId(), cmt.getTotalComment(lst.getContent().get(j).getId()));
-
         }
         Map<Integer, Integer> m = new HashMap<>();
         for (int j = 0; j <= lst.getContent().size() - 1; j++) {
             m.put(lst.getContent().get(j).getId(), interestedServiceImp.getTotalLike(lst.getContent().get(j).getId()));
-
         }
         map.addAttribute("likes", m);
         map.addAttribute("cmts", numCmt);
