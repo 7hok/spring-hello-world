@@ -6,7 +6,6 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Document</title>
         <style>
 
             body{
@@ -33,8 +32,8 @@
                
                 <div class="  text-center  d-flex px-5">
                   
-                    <div class="border border-dark rounded-circle user-profile-div m-5 p-2 d-none d-lg-block" >
-                        <img src="/image-static/machine-learning.svg" class="card-img-top border border-dark user-profile rounded-circle " alt="...">
+                    <div class="border border-dark rounded-circle m-5 p-2 d-none d-lg-block" >
+                        <img  th:src="${user.profilePicture}" onerror="this.src='/image-static/machine-learning.svg'" class="card-img-top border border-dark user-profile rounded-circle user-profile-div " alt="...">
                     </div>
                     <div class="align-self-center">
                         <h2>User Administrator</h2>
@@ -74,10 +73,11 @@
                                 <input type="text" class="form-control bg-color-two" placeholder="In love with JS" th:field="*{bio}" th:value="*{getBio()}">
                             </div>
                             <div class="">
+                               
                                 <label>Role</label>
-                                <select class="form-control form-control-one-line w-25" name="dropdown-test"  >
-                                    <option th:value="1" >Admin</option>
-                                    <option th:value="2" >User</option>
+                                <select class="form-control form-control-one-line w-25" name="dropdown-test" th:field="*{userRole}" >
+                                    <option value="ADMIN"  >Admin</option>
+                                    <option value="CLIENT">User</option>
 
                                 </select>
                             </div>
@@ -93,6 +93,59 @@
 
                  
             </div>
+        </div>
+        <div layout:fragment="content-js">
+            <script>
+                $("#role_click").on("click",function() {
+                    convertToModalContent($(this).attr("data-id"))
+                })
+                const convertToModalContent = async (id) => {
+                    let res = await fetch(`/api/userRoles/search/findByUserId?userId=${id}&projection=RoleSimpleProjection`);
+                    let json = await res.json();
+                    let _id = json._embedded.userRoles[0].role.id
+                    $("#modal_content").empty()
+                    $("#modal_content").append(dataAndSelection(_id),json._embedded.id);
+                }
+                const dataAndSelection = (role_id,unique_id) => {
+                    console.log(role_id)
+                    return `<div class="d-flex justify-content-center">
+                                <div>
+                                    <h3  data-id="${unique_id}" id="unique_id">User Role</h3>
+                                </div>
+                                <select class="form-control form-control-one-line w-25" name="dropdown-test" id="dropdown_role"  >
+                                    <option value="1" ${role_id == 1? 'selected' : ''} >User</option>
+                                    <option value="2" ${role_id == 2? 'selected' : ''} >Admin</option>
+
+                                </select> 
+                               
+                            </div>`;
+                }
+                $("#btn_role_save").click(function(e){
+                    e.preventDefault();
+                   let dropdown_role_id =  $("#dropdown_role").val();
+                   let unique_id = $("#unique_id").val();
+                   let user_id = $("#role_click").attr("data-id")
+                   alert(`asdasdasdads`)
+                   console.log(`btn click`)
+                   updateRole(unique_id,user_id,dropdown_role_id)
+                })
+
+                const updateRole = async(unique_id,_user_id,_role_id) => {
+                    let update_res =  await fetch(`/api/userRoles/${unique_id}`,{
+                                method : 'PUT',
+                                data : {
+                                    "role"  : {
+                                        "id" :_role_id
+                                    },
+                                    "user" : {
+                                        "id" : _user_id
+                                    }
+                                }
+                            });
+                    console.log(update_res)
+
+                } 
+            </script>
         </div>
     </body>
 </html>

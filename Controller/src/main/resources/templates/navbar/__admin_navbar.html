@@ -7,6 +7,99 @@
     .left-align > li > a > p > sub {
         margin-right : 8px;
     }
+    .dropdown ul.dropdown-menu-customized:before {
+        content: "";
+        border-bottom: 10px solid #fff;
+        border-right: 10px solid transparent;
+        border-left: 10px solid transparent;
+        position: absolute;
+        top: -10px;
+        right: 52px;
+        z-index: 10;
+    }
+    .dropdown-menu {
+         position: absolute;
+         top: 127%;
+         left: -300px;
+         z-index: 1000;
+         display: none;
+         float: left;
+         min-width: 10rem;
+         padding: .5rem 0;
+         margin: .125rem 0 0;
+         font-size: 1rem;
+         color: #212529;
+         text-align: left;
+         list-style: none;
+         background-color: #fff;
+         background-clip: padding-box;
+         border: 1px solid rgba(0,0,0,.15);
+         border-radius: .25rem;
+     }
+
+    #notification_div_body::-webkit-scrollbar-track
+        {
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+            background-color: #F5F5F5;
+        }
+
+        #notification_div_body::-webkit-scrollbar
+        {
+            width: 10px;
+            background-color: #F5F5F5;
+        }
+
+        #notification_div_body::-webkit-scrollbar-thumb
+        {
+            background-color: #000000;
+            border: 2px solid #555555;
+        }
+        .notifications {
+            min-width:420px;
+        }
+
+        .notifications-wrapper {
+            overflow:auto;
+            max-height:250px;
+        }
+
+        .notification-menu-title {
+            color:#393939;
+            /* font-size:1.5rem; */
+            display:inline-block;
+        }
+        .notification-heading, .notification-footer  {
+         padding:2px 10px;
+     }
+
+
+     .buttom-divider {
+         margin:5px 0;
+     }
+
+     .item-title {
+
+         font-size:16px;
+         color:#000;
+
+     }
+
+     .notifications a.notifications-content {
+         text-decoration:none;
+        background-color: #fff;
+
+     }
+     a.notifications-content:hover{
+        background-color:#ccc;
+     }
+     .notifications-item {
+         padding:10px;
+         margin:5px;
+         border-radius:4px;
+     }
+     .notifications-item:hover{
+        background-color:#ccc;
+     }
 </style>
 <nav class="navbar navbar-expand-lg bg-white border-bottom" >
     <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarTopRightSide" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
@@ -17,8 +110,8 @@
         </span>
     </button>
 
-    <a class="navbar-brand ml-4 text-dark" href="#">
-        <h3 class="icon-linear-color"><b>KhmerHowTo</b></h3>
+    <a class="navbar-brand ml-4 text-dark" href="/admin">
+        <h3 class="icon-linear-color"><b>KUNLOES</b></h3>
     </a>
     
     <div class="collapse navbar-collapse" id="navbarTopRightSide">
@@ -38,17 +131,70 @@
                     <h5 class="icon-linear-color">Admin</h5 >
                 </a>
             </li>
-            <li class="nav-item d-none d-lg-block ">
-                <a class="nav-link text-center " href="#">  
-                 
-                    <img class="" src="/icon/notification-navbar-v2.svg" style="width: 28px; height: 28px;" alt="">
-                    
-                </a>
+            <li class="nav-item  "  sec:authorize="isAuthenticated()">
+                <div class="dropdown ">
+                    <a class="nav-link text-center  d-none d-lg-block" href="#" id="dLabel" role="button" data-toggle="dropdown" data-target="#" aria-haspopup="true" aria-expanded="false">
+                        <img class="" src="/icon/notification-navbar-v2.svg" style="width: 28px; height: 28px;" alt="">
+                        <sup id="num_of_notification" class="" style="color: #393939; position: absolute; top: 10px;"></sup>
+                    </a>
+
+                    <ul class="dropdown-menu notifications dropdown-menu-customized " role="menu" aria-labelledby="dLabel" id=" style-scroll">
+
+                        <div class="notification-heading  border-bottom">
+                            <b class="notification-menu-title">Notifications</b>
+<!--                            <h4 class="notification-menu-title pull-right">View all<i class="glyphicon glyphicon-circle-arrow-right"></i></h4>-->
+                        </div>
+                        <li class="divider"></li>
+                        <div class="notifications-wrapper " id="notification_div_body">
+                            
+
+                        </div>
+                        <li class="divider buttom-divider "></li>
+                        <div class="notification-footer">
+                            <!-- <h4 class="notification-menu-title">View all<i class="glyphicon glyphicon-circle-arrow-right"></i></h4> -->
+                        </div>
+                    </ul>
+<!--                    End CH note-->
+
+
+
+                </div>
             </li>
             <li class="nav-item d-none d-lg-block">
-                <a class="nav-link text-center" href="#">  
-                    <img class="" src="/icon/user-navbar-v2.svg" style="width: 30px; height: 30px;" alt="">
-                </a>
+                <div class="dropdown ">
+
+                    <a class="nav-link text-center" href="#" id="profile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">  
+                        <img class="" src="/icon/user-navbar-v2.svg" style="width: 30px; height: 30px;" alt="">
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-customized dropdown-menu-right mt-3" aria-labelledby="profile" th:object="${#authentication.getPrincipal().getCurrentUser()}">
+                        <div class="card border-0">
+                            <div class="card-title ">
+                                    <div class="text-center pt-2">
+                                        <img class="rounded-circle" th:src="*{profilePicture}" onerror="this.src='https://cdn.dribbble.com/users/2620325/screenshots/6699707/2-01_2x.jpg'" style="width: 50px; height: 50px;" alt="">
+                                        <br>
+                                        <h6 class="pt-2 text-uppercase" th:text="*{name}"> Administrator</h6>
+                                        <span id="user_id" class="d-none" th:text="*{id}"></span>
+                                    </div>
+                            </div>
+                            <div class="card-body">
+                                <b>BIO : <br> </b>
+                                <p class="px-4" th:text="*{bio}">
+                                
+                                    Ben Arfa ចូល​រួម​ជាមួយ​ក្លឹប Ronaldo ក្រោយ​ខាន​លេង​បាល់​ជាង​កន្លះ​ឆ្នាំ
+                                    
+                                </p>
+                            </div>
+                        
+                            <div class="">
+                            <ul class="list-group list-group-flush border-top">
+                                <li class="list-group-item text-center click-list-user-profile" onclick="location.href='/admin/customize';">Customize</li>
+                                <li class="list-group-item text-center click-list-user-profile" onclick="location.href='/admin';">Admin</li>
+                                <li class="list-group-item text-center click-list-user-profile" onclick="location.href='/logout';">Logout</li>
+                            </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </li>
         </ul>
         <ul class="d-md-block d-lg-none left-align">

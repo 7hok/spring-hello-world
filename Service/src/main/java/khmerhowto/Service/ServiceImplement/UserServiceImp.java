@@ -53,12 +53,17 @@ private UserRepository userRepository;
     }
 
     // /@Transactional
-	public void saveUser(User user) {
+	public Boolean saveUser(User user) {
         //user.setId(30);
         System.out.println(user);
-        userRepository.save(user);
-        // userRepository.Persist
-	}
+        try {
+            userRepository.save(user);
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    } 
+
 
 }
 

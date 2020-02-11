@@ -1,5 +1,7 @@
 package khmerhowto.Repository.Model;
 
+import org.springframework.data.rest.core.annotation.RestResource;
+
 import java.time.LocalDateTime;
 
 import javax.persistence.*;
@@ -12,9 +14,16 @@ public class ContentRequest {
     private String title;
     private String text;
     @ManyToOne
+    @RestResource(exported = false)
     private User user;
     private LocalDateTime timestamp;
     private Integer status;
+
+    @PrePersist
+    public void prePersist() {
+        timestamp = LocalDateTime.now();
+        status = 1;
+    }
 
     public ContentRequest() {
     }

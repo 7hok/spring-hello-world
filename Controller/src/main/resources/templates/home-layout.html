@@ -1,30 +1,350 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link href="https://fonts.googleapis.com/css?family=Hanuman&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">    
+    <title>KUNLOES</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Hanuman|Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://storage.googleapis.com/non-spec-apps/mio-icons/latest/outline.css">
 
     <th:block th:include="~{fragment/__bootstrap_link}"></th:block>
     <th:block th:include="~{navbar/__navbar_css}"></th:block>
     <style>
-    .bg-color-two {
-        background-color: #E5EAED;
-    }
+        body{
+            font-family: 'Montserrat','Hanuman' ,sans-serif, serif ;
+            
+        }
+        .bg-color-two {
+            background-color: #E5EAED;
+        }
+
+        .outerDiv {
+            display: inline-flex;
+            /* height: 400px; */
+            /* background-color: red; */
+            /* color: white; */
+        }
+
+        .innerDiv:hover {
+            text-decoration: underline;
+        }
+
+        .innerDiv {
+            margin: auto 5px;
+        }
+
+        .mr:hover {
+            text-decoration: underline;
+            color: #96a0a5;
+        }
+        .card_buttom:hover{
+            background-color: #f3f3f3;
+        }
+        .loading-div {
+            opacity: 0.7;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: #5d5d5d85;
+            z-index: 3;
+        }
     </style>
 </head>
-<body>
+<body id="main_body" class="">
     <div th:replace="~{navbar/__navbar}"></div>
-    <div class="" layout:fragment="content"></div>
-    <div th:replace="~{footer/__footer}"></div>
+    <div id="loading" class="loading-div">
+        <div class="loader03"></div>
+    </div>
+    <div id="content_body" class="" style="display: none;" layout:fragment="content"></div>
+    <div id="footer_body" class="d-none" th:include="~{footer/__footer}"></div>
+    <div sec:authorize="isAuthenticated()">
+        <span id="isAuth" th:data-role="${#authentication.getPrincipal().getCurrentUser().getUserRole()}" class="d-none" th:text="${#authentication.getPrincipal().getCurrentUser().getLastNotificationClick()}">true</span>  
+    </div>
     <th:block th:include="~{fragment/__javascript_link}"></th:block>
     <div class="" layout:fragment="content-js"></div>
     <script>
+        //Chamroeun
+        function requestContent(_id){
+            var requestTitle = $("#content-request-title").val();
+            var requestMessage = $("#content-request-message").val();
+
+            // alert(requestTitle);
+
+            var request={
+                "title": requestTitle,
+                "text": requestMessage,
+                "status": 1,
+                "user": {
+                    "id": _id
+                },
+            }
+            $.ajax({
+                type: "POST",
+                url: '/api/requests',
+                data: JSON.stringify(request),
+                success: function (data) {
+                    console.log("successfully send request")
+                },
+                error: function (data) {
+                    console.log(data)
+                },
+                contentType: "application/json"
+            });
+        }
+
+
+
+
+
+        // Document ready function
+        $(function () {
+            var width_input=$( '.search-bar-parent-div' ).width();
+
+            var button = $('#srch');
+            var tooltip;
+
+            var l = 0;
+
+            button.on("  paste keyup", function () {
+                let _div = `<div class=" loader05 m-0" style="width:26px;height:26px;"> </div>`
+                $("#srchBody").html(_div);
+
+                var name = $("#srch").val();
+
+
+                if (l == 0) {
+                    l = 1;
+                    tooltip = new maTooltip(button, {
+                        inline_style: 'max-width: none; border-radius:8px; width:'+width_input+'px; overflow: hidden; padding: 0pc;border: 1px #e7e7e7 solid;background-color: #fbfbfb;',
+                        full_visibility_duration: 999999999,
+                        position: maTooltip.POSITION.BOTTOM,
+                        static_message: `<div id="srh" class="container-fluid p-0" style="    background-color: #fbfbfb; color: black; border-radius: inherit;   ">   
+                            
+                         </div>`
+                    });
+                }
+
+                $.ajax({
+                    url: `/api/contents/search/findByTitleContainingIgnoreCase?title=${name}&page=0&size=3&projection=ContentNotificationProjection`,
+                    method: 'GET',
+                    success: function (obj) {
+                        tooltip.show();
+                        $('.er').remove()
+                        if (obj._embedded.contents.length == 0) {
+                            $('.maTooltip-BOTTOM').remove()
+                        }
+                        var elem = "";
+                        elem += `<div class ="row er p-2 mb-1"  style="border-bottom: 1px  solid #00000029;">
+                                     <div class="col-6" style="font-size: 14px; text-align: left;">
+                                        TITLE
+                                     </div>
+                                     <div class="col-6 mr" style="font-size: 14px; text-align: right; opacity: 0.8; cursor: pointer" onclick="window.location.href ='/search/${name}?type=2'">
+                                         MORE
+                                     </div>
+                                 </div>`
+                        for (i = 0; i < obj._embedded.contents.length; i++) {
+                            elem += `
+                        <div onclick="window.location.href ='/detail/${obj._embedded.contents[i].id}'" class="row er    mb-0 pt-2" style=" !important;  cursor: pointer; padding-bottom: 7px" >
+                            <div class="col-3 " ><img class=" rounded-circle z-depth-2 myButton point" style="width: 32px;margin-right: -20px; height: 32px" src=${obj._embedded.contents[i].thumbnail} alt=""></div>
+                            <div class="col-9 pl-0 outerDiv" style="font-size: 14px; text-align: left; vertical-align: middle;"><div class ="innerDiv" style="line-height: 1.4;">${obj._embedded.contents[i].title}</div></div>
+                        </div>
+                        `
+
+                        }
+
+                        $("#srh").append(elem)
+                        $("#srchBody").html(` <i class="material-icons-new outline-search" style="color: #0000008 !important; "></i>`)
+                    },
+                    error: function (err) {
+
+                        console.log(err);
+                    }
+                });
+
+
+            });
+
+
+
+            button.blur(function () {
+                tooltip.hide();
+            });
+
+            $("#srchBody").click(function () {
+                 $("#srch").val();
+                 window.location.replace('/search/'+$("#srch").val()+'?type=1')
+            });
+            
           
-        </script>
+        });
+        /** NOTIFICATION **/
+        
+        /*******************
+            START 
+                getAmountNotiFromApi
+                getNotification
+
+            CLICK
+                updateLastReadIfClick
+                updateLastReadIfClickShowContentList
+
+            CONVERT    
+                convertJsonToNotificationList
+                convertAdminJsonToNotificationList
+
+        **************************/
+        const updateLastReadIfClick = async () => {
+            let json = null;
+            try {
+                let res = await fetch(`/user/update/lastread`, {
+                    method: `POST`
+                });
+                json = await res.json();
+                console.log(json)
+
+            } catch (error) {
+                console.log(error)
+            }
+
+
+
+        }
+
+        const updateLastReadIfClickShowContentList = async () => {
+            // let res = await fetch(`api/contents/search/findAllByOrderByIdDesc?projection=ContentNotificationProjection`, {
+            let res = await fetch(`/notification/get`, {
+                method: `POST`
+            });
+            json = await res.json();
+            console.log(json)
+            if(json.type == 0){
+               
+                let contents = json.body;
+
+                contents.forEach(content => {
+                    $("#notification_div_body").append(convertJsonToNotificationList(content.id, content.category.name, content.timestamp))
+                })
+            }else if(json.type ==1 ){
+                let comments = json.body;
+                comments.forEach(comment => {
+                    $("#notification_div_body").append(convertAdminJsonToNotificationList(comment.content.id,comment.text,  comment.timestamp))
+                    // convertAdminJsonToNotificationList
+                })
+            }
+            
+        }
+        var isClick = false;
+        const getNotification = () => {
+            let _last_read = $("#isAuth").text();
+            if (_last_read == "") {
+                /*unauthenticateed */
+                console.log(`unauthenticateed`)
+            } else {
+                /*authenticated*/
+                /*NOTE
+                    ADMIN OR USER 
+
+                    CHECK IN getAmountNotiFromApi
+                */
+                console.log(`authenticateed`)
+                console.log(_last_read);
+                let _unread_amount = getAmountNotiFromApi(_last_read)
+                _unread_amount.then(amount => {
+                    numberToNotificationAmount(amount)
+                })
+
+                $("#dLabel").on('click', function () {
+                    /*NOTE ADMIN OR USER FETCH URI*/
+                   if(isClick == false){
+                        updateLastReadIfClickShowContentList()
+                        updateLastReadIfClick();
+                        isClick = true
+                       $("#num_of_notification").text("")
+                   }
+                })
+            }
+
+        };
+        /*NOTE URI PARAM :parameter for admin*/
+        const getAmountNotiFromApi = async (datetime) => {
+            let _role = $("#isAuth").attr("data-role");
+            let _response = null;
+            if(_role.includes("CLIENT")){
+                _response=  await fetch(`/api/contents/search/findUnreadContentByDate?date=${datetime}`);
+            }else if(_role.includes("ADMIN")){
+                _response= await fetch(`/api/comments/search/findUnreadCommentByDate?date=${datetime}`);
+            }
+            
+            const notification_json_amount = await _response.json();
+            console.log(notification_json_amount)
+            return notification_json_amount;
+        }
+
+        const numberToNotificationAmount = (amount) => {
+            if (parseInt(amount) > 0) {
+                $("#num_of_notification").text(amount)
+            } else {
+
+            }
+        }
+        const convertJsonToNotificationList = (article_id, category_name, time) => {
+            return ` <a class="notifications-content" href="/detail/${article_id}">
+                            <div class="notifications-item border-bottom">
+                                <p class="item-title">New article has been posted in <b> ${category_name}</b></p>
+                                <p class="item-info text-muted">${time}</p>
+                            </div>
+
+                </a>`
+        }
+        const convertAdminJsonToNotificationList = (article_id,comment_body,time) => {
+            return ` <a class="notifications-content" href="/detail/${article_id}">
+                            <div class="notifications-item border-bottom">
+                                <p class="item-title">${comment_body}</b></p>
+                                <p class="item-info text-muted">${time}</p>
+                            </div>
+
+                </a>`
+        }
+        getNotification()
+        /** NOTIFICATION **/
+
+        moment.locale("km")
+        const convertTimeToFormat = () => {
+            
+            let _time_contents = $(".content-timestamp");
+            _time_contents.each(function(){
+
+                try{
+                    let _time = $(this).text();
+                    let _casted_time =  moment(_time).fromNow();
+                    if(_casted_time == "Invalid date"){
+                        console.log(`if`)
+                    }else{
+                        console.log(`else`)
+                        $(this).text(_casted_time);
+                    }
+
+                }catch (e) {
+                    console.log(`x`)
+                }
+
+            })
+        }    
+        setTimeout(function(){
+            convertTimeToFormat()
+            $("#loading").addClass("d-none")
+            $("#content_body").css({"display": "block"})
+            $("#footer_body").removeClass("d-none")
+        }, 1000);
+
+    </script>
+<script>
+
+</script>
+    <th:block th:include="~{fragment/__notify_client}"></th:block>
 </body>
+
 </html>

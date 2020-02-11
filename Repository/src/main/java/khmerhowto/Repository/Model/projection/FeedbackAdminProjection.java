@@ -34,7 +34,7 @@ import khmerhowto.Repository.Model.User;
      * InnerFeedbackAdminProjection
      */
     interface ContentInfo {
-    
+        Integer getId();
         String getTitle();
     }
 }

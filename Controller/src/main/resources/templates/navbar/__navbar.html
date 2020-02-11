@@ -1,4 +1,23 @@
 <style>
+
+        #notification_div_body::-webkit-scrollbar-track
+        {
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+            background-color: #F5F5F5;
+        }
+
+        #notification_div_body::-webkit-scrollbar
+        {
+            width: 10px;
+            background-color: #F5F5F5;
+        }
+
+        #notification_div_body::-webkit-scrollbar-thumb
+        {
+            background-color: #000000;
+            border: 2px solid #555555;
+        }
+
      .icon-linear-color{
         background: #393939;
         -webkit-background-clip: text;
@@ -64,8 +83,8 @@
      }
 
      .notification-menu-title {
-         color:#ff7788;
-         font-size:1.5rem;
+         color:#393939;
+         /* font-size:1.5rem; */
          display:inline-block;
      }
 
@@ -92,22 +111,27 @@
 
      .notifications a.notifications-content {
          text-decoration:none;
-         background:#ccc;
+        background-color: #fff;
 
      }
-
+     a.notifications-content:hover{
+        background-color:#ccc;
+     }
      .notifications-item {
          padding:10px;
          margin:5px;
-         background:#ccc;
          border-radius:4px;
      }
-
+     .notifications-item:hover{
+        background-color:#ccc;
+     }
     .item-info{
         font-size: 14px;
     }
 
-
+    .er:hover{
+        background-color: #f0ebe3;
+    }
 
     .page-active {
         border-bottom: 2px solid #f89808;
@@ -142,7 +166,9 @@
         background-color: #E5EAED;
         cursor: pointer; 
     }
+    
 </style>
+<link rel="stylesheet" href="../css/maTooltip.css">
 <nav class="navbar navbar-expand-lg bg-white border-bottom" >
     <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarTopRightSide" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon ">
@@ -153,19 +179,21 @@
     </button>
 
     <a class="navbar-brand ml-4 text-dark" href="/homepage">
-        <h3 class="icon-linear-color"><b>KUNLOES</b></h3>
+        <h3 class="icon-linear-color">
+            <b>KUNLOES</b>
+        </h3>
     </a>
     <div class="mx-auto  text-center w-75 d-none d-lg-block">
       
         <div class="mx-auto w-50 search-bar-parent-div d-flex">
-            <input type="text" class="form-control-one-line search-bar" style="" placeholder="Search"  >
-            <button class="border-0 bg-transparent d-flex">  
-                <i class="material-icons-new outline-search" style="color: #0000008 !important; "></i>
+            <input type="text" id="srch" class="form-control-one-line search-bar"   placeholder="Search"  >
+            <button class="border-0 bg-transparent d-flex" id="srchBody">  
+                <i class="material-icons-new outline-search" style="color: #0000008 !important; " ></i>
+                
             </button>
            
         </div>
     </div>
-   
     
     <div class="collapse navbar-collapse" id="navbarTopRightSide">
         
@@ -177,19 +205,20 @@
             <li class="nav-item  d-none d-lg-block">
 
                 <a class="nav-link text-center text-dark" href="/homepage">
-                    <h5 th:class="${CURRENT_PAGE == 'home'}?'icon-linear-color page-active':'icon-linear-color'" style="width: 60%;">Home</h5>
+                    <h5 th:class="${CURRENT_PAGE == 'home'}?'icon-linear-color page-active':'icon-linear-color'" style="width: 75%;">Home</h5>
 
                 </a>
             </li>
             <li class="nav-item  d-none d-lg-block">
-                <a class="nav-link text-center text-dark" href="/contentByCategory">
+                <a class="nav-link text-center text-dark" href="/category">
                     <h5 th:class="${CURRENT_PAGE == 'category'}?'icon-linear-color page-active':'icon-linear-color'"  >Category</h5>
                 </a>
             </li>
-            <li class="nav-item  ">
+            <li class="nav-item  "  sec:authorize="isAuthenticated()">
                 <div class="dropdown ">
                     <a class="nav-link text-center  d-none d-lg-block" href="#" id="dLabel" role="button" data-toggle="dropdown" data-target="#" aria-haspopup="true" aria-expanded="false">
                         <img class="" src="/icon/notification-navbar-v2.svg" style="width: 28px; height: 28px;" alt="">
+                        <sup id="num_of_notification" class="" style="color: #393939; position: absolute; top: 10px;"></sup>
                     </a>
 <!--                    <div class="notify-drop dropdown-menu notifications dropdown-menu-customized dropdown-menu-right mt-3" style="width: 100px;" aria-labelledby="notification">-->
 <!--                        <ul class="list-group">-->
@@ -201,47 +230,47 @@
 
 
 <!--                    CH note-->
-                    <ul class="dropdown-menu notifications dropdown-menu-customized " role="menu" aria-labelledby="dLabel">
+                    <ul class="dropdown-menu notifications dropdown-menu-customized " role="menu" aria-labelledby="dLabel" id=" style-scroll">
 
-                        <div class="notification-heading">
-                            <h4 class="notification-menu-title">Notifications</h4>
+                        <div class="notification-heading  border-bottom">
+                            <b class="notification-menu-title">Notifications</b>
 <!--                            <h4 class="notification-menu-title pull-right">View all<i class="glyphicon glyphicon-circle-arrow-right"></i></h4>-->
                         </div>
                         <li class="divider"></li>
-                        <div class="notifications-wrapper ">
-                            <a class="notifications-content" href="#">
+                        <div class="notifications-wrapper " id="notification_div_body">
+                            <a class="notifications-content d-none" href="#">
                                 <div class="notifications-item">
                                     <h6 class="item-title">New article has been posted in Entertainment</h6>
                                     <p class="item-info text-muted"><i>2</i>&nbsp;<i>Hours ago</i></p>
                                 </div>
 
                             </a>
-                            <a class="notifications-content" href="#">
+                            <a class="notifications-content d-none" href="#">
                                 <div class="notifications-item">
                                     <h6 class="item-title">New article has been posted in Entertainment</h6>
                                     <p class="item-info text-muted"><i>2</i>&nbsp;<i>Hours ago</i></p>
                                 </div>
                             </a>
-                            <a class="notifications-content" href="#">
+                            <a class="notifications-content d-none" href="#">
                                 <div class="notifications-item">
                                     <h6 class="item-title">New article has been posted in Entertainment</h6>
                                     <p class="item-info text-muted"><i>2</i>&nbsp;<i>Hours ago</i></p>
                                 </div>
                             </a>
-                            <a class="notifications-content" href="#">
+                            <a class="notifications-content d-none" href="#">
                                 <div class="notifications-item">
                                     <h6 class="item-title">New article has been posted in Entertainment</h6>
                                     <p class="item-info text-muted"><i>2</i>&nbsp;<i>Hours ago</i></p>
                                 </div>
 
                             </a>
-                            <a class="notifications-content" href="#">
+                            <a class="notifications-content d-none" href="#">
                                 <div class="notifications-item">
                                     <h6 class="item-title">New article has been posted in Entertainment</h6>
                                     <p class="item-info text-muted"><i>2</i>&nbsp;<i>Hours ago</i></p>
                                 </div>
                             </a>
-                            <a class="notifications-content" href="#">
+                            <a class="notifications-content d-none" href="#">
                                 <div class="notifications-item">
                                     <h6 class="item-title">New article has been posted in Entertainment</h6>
                                     <p class="item-info text-muted"><i>2</i>&nbsp;<i>Hours ago</i></p>
@@ -250,7 +279,9 @@
 
                         </div>
                         <li class="divider buttom-divider "></li>
-                        <div class="notification-footer"><h4 class="notification-menu-title">View all<i class="glyphicon glyphicon-circle-arrow-right"></i></h4></div>
+                        <div class="notification-footer">
+                            <!-- <h4 class="notification-menu-title">View all<i class="glyphicon glyphicon-circle-arrow-right"></i></h4> -->
+                        </div>
                     </ul>
 <!--                    End CH note-->
 
@@ -258,40 +289,48 @@
 
                 </div>
             </li>
-            <li class="nav-item ">
-                <div class="dropdown ">
+            <li class="nav-item "  sec:authorize="isAuthenticated()">
+                <div class="dropdown "  th:object="${#authentication.getPrincipal().getCurrentUser()}">
 
-                    <a class="nav-link text-center  d-none d-lg-block" href="#" id="profile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">  
+                    <a class="nav-link text-center  d-none d-lg-block" href="#" id="profile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <img class="" src="/icon/user-navbar-v2.svg" style="width: 30px; height: 30px;" alt="">
                     </a>
-                <div class="dropdown-menu dropdown-menu-customized dropdown-menu-right mt-3" aria-labelledby="profile">
-                    <div class="card border-0">
-                        <div class="card-title ">
-                                <div class="text-center pt-2">
-                                    <img class="rounded-circle" src="https://cdn.dribbble.com/users/2620325/screenshots/6699707/2-01_2x.jpg" style="width: 50px; height: 50px;" alt="">
-                                    <br>
-                                    <h6 class="pt-2"> Administrator</h6>
-                            
-                                </div>
-                        </div>
-                        <div class="card-body">
-                            <b>BIO : <br> </b>
-                            <p class="px-4">
-                               
-                                Ben Arfa ចូល​រួម​ជាមួយ​ក្លឹប Ronaldo ក្រោយ​ខាន​លេង​បាល់​ជាង​កន្លះ​ឆ្នាំ
-                                
-                            </p>
-                        </div>
-                       
-                        <div class="">
-                           <ul class="list-group list-group-flush border-top">
-                            <li class="list-group-item text-center click-list-user-profile" onclick="location.href='/admin/customize';">Customize</li>
-                            <li class="list-group-item text-center click-list-user-profile" onclick="location.href='/admin';">Admin</li>
-                           </ul>
+               
+                    <div class="dropdown-menu dropdown-menu-customized dropdown-menu-right mt-3" aria-labelledby="profile">
+                        <div class="card border-0">
+                            <div class="card-title ">
+                                    <div class="text-center pt-2">
+                                        <img class="rounded-circle" th:src="*{profilePicture}"  onerror="this.src='https://cdn.dribbble.com/users/2620325/screenshots/6699707/2-01_2x.jpg'" style="width: 50px; height: 50px;" alt="">
+                                        <br>
+                                        <h6 class="pt-2" th:text="*{name}"> Administrator</h6>
+
+                                    </div>
+                            </div>
+                            <div class="card-body">
+                                <b>BIO : <br> </b>
+                                <p class="px-4" th:text="*{bio}">
+
+                                    Ben Arfa ចូល​រួម​ជាមួយ​ក្លឹប Ronaldo ក្រោយ​ខាន​លេង​បាល់​ជាង​កន្លះ​ឆ្នាំ
+
+                                </p>
+                            </div>
+
+                            <div class="">
+                            <ul th:switch="*{getUserRole()}" class="list-group list-group-flush border-top">
+                                <li class="list-group-item text-center click-list-user-profile" onclick="location.href='/customize';">Customize</li>
+                                <li th:case="'CLIENT'" class="list-group-item text-center click-list-user-profile" onclick="" data-toggle="modal" data-target="#requestModal" data-whatever="@mdo">Request</li>
+                                <li th:case="'ADMIN'" class="list-group-item text-center click-list-user-profile" onclick="location.href='/admin';">Admin</lith:case="'CLIENT'">
+                                <li class="list-group-item text-center click-list-user-profile" onclick="location.href='/logout';">Logout</li>
+                            </ul>
+                            </div>
                         </div>
                     </div>
-                  </div>
-                
+                </div>  
+            </li>
+            <li th:class="${#authorization.expression('isAuthenticated()') == true} ? 'd-none' : 'nav-item' ">
+                <a class="nav-link text-center text-dark" href="/login">
+                    <img class="" src="/icon/user-navbar-v2.svg" style="width: 28px; height: 28px;" alt="">
+                </a>
             </li>
         </ul>
         <ul class="d-md-block d-lg-none">
@@ -316,5 +355,34 @@
             </li>
             
         </ul> 
+    </div>
+    <div class="modal fade" id="requestModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Content Request</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="content-request-title" class="col-form-label">Title</label>
+                            <input type="text" placeholder="Please input content title here" class="form-control" id="content-request-title">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="content-request-message" class="col-form-label mb-2" >Your Message</label>
+                            <textarea class="form-control" id="content-request-message"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer" >
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" sec:authorize="isAuthenticated()" class="btn btn-primary" data-dismiss="modal" th:onclick="'requestContent('+${#authentication.getPrincipal().getCurrentUser().getId()}+')'">Send</button>
+                </div>
+            </div>
+        </div>
     </div>
 </nav>

@@ -6,7 +6,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
     <style>
 
 body{
@@ -58,24 +57,24 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
     <div th:class="${page.getTotalPages() < 2 ? 'd-none' : ''}">
         <nav aria-label="Page navigation example" class="">
             <ul class="pagination justify-content-center">
-                <li class="page-item">
+                <!-- <li class="page-item">
                     <a class="page-link" href="#" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
                         <span class="sr-only">Previous</span>
                     </a>
-                </li>
+                </li> -->
                 <li class="page-item " th:each="i : ${#numbers.sequence(1,page.getTotalPages() )}">
                     <a class="page-link" th:href="@{?(size=10,page=${i-1})}" th:text="${i}"></a>
                 </li>
                 <!-- <li class="page-item"><a class="page-link" href="?size=10">1</a></li>
                 <li class="page-item"><a class="page-link" href="#">2</a></li>
                 <li class="page-item"><a class="page-link" href="#">3</a></li> -->
-                <li class="page-item">
+                <!-- <li class="page-item">
                     <a class="page-link" href="#" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
                         <span class="sr-only">Next</span>
                     </a>
-                </li>
+                </li> -->
             </ul>
         </nav>
     </div>
@@ -84,7 +83,7 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
     <div id="feedback_modal" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-head d-flex justify-content-around py-3">
+                <div class="modal-head d-flex justify-content-around py-3" id="modal-head"> 
                     <!-- <h6 id="modal_content"> Feedback From Client</h6> -->
                     <div class="">
                         <img class="rounded-circle" id="modal_user_img" style="height: 50px; width:45px;" src="" alt="" srcset="">
@@ -99,7 +98,7 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
                 </div>    
                 
                 <div class="modal-body border-top ">
-                    <span > May /2 /2020:</span>
+                    <span >Go To Article - <a id="modal_article_id" href="">Click Here</a> </span>
                     <p class="px-2" id="modal_paragraph"></p>
                 </div>
             </div>
@@ -151,8 +150,8 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
                         $("#modal_user_img").attr("src",feedback.user.profilePicture)
                         $("#modal_user_name").text(feedback.user.name)
                         $("#modal_timestamp").text(feedback.timestamp)
-                        // $("#modal_paragraph").text(feedback.text)
-                        $("#modal_paragraph").text(feedback.toString());
+                        $("#modal_article_id").attr("href",`/detail/${feedback.content.id}`)
+                        $("#modal_paragraph").text(`${feedback.text}`);
                         $('#feedback_modal').modal('toggle');
                     })
                 }
@@ -165,8 +164,7 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
                 if(_response ==null ){
                     alert("remove fail")
                 }else{
-                    alert("success")
-                    location.reload = true;
+                    location.reload();
                 }
             })
             $('#datepicker').datepicker({

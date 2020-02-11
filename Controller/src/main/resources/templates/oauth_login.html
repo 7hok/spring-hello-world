@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns="http://www.w3.org/1999/xhtml" itemscope itemtype="http://schema.org/Article">
+
+<head>
+    <meta  charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Hanuman|Roboto&display=swap" rel="stylesheet">
+
+    <title>Login</title>
+    <th:block th:include="~{fragment/__bootstrap_link}"></th:block>
+    <meta name="google-signin-client_id" content="836845369110-sqgfnf0i6lkpl8jb28bvprvf935tarlq.apps.googleusercontent.com">       
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js">
+    </script>
+    <script src="https://apis.google.com/js/client:platform.js?onload=start" async defer>
+    </script>
+    <script>
+        function start() {
+          gapi.load('auth2', function() {
+            auth2 = gapi.auth2.init({
+              client_id: '836845369110-sqgfnf0i6lkpl8jb28bvprvf935tarlq.apps.googleusercontent.com',
+              // Scopes to request in addition to 'profile' and 'email'
+              scope: 'profile email'
+            });
+          });
+        }
+      </script>
+      <style>
+       body{
+            font-family: 'Montserrat','Hanuman' ,sans-serif, serif ;
+            
+        }
+      </style>
+</head>
+
+<body>
+<div class="container-fluid py-0 " style="padding-left: 0%;">
+    <div class="row">
+        <!-- <div class=" col-6 col-lg-6 d-none d-sm-block "> -->
+            <div class="col-sm col-6 col-lg-6 d-none d-sm-block d-none d-sm-block d-sm-none d-md-block">
+
+            <img class="vh-100 w-100" src="/img/loginPic.jpg" alt="">
+        </div>
+        <div class="col-sm h-100 my-auto" style="padding-left: 14%; padding-right: 14%; ">
+            <form class="p-form" style="text-align: center;" method="post" id="form-submit" th:action="@{/login}">
+                <div th:if="${param.error}" class="alert alert-error">    
+                    Invalid username and password.
+                </div>
+                <div th:if="${param.logout}" class="alert alert-success"> 
+                    You have been logged out.
+                </div>
+                <h5 style="line-height: 65px; margin-bottom: 4px; font-size: x-large;" class="font-weight-bold">KUNLOES</h5>
+                <!-- <span class="title-log ">Khmer How To</span> -->
+                <p class="line-m" style="line-height: 100%; font-size: small;">Please login or sign up for an account</p>
+
+                <div style=" text-align: start; margin-bottom: 9%; margin-top: 10%;">
+                    <span style="text-align: left; margin-bottom: 0px !important;font-size: small">Email</span>
+                    <input style="text-align: left; margin-top: 2px;" type="text" class="t-span form-control"
+                           placeholder="ABC@gmail.com"
+                           id="username" name="username" 
+                           >
+                </div>
+                <div style="text-align: start;">
+                    <span class="t-span" style="margin-bottom: 0px; font-size: small">Password</span>
+                    <input type="password" class="t-span form-control" style="margin-top: 2px; margin-bottom: 10%;"
+                           placeholder="Password" id="password" autocomplete="on" name="password" >
+                </div>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-6  px-0 text-left"> <input type="checkbox" value=""><span style="font-size: small" class="align-top line-m">&nbsp;&nbsp;Remember me</span></label></div>
+                        <!-- <div class="col-6  px-0 text-right"> <p class="line-m checkbox-inline "><a style="font-size: small; text-decoration: underline;" class="align-top "  href="">Forget Password</a> </p></div> -->
+                    </div>
+                </div>
+
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-6 px-0 text-left">
+                          <a style="width: 100px;     background-color: #a9a9a954;" type="submit"
+                                href="/signup"    class="btn right-al"><span class="t-span">Sign Up</span></a>
+                           
+                        </div>
+                        <div class="col-6 px-0 text-right">
+                          <button  style="width: 90px; background-color: #FF2A19;" type="submit" class="btn btn-primary text-white left-al"><span class="t-span">Login</span> </button>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div style="height: 30px;"></div>
+                <button  id="signinButton" style="margin-bottom: 39px;" type="button" class="loginBtn loginBtn--google">
+                    Login with Google
+                </button>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<button >Sign in with Google</button>
+
+<script>
+  $('#signinButton').click(function() {
+    // signInCallback defined in step 6.
+    auth2.grantOfflineAccess().then(signInCallback);
+  });
+</script>
+<script>
+    function signInCallback(authResult) {
+      if (authResult['code']) {
+        console.log(authResult['code'])
+        // Hide the sign-in button now that the user is authorized, for example:
+        $('#signinButton').attr('style', 'display: none');
+        let _code = authResult['code'];
+        fetch(`/auth/code?code=${_code}`,{
+          method : 'POST',
+          headers : {
+           "Content-Type" : "application/json"
+          }
+        }).then(res => 
+          res.json()
+        ).then(json => {
+
+          if(json.redirect == "fail"){
+            alert("there ")
+          }else{
+            location.href = json.redirect;
+          }
+        }
+        ).catch(err => {
+          console.log(err)
+        })
+     
+      } else {
+        // There was an error.
+      }
+    }
+   
+</script>
+<!-- <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script> -->
+
+</body>
+
+</html>

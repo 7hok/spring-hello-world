@@ -11,12 +11,12 @@ import java.awt.print.Pageable;
 import java.time.LocalDateTime;
  
 
-@RepositoryRestResource(collectionResourceRel = "requests")
+@RepositoryRestResource(collectionResourceRel = "requests", path = "requests")
 public interface ContentRequestRepository extends JpaRepository<ContentRequest,Integer> {
 
     Page<ContentRequest> findByStatus(int i, org.springframework.data.domain.Pageable pageable);
 
-    @Query("SELECT f FROM ContentRequest f WHERE f.status = 1 AND f.timestamp BETWEEN :start_date AND :end_date")
+    @Query("SELECT f FROM ContentRequest f WHERE f.timestamp BETWEEN :start_date AND :end_date")
 	Page<ContentRequest> findByDate(LocalDateTime start_date, LocalDateTime end_date,
 			org.springframework.data.domain.Pageable pageable);
 

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    xmlns="http://www.w3.org/1999/xhtml" layout:decorator="~{home-layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="content bg-white" layout:fragment="content">
+        <style>
+            .lib-panel {
+                margin-bottom: 20Px;
+            }
+
+            .lib-panel img {
+                width: 100%;
+                background-color: transparent;
+            }
+
+            .lib-panel .row,
+            .lib-panel .col-md-6 {
+                padding: 0;
+                background-color: #FFFFFF;
+            }
+
+
+            .lib-panel .lib-row {
+                padding: 0 20px 0 20px;
+            }
+
+            .lib-panel .lib-row.lib-header {
+                background-color: #FFFFFF;
+                font-size: 20px;
+                padding: 10px 20px 0 20px;
+            }
+
+            .lib-panel .lib-row.lib-header .lib-header-seperator {
+                height: 2px;
+                width: 26px;
+                background-color: #d9d9d9;
+                margin: 7px 0 7px 0;
+            }
+
+            .lib-panel .lib-row.lib-desc {
+                position: relative;
+                height: 100%;
+                display: block;
+                font-size: 13px;
+            }
+
+            .lib-panel .lib-row.lib-desc a {
+                position: absolute;
+                width: 100%;
+                bottom: 10px;
+                left: 20px;
+            }
+
+            .row-margin-bottom {
+                margin-bottom: 20px;
+            }
+
+            .box-shadow {
+                -webkit-box-shadow: 0 0 10px 0 rgba(0, 0, 0, .10);
+                box-shadow: 0 0 10px 0 rgba(0, 0, 0, .10);
+            }
+
+            .no-padding {
+                padding: 0;
+            }
+        </style>
+        <div class="container-fluid" id="con">
+            <br>
+            <div class="row">
+                <div class="col-1"> </div>
+                <div class="col-2" style="font-size: 20px;">Search for: </div>
+                <div class="col-8" style="font-size: 20px;" th:text="${body}"></div>
+
+            </div>
+            <br>
+        </div>
+        <div class="container-fluid pb-5">
+            <div class="row">
+                <div class="col-4">
+
+                </div>
+                <div class="col-4">
+                    <button type="button" class="btn btn-primary w-100" style="border-radius: 10px;" id="smore">See
+                        More</button>
+                </div>
+                <div class="col-4">
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div layout:fragment="content-js">
+        <script>
+            showSearch(0);
+            var ele = ``;
+            var ul=``;
+            
+            function showSearch(page) {
+                if([[${type}]]==2){
+                ul=`/api/contents/search/findByTitleContainingIgnoreCase?title=[[${body}]]&page=${page}&size=6&projection=ContentNotificationProjection`
+            }
+            else{
+                ul=`/api/contents/search/findByBodyContainingIgnoreCase?body=[[${body}]]&page=${page}&size=6&projection=ContentNotificationProjection`
+            }
+                $.ajax({
+                    url: ul,
+                    method: 'GET',
+                    success: function (obj) {
+
+                        var bd;
+                        if (obj._embedded.contents.length == 0) {
+                            return;
+                        }
+                        else {
+                            for (i = 0; i < obj._embedded.contents.length; i++) {
+                                bd = obj._embedded.contents[i].body
+
+                                ele += ` 
+                    <div class="row row-margin-bottom" >    
+                       <div class="col-md-1"></div>
+                        <div class="col-md-10 no-padding lib-item" data-category="view">
+                            <div class="lib-panel" style="cursor: pointer" onclick="window.location.href ='/detail/${obj._embedded.contents[i].id}'">
+                                <div class="row box-shadow">
+                                    <div class="col-md-4">
+                                        <img class="lib-img-show" style=" width: 262px;  height: 215px;"
+                                        src= ${obj._embedded.contents[i].thumbnail}>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="lib-row lib-header">
+                                            ${obj._embedded.contents[i].title}
+                                            <div class="lib-header-seperator"></div>
+                                        </div>
+                                        <div class="lib-row lib-desc">
+                                            ${bd.replace(/(<([^>]+)>)/ig, "").substring(0, 400)}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                       <div class="col-md-1"></div>
+                    </div> 
+                    `
+                            }
+                            var p = parseInt(page) + 1;
+
+                            $('#con').append(ele)
+                            // $("#bfCaptchaEntry").on("click", showSearch(parseInt(page)+1));
+                            $('#smore').attr('onClick', `showSearch(${p})`);
+                        }
+                    },
+                    error: function (err) {
+
+                        console.log(err);
+                    }
+                });
+            }
+
+        </script>
+    </div>
+</body>
+
+</html>

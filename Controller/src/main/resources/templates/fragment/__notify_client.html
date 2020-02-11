@@ -1,0 +1,49 @@
+<link rel="stylesheet" href="/izitoast/iziToast.min.css">
+<script src="/izitoast/iziToast.min.js"></script>
+<script src="/js/socket.io.js"></script>
+<script>
+     const notifyUser = (msg,actionClick) => {
+            iziToast.show({ 
+            theme: 'dark',
+            icon: 'material-icons-new outline-notifications_active',
+            message: msg,
+            position: 'bottomRight',
+            transitionIn : 'fadeInLeft',
+            transitionOut: 'fadeOutUp',
+            timeout : 7000,
+            progressBarColor: 'rgb(0, 255, 184)',
+            buttons: [
+                ['<button>Here</button>', actionClick, true]
+            ]});
+    } 
+</script>
+<script>
+    try {
+        const socketUrl = location.protocol + "//" + location.hostname + ":15657";
+          const socket = io.connect(socketUrl);
+          let _socket_role =  $("#isAuth").attr("data-role")
+         
+          if(_socket_role.includes("ADMIN")){
+               
+                socket.on('admin',function(data){
+                        let content = data;
+                        notifyUser(`New Comment`,()=> {
+                            location.href = `/detail/${content.id}`;
+                        })
+                    })
+            } else {
+                socket.on('client',function(data){
+                    let content = data;
+                    console.log(content)
+                    notifyUser(`New Article Click Here`,()=> {
+                        location.href = `/detail/${content.id}`;
+                    })
+                })
+
+            }
+         
+    } catch (error) {
+        
+    }
+         
+</script>

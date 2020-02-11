@@ -1,10 +1,14 @@
 package khmerhowto.configuration;
 
+import java.util.Arrays;
+
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.ProviderManager;
+import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -27,6 +31,7 @@ public class WebConfiguration extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
  
@@ -34,18 +39,18 @@ public class WebConfiguration extends WebSecurityConfigurerAdapter {
   
  
         http.authorizeRequests()
-            .antMatchers("/**")
-            .permitAll()
-            .antMatchers("/admin/question")
-            .authenticated()
+            .antMatchers("/admin","/admin/**")
+            .hasRole("ADMIN")   
             .and()
             .formLogin()
-            .loginPage("/oauth_login")
+            .loginPage("/login")
             .loginProcessingUrl("/login")
+            .defaultSuccessUrl("/home", true)
+            // .failureForwardUrl("/ortkertte")
             .and()
             .logout()
             .logoutUrl("/logout")
-            .logoutSuccessUrl("/oauth_login")
+            .logoutSuccessUrl("/home")
             .invalidateHttpSession(true)
             .deleteCookies("JSESSIONID")
             .and()
@@ -53,7 +58,7 @@ public class WebConfiguration extends WebSecurityConfigurerAdapter {
     }
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService() );
+         auth.userDetailsService(userDetailsService() );
         // auth.inMemoryAuthentication().withUser("guest").password("{noop}guest1234").roles("USER");
         // auth.inMemoryAuthentication().withUser("admin").password("{noop}admin1234").roles("ADMIN");
     }

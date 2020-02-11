@@ -10,8 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
 @RestController
-@EnableOAuth2Sso
-
+// @EnableOAuth2Sso
 public class KhmerHowToSpringBootApplication extends SpringBootServletInitializer {
     public static void main(String[] args){
 

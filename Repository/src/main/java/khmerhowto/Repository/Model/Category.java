@@ -4,11 +4,14 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.PrePersist;
 
+//import khmerhowto.Repository.Model.audit.AuditListener;
+//@EntityListeners(AuditListener.class)
 @Entity
 public class Category implements Serializable{
     @Id
@@ -28,6 +31,10 @@ public class Category implements Serializable{
     }
     public Category() {
     }
+    public Category(Integer id) {
+        this.id=id;
+    }
+    
 
     public Category(int id, String name, String image, String description, Integer status, LocalDateTime timestamp) {
         this.id=id;

@@ -7,6 +7,7 @@ import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+//import khmerhowto.Repository.globalFunction.GlobalFunctionHelper;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 @Entity
@@ -18,31 +19,55 @@ public class Content {
     @ManyToOne
     @RestResource(exported = false)
     private Category category;
-
+    @ManyToOne
+    @RestResource(exported = false)
+    private User user;
     private String thumbnail;
     private String title;
     private String body;
-    private String writer;
+
     private Integer status;
     private LocalDateTime timestamp;
 
     public Content() {
     }
+
     @PrePersist
     public void prePersist() {
-        //  d=null;
+
         timestamp = LocalDateTime.now();
         status = 1;
     }
-    public Content(int id, Category category, String thumbnail, String title, String body, String writer, Integer status, LocalDateTime timestamp) {
-        this.id=id;
-        this.category=category;
-        this.thumbnail=thumbnail;
-        this.title=title;
-        this.body=body;
-        this.writer=writer;
-        this.status=status;
-        this.timestamp= timestamp;
+    @PreUpdate
+    public void preUpdate() {
+
+        timestamp = LocalDateTime.now();
+        status = 1;
+    }
+
+    public Content(int id, Category category, String thumbnail, String title, String body, User user, Integer status, LocalDateTime timestamp) {
+
+        this.id = id;
+        this.category = category;
+        this.thumbnail = thumbnail;
+        this.title = title;
+        this.body = body;
+        this.user = user;
+        this.status = status;
+        this.timestamp = timestamp;
+
+    }
+
+    public Content(int id) {
+        this.id = id;
+	}
+
+	public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public int getId() {
@@ -85,13 +110,6 @@ public class Content {
         this.body = body;
     }
 
-    public String getWriter() {
-        return writer;
-    }
-
-    public void setWriter(String writer) {
-        this.writer = writer;
-    }
 
     public Integer getStatus() {
         return status;
@@ -112,15 +130,15 @@ public class Content {
     @Override
     public String toString() {
         return "Content{" +
-                "id=" + id +
-                ", category=" + category +
-                ", thumbnail='" + thumbnail + '\'' +
-                ", title='" + title + '\'' +
-                ", body='" + body + '\'' +
-                ", writer='" + writer + '\'' +
-                ", status='" + status + '\'' +
-                ", timestamp=" + timestamp +
-                '}';
+            "id=" + id +
+            ", category=" + category +
+            ", thumbnail='" + thumbnail + '\'' +
+            ", title='" + title + '\'' +
+            ", body='" + body + '\'' +
+            ", user='" + user + '\'' +
+            ", status='" + status + '\'' +
+            ", timestamp=" + timestamp +
+            '}';
     }
 }
 

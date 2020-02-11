@@ -19,8 +19,10 @@ public class ContentServiceImp implements ContentService {
     @Autowired
     private ContentRepository contentRepository;
 
+//    public Page<Content> findTop3
+
     public Page<Content> findAll(Pageable pageable) {
-        return contentRepository.findAll(pageable);
+        return contentRepository.findByStatus(1,pageable);
     }
 
     public Page<Content> findByName(String string, Pageable pageable) {
@@ -48,5 +50,11 @@ public class ContentServiceImp implements ContentService {
     @Override
     public List<Content> findAll() {
         return null;
+    }
+
+    @Override
+    public Page<Content> findByTitleContainingIgnoreCase(String title, Pageable pageable) {
+       
+        return  contentRepository.findByTitleContainingIgnoreCase(title, pageable);
     }
 }

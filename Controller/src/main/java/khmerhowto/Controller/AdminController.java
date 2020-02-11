@@ -19,6 +19,7 @@ import khmerhowto.Service.UserService;
 import khmerhowto.Service.ServiceImplement.CategoryServiceImp;
 import khmerhowto.Service.ServiceImplement.FeedBackServiceImp;
 import khmerhowto.Service.ServiceImplement.ContentServiceImp;
+import khmerhowto.globalFunction.GlobalFunctionHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -34,16 +35,27 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
 /**
  * AdminController
+ * MOST of algorithm 
+ *   1.  ALL :  SERVICE -> REPOSITORY : FindByStatus1
+ *   2.  FILTER : REQUEST PARAM AS Parameter
+ *   3.  CONDITION 
+ *   3.1      IF REQUEST PARAM = NULL
+ *   3.1.1         ALL
+ *   3.2      ELSE
+ *   3.2.1         FILTER      
  */
 @Controller
-//@RequestMapping("/dynas/")
+@SessionAttributes("user")
 public class AdminController {
     @Autowired
     private RoleService roleService;
@@ -59,12 +71,22 @@ public class AdminController {
     private FeedBackServiceImp feedbackservice;
     @Autowired 
     private ContentServiceImp  articleService;
-
+    @PersistenceContext
+    EntityManager em;
     @GetMapping("/admin/article/edit/{id}")
-    String editArticle(@PathVariable String id, ModelMap model) {
-        model.addAttribute("categories",categoryService.findCategoryByStatus(1));
-        
+    String editArticle(@PathVariable Integer id, ModelMap model) {
+        List<Category> lst=categoryService.findCategoryByStatus(1);
+        model.addAttribute("categories",lst);
+        Content con=em.find(Content.class,id);
+        model.addAttribute("cId", con.getCategory().getId());
         model.addAttribute("id", id);
+        model.addAttribute("categories", categoryService.findCategoryByStatus(1));
+        if (GlobalFunctionHelper.getCurrentUser() == null) {
+            model.addAttribute("currentUser", new User());
+        } else {
+            model.addAttribute("currentUser", GlobalFunctionHelper.getCurrentUser());
+
+        }
         return "admin/admin-article-edit";
     }
 
@@ -90,7 +112,6 @@ public class AdminController {
         }else{
             page = contentRequestService.findByDate(date,pageable);
         }
-        page = contentRequestService.findAll(pageable);
         List<ContentRequest>questions = page.getContent();
         model.addAttribute("page",page);
         model.addAttribute("questions",questions);
@@ -101,18 +122,16 @@ public class AdminController {
     String manageUser(@RequestParam(value = "search" , required = false)String userName, @PageableDefault(size = 10)Pageable pageable, Model model){
 
         Page<User> page =null;
-        // userService.findAll(pageable);    
-      
-        // model.addAttribute("user",user);
+    
         if(userName!=null){
             page =userService.findByName(userName,pageable);
 
         }else {
-            // page =page.getContent();
+    
             page = userService.findAll(pageable);
         }
         
-        // System.out.println(user.getName());
+
         model.addAttribute("page",page);
         model.addAttribute("users",page.getContent());
 
@@ -141,7 +160,6 @@ public class AdminController {
         return "admin/admin-category";
     }
 
-
     @GetMapping("/admin/customize/{id}")
     String customizeInfo(@PathVariable("id")Integer id,Model model){
         model.addAttribute("role",roleService.findAll());
@@ -166,7 +184,17 @@ public class AdminController {
             }
     }
 
-
+    @GetMapping("/admin/article/insert")
+    String insertArticle(ModelMap map) {
+        map.addAttribute("categories", categoryService.findCategoryByStatus(1));
+        if (GlobalFunctionHelper.getCurrentUser() == null) {
+            map.addAttribute("currentUser", new User());
+        } else {
+            map.addAttribute("currentUser", GlobalFunctionHelper.getCurrentUser());
+            System.out.println("s"+ GlobalFunctionHelper.getCurrentUser());
+        }
+        return "admin/admin-article-insert";
+    }
 
     @GetMapping("/admin/article")
     String manageArticle(@PageableDefault(size = 10)Pageable pageable,@RequestParam(value = "category_id", defaultValue ="0",required = false)Integer c_id,@RequestParam(value = "search" ,required = false) String search_text ,Model model){

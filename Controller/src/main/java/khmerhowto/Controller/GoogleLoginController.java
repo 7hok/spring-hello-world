@@ -1,8 +1,14 @@
 package khmerhowto.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +21,8 @@ import khmerhowto.configurationmodel.MyUser;
 import khmerhowto.globalFunction.GlobalFunctionHelper;
 
 import java.security.Principal;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -28,23 +36,36 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 public class GoogleLoginController {
     
     @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
     private UserRepository userRepository;
 
     @GetMapping("/log")
     @ResponseBody
-    public Principal user(Principal principal){
-        // System.out.println(((UserDetails)principal).getUsername());
-       System.out.println( GlobalFunctionHelper.getCurrentUser());;
+    public Principal user(Principal principal){ 
+        System.out.println( GlobalFunctionHelper.getCurrentUser()); 
         return principal;
     }
-    @GetMapping("/ck")
-    public String ckEdit(){
-        return "ckedit";
-    }
+    /**
+     * 
+     * 
+     * Email 100% getting because of verified from login
+     * After getting email from sending access token
+     * check whether email is registered 
+     * IF true
+     *     AutoLogin
+     * ELSE
+     *     Redirected Register        
+     * @param code
+     * @param request
+     * @return
+     */
+   
     @PostMapping(value="/auth/code")
-    @ResponseBody
-    public String postMethodName(@RequestParam("code") String code,HttpServletRequest request) {
-        //TODO: process POST request
+    public  ResponseEntity<Map<String, Object>> postMethodName(@RequestParam("code") String code,HttpServletRequest request) {
+      
+        Map<String, Object> response = new HashMap<>();  
         try {
              GoogleTokenResponse tokenResponse =
           new GoogleAuthorizationCodeTokenRequest(
@@ -71,43 +92,55 @@ public class GoogleLoginController {
                 String givenName = (String) payload.get("given_name");
              * 
              */
-            /**
-             * Email 100% getting because of verified from login
-             * After getting email from sending access token
-             * check whether email is registered 
-             * IF true
-             *     AutoLogin
-             * ELSE
-             *     Redirected Register
-             */
             String email = payload.getEmail();
-            Boolean userChecked = checkUserByEmail(email, request);
+            Boolean userChecked = checkUserByEmailIfTrueLoggedIn(email, request);
+            
+            
             if(userChecked == true ){
-                return "redirect:/home";
+                System.out.println("EX User Login");
+                response.put("redirect", "/home");
             }else{
                 User user = new User();
                 user.setEmail(payload.getEmail());
                 user.setName((String) payload.get("name"));
                 user.setProfilePicture((String) payload.get("picture"));
                 request.getSession().setAttribute("USER", user);
-                return "redirect:/signup";
+                System.out.println("new User Login");
+                response.put("redirect", "/signup");
             }
+            return new ResponseEntity<>(response,HttpStatus.OK);
         } catch (Exception e) {
-            System.out.println(e);
+            response.put("redirect", "fail");
         }
-          
+       
         
-        return "";
+        return new ResponseEntity<>(response,HttpStatus.OK);
     }
-
-    private Boolean checkUserByEmail(String email,HttpServletRequest request){
+   
+    private Boolean checkUserByEmailIfTrueLoggedIn(String email,HttpServletRequest request){
         User user = userRepository.findByEmail(email);
         if(user == null ){
             return false;
         }else{
-            new LoginController().autoLogin(email, user.getPassword(), request);
-            return true;
+            Boolean loginStatus = autoLogin(email, user.getPassword(), request);
+            return loginStatus == true ? true : false;
         }
         
+    }
+
+    protected Boolean autoLogin(String userName,String password,HttpServletRequest request){
+        try {
+            UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(userName,password);
+            authToken.setDetails(new WebAuthenticationDetails(request));
+            Authentication authentication = authenticationManager.authenticate(authToken);
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            
+        } catch (Exception e) {
+            //TODO: handle exception
+            System.out.println(e);
+            return false;
+        }
+        return true;
+ 
     }
 }
