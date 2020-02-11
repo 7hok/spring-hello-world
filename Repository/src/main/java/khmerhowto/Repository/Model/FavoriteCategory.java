@@ -14,11 +14,11 @@ public class FavoriteCategory {
     private User user;
     @ManyToOne
     private Category category;
-    private Integer status;
+    private boolean status;
 
     @PrePersist
     private void prePersist(){
-        this.status = 1;
+        this.status = true;
     }
     public FavoriteCategory() {
     }
@@ -26,7 +26,7 @@ public class FavoriteCategory {
         this.user=user;
         this.category=category;
     }
-    public FavoriteCategory(int id, User user, Category category, Integer status) {
+    public FavoriteCategory(int id, User user, Category category, boolean status) {
         this.id=id;
         this.user=user;
         this.category=category;
@@ -59,11 +59,11 @@ public class FavoriteCategory {
         this.category = category;
     }
 
-    public Integer isStatus() {
+    public boolean isStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(boolean status) {
         this.status = status;
     }
 

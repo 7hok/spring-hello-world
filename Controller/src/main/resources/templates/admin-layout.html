@@ -31,10 +31,10 @@
 </head>
 <body>
     <div th:replace="~{navbar/__admin_navbar}"></div>
-    <div id="loading" class="loading-div">
-        <div class="loader09"></div>
-    </div>
-    <div id="content_body" class="container-fluid d-none ">
+<!--    <div id="loading" class="loading-div">-->
+<!--        <div class="loader09"></div>-->
+<!--    </div>-->
+    <div id="content_body" class="container-fluid   ">
         <div class="row ">
             <!-- LEFT SIDE BAR -->
             <div class="col-1 px-0 left-side-menu-div d-none d-lg-block">
@@ -165,10 +165,10 @@
                 }
             })   
         }
-        setTimeout(function(){
-            $("#loading").addClass("d-none")
-            $("#content_body").removeClass("d-none")
-        }, 1000);
+        // setTimeout(function(){
+        //     $("#loading").addClass("d-none")
+        //     $("#content_body").removeClass("d-none")
+        // }, 1000);
     </script>
 </body>
 </html>

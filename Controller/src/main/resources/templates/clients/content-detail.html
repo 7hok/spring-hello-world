@@ -84,7 +84,7 @@
                 <div class="col-2 col-sm-2 col-md-2  col-lg-1 pl-2 pl-sm-2 pl-lg-2  " id="pfpic"
                      style="  padding-left: 0; text-align: right; margin-bottom: 23px;">
                     <!-- <img src="" alt=""> -->
-                    <img class=" rounded-circle z-depth-2 myButton point mr-sm-3 "
+                    <img class=" rounded-circle z-depth-2 user_name point mr-sm-3 "
                          style="  width: 60px; height: 60px;" alt="100x100"
                          id="ownerImg"
                          src="https://cdn.mos.cms.futurecdn.net/xgc36EhSDW9Zu3RGLCfLEg-970-80.jpg"
@@ -98,8 +98,8 @@
                         <div class="row mb-0 pl-3 pl-sm-0 pl-dm-0 pl-lg-0">
                             <!-- <input  type="button" value="Click me!"> -->
                             <div class="col-12 pl-0 ">
-                                        <span id="myButton" style="color: #46464e;" bio="" location=""
-                                              class="point myButton"
+                                        <span id="user_name" style="color: #46464e;" bio="" location=""
+                                              class="point user_name"
                                               data-toggle="tooltip" data-html="true"> Kong Pengsea</span>
                             </div>
                             <span id="time" class="content-timestamp"></span>
@@ -439,7 +439,7 @@
                 success: function (data) {
                     console.log(data)
                     $('#bContent').append(data["body"]);
-                    $('#myButton').text(data["user"].name);
+                    $('#user_name').text(data["user"].name);
                     $('#ownerImg').attr('src', data["user"].profilePicture);
 
                     /*
@@ -458,7 +458,7 @@
                     var bio = data["user"].bio;
                     var src = data["user"].profilePicture;
                     var name = data["user"].name;
-                    var button = $('#myButton');
+                    var button = $('#user_name');
                     /*
                     * instance obj tooltip to display when hover on name and profile picture
                     * */
@@ -466,7 +466,7 @@
                         inline_style: 'max-width: none;',
                         full_visibility_duration: 31000,
                         position: maTooltip.POSITION.BOTTOM,
-                        static_message: `<div style="background-color: white; color: black; border-radius: inherit;"><div>  <img class="img-fluid rounded-circle z-depth-2" style="width: 60px; height: 60px; min-height: 40px; min-width: 40px;" alt="100x100" src=${src} data-holder-rendered="true"></div><h3>${name}</h3><p>${locate}</p><p>${bio}</p><hr><div style="height: 32px;border-radius: inherit;background-color: white; color: black;"><a href="" style="margin-left: 20px;margin-right: 20px ">Favorite Category</a><a style="margin-left: 20px;margin-right: 20px " href="">Education</a><a href="" style="margin-left: 20px;margin-right: 20px ">Technology</a></div></div>`
+                        static_message: `<div style="background-color: white; color: black; border-radius: inherit;"><div>  <img class="img-fluid rounded-circle z-depth-2" style="width: 60px; height: 60px; min-height: 40px; min-width: 40px;" alt="100x100" src=${src} data-holder-rendered="true"></div><h3>${name}</h3><p>${locate}</p><p>${bio}</p><hr><div style="height: 32px;border-radius: inherit;background-color: white; color: black;"><a href="" style="margin-left: 20px;margin-right: 20px;text-decoration: none ">Favorite Category</a><a style="margin-left: 20px;margin-right: 20px;text-decoration: none  " href="">Education</a><a href="" style="margin-left: 20px;margin-right: 20px;text-decoration: none  ">Technology</a></div></div>`
                     });
                     //to show tooltip on hover
                     button.hover(function () {
