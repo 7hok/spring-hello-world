@@ -1,5 +1,6 @@
 package khmerhowto.Controller;
 
+import java.lang.reflect.Array;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -171,20 +172,20 @@ public class HomeController {
     String contentCard(ModelMap map, @PathVariable("no") Integer i) {
         Page<Content> lst;
         String b;
-        List<Content> list=new ArrayList<>();
+//        List<Content> list=new ArrayList<>();
         lst = con.findAll(PageRequest.of(i, 3, Sort.by(Sort.Direction.DESC, "Id")));
-         try {
-             list.addAll(lst.getContent());
-
-            for (int l = 0; l < list.size(); l++) {
-                b = list.get(l).getBody().replaceAll("<[^\\P{Graph}>]+(?: [^>]*)?>", "");
-                list.get(l).setBody(b);
-            }
-        }
-        catch(Exception e){
-
-        }
-        map.addAttribute("contents",list);
+//         try {
+//             list.addAll(lst.getContent());
+//
+//            for (int l = 0; l < list.size(); l++) {
+//                b = list.get(l).getBody().replaceAll("<[^\\P{Graph}>]+(?: [^>]*)?>", "");
+//                list.get(l).setBody(b);
+//            }
+//        }
+//        catch(Exception e){
+//
+//        }
+        map.addAttribute("contents",lst.getContent());
 
         Map<Integer, Integer> numCmt = new HashMap<>();
         for (int j = 0; j <= lst.getContent().size() - 1; j++) {
@@ -404,24 +405,7 @@ public class HomeController {
         return "content-by-category-test";
     }
 
-    @Autowired
-    JavaMailSender javaMailSender;
 
 
-    @GetMapping("/sendEmailHz")
-    @ResponseBody
-    public  void sendEmail() {
 
-        SimpleMailMessage msg = new SimpleMailMessage();
-        for (int i=0;i<=5;i++){
-            String[] emailArray= {"humchamroeunhrd@gmail.com", "humchamroeuncs@gmail.com", "humchamroeunmmo@gmail.com"};
-            msg.setTo(emailArray);
-            msg.setSubject("Kunloes Update");
-            msg.setText("Find a beautiful piece of art. If you fall in love with Van Gogh or Matisse or John Oliver Killens, or if you fall love with the music of Coltrane, the music of Aretha Franklin, or the music of Chopin - find some beautiful art and admire it, and realize that that was created by human beings just like you, no more human, no less. Read more at https://www.brainyquote.com/topics/beautiful-quotes");
-            javaMailSender.send(msg);
-            System.out.println("send email");
-            System.out.println("Jab id"+favoriteCategoryRepository.findAllByuserId(1));
-        }
-    }
-  
 }

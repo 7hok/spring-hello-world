@@ -8,8 +8,10 @@ import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 //import khmerhowto.Repository.globalFunction.GlobalFunctionHelper;
+import khmerhowto.Repository.Model.audit.ArticleListener;
+import org.springframework.context.event.EventListener;
 import org.springframework.data.rest.core.annotation.RestResource;
-
+@EntityListeners(ArticleListener.class)
 @Entity
 public class Content {
     @Id

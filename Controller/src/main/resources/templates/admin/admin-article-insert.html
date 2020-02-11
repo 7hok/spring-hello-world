@@ -275,7 +275,8 @@
                     }
 
                     if(thImg==""){
-                        alert("សូមបញ្ចូលរូបតំណាង")
+                        alert("សូមបញ្ចូលរូបតំណាង");
+                        return;
                     }
                     $("#post").attr("disabled", true);
                     var dataObj = {
@@ -302,6 +303,7 @@
                             window.location.replace("/detail/"+respone.id);
                         },
                         error: function (respone){
+                            $("#post").attr("disabled", false);
                             console.log(respone);
                         },
                         dataType: 'json'
@@ -386,6 +388,7 @@
                 });
                 //TO SEARCH CATEGORIES
                 $(function(){
+                    // $('.card-text').html($('.card-text').html().replace(/(<([^>]+)>)/ig, ""));
                     jQuery.expr[':'].icontains = function(a, i, m) {
                         return jQuery(a).text().toUpperCase()
                             .indexOf(m[3].toUpperCase()) >= 0;
