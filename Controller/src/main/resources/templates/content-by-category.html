@@ -164,13 +164,6 @@
             border-color: #f8f9fa !important;
             font-size: 17px !important;
         }
-
-
-
-
-
-
-
         /* New Scroll Category */
         /* End of New Scroll Category */
 
@@ -215,18 +208,17 @@
                 <ul class="list-group">
                     <li class="list-group-item category-border-color active category-bg-color font-weight-bold ">Categories</li>
                     <li class="list-group-item  " style="cursor: pointer">
-
                         <div class="custom-control custom-radio pt-2" th:each="category:${categories}">
                             <th:block th:if="${category.id == 1}">
                                 <input type="radio" style="cursor: pointer" checked th:value="${category.id}" th:id="${category.id}" name="customRadio" class="custom-control-input">
                                 <div  class="custom-control-label pointer" >
-                                    <label style="cursor: pointer; display:inline-block; width:90%;" th:text="${category.name}" th:for="${category.id}"></label>
+                                    <label style="cursor: pointer; display:inline-block; width:90%; margin-left: 3px" th:text="${category.name}" th:for="${category.id}"></label>
                                 </div>
                             </th:block>
                             <th:block th:unless="${category.id == 1}">
                                 <input type="radio" style="cursor: pointer" checked th:value="${category.id}" th:id="${category.id}" name="customRadio" class="custom-control-input">
                                 <div  class="custom-control-label pointer" >
-                                    <label style="cursor: pointer; display:inline-block; width:90%;" th:text="${category.name}" th:for="${category.id}"></label>
+                                    <label style="cursor: pointer; display:inline-block; width:90%; margin-left: 3px" th:text="${category.name}" th:for="${category.id}"></label>
                                 </div>
                             </th:block>
                         </div>

@@ -226,7 +226,7 @@
             </div>
 
             <div class="row py-2">
-                <div class="col-12"><input style="float: right; width: 100px; " onclick="getData()" type="button"
+                <div class="col-12"><input style="float: right; width: 100px; " onclick="getData()" id="post" type="button"
                         value="Update" class="btn btn-primary"></div>
             </div>
 
@@ -234,16 +234,13 @@
             <script>
 
                 var thImg = "";
-
+                var owner_id='';
                 CKEDITOR.replace('editor1', {
                     uiColor: '#C2D6FF',
                     allowedContent: true
                 });
 
-                window.onload =
-                    function () {
-                        CKEDITOR.instances.editor1.insertHtml("<p>adsfasdfadf</p>");
-                    }
+
 
                 CKEDITOR.on("instanceReady", function (event) {
                     $.ajax({
@@ -259,14 +256,14 @@
                             $("#search").val(title);
                             $("#thumnail").attr("src",  data["thumbnail"]);
                             thImg = data["thumbnail"];
-
+                            owner_id=data.user.id;
                         },
                         error: function (data) {
                             console.log("error");
                             console.log(data);
                         }
                     });
-                })
+                });
 
                 CKEDITOR.fire('load');
 
@@ -276,18 +273,35 @@
 
                 function getData() {
                     var radioValue = $("input[name='radio']:checked").val();
-                    if(radioValue==undefined){
-                        alert("undefined");
-                    }
+
+
                     var value = CKEDITOR.instances["editor1"].getData();
- 
+                    if(value==""||value.length<20){
+                        alert("អត្ថបទអោយបានត្រឹមត្រូវ");
+                        return;
+                    }
+                    if($("#search").val().length<1){
+                        alert("សូមបញ្ចូលចំណងើង");
+                        return;
+                    }
+                    if (radioValue === undefined){
+                        alert("សូមជ្រើសរើសប្រភេទអត្ថបទ");
+                        return;
+                    }
+
+                    if(thImg==""){
+                        alert("សូមបញ្ចូលរូបតំណាង")
+                    }
+                    $("#post").attr("disabled", true);
                     var dataObj = {
                         "body": value,
                         "id": [[${id}]],
                         "status": "1",
                         "thumbnail": thImg,
                         "title": $("#search").val(),
-                        "writer": "string",
+                        "user":{
+                            "id": [[${currentUser.getId()}]]
+                        },
                         "category": {
                             "id": radioValue //static
                         }
@@ -299,9 +313,11 @@
                         contentType: "application/json",
                         success: function (respone) {
                             console.log(respone)
+                            window.location.replace("/detail/"+respone.id);
                         },
                         error: function(er){
                            console.log(er)
+
                         },
                         dataType: 'json'
                     });

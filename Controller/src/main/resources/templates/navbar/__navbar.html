@@ -205,7 +205,7 @@
             <li class="nav-item  d-none d-lg-block">
 
                 <a class="nav-link text-center text-dark" href="/homepage">
-                    <h5 th:class="${CURRENT_PAGE == 'home'}?'icon-linear-color page-active':'icon-linear-color'" style="width: 75%;">Home</h5>
+                    <h5 th:class="${CURRENT_PAGE == 'home'}?'icon-linear-color page-active':'icon-linear-color'" style="width: 75%;" th:text="#{article.author}">Home</h5>
 
                 </a>
             </li>
@@ -298,7 +298,7 @@
                
                     <div class="dropdown-menu dropdown-menu-customized dropdown-menu-right mt-3" aria-labelledby="profile">
                         <div class="card border-0">
-                            <div class="card-title ">
+                            <div class="card-title">
                                     <div class="text-center pt-2">
                                         <img class="rounded-circle" th:src="*{profilePicture}"  onerror="this.src='https://cdn.dribbble.com/users/2620325/screenshots/6699707/2-01_2x.jpg'" style="width: 50px; height: 50px;" alt="">
                                         <br>
@@ -319,7 +319,7 @@
                             <ul th:switch="*{getUserRole()}" class="list-group list-group-flush border-top">
                                 <li class="list-group-item text-center click-list-user-profile" onclick="location.href='/customize';">Customize</li>
                                 <li th:case="'CLIENT'" class="list-group-item text-center click-list-user-profile" onclick="" data-toggle="modal" data-target="#requestModal" data-whatever="@mdo">Request</li>
-                                <li th:case="'ADMIN'" class="list-group-item text-center click-list-user-profile" onclick="location.href='/admin';">Admin</lith:case="'CLIENT'">
+                                <li th:case="'ADMIN'" class="list-group-item text-center click-list-user-profile" onclick="location.href='/admin';">Admin</li>
                                 <li class="list-group-item text-center click-list-user-profile" onclick="location.href='/logout';">Logout</li>
                             </ul>
                             </div>

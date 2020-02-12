@@ -12,8 +12,7 @@
      
     <div th:onclick="'window.location.href = \'' + @{/detail/{id}(id=${content.getId()})} + '\''" th:style="'background:url(' + @{${content.getThumbnail()}} +') no-repeat center;'+' background-size: cover; cursor: pointer;' " 
         class="h-100  group-one-c-one d-flex align-items-end justify-content-center mysl">
-         
-       
+
         <div class="text-center mw-50">
             <h5 class="text-white" th:text=${content.getTitle()}>
             </h5>

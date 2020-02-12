@@ -7,6 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src=""></script>
+    <meta property="og:url"           content="https://www.your-domain.com/your-page.html" />
+    <meta property="og:type"          content="website" />
+    <meta property="og:title"         content="Your Website Title" />
+    <meta property="og:description"   content="Your description" />
+    <meta property="og:image"         content="https://www.your-domain.com/path/image.jpg" />
  </head>
 
 <body>
@@ -110,13 +115,17 @@
                 <div class="col-2 col-sm-2 col-md-2 col-lg-2 pr-0">
                     <table style="float: right; margin-top: 3%;">
                         <tr>
-                            <td class="p-1 point"><img onclick="printContent()" style="max-width: 31px;color: #46464e;"
+                            <td class=" point" style="    padding-bottom: 4px;
+"><img onclick="printContent()" style="max-width: 31px;color: #46464e;"
                                                        src="/icon/print.svg" alt="">
                             </td>
 
-                            <td class="p-1 point"><img onclick="setSrc()" style="max-width: 30px;color: #46464e;"
-                                                       src="/icon/facebook.svg" alt=""></td>
-                            <td class=" point"> <img style="max-width: 30px; margin-left: 2.6px; " src="/icon/d.svg"
+                            <td class="p-1 point pt-1" >
+
+                                     <iframe src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&layout=button&size=large&appId=1242809985886635&width=77&height=28" width="29" height="30" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+
+                                </td>
+                            <td class=" point" style="padding-bottom: 2px"> <img style="max-width: 30px; margin-left: 2.6px;    margin-bottom: 7px; " src="/icon/d.svg"
                                                      alt="" onclick="" data-toggle="modal" data-target="#feedbackModal" data-whatever="@mdo">
 
                             </td>
@@ -175,10 +184,13 @@
                 <div class="col-1 col-md-1 col-lg-1  my-auto pl-1 pl-md-0 pl-lg-0" style=" " sec:authorize="isAuthenticated()">
                     <span id="likeNum" class="pb-3 " th:text=${like}></span>
                 </div>
-                <div class="col-10 col-md-10 col-lg-10">
+                <div class="col-9 col-md-9 col-lg-9">
                     <div id="category"
                          style="padding: 6px;display: inline;border-radius: 4px;  background-color:rgb(251, 248, 248);">
                     </div>
+
+                </div>
+                <div class="col-1 col-md-1 col-lg-1">
 
                 </div>
             </div>
@@ -365,14 +377,13 @@
         </div>
    </div>
 
-    <iframe id="share_to_fb" src="https://www.facebook.com/plugins/share_button.php?href=http://news.sabay.com.kh/article/1188282#utm_campaign=onpage&layout=button&size=large&appId=1242809985886635&width=77&height=28" width="77" height="28" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
 </div>
-
 <div layout:fragment="content-js">
     <script src="/js/es6-promise.auto.min.js"></script>
     <script src="/pdf/jspdf.min.js"></script>
     <script src="/js/html2canvas.min.js"></script>
     <script src="/js/html2pdf.js"></script>
+
     <script>
         function addScript(url) {
             var script = document.createElement('script');
@@ -381,6 +392,7 @@
             document.head.appendChild(script);
         }
         addScript('https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js');
+
         const printContent = () => {
             /*
             var doc = new jsPDF();
@@ -415,7 +427,7 @@
         function setSrc(){
             var url=document.URL;
             $('#share_to_fb').attr('src',"https://www.facebook.com/plugins/share_button.php?href="+url+"&layout=button&size=large&appId=1242809985886635&width=77&height=28");
-            $('._2tga ').click();
+
         }
     </script>
     <script>
