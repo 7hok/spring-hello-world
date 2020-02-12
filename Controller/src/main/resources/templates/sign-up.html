@@ -21,17 +21,17 @@
                 <form  id="form-submit" class="p-form" style="text-align: center;" method="POST" th:object="${USER}" action="/signup">
                     <h3 style="line-height: 60px; margin-bottom: 3px; font-size: x-large;" class="font-weight-bold"> KUNLOES</h3>
                     <!-- <span class="title-log ">Khmer How To</span> -->
-                    <p class="line-m" style="line-height: 100%; font-size: small;">Sign up with <b>KUNLOES</b>
+                    <p class="line-m" style="line-height: 100%; font-size: small;" th:text="#{sign-up-with-kunloes-account}">Sign up with <b>KUNLOES</b>
                         Account</p>
 
                     <div style=" text-align: start; margin-bottom: 7%; margin-top: 7%;">
-                        <span style="text-align: left; margin-bottom: 0px !important;font-size: small; font-weight: 550; " id="nameLabel">Name</span>
+                        <span style="text-align: left; margin-bottom: 0px !important;font-size: small; font-weight: 550; " id="nameLabel" th:text="#{name}">Name</span>
                         <span id="nameRequired" style="text-align: left; color: red; margin-bottom: 0px !important;font-size: xx-small; font-weight: 550;">*required</span>
                         <input style="text-align: left; margin-top: 2px; font-size: small" type="text"
-                           id="name_input"  class="t-span form-control" th:field="*{name}" placeholder="Name">
+                           id="name_input"  class="t-span form-control" th:field="*{name}" th:placeholder="#{name}">
                     </div>
                     <div style="text-align: start;">
-                        <span class="t-span" style="margin-bottom: 0px; font-size: small;font-weight: 550; " id="emailLabel">E-mail</span>
+                        <span class="t-span" style="margin-bottom: 0px; font-size: small;font-weight: 550; " id="emailLabel" th:text="#{email}">E-mail</span>
                         <span id="emailRequired" style="text-align: left; color: red; margin-bottom: 0px !important;font-size: xx-small; font-weight: 550; " >*required</span>
                         <input type="text" class="t-span form-control"
                         id="email_input" style="margin-top: 2px; margin-bottom: 8%; font-size: small " th:field="*{email}" placeholder="youremail@email.com">
@@ -39,44 +39,44 @@
 
                     <div id="radioSex" style="text-align: start; ">
 
-                        <span class="t-span" style="display: block; margin-bottom: -1px; font-size: small;font-weight: 550;" id="gender">Gender<span id="sexRequired" style="text-align: left; color: red; margin-bottom: 0px !important;font-size: xx-small; font-weight: 550;">&nbsp;*required</span></span>
+                        <span class="t-span" style="display: block; margin-bottom: -1px; font-size: small;font-weight: 550;" id="gender" th:text="#{gender}">Gender<span id="sexRequired" style="text-align: left; color: red; margin-bottom: 0px !important;font-size: xx-small; font-weight: 550;">&nbsp;*required</span></span>
 
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" style="font-size: small " type="radio"
-                                name="inlineRadioOptions" id="inlineRadio1" th:field="*{sex}" value="male">
-                            <label class="form-check-label" style="font-size: small " for="inlineRadio1">Male</label>
+                                name="inlineRadioOptions" id="inlineRadio1" th:field="*{sex}" value="male" >
+                            <label class="form-check-label" style="font-size: small " for="inlineRadio1" th:text="#{male}">Male</label>
                         </div>
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" style="font-size: small " type="radio"
-                                name="inlineRadioOptions" id="inlineRadio2" th:field="*{sex}" value="female">
-                            <label class="form-check-label " style="font-size: small " for="inlineRadio2">Female</label>
+                                name="inlineRadioOptions" id="inlineRadio2" th:field="*{sex}" value="female" >
+                            <label class="form-check-label " style="font-size: small " for="inlineRadio2" th:text="#{female}">Female</label>
                         </div>
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="inlineRadioOptions" th:field="*{sex}" id="inlineRadio3"
-                                value="other">
-                            <label style="font-size: small " class="form-check-label" for="inlineRadio3">Other</label>
+                                value="other" >
+                            <label style="font-size: small " class="form-check-label" for="inlineRadio3" th:text="#{other}">Other</label>
                         </div>
                     </div>
                  
                     <div style=" text-align: start; margin-bottom: 8%; margin-top: 5%;">
-                        <span style="text-align: left; margin-bottom: 0px !important;font-size: small;font-weight: 550;  " id="passwordLabel">Password</span>
+                        <span style="text-align: left; margin-bottom: 0px !important;font-size: small;font-weight: 550;  " id="passwordLabel" th:text="#{password}">Password</span>
                         <span id="passwordRequired" style="text-align: left; color: red; margin-bottom: 0px !important;font-size: xx-small; font-weight: 550;">*required</span>
                         <input style="text-align: left; margin-top: 3px; font-size: small " type="password"
-                           id="password"  class="t-span form-control" th:field="*{password}" placeholder="Password">
+                           id="password"  class="t-span form-control" th:field="*{password}" th:placeholder="#{password}">
                     </div>
                     <div style=" text-align: start; margin-bottom: 11%; margin-top: 5%;">
-                        <span style="text-align: left; margin-bottom: 0px !important;font-size: small;font-weight: 550;  ">Confirm Password</span>
+                        <span style="text-align: left; margin-bottom: 0px !important;font-size: small;font-weight: 550;  " th:text="#{confirm-password}">Confirm Password</span>
                         <span id="passwordNotMatched" style="text-align: left; color: red; margin-bottom: 0px !important;font-size: xx-small; font-weight: 550;">*not matched</span>
                         <input style="text-align: left; margin-top: 3px; font-size: small " type="password"
-                        id="c_password" class="t-span form-control" placeholder="Password">
+                        id="c_password" class="t-span form-control" th:placeholder="#{password}">
                     </div>
                     <div class="container-fluid mb-2">
                         <div class="row">
                             <div class="col-6 px-0 text-left">
-                                <a style="width: 90px;background-color: #FF2A19;" href="/login"  class="btn text-white right-al"><span class="t-span ">Log in</span></a>
+                                <a style="width: 103px;background-color: #FF2A19;" href="/login"  class="btn text-white right-al"><span class="t-span " th:text="#{log-in}">Log in</span></a>
                             </div>
                             <div class="col-6 px-0 text-right">
-                                <button style="width: 90px;" id="btnSubmit"  type="submit" class="btn btn-primary left-al"><span class="t-span">SignUp</span>
+                                <button style="width: 90px;" id="btnSubmit"  type="submit" class="btn btn-primary left-al"><span class="t-span" th:text="#{sign-up}">SignUp</span>
                                 </button>
                                 
                             </div>

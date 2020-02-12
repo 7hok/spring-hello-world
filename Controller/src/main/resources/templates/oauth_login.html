@@ -51,23 +51,23 @@
                 </div>
                 <h5 style="line-height: 65px; margin-bottom: 4px; font-size: x-large;" class="font-weight-bold">KUNLOES</h5>
                 <!-- <span class="title-log ">Khmer How To</span> -->
-                <p class="line-m" style="line-height: 100%; font-size: small;">Please login or sign up for an account</p>
+                <p class="line-m" style="line-height: 100%; font-size: small;" th:text="#{please-login-or-sign-up}">Please login or sign up for an account</p>
 
                 <div style=" text-align: start; margin-bottom: 9%; margin-top: 10%;">
-                    <span style="text-align: left; margin-bottom: 0px !important;font-size: small">Email</span>
+                    <span style="text-align: left; margin-bottom: 0px !important;font-size: small" th:text="#{email}">Email</span>
                     <input style="text-align: left; margin-top: 2px;" type="text" class="t-span form-control"
                            placeholder="ABC@gmail.com"
                            id="username" name="username" 
                            >
                 </div>
                 <div style="text-align: start;">
-                    <span class="t-span" style="margin-bottom: 0px; font-size: small">Password</span>
+                    <span class="t-span" style="margin-bottom: 0px; font-size: small" th:text="#{password}">Password</span>
                     <input type="password" class="t-span form-control" style="margin-top: 2px; margin-bottom: 10%;"
-                           placeholder="Password" id="password" autocomplete="on" name="password" >
+                           th:placeholder="#{password}" id="password" autocomplete="on" name="password" >
                 </div>
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-6  px-0 text-left"> <input type="checkbox" value=""><span style="font-size: small" class="align-top line-m">&nbsp;&nbsp;Remember me</span></label></div>
+                        <div class="col-6  px-0 text-left"> <input type="checkbox" value="">&nbsp;<span style="font-size: small" class="align-top line-m"​ th:text="#{remember-me}">Remember me</span></label></div>
                         <!-- <div class="col-6  px-0 text-right"> <p class="line-m checkbox-inline "><a style="font-size: small; text-decoration: underline;" class="align-top "  href="">Forget Password</a> </p></div> -->
                     </div>
                 </div>
@@ -76,11 +76,11 @@
                     <div class="row">
                         <div class="col-6 px-0 text-left">
                           <a style="width: 100px;     background-color: #a9a9a954;" type="submit"
-                                href="/signup"    class="btn right-al"><span class="t-span">Sign Up</span></a>
+                                href="/signup"    class="btn right-al"><span class="t-span" th:text="#{sign-up}">Sign Up</span></a>
                            
                         </div>
                         <div class="col-6 px-0 text-right">
-                          <button  style="width: 90px; background-color: #FF2A19;" type="submit" class="btn btn-primary text-white left-al"><span class="t-span">Login</span> </button>
+                          <button  style="width: 103px; background-color: #FF2A19;" type="submit" class="btn btn-primary text-white left-al"><span class="t-span" th:text="#{log-in}">Login</span> </button>
                         </div>
                     </div>
                 </div>

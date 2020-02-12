@@ -134,7 +134,7 @@
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Feedback</h5>
+                                                <h5 class="modal-title" id="exampleModalLabel" th:text="#{feedback}">Feedback</h5>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
@@ -143,15 +143,15 @@
                                                 <form>
 
                                                     <div class="form-group">
-                                                        <label for="feedback-message" class="col-form-label mb-2" >Your Message</label>
+                                                        <label for="feedback-message" class="col-form-label mb-2" th:text="#{your-message}" >Your Message</label>
 
                                                         <textarea class="form-control" id="feedback-message"></textarea>
                                                     </div>
                                                 </form>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="sendFeedback()">Send</button>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal" th:text="#{close}">Close</button>
+                                                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="sendFeedback()" th:text="#{send}">Send</button>
                                             </div>
                                         </div>
                                     </div>
@@ -196,8 +196,8 @@
             </div>
             <div class="row" style="margin-top: 3%; margin-left: 0;; margin-bottom: 3%;  ">
                 <div class="col-4 col-sm-6 col-md-4 col-lg-2 pl-0"
-                     style="border-bottom: 3px solid rgb(9, 190, 235);">
-                    <span id="nCmt" th:text=${totalCmt}></span> Comments
+                     style="border-bottom: 3px solid rgb(9, 190, 235);" >
+                    <span id="nCmt" th:text=${totalCmt}></span> <span th:text="#{comments}">Comments</span>
                 </div>
                 <div class="col-8 col-sm-6 col-md-8 col-lg-10"
                      style="border-bottom: 3px solid rgb(217, 217, 226);">
@@ -214,7 +214,7 @@
                 </div>
                 <div class="col-10 col-sm-10 col-md-11 col-lg-11 pr-0 pl-0 my-auto">
                     <div class="form-group my-auto">
-                        <input type="email" class="form-control" id="commentInp" placeholder="Comment">
+                        <input type="email" class="form-control" id="commentInp" th:placeholder="#{comment}">
                     </div>
                     <!--  <input style="width: -webkit-fill-available;" placeholder="comment" type="text" name="" id="">-->
                 </div>
@@ -239,7 +239,7 @@
                         <div class="col-1 col-sm-3 col-md-3"></div>
                         <div class="col-10 col-sm-6 col-md-6" style="text-align: center; margin-bottom: 4%;">
                             <button type="button" class="btn  w-auto btn-primary btn-block" id="showCmt"
-                                    style="border-radius: 30px; margin-left: 25%;">Show More Comments
+                                    style="border-radius: 30px; margin-left: 25%;" th:text="#{show-more-comment}">Show More Comments
                             </button>
                         </div>
                         <div class="col-1 col-sm-3 col-md-3"></div>
@@ -255,7 +255,7 @@
 
    <div class="recomment-div" th:if="${RECOMMEND_ARTICLE != null}">
         <div class="row" style=" margin-left: 1px;">
-            <h4>អត្ថបទដែលគួរអាន</h4>
+            <h4 th:text="#{recommended-article}">អត្ថបទដែលគួរអាន</h4>
 
         </div>
         <div th:each=" article : ${RECOMMEND_ARTICLE}" th:object="${article}" class="article_object_list row" style=" margin-left: 1px;" th:onclick="'onClickRedirectTo('+*{id}+')'">
@@ -275,14 +275,13 @@
                             <div class="row">
                                 <div class="col-12" style="position: relative;width: max-content;position: absolute;right: 0px;bottom: 0px;
                                     float: right;">
-                                    <a th:href="'/detail/'+*{id}" style="font-size: smaller; text-decoration: none;">see more >
+                                    <a th:href="'/detail/'+*{id}" style="font-size: smaller; text-decoration: none;" th:text="#{see-more}">see more >
                                     </a>
                                 </div>
                             </div>
                         </div>
 
                     </div>
-
                 </div>
             </div>
         </div>
