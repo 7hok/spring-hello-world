@@ -172,25 +172,21 @@ public class HomeController {
     String contentCard(ModelMap map, @PathVariable("no") Integer i) {
         Page<Content> lst;
         String b;
-//        List<Content> list=new ArrayList<>();
+        List<Content> list=new ArrayList<>();
+        Map<Integer, String> card_text = new HashMap<>();
         lst = con.findAll(PageRequest.of(i, 3, Sort.by(Sort.Direction.DESC, "Id")));
-//         try {
-//             list.addAll(lst.getContent());
-//
-//            for (int l = 0; l < list.size(); l++) {
-//                b = list.get(l).getBody().replaceAll("<[^\\P{Graph}>]+(?: [^>]*)?>", "");
-//                list.get(l).setBody(b);
-//            }
-//        }
-//        catch(Exception e){
-//
-//        }
-        map.addAttribute("contents",lst.getContent());
+        for (int l = 0; l < lst.getContent().size(); l++) {
+           b = lst.getContent().get(l).getBody().replaceAll("<[^\\P{Graph}>]+(?: [^>]*)?>", "");
+           card_text.put(lst.getContent().get(l).getId(),b);
+        }
 
+        map.addAttribute("contents",lst.getContent());
+        map.addAttribute("text_card",card_text);
         Map<Integer, Integer> numCmt = new HashMap<>();
         for (int j = 0; j <= lst.getContent().size() - 1; j++) {
             numCmt.put(lst.getContent().get(j).getId(), cmt.getTotalComment(lst.getContent().get(j).getId()));
         }
+        System.out.println(card_text);
         Map<Integer, Integer> m = new HashMap<>();
         for (int j = 0; j <= lst.getContent().size() - 1; j++) {
             m.put(lst.getContent().get(j).getId(), interestedServiceImp.getTotalLike(lst.getContent().get(j).getId()));
@@ -209,15 +205,8 @@ public class HomeController {
     @GetMapping(value = "/conCard")
     String content(ModelMap map) {
         Page<Content> lst = con.findAll(PageRequest.of(0, 3, Sort.by(Sort.Direction.DESC, "Id")));
-        List<Content> list=new ArrayList<>();
-        String b;
-        for(Integer i=0;i<lst.getContent().size();i++){
-          list.add((Content) lst.getContent().get(i));
-          b= list.get(i).getBody().replaceAll("<[^\\P{Graph}>]+(?: [^>]*)?>", "");
-          list.get(i).setBody(b);
-            System.out.println(b);
-        }
-        map.addAttribute("contents", list);
+
+        map.addAttribute("contents", lst.getContent());
 
         return "fragment/__content_card::contentList";
     }
