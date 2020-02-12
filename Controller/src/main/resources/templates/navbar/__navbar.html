@@ -221,21 +221,12 @@
                         <img class="" src="/icon/notification-navbar-v2.svg" style="width: 28px; height: 28px;" alt="">
                         <sup id="num_of_notification" class="" style="color: #393939; position: absolute; top: 10px;"></sup>
                     </a>
-<!--                    <div class="notify-drop dropdown-menu notifications dropdown-menu-customized dropdown-menu-right mt-3" style="width: 100px;" aria-labelledby="notification">-->
-<!--                        <ul class="list-group">-->
-<!--                            <li class="list-group-item" >New post From Science</li>-->
-<!--                            <li class="list-group-item">New post From Tech</li>-->
-<!--                            <li class="list-group-item">New post From Soft</li>-->
-<!--                        </ul>-->
-<!--                    </div>-->
 
-
-<!--                    CH note-->
                     <ul class="dropdown-menu notifications dropdown-menu-customized " role="menu" aria-labelledby="dLabel" id=" style-scroll">
 
                         <div class="notification-heading  border-bottom">
                             <b class="notification-menu-title" th:text="#{notification}">Notifications</b>
-<!--                            <h4 class="notification-menu-title pull-right">View all<i class="glyphicon glyphicon-circle-arrow-right"></i></h4>-->
+
                         </div>
                         <li class="divider"></li>
                         <div class="notifications-wrapper " id="notification_div_body">
@@ -281,12 +272,10 @@
                         </div>
                         <li class="divider buttom-divider "></li>
                         <div class="notification-footer">
-                            <!-- <h4 class="notification-menu-title">View all<i class="glyphicon glyphicon-circle-arrow-right"></i></h4> -->
+
                         </div>
                     </ul>
 <!--                    End CH note-->
-
-
 
                 </div>
             </li>
@@ -311,7 +300,6 @@
                                 <b th:text="#{biography}">BIO : <br> </b>
                                 <p class="px-4" th:text="*{bio}">
 
-                                    Ben Arfa ចូល​រួម​ជាមួយ​ក្លឹប Ronaldo ក្រោយ​ខាន​លេង​បាល់​ជាង​កន្លះ​ឆ្នាំ
 
                                 </p>
                             </div>
@@ -333,6 +321,21 @@
                     <img class="" src="/icon/user-navbar-v2.svg" style="width: 28px; height: 28px;" alt="">
                 </a>
             </li>
+            <li style="margin-right: 37px;margin-top: 5px;">
+<!--                <select style="border: none; cursor: pointer">-->
+<!--                    <option style="border: none;cursor: pointer">KH</option>-->
+<!--                    <option style="border: none;cursor: pointer">EN</option>-->
+<!--                </select>-->
+                <div class="dropdown">
+                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Language
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="left: -13px;top: 41px;">
+                        <a class="dropdown-item" href="/?lang=kh">KHMER</a>
+                        <a class="dropdown-item" href="/?lang=en">ENGLISH</a>
+                    </div>
+                </div>
+            </li>
         </ul>
         <ul class="d-md-block d-lg-none">
             <li class="list-group-item">
@@ -343,18 +346,14 @@
             </li>
             <li class="list-group-item ">
                 <a class="nav-link text-dark" href="/contentByCategory">
-                    
                     <h5 class=" icon-linear-color"><sub><i class="material-icons-new outline-library_books md-36 mr-2"></i></sub> Category</h5>
-
                 </a>
             </li>
             <li class="list-group-item text-center">
                 <a class="nav-link text-dark ">
                     <h5 class="text-left icon-linear-color"><sub><i class="material-icons-new outline-notifications mr-2 "></i></sub> Notification</h5>
                 </a>
-               
             </li>
-            
         </ul> 
     </div>
     <div class="modal fade" id="requestModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

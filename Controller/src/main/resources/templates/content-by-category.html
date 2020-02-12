@@ -194,7 +194,7 @@
 
             <div class="category-bg-color scrollmenu  top-category  w-100" >
                 <th:block th:each="category:${categories}">
-<!--                    <a href="#home" th:text="${category.name}" th:value="${category.id}">Communication</a>-->
+
                     <label style="padding: 10px;  margin: 0px; cursor: pointer" th:text="${category.name}"
                            th:for="${category.id}"> </label>
                 </th:block>
@@ -367,9 +367,9 @@
                         }
                         if (obj._embedded.contents.length>0) {
                             ele1 = `<div class="carousel-item active" onclick="window.location.href ='/detail/${obj._embedded.contents[0].id}'" style="height: 400px;background:url(${obj._embedded.contents[0].thumbnail}) no-repeat center; background-size: cover; cursor: pointer;" class="border  border-dark h-100  group-one-c-one d-flex align-items-end justify-content-center mysl">
-<!--                        <img src=${obj._embedded.contents[0].thumbnail} class="d-block w-100" alt="..."> -->
+
                                 <div class="latest-post-caption carousel-caption d-none d-md-block text-left ">
-                                <h5  class="vw vw-10 mb-3 mb-md-3 mb-sm-3"><span class="carousel-control-next-icon" aria-hidden="true"></span>Latest Post</h5>
+                                <h5  class="vw vw-10 mb-3 mb-md-3 mb-sm-3">  </h5>
                                 <p class="vw-10 mb-3 mb-md-3 mb-sm-3 latest-post" >${obj._embedded.contents[0].title}</p>
                                 <a href=""><button type="button" class=" latest-category-button btn btn-outline-primary btn-round-lg btn-lg">Keep Reading</button></a>
                                 </div>
@@ -377,9 +377,9 @@
                                 }
                         if (obj._embedded.contents.length>1) {
                             ele2 = `<div class="carousel-item " onclick="window.location.href ='/detail/${obj._embedded.contents[1].id}'" style="height: 400px;background:url(${obj._embedded.contents[1].thumbnail}) no-repeat center; background-size: cover; cursor: pointer;" class="border  border-dark h-100  group-one-c-one d-flex align-items-end justify-content-center mysl">
-<!--                        <img src=${obj._embedded.contents[1].thumbnail} class="d-block w-100" alt="...">-->
+
                                 <div class="latest-post-caption carousel-caption d-none d-md-block text-left ">
-                                <h5  class="vw vw-10 mb-3 mb-md-3 mb-sm-3"><span class="carousel-control-next-icon" aria-hidden="true"></span>Latest Post</h5>
+                                <h5  class="vw vw-10 mb-3 mb-md-3 mb-sm-3">  </h5>
                                 <p class="vw-10 mb-3 mb-md-3 mb-sm-3 latest-post">${obj._embedded.contents[0].title}</p>
                                 <a href=""><button type="button" class=" latest-category-button btn btn-outline-primary btn-round-lg btn-lg">Keep Reading</button></a>
                                 </div>
@@ -387,9 +387,9 @@
                                 }
                         if (obj._embedded.contents.length>2) {
                             ele3 = `<div class="carousel-item " onclick="window.location.href ='/detail/${obj._embedded.contents[2].id}'" style="height: 400px;background:url(${obj._embedded.contents[2].thumbnail}) no-repeat center; background-size: cover; cursor: pointer;" class="border  border-dark h-100  group-one-c-one d-flex align-items-end justify-content-center mysl">
-<!--                        <img src=${obj._embedded.contents[2].thumbnail} class="d-block w-100" alt="...">-->
+
                                 <div class="latest-post-caption carousel-caption d-none d-md-block text-left ">
-                                <h5  class="vw vw-10 mb-3 mb-md-3 mb-sm-3"><span class="carousel-control-next-icon" aria-hidden="true"></span>Latest Post</h5>
+                                <h5  class="vw vw-10 mb-3 mb-md-3 mb-sm-3">  </h5>
                                 <p class="vw-10 mb-3 mb-md-3 mb-sm-3 latest-post">${obj._embedded.contents[0].title}</p>
                                 <a href=""><button type="button" class=" latest-category-button btn btn-outline-primary btn-round-lg btn-lg">Keep Reading</button></a>
                                 </div>
@@ -398,9 +398,7 @@
                         $("#contt").append(ele1);
                         $("#contt").append(ele2);
                         $("#contt").append(ele3);
-
                         $("#loadMoreRecentBtn").click();
-
                     }
                 });
 
@@ -448,21 +446,7 @@
                                         class="text-muted"></small> <small class="text-muted"></small></p>
                                 <p class="card-text text-left">${objRecent._embedded.contents[1].body.replace(/(<([^>]+)>)/ig, "").substring(0, 200)}</p>
                                 <div class="d-inline d-flex justify-content-end  align-items-end text-right mr-2">
-<!--                                    <div>-->
-                                <!--                                        <a class="text-decoration-none" href="">-->
-                                <!--                                        <i class="material-icons-new outline-favorite_border"-->
-                                <!--                                           style="width: 22px; height: 22px;">-->
-                                <!--                                        </i>-->
-                                <!--                                        </a>-->
 
-                                <!--                                        <sup>12</sup>-->
-                                <!--                                        &nbsp;<a class="text-decoration-none" href="">-->
-                                <!--                                        <i class="material-icons-new outline-mode_comment"-->
-                                <!--                                           style="width: 22px; height: 22px;">-->
-                                <!--                                        </i>-->
-                                <!--                                        </a>-->
-                                <!--                                        <sup>24</sup>-->
-                                <!--                                    </div>-->
                                 </div>
                                 </div>
                                 </div>`;
