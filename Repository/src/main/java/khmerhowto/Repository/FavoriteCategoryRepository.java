@@ -8,5 +8,5 @@ import java.util.List;
 
 @RepositoryRestResource
 public interface FavoriteCategoryRepository extends JpaRepository<FavoriteCategory,Integer> {
-    List<FavoriteCategory> findAllByuserId(Integer id);
+     List<FavoriteCategory> findAllByCategoryId(Integer cateId);
 }
