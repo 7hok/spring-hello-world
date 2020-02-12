@@ -1,5 +1,6 @@
 package khmerhowto.Repository;
 
+import khmerhowto.Repository.Model.Content;
 import khmerhowto.Repository.Model.User;
 
 import org.springframework.data.domain.Page;
@@ -17,6 +18,5 @@ public interface UserRepository extends JpaRepository<User,Integer> {
 	Page<User> findByNameContainingIgnoreCaseAndStatus(String name, int i, Pageable pageable);
 	Page<User> findByStatus(int i, Pageable pageable);
 	User findByEmail(String username);
-
 
 }

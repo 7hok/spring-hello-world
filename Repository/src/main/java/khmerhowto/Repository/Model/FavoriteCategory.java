@@ -1,5 +1,7 @@
 package khmerhowto.Repository.Model;
 
+import org.springframework.data.rest.core.annotation.RestResource;
+
 import javax.persistence.*;
 
 @Entity
@@ -11,6 +13,7 @@ public class FavoriteCategory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @ManyToOne
+    @RestResource(exported = false)
     private User user;
     @ManyToOne
     private Category category;

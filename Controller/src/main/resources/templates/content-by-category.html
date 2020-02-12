@@ -206,7 +206,7 @@
             <!-- The beginning of Left Container (Category)  -->
             <div class="col-md-0 col-lg-3 col-sm-12 left-category category-width  " >
                 <ul class="list-group">
-                    <li class="list-group-item category-border-color active category-bg-color font-weight-bold ">Categories</li>
+                    <li class="list-group-item category-border-color active category-bg-color font-weight-bold " th:text="#{categories}">Categories</li>
                     <li class="list-group-item  " style="cursor: pointer">
                         <div class="custom-control custom-radio pt-2" th:each="category:${categories}">
                             <th:block th:if="${category.id == 1}">
@@ -233,7 +233,7 @@
             <!-- The beginning of Right Container -->
             <div class=" col-lg-9 col-sm-12">
                 <div class="row ml-1 to_remove_on_null">
-                    <h4 class="text-primary recent-popular-post-weight">Recent Post</h4>
+                    <h4 class="text-primary recent-popular-post-weight" th:text="#{recent-post}">Recent Post</h4>
                 </div>
 
                 <!--One Horizontal Card-->
@@ -265,12 +265,12 @@
 
                 <div class="row mt-5 mb-5 to_remove_on_null">
                     <div class="col-md-12 col-sm-12 text-center">
-                        <h4 class="text-primary p-2 bg-light load-more" style="cursor: pointer" id="load">  Load More </h4>
+                        <h4 class="text-primary p-2 bg-light load-more" style="cursor: pointer" id="load" th:text="#{load-more}">  Load More </h4>
                     </div>
                 </div>
 
                 <div class="row ml-1  ">
-                    <h4 class="text-primary recent-popular-post-weight">Popular Post</h4>
+                    <h4 class="text-primary recent-popular-post-weight" th:text="#{popular-post}">Popular Post</h4>
                 </div>
                 <div class="mt-n3" id="popular_post">
                     <hr>
@@ -292,7 +292,7 @@
                 <!-- End of Two Card in Popular Post -->
                 <div class="row mt-5 mb-5">
                     <div class="col-md-12 col-sm-12 text-center">
-                        <h4 class="text-primary p-2 bg-light load-more" style="cursor: pointer" id="loadmore_popular">  Load More </h4>
+                        <h4 class="text-primary p-2 bg-light load-more" style="cursor: pointer" id="loadmore_popular" th:text="#{load-more}">  Load More </h4>
                     </div>
                 </div>
             </div>
