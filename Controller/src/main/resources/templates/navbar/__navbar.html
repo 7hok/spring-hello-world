@@ -327,12 +327,12 @@
 <!--                    <option style="border: none;cursor: pointer">EN</option>-->
 <!--                </select>-->
                 <div class="dropdown">
-                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:text="#{language}">
                         Language
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="left: -13px;top: 41px;">
-                        <a class="dropdown-item" href="/?lang=kh">KHMER</a>
-                        <a class="dropdown-item" href="/?lang=en">ENGLISH</a>
+                        <a class="dropdown-item"  onclick="changeLanguage('kh')"​​​ th:text="#{khmer}">KHMER</a>
+                        <a class="dropdown-item"  onclick="changeLanguage('en')" th:text="#{english}">ENGLISH</a>
                     </div>
                 </div>
             </li>

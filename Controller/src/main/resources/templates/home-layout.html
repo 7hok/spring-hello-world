@@ -66,6 +66,22 @@
     <th:block th:include="~{fragment/__javascript_link}"></th:block>
     <div class="" layout:fragment="content-js"></div>
     <script>
+
+        function changeLanguage(language) {
+            var currentUrl = location.pathname+location.search;
+            if (currentUrl.indexOf("?") == -1){
+                location.href = currentUrl+"?lang="+language;
+            }else {
+                if (currentUrl.indexOf("?lang") != -1) {
+                    location.href = currentUrl.split("?lang", 1) + "?lang=" + language;
+                } else if (currentUrl.indexOf("&lang") != -1) {
+                    location.href = currentUrl.split("&lang", 1) + "&lang=" + language;
+                }else {
+                    location.href = currentUrl + "&lang=" + language;
+                }
+            }
+        }
+
         //Chamroeun
         function requestContent(_id){
             var requestTitle = $("#content-request-title").val();
