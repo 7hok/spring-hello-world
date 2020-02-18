@@ -554,6 +554,21 @@
 
             });
             $(document).ready(function () {
+                $('.custom-control-input').click(function(){
+                    if ($(this).is(':checked'))
+                    {
+                        $("#contt").empty();
+
+                        $("#conttRecentLoad1").empty();
+                        $("#conttRecent1").empty();
+                        i=2;
+                        cateId=$(this).val();
+                        showCard(1,cateId);
+                        showSlide(cateId);
+                        showCardBottomPopular(0,cateId);
+
+                    }
+                });
                 var allElementOfCardPopular = '';
                 var page = 1;
 
@@ -628,7 +643,8 @@
 
                 function showCardBottomPopular(page, cid) {
                     var eleRecent1 = '', eleRecent2 = '', eleRecent3 = '';
-
+                    $("#pop_post").empty();
+                    $("#card_popular").empty();
                     $.ajax({
                         url: `/api/contents/search/findPopularArticleBaseOnClick?category_id=${cid}&page=${page}&size=3&projection=ContentNotificationProjection`,
                         method: 'GET',
@@ -646,7 +662,7 @@
                                         <h5 class="card-title">${objRecent._embedded.contents[0].title}</h5>
                                         <p class="card-text text-left">${objRecent._embedded.contents[0].body.replace(/(<([^>]+)>)/ig, "").substring(0, 200)}</p>
 
-                                        <p class="cart-text"><small class="text-muted content-timestamp"> ${objRecent._embedded.contents[2].timestamp}</small> <small
+                                        <p class="cart-text"><small class="text-muted content-timestamp"> ${objRecent._embedded.contents[0].timestamp}</small> <small
                                                 class="text-muted"> </small> <small class="text-muted">  </small></p>
                                         <div class="d-inline d-flex justify-content-end  align-items-end text-right mr-2">
 
@@ -661,8 +677,8 @@
                             <img class="card-img-top img-thumbnail" src="${objRecent._embedded.contents[1].thumbnail}" alt="Card image cap">
                             <div class="card-body text-center">
                                 <h5 class="card-title">${objRecent._embedded.contents[1].title}</h5>
-                                <p class="card-text"><small class="text-muted content-timestamp">${objRecent._embedded.contents[2].timestamp}</small> <small
-                                        class="text-muted"> </small> <small class="text-muted">  </small></p>
+                                <p class="card-text"><small class="text-muted content-timestamp">${objRecent._embedded.contents[1].timestamp}</small>
+                                <small class="text-muted"> </small> <small class="text-muted">  </small></p>
                                 <p class="card-text text-left">${objRecent._embedded.contents[1].body.replace(/(<([^>]+)>)/ig, "").substring(0, 200)}</p>
                                 <div class="d-inline d-flex justify-content-end  align-items-end text-right mr-2">
 
@@ -676,8 +692,8 @@
                             <img class="card-img-top img-thumbnail" src="${objRecent._embedded.contents[2].thumbnail}" alt="Card image cap">
                             <div class="card-body text-center">
                                 <h5 class="card-title">${objRecent._embedded.contents[2].title}</h5>
-                                <p class="card-text"><small class="text-muted content-timestamp">${objRecent._embedded.contents[2].timestamp}</small> <small
-                                        class="text-muted"> </small> <small class="text-muted">  </small></p>
+                                <p class="card-text"><small class="text-muted content-timestamp">${objRecent._embedded.contents[2].timestamp}</small>
+                                <small class="text-muted"> </small> <small class="text-muted">  </small></p>
                                 <p class="card-text text-left">${objRecent._embedded.contents[2].body.replace(/(<([^>]+)>)/ig, "").substring(0, 200)}</p>
                                 <div class="d-inline d-flex justify-content-end  align-items-end text-right mr-2">
 
@@ -686,7 +702,9 @@
                                 </div>`;
                             }
                             var elet = `<div class= "col-md-6 col-sm-12 mb-3 " id= "conttRecent2 ">${eleRecent2}</div><div class= "col-md-6 col-sm-12 mb-3 " id= "conttRecent3 ">${eleRecent3}</div>`
+
                             $("#pop_post").append(eleRecent1);
+
                             $("#card_popular").append(elet);
                             convertTimeToFormat();
                         },
@@ -704,19 +722,7 @@
                 });
 
             })
-            $('.custom-control-input').click(function(){
-                if ($(this).is(':checked'))
-                {
-                    $("#contt").empty();
 
-                    $("#conttRecentLoad1").empty();
-                    $("#conttRecent1").empty();
-                    i=2;
-                    cateId=$(this).val();
-                    showCard(1,cateId);
-                    showSlide(cateId);
-                }
-            });
             setTimeout(function(){
                 getParamRequest()
             }, 500);

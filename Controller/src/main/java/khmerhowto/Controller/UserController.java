@@ -82,7 +82,7 @@ public class UserController {
             System.out.println("client");
            }else{
                /**1 = admin & 0 = client*/
-            Page<Comment> pages = commentRepository.findAllByOrderByIdDesc(pageable);
+            Page<Comment> pages = commentRepository.findAllByStatusOrderByIdDesc(1,pageable);
             List<Comment> comments = pages.getContent();
             response.put("body", comments);
             response.put("type",1);

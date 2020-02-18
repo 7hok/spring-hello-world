@@ -108,10 +108,11 @@
             
             function showSearch(page) {
                 if([[${type}]]==2){
-                ul=`/api/contents/search/findByTitleContainingIgnoreCase?title=[[${body}]]&page=${page}&size=6&projection=ContentNotificationProjection`
+                ul=`/api/contents/search/findByStatusAndTitleContainingIgnoreCase?st=1&title=[[${body}]]&page=${page}&size=6&projection=ContentNotificationProjection`
             }
             else{
-                ul=`/api/contents/search/findByBodyContainingIgnoreCase?body=[[${body}]]&page=${page}&size=6&projection=ContentNotificationProjection`
+                ul=`/api/contents/search/findByBodyContainingIgnoreCaseAndStatus?body=[[${body}]]&st=1&page=${page}&size=6&projection=ContentNotificationProjection`
+
             }
                 $.ajax({
                     url: ul,

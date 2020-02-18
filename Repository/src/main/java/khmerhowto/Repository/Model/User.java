@@ -42,7 +42,7 @@ public class User implements Serializable {
         this.timestamp = LocalDateTime.now();
         this.lastNotificationClick = LocalDateTime.now(); 
         this.userRole = "CLIENT";
-        this.profilePicture = this.profilePicture == null ? "https://cdn.dribbble.com/users/13754/screenshots/6412198/reading-recommendations_2x.png" : this.profilePicture;
+//        this.profilePicture = this.profilePicture == null ? "https://cdn.dribbble.com/users/13754/screenshots/6412198/reading-recommendations_2x.png" : this.profilePicture;
     }
 
     public User() {

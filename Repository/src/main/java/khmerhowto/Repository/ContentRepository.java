@@ -25,20 +25,20 @@ public interface ContentRepository extends JpaRepository<Content, Integer> {
 	@Query(nativeQuery = true,value = "SELECT * FROM top_click_category_article_suggestion(:user_id) ORDER BY click DESC NULLS LAST")
 	Page<Content> findContentBasedOnUserHistoryClick( @Param("user_id") Integer user_id, @PageableDefault(size = 3) Pageable pageable);
 
-	@Query(nativeQuery = true,value = "SELECT * FROM favorite_category_article_suggestion(:user_id)")
+	@Query(nativeQuery = true,value = "SELECT * FROM favorite_category_article_suggestion(:user_id) WHERE status = 1" )
 	Page<Content> findContentBasedOnFavoriteCategory( @Param("user_id") Integer user_id,Pageable pageable);
 
 	@Query(nativeQuery = true, value = "SELECT count(*) FROM content WHERE timestamp > :date")
 	Integer findUnreadContentByDate(@Param("date")@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime convert);
 
-	Page<Content> findByTitleContainingIgnoreCase(@Param("title") String title, Pageable pageable);
+	Page<Content> findByStatusAndTitleContainingIgnoreCase(Integer st,@Param("title") String title, Pageable pageable);
 
 	List<Content> findAllBycategoryIdAndStatus(Integer id ,Integer st, Pageable pageable);
 
 	Page<Content> findByTitleContainingIgnoreCaseAndCategoryIdAndStatus(@Param("title") String title, Integer c_id, int i, Pageable pageable);
 	public Page<Content> findAllByOrderByIdDesc(Pageable pageable);
 
-	Page<Content> findByBodyContainingIgnoreCase(@Param("body") String body, Pageable pageable);
+	Page<Content> findByBodyContainingIgnoreCaseAndStatus(@Param("body") String body,Integer st, Pageable pageable);
 	@Query(value = "SELECT click,c.* FROM history_click as h RIGHT JOIN content as c on h.content_id = c.id WHERE status = 1 ORDER BY click desc NULLS LAST " ,nativeQuery = true)
 	Page<Content> findPopularContent(Pageable pageable);
 

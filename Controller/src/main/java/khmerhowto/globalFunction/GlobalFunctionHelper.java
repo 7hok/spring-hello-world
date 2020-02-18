@@ -1,5 +1,10 @@
 package khmerhowto.globalFunction;
 
+import khmerhowto.Repository.FavoriteCategoryRepository;
+import khmerhowto.Repository.Model.FavoriteCategory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -7,19 +12,19 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.web.multipart.MultipartFile;
-
 import khmerhowto.Repository.Model.User;
 import khmerhowto.configurationmodel.MyUser;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
 public class GlobalFunctionHelper {
 
-    private static String filePath = "Controller/src/main/resources/static/images/";
+    private static String filePath = "/home/howto/images/";
     public static String uploaded(MultipartFile files) throws Exception {
         String fileName = UUID.randomUUID() + "." + files.getOriginalFilename().substring(files.getOriginalFilename().lastIndexOf(".") + 1);
         Files.copy(files.getInputStream(), Paths.get(filePath,fileName));
@@ -50,6 +55,8 @@ public class GlobalFunctionHelper {
             return false;
         }
         return true;
-
     }
+
+
+
 }

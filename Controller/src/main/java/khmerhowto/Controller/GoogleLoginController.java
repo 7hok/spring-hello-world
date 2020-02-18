@@ -75,7 +75,7 @@ public class GoogleLoginController {
               "836845369110-sqgfnf0i6lkpl8jb28bvprvf935tarlq.apps.googleusercontent.com",
               "lxv4I6XzJLZbgclsKDbXohEx",
               code,
-              "http://localhost:8080").execute();
+              "https://kunloes.com").execute();
 
             String accessToken = tokenResponse.getAccessToken();  
             System.out.println(accessToken);

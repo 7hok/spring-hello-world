@@ -144,7 +144,7 @@ public class AdminController {
     @GetMapping("/admin/customize")
     String customizeInfoStatic(Model model){
         model.addAttribute("CURRENT_PAGE", "setting");
-        return "admin/admin-customize-user-static";
+        return "admin/admin-customize-user";
     }
 
     @GetMapping("/admin")
@@ -162,9 +162,13 @@ public class AdminController {
 
     @GetMapping("/admin/customize/{id}")
     String customizeInfo(@PathVariable("id")Integer id,Model model){
+        if (id==-1){
+            id=GlobalFunctionHelper.getCurrentUser().getId();
+        }
         model.addAttribute("role",roleService.findAll());
-        model.addAttribute("user",userService.findById(id));
 
+        model.addAttribute("user",userService.findById(id));
+        System.out.println(userService.findById(id).getProfilePicture());
         model.addAttribute("CURRENT_PAGE", "setting");
 
         return "admin/admin-customize-user";

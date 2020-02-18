@@ -272,7 +272,7 @@
                             <h4 style="color : #393939">Your Favorite Category</h4>
                             <hr>
                             <div class="scroll_div" style="max-height: 45vh; overflow: scroll;overflow-x: hidden;">
-                                <div class="d-flex  align-items-center article_object_list" th:each="article : ${FAVORITE_CATEGORY_TOP_ARTICLE}" th:object="${article}" th:onclick="onClickRedirectTo(*{id})">
+                                <div class="d-flex  align-items-center article_object_list" th:each="article : ${FAVORITE_CATEGORY_TOP_ARTICLE}" th:object="${article}" th:onclick="'onClickRedirectTo('+*{id}+')'">
                                     <img onerror="this.src = 'image-static/face_recognition_dribbble.png'" th:src="*{thumbnail}" class="rounded-circle m-2" style="width: 90px; height: 90px; max-height: 10vh;" alt="">
                                     <div class="d-inline-block pl-2">
                                         <span class="overflow-hidden w-100"><b class="kht-text-color" th:text="*{title}">How tech recognize human face </b></span>

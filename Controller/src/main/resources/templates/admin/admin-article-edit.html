@@ -138,7 +138,7 @@
 
 <body>
     <div class="content m-5" layout:fragment="content">
-        <script th:src="@{/js/ckeditor/ckeditor.js}"></script>
+        <script th:src="@{/Js/ckeditor/ckeditor.js}"></script>
         <form style="display: none;" method="POST" id="frm" enctype="multipart/form-data">
             <input id="chooseImg" type="file" name="file" accept=".png, .jpg, .jpeg"><br><br>
             <button type="submit" style="display: none;" id="added">add</button>
@@ -202,18 +202,18 @@
                         style="border: 1px solid rgb(104, 96, 96);margin-top: 10px;margin-bottom: 10px;; width:  64%; border-radius: 9px;">
                         <input autocomplete="off" type="text"
                             style="padding: 5px; width: 100%; border: none; border-radius: 9px;" name="title"
-                            id="searchCate">
+                            id="cate_search">
                     </div>
 
                     <div style="overflow-y: scroll; height:400px; padding-right: 10px;">
 
-                        <div class="container">
+                        <div class="container-fluid">
                             <div class="row text-center">
-                                <div class="funkyradio" style="width: -webkit-fill-available;">
+                                <div class="funkyradio" style="width: 87%;">
                                     <th:block th:each="category : ${categories}">
-                                        <div class="funkyradio-default">
+                                        <div class="funkyradio-default​​ check_category">
                                             <input type="radio"  th:value="${category.getId()}" name="radio" th:id="${category.getId()}" />
-                                            <label th:for="${category.getId()}" th:text="${category.getName()}">First Option default</label>
+                                            <label th:for="${category.getId()}"​ class="category_name" th:text="${category.getName()}">First Option default</label>
                                         </div>
 
                                     </th:block>
@@ -239,9 +239,6 @@
                     uiColor: '#C2D6FF',
                     allowedContent: true
                 });
-
-
-
                 CKEDITOR.on("instanceReady", function (event) {
                     $.ajax({
                         type: 'GET',
@@ -297,7 +294,7 @@
                         "body": value,
                         "id": [[${id}]],
                         "status": "1",
-                        "thumbnail": thImg,
+                        "thumbnail": "/img/"+thImg,
                         "title": $("#search").val(),
                         "user":{
                             "id": [[${currentUser.getId()}]]
@@ -329,7 +326,7 @@
                 });
 
                 $("#frm").submit(function (e) {
-                    event.preventDefault();
+                    e.preventDefault();
 
                     var fd = new FormData();
                     fd.append('file', chooseImg.files[0]);
@@ -343,7 +340,7 @@
                             console.log(data);
                             var srcimg = data["Data"]
                             var im =
-                                `<span><img width='200px' src='/img/${srcimg}'><span>`;
+                                `<span><img width='200px' src='${srcimg}'><span>`;
 
                             CKEDITOR.instances.editor1.insertHtml(im);
 
@@ -356,7 +353,27 @@
                 });
 
 
+                $("#thumnailFrm").submit(function (e) {
+                    event.preventDefault();
 
+                    var fd = new FormData();
+                    fd.append('file', myTh.files[0]);
+                    $.ajax({
+                        type: 'POST',
+                        url: '/upload',
+                        data: fd,
+                        contentType: false,
+                        processData: false,
+                        success: function (data) {
+                            var srcimg = data["Data"]
+                            thImg = srcimg;
+                        },
+                        error: function (data) {
+                            console.log("error");
+                            console.log(data);
+                        }
+                    });
+                });
                 function chooseThum() {
                     $("#myTh").click();
                 }
@@ -378,7 +395,21 @@
                     $('#'+[[${cId}]]).attr("checked", "checked");
 
                 });
+                $(function(){
+                    // $('.card-text').html($('.card-text').html().replace(/(<([^>]+)>)/ig, ""));$('.card-text').html('sa')
+                    jQuery.expr[':'].icontains = function(a, i, m) {
+                        return jQuery(a).text().toUpperCase()
+                            .indexOf(m[3].toUpperCase()) >= 0;
+                    };
 
+                    $("#cate_search").on('input',function(){
+
+                        $('.check_category').addClass('d-none');
+                        let val = $(this).val()
+
+                        $(".category_name:icontains("+val+")").parents('.check_category').removeClass('d-none');
+                    })
+                })
             </script>
         </div>
     </div>

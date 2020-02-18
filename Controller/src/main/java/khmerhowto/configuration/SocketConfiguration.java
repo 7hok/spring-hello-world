@@ -24,7 +24,7 @@ public class SocketConfiguration {
     public SocketIOServer socketIOServer(){
         Configuration config = new Configuration();
         config.setHostname("0.0.0.0");
-        config.setPort(15657);
+        config.setPort(9009);
 
         /**
          * not to reopen application
