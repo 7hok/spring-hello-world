@@ -159,6 +159,11 @@ public class HomeController {
         return "clients/privacy";
     }
 
+    @GetMapping("/guide")
+    String showUserGuide() {
+        return "clients/userGuide";
+    }
+
     @GetMapping("/example")
     String example() {
         return "myhometest";
