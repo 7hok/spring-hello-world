@@ -84,7 +84,8 @@ public class HomeController {
     HistoryRepository historyRepository;
     @Autowired
     AuthenticationManager authenticationManager;
-
+    @Autowired
+    EntityManager entityManager;
     /**
      * PROCESS 
      *      IF USER LOGGED IN 
@@ -98,12 +99,21 @@ public class HomeController {
      */
     @GetMapping("/detail/{id}")
     public String testDetail(ModelMap modelMap, @PathVariable Integer id) {
+        Map<Integer,String> lstBody=new HashMap<>();
         modelMap.addAttribute("id", id);
+        Content con= entityManager.find(Content.class,id);
+         String body=con.getBody().replaceAll("<[^\\P{Graph}>]+(?: [^>]*)?>", "").replaceAll("&nbsp;"," ");
+         String image=con.getThumbnail();
+        modelMap.addAttribute("title",con.getTitle());
+        modelMap.addAttribute("body",body);
+        modelMap.addAttribute("image",image);
         Page<Content> click_pages = null;
         if (GlobalFunctionHelper.getCurrentUser() == null) {
             modelMap.addAttribute("currentUser", new User());
-
             click_pages = contentRepository.findPopularContent(new PageRequest(0, 3));
+            for (int i=0;i<click_pages.getContent().size();i++){
+                lstBody.put(click_pages.getContent().get(i).getId(),click_pages.getContent().get(i).getBody().replaceAll("<[^\\P{Graph}>]+(?: [^>]*)?>", "").replaceAll("&nbsp;"," "));
+            }
             modelMap.addAttribute("RECOMMEND_ARTICLE", click_pages.getContent());
             } else {
             User cur_user =  GlobalFunctionHelper.getCurrentUser();
@@ -119,9 +129,17 @@ public class HomeController {
             }
             modelMap.addAttribute("currentUser",cur_user);
             click_pages = contentRepository.findContentBasedOnUserHistoryClick(cur_user.getId(),new PageRequest(0, 3));
-            modelMap.addAttribute("RECOMMEND_ARTICLE", click_pages.getContent());
-        }
 
+            List<Content> obj=click_pages.getContent();
+            for (int i=0;i<obj.size();i++){
+                lstBody.put(obj.get(i).getId(),obj.get(i).getBody().replaceAll("<[^\\P{Graph}>]+(?: [^>]*)?>", "").replaceAll("&nbsp;"," "));
+            }
+
+
+            modelMap.addAttribute("RECOMMEND_ARTICLE",obj);
+
+        }
+        modelMap.addAttribute("lstBody",lstBody);
         modelMap.addAttribute("totalCmt", cmt.getTotalComment(id));
         modelMap.addAttribute("like", interestedServiceImp.getTotalLike(id));
         return "clients/content-detail";
@@ -177,7 +195,8 @@ public class HomeController {
         lst = con.findAll(PageRequest.of(i, 3, Sort.by(Sort.Direction.DESC, "Id")));
         for (int l = 0; l < lst.getContent().size(); l++) {
            b = lst.getContent().get(l).getBody().replaceAll("<[^\\P{Graph}>]+(?: [^>]*)?>", "");
-           card_text.put(lst.getContent().get(l).getId(),b);
+           card_text.put(lst.getContent().get(l).getId(),b.replace("&nbsp;"," "));
+
         }
 
         map.addAttribute("contents",lst.getContent());
@@ -340,12 +359,16 @@ public class HomeController {
 
     @PostMapping("/customize")
     String customizeUser(@ModelAttribute("user") User user, @RequestParam("files") MultipartFile file) {
+
+       ModelMap modelMap=new ModelMap();
+
+
         if (file.isEmpty()) {
 
         } else {
 
             try {
-                user.setProfilePicture("/images/"+GlobalFunctionHelper.uploaded(file));
+                user.setProfilePicture("/img/"+GlobalFunctionHelper.uploaded(file));
             } catch (Exception e) {
                
                 e.printStackTrace();
